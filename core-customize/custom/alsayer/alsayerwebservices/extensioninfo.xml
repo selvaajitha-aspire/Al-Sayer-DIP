@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+           
+    
+    <extension abstractclassprefix="Generated" classprefix="Alsayerwebservices" managername="AlsayerwebservicesManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="alsayerwebservices" usemaven="false">
+                               
+      
+        
+        <requires-extension name="webservicescommons"/>
+                         
+       
+      
+        
+        <coremodule generated="true" manager="com.alsayer.webservices.jalo.AlsayerwebservicesManager" packageroot="com.alsayer.webservices"/>
+                      
+        
+        <webmodule jspcompile="false" webroot="/alsayerwebservices"/>
+                					
+		
+        
+        	
+
+   
+    
+    </extension>
+              
+
+
+</extensioninfo>
