@@ -1,0 +1,10 @@
+{
+    "applications": [
+        {
+            "name": "alsayerstore",
+            "path": "alsayerstore",
+            "enableSSR": true,
+            "disableImageReuse": true
+        }
+    ]
+}
