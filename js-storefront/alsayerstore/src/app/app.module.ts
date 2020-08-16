@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule } from '@spartacus/storefront';
+import { B2cStorefrontModule, PWAModuleConfig } from '@spartacus/storefront';
+import { ConfigModule } from '@spartacus/core';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,12 @@ import { B2cStorefrontModule } from '@spartacus/storefront';
         level: '2.0'
       }
     }),
+    ConfigModule.withConfig({
+      pwa: {
+        enabled: true,
+        addToHomeScreen: true,
+      }
+    }as PWAModuleConfig),
     BrowserTransferStateModule,
   ],
   providers: [],
