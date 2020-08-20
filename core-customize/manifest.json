@@ -26,17 +26,17 @@
 "acceleratorstorefrontcommons",
 "b2bacceleratorfacades",
 "b2bacceleratorservices",
-"osanedfulfilmentprocess",
-"osanedcore",
-"osanedfacades",
-"osanedstorefront",
-"osanedinitialdata",
-"osanedbackoffice",
-"osanedtest",
+"alsayerfulfilmentprocess",
+"alsayercore",
+"alsayerfacades",
+"alsayerstorefront",
+"alsayerinitialdata",
+"alsayerbackoffice",
+"alsayertest",
 "cmsbackoffice",
 "productcockpit",
 "cmsoccaddon",
-"osanedcommercewebservices",
+"alsayerwebservices",
 "oauth2",
 "apiregistryservices",
 "apiregistrybackoffice"
@@ -87,13 +87,6 @@
             "value": "de,en"
         }
     ],
-    "storefrontAddons": [
-		{
-            "addon": "cmsoccaddon",
-            "storefront": "osanedcommercewebservices",
-            "template": "ycommercewebservices"
-        }
-    ],
     "aspects": [
         {
             "name": "backoffice",
@@ -125,20 +118,20 @@
                     "value": "true"
                 },
                 {
-                    "key": "spring.session.osanedstorefront.save",
+                    "key": "spring.session.alsayerstorefront.save",
                     "value": "async"
                 },
                 {
-                    "key": "spring.session.osanedstorefront.cookie.name",
+                    "key": "spring.session.alsayerstorefront.cookie.name",
                     "value": "JSESSIONID"
                 },
                 {
-                    "key": "spring.session.osanedstorefront.cookie.path",
+                    "key": "spring.session.alsayerstorefront.cookie.path",
                     "value": "/"
                 },
                 {
                     "key": "storefrontContextRoot",
-                    "value": "/osanedstorefront"
+                    "value": "/alsayerstorefront"
                 }
             ],
             "webapps": [
@@ -151,8 +144,8 @@
                     "contextPath": "/medias"
                 },
                 {
-                    "name": "osanedstorefront",
-                    "contextPath": "/osanedstorefront"
+                    "name": "alsayerstorefront",
+                    "contextPath": "/alsayerstorefront"
                 },
                 {
                     "name": "acceleratorservices",
@@ -196,7 +189,7 @@
                 },
                 {
                     "key": "storefrontContextRoot",
-                    "value": "/osanedstorefront"
+                    "value": "/alsayerstorefront"
                 }
             ],
             "webapps": [
@@ -209,8 +202,8 @@
                     "contextPath": "/authorizationserver"
                 },
 				 {
-                    "name": "osanedcommercewebservices",
-                    "contextPath": "/osanedcommercewebservices"
+                    "name": "alsayerwebservices",
+                    "contextPath": "/alsayerwebservices"
                 }
             ]
         }
