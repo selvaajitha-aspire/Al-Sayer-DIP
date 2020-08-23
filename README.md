@@ -28,7 +28,9 @@ This document helps you setup local environment for Alsayer Project.
 ### Installation Setup :
 
 1. Create a codebase directory for cloning the repository. Open the command prompt/terminal inside the directory and run the command :
+
     **git clone https://github.com/aspiredigital-ae/Al-Sayer-DIP.git**
+
     It will ask for your Github id and password, provide the details accordingly.
 
 2. Create your local branch for your custom changes:
