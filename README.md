@@ -27,13 +27,11 @@ This document helps you setup local environment for Alsayer Project.
 
 ### Installation Setup :
 
-1. Create a codebase directory for cloning the repository. Open the command prompt/terminal inside the directory and run the command :  
+1. Create a codebase directory for cloning the repository. Open the command prompt/terminal inside the directory and run the command :
+    **git clone https://github.com/aspiredigital-ae/Al-Sayer-DIP.git**
+    It will ask for your Github id and password, provide the details accordingly.
 
-  **git clone https://github.com/aspiredigital-ae/Al-Sayer-DIP.git**  
-
-  It will ask for your Github id and password, provide the details accordingly.
-
-1. Create your local branch for your custom changes:
+2. Create your local branch for your custom changes:
 
   * For windows you can use Tortoise git or SourceTree to create a branch under origin/develop.
 
@@ -48,7 +46,7 @@ This document helps you setup local environment for Alsayer Project.
     **git push -u origin <branch_name>**
 
 
-1. Create symlinks for custom by running the following commands in cmd/terminal :
+3. Create symlinks for custom by running the following commands in cmd/terminal :
 
   * For Windows :
 
@@ -63,17 +61,17 @@ This document helps you setup local environment for Alsayer Project.
      **ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/custom {hybris_installation_dir}/hybris/bin/custom**
 
 
-1. Copy and paste alsayer-receipe in your {hybris_installation_dir}/installer/recipes which is present your codebase.
+4. Copy and paste alsayer-receipe in your {hybris_installation_dir}/installer/recipes which is present your codebase.
 
 
-1. Open a terminal or command prompt window inside the installer folder i.e., {hybris_installation_dir}/installer and set up the recipe using the following command:
+5. Open a terminal or command prompt window inside the installer folder i.e., {hybris_installation_dir}/installer and set up the recipe using the following command:
 
    **./install.sh -r alsayer-receipe**  
 
    If you are using **Windows**, change ./install.sh to install.bat.
 
 
-1.  Go to your platform directory to {hybris_installation_dir}/hybris/bin/platform  and run following commands to access the site -
+6.  Go to your platform directory to {hybris_installation_dir}/hybris/bin/platform  and run following commands to access the site -
 
   * For windows-
 
@@ -101,7 +99,7 @@ This document helps you setup local environment for Alsayer Project.
     You can access the storefront from link  **https://localhost:9002/alsayerstorefront?site=electronics**
 
 
-1. You can see the alsayerstore, the spartacus storefront present in repo/js-storefront/alsayerstore and can start server inside alsayerstore as:
+7. You can see the alsayerstore, the spartacus storefront present in repo/js-storefront/alsayerstore and can start server inside alsayerstore as:
 
   **yarn install**
 
@@ -110,7 +108,7 @@ This document helps you setup local environment for Alsayer Project.
   And can access the spartacus site form link  **https://locahost:4200**
 
 
-1.  Create symlinks for localextensions.xml and local.properties by running following commands in cmd/terminal:
+8.  Create symlinks for localextensions.xml and local.properties by running following commands in cmd/terminal:
 
   * For Windows :
 
