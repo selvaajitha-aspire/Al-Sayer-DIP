@@ -5,9 +5,9 @@ This document helps you setup local environment for Alsayer Project.
 
 ### Prerequisites
 
-* Download the OpenJDK Java 11 from **https://jdk.java.net/java-se-ri/11** and setup JAVA_HOME and PATH variables.
+* Download the OpenJDK Java 11 from **https://jdk.java.net/java-se-ri/11** and setup JAVA_HOME and PATH variables.
 
-* IntelliJ /Eclipse and VS Code Editor**
+* IntelliJ /Eclipse and VS Code Editor
 
 * Backend Development Requirement- Extract the sap commerce cloud zip downloaded from onedrive link shared:
 
@@ -41,7 +41,7 @@ This document helps you setup local environment for Alsayer Project.
 
     To create and checkout from origin/develop to your branch
 
-    **git checkout -b <name-of-your-branch> develop**
+    **git checkout -b <branch_name> develop**
 
     To create branch in the repo
 
@@ -70,7 +70,7 @@ This document helps you setup local environment for Alsayer Project.
 
    **./install.sh -r alsayer-receipe**  
 
-   If you are using **Windows**, change ./install.sh to install.bat.
+   If you are using **Windows**, change ./install.sh to **install.bat**.
 
 
 6.  Go to your platform directory to {hybris_installation_dir}/hybris/bin/platform  and run following commands to access the site -
@@ -103,11 +103,11 @@ This document helps you setup local environment for Alsayer Project.
 
 7. You can see the alsayerstore, the spartacus storefront present in repo/js-storefront/alsayerstore and can start server inside alsayerstore as:
 
-  **yarn install**
+    **yarn install**
 
-  **yarn start**
+    **yarn start**
 
-  And can access the spartacus site form link  **https://locahost:4200**
+   And can access the spartacus site form link  **https://locahost:4200**
 
 
 8.  Create symlinks for localextensions.xml and local.properties by running following commands in cmd/terminal:
@@ -123,7 +123,7 @@ This document helps you setup local environment for Alsayer Project.
     **mklink /D {hybris_installation_dir}/hybris/config/localextensions.xml  {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/localextensions.xml**
 
 
-    * For Linux/Mac :
+   * For Linux/Mac :
 
     Symlink for local.properties :
 
