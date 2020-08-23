@@ -11,9 +11,9 @@ This document helps you setup local environment for Alsayer Project.
 
 * Backend Development Requirement- Extract the sap commerce cloud zip downloaded from onedrive link shared:
 
-**https://aqtllc-my.sharepoint.com/:u:/r/personal/krishna_kumar_aspiredigital_com/Documents/Demo/CXCOM200500P_0-70004955.ZIP?csf=1&web=1&e=7ZTd6w**
+  **https://aqtllc-my.sharepoint.com/:u:/r/personal/krishna_kumar_aspiredigital_com/Documents/Demo/CXCOM200500P_0-70004955.ZIP?csf=1&web=1&e=7ZTd6w**
 
-in your hybris installation directory.
+  in your hybris installation directory.
 
 * Frontend Development Requirement-
 
@@ -31,7 +31,7 @@ in your hybris installation directory.
 
   **git clone https://github.com/aspiredigital-ae/Al-Sayer-DIP.git**  
 
-It will ask for your Github id and password, provide the details accordingly.
+  It will ask for your Github id and password, provide the details accordingly.
 
 1. Create your local branch for your custom changes:
 
