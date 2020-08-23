@@ -17,11 +17,11 @@ This document helps you setup local environment for Alsayer Project.
 
 * Frontend Development Requirement-
 
-1.  node.js - 12.x version  
+  1.  node.js - 12.x version  
 
-1.  Angular CLI- 10.x or later
+  1.  Angular CLI- 10.x or later
 
-1.  yarn-1.15 or later
+  1.  yarn-1.15 or later
 
 
 
@@ -52,13 +52,13 @@ This document helps you setup local environment for Alsayer Project.
 
   * For Windows :
 
-    * Symlink for custom folder from the Alsayer codebase
+    Symlink for custom folder from the Alsayer codebase
 
      **mklink /D {hybris_installation_dir}/hybris/bin/custom {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/custom**
 
   * For Linux/Mac :
 
-    *Symlink for custom folder from the Alsayer codebase
+    Symlink for custom folder from the Alsayer codebase
 
      **ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/custom {hybris_installation_dir}/hybris/bin/custom**
 
