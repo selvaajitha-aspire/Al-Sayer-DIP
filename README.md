@@ -1,45 +1,143 @@
-**Edit a file, create a new file, and clone from Github in under 2 minutes**
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+#Alsayer Setup Instruction 
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+This document helps you setup local environment for Alsayer Project. 
 
----
+###Prerequisites 
 
-## Edit a file
+*Download the OpenJDK Java 11 from **https://jdk.java.net/java-se-ri/11** and setup JAVA_HOME and PATH variables. 
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+*IntelliJ /Eclipse and VS Code Editor  
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+*Backend Development Requirement- Extract the sap commerce cloud zip downloaded from onedrive link shared: 
 
----
+**https://aqtllc-my.sharepoint.com/:u:/r/personal/krishna_kumar_aspiredigital_com/Documents/Demo/CXCOM200500P_0-70004955.ZIP?csf=1&web=1&e=7ZTd6w** 
 
-## Create a file
+in your hybris installation directory. 
 
-Next, you’ll add a new file to this repository.
+*Frontend Development Requirement- 
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+1.  node.js - 12.x version  
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+2.  Angular CLI- 10.x or later 
 
----
+3.  yarn-1.15 or later 
 
-## Clone a repository
+ 
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+###Installation Setup : 
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+1. Create a codebase directory for cloning the repository. Open the command prompt/terminal inside the direcectory and run the command :  
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+  **git clone https://github.com/aspiredigital-ae/Al-Sayer-DIP.git**  
+
+It will ask for your github id and password, provide the details accordingly. 
+
+2. Create your local branch for your custom changes: 
+
+* For windows you can use Tortoise git or SourceTree to create a branch under origin/develop. 
+
+* For Linux/Mac run command -   
+
+  *To create and checkout from origin/develop to your branch 
+
+   git checkout -b <name-of-your-branch> develop 
+
+  *To create branch in the repo 
+
+   git push -u origin <branch_name> 
+
+  
+2. Create symlinks for custom by running the following commands in cmd/terminal : 
+
+  *For Windows : 
+
+    *Symlink for custom folder from the Alsayer codebase 
+
+     mklink /D {hybris_installation_dir}/hybris/bin/custom {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/custom  
+
+  *For Linux/Mac : 
+
+    *Symlink for custom folder from the Alsayer codebase 
+
+     ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/custom {hybris_installation_dir}/hybris/bin/custom 
+
+
+3. Copy and paste alsayer-receipe in your {hybris_installation_dir}/installer/recipes which is present your codebase.
+
+
+4. Open a terminal or command prompt window inside the installer folder i.e., {hybris_installation_dir}/installer and set up the recipe using the following command: 
+
+-  ./install.sh -r alsayer-receipe  
+
+* If you are using **Windows**, change ./install.sh to install.bat. 
+
+
+5.  Go to your platform directory to {hybris_installation_dir}/hybris/bin/platform  and run following commands to access the site - 
+
+-For windows- 
+
+  -setantenv.bat 
+
+  -ant clean all  
+
+  -ant initialize 
+
+  -hybrisserver.bat debug  
+
+ 
+
+For linux/mac- 
+
+  -. ./setantenv.sh 
+
+  -ant clean all  
+
+  -ant initialize 
+
+  -./hybrisserver.sh debug  
+
+ 
+**You can access the storefront from link- https://localhost:9002/alsayerstorefront?site=electronics**
+
+
+7. You can see the alsayerstore, the spartacus storefront present in repo/js-storefront/alsayerstore and can start server inside alsayerstore as: 
+
+-yarn install 
+
+-yarn start 
+
+**And can access the spartacus site form link – https://locahost:4200**
+
+
+8.  Create symlinks for localextensions.xml and local.properties by running following commands in cmd/terminal: 
+
+-For Windows : 
+
+  -Symlink for local.properties :  
+
+   mklink /D {hybris_installation_dir}/hybris/config/local.properties {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/local.properties 
+
+ 
+
+  -Symlink for localextensions.xml: 
+
+   mklink /D {hybris_installation_dir}/hybris/config/localextensions.xml  {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/localextensions.xml 
+
+ 
+
+-For Linux/Mac : 
+
+  -Symlink for local.properties : 
+
+   ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/local.properties {hybris_installation_dir}/hybris/config/local.properties 
+
+ 
+
+  -Symlink for localextensions.xml: 
+
+   ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/localextensions.xml {hybris_installation_dir}/hybris/config/localextensions.xml 
+
+ 
+
+ 
