@@ -125,10 +125,10 @@ This document helps you setup local environment for Alsayer Project.
 
    * For Linux/Mac :
 
-    Symlink for local.properties :
+     Symlink for local.properties :
 
-    **ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/local.properties {hybris_installation_dir}/hybris/config/local.properties**
+     **ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/local.properties {hybris_installation_dir}/hybris/config/local.properties**
 
-    Symlink for localextensions.xml:
+     Symlink for localextensions.xml:
 
-    **ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/localextensions.xml {hybris_installation_dir}/hybris/config/localextensions.xml**
+     **ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/config/localextensions.xml {hybris_installation_dir}/hybris/config/localextensions.xml**
