@@ -3,6 +3,8 @@
  */
 package com.alsayer.storefront.controllers.pages;
 
+import com.alsayer.facades.customer.AlsayerCustomerFacade;
+import com.alsayer.facades.customer.impl.AlsayerCustomerFacadeImpl;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -15,10 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +40,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LoginPageController extends AbstractLoginPageController
 {
 	private HttpSessionRequestCache httpSessionRequestCache;
+
+
+
+	@Resource(name = "customerFacade")
+	private AlsayerCustomerFacadeImpl alsayerCustomerFacade;
+
 
 	@Override
 	protected String getView()
@@ -88,13 +99,14 @@ public class LoginPageController extends AbstractLoginPageController
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String doRegister(@RequestHeader(value = "referer", required = false) final String referer, final RegisterForm form,
-			final BindingResult bindingResult, final Model model, final HttpServletRequest request,
-			final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	{
-		getRegistrationValidator().validate(form, bindingResult);
-		return processRegisterUserRequest(referer, form, bindingResult, model, request, response, redirectModel);
-	}
+public String doRegister(@RequestHeader(value = "referer", required = false) final String referer, final RegisterForm form,
+						 final BindingResult bindingResult, final Model model, final HttpServletRequest request,
+						 final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+{
+	getRegistrationValidator().validate(form, bindingResult);
+	return processRegisterUserRequest(referer, form, bindingResult, model, request, response, redirectModel);
+}
+
 
 	@RequestMapping(value = "/register/termsandconditions", method = RequestMethod.GET)
 	public String getTermsAndConditions(final Model model) throws CMSItemNotFoundException
@@ -104,4 +116,26 @@ public class LoginPageController extends AbstractLoginPageController
 		setUpMetaDataForContentPage(model, pageForRequest);
 		return ControllerConstants.Views.Fragments.Checkout.TermsAndConditionsPopup;
 	}
+
+
+
+	@RequestMapping(value = "/activate", method = RequestMethod.GET)
+	public String activateUser(@RequestParam(name ="token")String token) throws TokenInvalidatedException
+	{
+		Assert.hasText(token, "The field [token] cannot be empty");
+		getAlsayerCustomerFacade().activateUser(token);
+		return ControllerConstants.Views.Pages.Account.AccountHomePage;
+	}
+
+
+	public AlsayerCustomerFacadeImpl getAlsayerCustomerFacade() {
+		return alsayerCustomerFacade;
+	}
+
+	public void setAlsayerCustomerFacade(AlsayerCustomerFacadeImpl alsayerCustomerFacade) {
+		this.alsayerCustomerFacade = alsayerCustomerFacade;
+	}
+
+
+
 }

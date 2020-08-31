@@ -102,7 +102,22 @@
                     </attribute>
                 </attributes>
             </itemtype>
+            <itemtype code="StoreFrontCustomerProcess" extends="StoreFrontProcess"
+                      autocreate="false" generate="true"
+                      jaloclass="de.hybris.platform.commerceservices.jalo.process.StoreFrontCustomerProcess">
+                <description>Represents customer related store front business process.</description>
+                <attributes>
+                    <attribute qualifier="activeToken" type="java.lang.String">
+                        <persistence type="property" />
+                        <description>Attribute contains token for activation.</description>
+                    </attribute>
+
+                </attributes>
+            </itemtype>
         </typegroup>
+
+
+
 
     </itemtypes>
 </items>

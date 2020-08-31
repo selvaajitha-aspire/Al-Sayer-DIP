@@ -12,8 +12,9 @@
                 		
         
         <requires-extension name="acceleratorfacades"/>
-                		
-        
+
+        <requires-extension name="commercefacades"/>
+
         <requires-extension name="alsayercore"/>
                 		
         

@@ -21,6 +21,11 @@
 		<property name="productConverter" ref="carouselProductConverter"/>
 		<property name="cartService" ref="cartService"/>
 	</bean>
+
+	<alias alias="customerFacade" name="alsayerCustomerFacadeImpl"/>
+	<bean id="alsayerCustomerFacadeImpl" class="com.alsayer.facades.customer.impl.AlsayerCustomerFacadeImpl" parent="defaultCustomerFacade" >
+		<property name="alsayerCustomerAccountService" ref="alsayerCustomerAccountService"/>
+	</bean>
 	
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
@@ -127,6 +132,7 @@
 	<bean id="forgottenPasswordEmailContext" class="com.alsayer.facades.process.email.context.ForgottenPasswordEmailContext" parent="customerEmailContext" scope="prototype" >
 		<property name="customerConverter" ref="customerConverter"/>
 	</bean>
+
 
 	<bean id="orderNotificationEmailContext" class="com.alsayer.facades.process.email.context.OrderNotificationEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="orderConverter" ref="orderConverter"/>
