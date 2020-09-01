@@ -123,7 +123,7 @@ public String doRegister(@RequestHeader(value = "referer", required = false) fin
 	public String activateUser(@RequestParam(name ="token")String token) throws TokenInvalidatedException
 	{
 		Assert.hasText(token, "The field [token] cannot be empty");
-		getAlsayerCustomerFacade().activateUser(token);
+			getAlsayerCustomerFacade().activateUser(token);
 		return ControllerConstants.Views.Pages.Account.AccountHomePage;
 	}
 
