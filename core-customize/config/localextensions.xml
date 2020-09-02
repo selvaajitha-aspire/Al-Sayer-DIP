@@ -28,13 +28,14 @@
     <extension name='promotionsbackoffice' />
     <extension name='voucher' />
     <extension name='voucherbackoffice' />
-    <extension name='commercefacades' />
+   <!-- <extension name='commercefacades' /> 
     <extension name='commerceservices' />
     <extension name='commerceservicesbackoffice' />
-    <extension name='commercewebservices' />
+    <extension name='commercewebservices' /> 
     <extension name='commercewebservicescommons' />
     <extension name='commercewebservicestests' />
-    <extension name='alsayerocc' />
+    <extension name='alsayerocc' /> -->
+    <extension name='alsayercommercewebservices' />
     <extension name='consignmenttrackingaddon' />
     <extension name='consignmenttrackingbackoffice' />
     <extension name='consignmenttrackingfacades' />
@@ -44,7 +45,7 @@
     <extension name='acceleratorbackoffice' />
     <extension name='acceleratorcms' />
     <extension name='acceleratorfacades' />
-    <extension name='acceleratorocc' />
+   <!-- <extension name='acceleratorocc' /> -->
     <extension name='acceleratorservices' />
     <extension name='acceleratorstorefrontcommons' />
     <extension name='addonsupport' />
@@ -90,10 +91,11 @@
     <extension name='ordermanagementfacades' />
     <extension name='ordermanagementwebservices' />
     <extension name='orderselfserviceaddon' />
+    <extension name="oauth2" />
     <extension name='warehousing' />
     <extension name='warehousingbackoffice' />
     <extension name='warehousingfacades' />
-    <extension name='warehousingwebservices' />
+    <extension name='warehousingwebservices' /> 
     <extension name='alsayerordermanagement' />
     <extension name='personalizationcms' />
     <extension name='personalizationcmsbackoffice' />
@@ -148,12 +150,10 @@
     <extension name='cmsbackoffice' />
     <extension name='cmscockpit' />
     <extension name='cmsfacades' />
-    <extension name='cmsocc' />
+   <!-- <extension name='cmsocc' /> -->
     <extension name='cmswebservices' />
     <extension name='previewwebservices' />
     <extension name='permissionsfacades' />
     <extension name='permissionswebservices' />
-    <extension name='webservicescommons' />
-    <extension name='alsayerwebservices' />
   </extensions>
 </hybrisconfig>
