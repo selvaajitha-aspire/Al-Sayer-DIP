@@ -4,7 +4,6 @@
 package com.alsayer.v2.controller;
 
 import com.alsayer.commercewebservicescommons.dto.user.ActiveUserWsDTO;
-import com.alsayer.commercewebservicescommons.dto.user.SuccessActiveUserWsDTO;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
