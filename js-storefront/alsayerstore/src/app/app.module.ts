@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule, PWAModuleConfig } from '@spartacus/storefront';
+import { B2cStorefrontModule, PWAModuleConfig, DirectionMode, DirectionConfig } from '@spartacus/storefront';
 import { ConfigModule } from '@spartacus/core';
 
 @NgModule({
@@ -32,7 +32,7 @@ import { ConfigModule } from '@spartacus/core';
         fallbackLang: 'en'
       },
       features: {
-        level: '2.0'
+        level: '2.1'
       }
     }),
     ConfigModule.withConfig({
@@ -41,6 +41,12 @@ import { ConfigModule } from '@spartacus/core';
         addToHomeScreen: true,
       }
     }as PWAModuleConfig),
+    ConfigModule.withConfig({
+      direction: {
+          default: DirectionMode.LTR,
+          rtlLanguages: [],
+      },
+    } as DirectionConfig),
     BrowserTransferStateModule,
   ],
   providers: [],
