@@ -173,7 +173,15 @@
           "location": "/config/local_prod.properties",
           "persona": "production"
         }
-      ]
+      ],
+      "extensions": {
+          "location": "/hybris/config/localextensions.xml",
+          "exclude": [
+              "azurecloudhotfolder",
+              "cloudcommons",
+              "cloudhotfolder"
+          ]
+      }
 
     },
     "storefrontAddons": [
