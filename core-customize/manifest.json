@@ -1,6 +1,6 @@
 {
     "commerceSuiteVersion": "2005",
-    "enableImageProcessingService": true,
+    "useCloudExtensionPack": true,
     "extensions": [
     "spartacussampledataaddon",
     "adaptivesearch",
