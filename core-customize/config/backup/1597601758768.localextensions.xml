@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hybrisconfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="resources/schemas/extensions.xsd">
+	<extensions>
+		<!--
+				All extensions located in ${HYBRIS_BIN_DIR}/platform/ext are automatically loaded.
+				More information about how to configure available extensions can be found here : https://wiki.hybris.com/x/nZVzC
+		-->
+
+		<path dir="${HYBRIS_BIN_DIR}" />
+
+
+										
+		<!-- modules/configurable-bundle/deprecated -->
+
+										
+		<!-- modules/cockpit-core/deprecated -->
+
+										
+		<!-- modules/hybris-utilities -->
+
+										
+		<!-- modules/customer-coupon -->
+
+										
+		<!-- modules/consignment-tracking -->
+
+										
+		<!-- modules/marketplace -->
+
+										
+		<!-- modules/web-services-commons -->
+
+										
+		<!-- modules/customer-service -->
+
+										
+		<!-- modules/backoffice-framework -->
+
+										
+		<!-- modules/platform -->
+		<extension name="yempty" />
+
+										
+		<!-- modules/backoffice-applications -->
+
+										
+		<!-- modules/core-accelerator -->
+
+										
+		<!-- modules/subscriptions/deprecated -->
+
+										
+		<!-- modules/personalization -->
+
+										
+		<!-- modules/personalization-integration -->
+
+										
+		<!-- modules/personalization-promotion -->
+
+										
+		<!-- modules/order-management -->
+
+										
+		<!-- modules/ondemand-connect/deprecated -->
+
+										
+		<!-- modules/promotion-engine -->
+
+										
+		<!-- modules/coupon -->
+
+										
+		<!-- modules/timed-access-promotion-engine -->
+
+										
+		<!-- modules/china-accelerator-logistics -->
+
+										
+		<!-- modules/china-accelerator-tax-invoice -->
+
+										
+		<!-- modules/china-accelerator-alipay-psp -->
+
+										
+		<!-- modules/china-accelerator-address -->
+
+										
+		<!-- modules/china-accelerator-wechat-psp -->
+
+										
+		<!-- modules/backoffice-applications/deprecated -->
+
+										
+		<!-- modules/commerce-services -->
+
+										
+		<!-- modules/b2b-commerce -->
+
+										
+		<!-- modules/rule-engine -->
+
+										
+		<!-- modules/personalization-search -->
+
+										
+		<!-- modules/cockpit-applications/deprecated -->
+
+										
+		<!-- modules/b2c-accelerator-addons -->
+
+										
+		<!-- modules/base-commerce -->
+
+										
+		<!-- modules/subscription-bundles -->
+
+										
+		<!-- modules/web-content-management-system -->
+
+										
+		<!-- modules/web-content-management-system/deprecated -->
+
+										
+		<!-- modules/data-hub-adapter -->
+
+										
+		<!-- modules/platform/deprecated -->
+
+										
+		<!-- modules/adaptive-search -->
+
+										
+		<!-- modules/search-and-navigation -->
+
+										
+		<!-- modules/b2b-accelerator -->
+
+										
+		<!-- modules/customer-interest -->
+
+										
+		<!-- modules/notification -->
+
+										
+		<!-- modules/messagecenter -->
+
+										
+		<!-- modules/selective-cart -->
+
+										
+		<!-- modules/stock-notification -->
+
+										
+		<!-- modules/entitlements -->
+
+										
+		<!-- modules/yforms -->
+
+										
+		<!-- modules/cds-integration -->
+
+										
+		<!-- modules/base-accelerator -->
+
+										
+		<!-- modules/npm-ancillary -->
+
+										
+		<!-- modules/configurator-complex-products -->
+
+										
+		<!-- modules/china-accelerator-addons -->
+
+										
+		<!-- modules/china-accelerator-people-profile -->
+
+										
+		<!-- modules/china-accelerator-payment -->
+
+										
+		<!-- modules/smartedit -->
+
+										
+		<!-- modules/base-accelerator/deprecated -->
+
+										
+		<!-- modules/text-field-configurator-template -->
+
+										
+		<!-- modules/commerce-infrastructure-services-client/deprecated -->
+
+										
+		<!-- modules/integration-apis -->
+
+										
+		<!-- modules/assisted-services -->
+
+										
+		<!-- modules/assisted-services-integrations -->
+
+										
+		<!-- modules/backoffice-addons -->
+
+										
+		<!-- modules/cds-merchandising -->
+
+										
+		<!-- modules/subscription-bundles/deprecated -->
+
+										
+		<!-- modules/b2b-accelerator-addons -->
+
+										
+		<!-- modules/event-tracking -->
+
+										
+		<!-- modules/api-registry -->
+
+										
+		<!-- modules/sap-cloud-platform-extension-factory-integration -->
+
+
+	</extensions>
+</hybrisconfig>
