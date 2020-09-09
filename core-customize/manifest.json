@@ -1,7 +1,6 @@
 {
     "commerceSuiteVersion": "2005",
     "useCloudExtensionPack":true,
-    "disableImageReuse": true,
     "extensions": [
       "spartacussampledataaddon",
       "adaptivesearch",
@@ -175,7 +174,7 @@
         }
       ],
       "extensions": {
-          "location": "/hybris/config/localextensions.xml",
+          "location": "/config/localextensions.xml",
           "exclude": [
               "azurecloudhotfolder",
               "cloudcommons",
