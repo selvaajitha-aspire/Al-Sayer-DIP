@@ -484,9 +484,9 @@
 	   }
 	],
 	"tests": {
-      "excludedPackages": [ "de.hybris.*", "com.hybris.*" ]
+      "excludedPackages": [ "de.hybris.*", "com.hybris.*", "com.alsayer.*" ]
    },
     "webTests": {
-      "excludedPackages": [ "de.hybris.*", "com.hybris.*" ]
+      "excludedPackages": [ "de.hybris.*", "com.hybris.*", "com.alsayer.*" ]
    }
  }

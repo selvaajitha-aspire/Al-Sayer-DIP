@@ -2,9 +2,8 @@
     "applications": [
         {
             "name": "alsayerstore",
-            "path": "alsayerstore",
-            "enableSSR": true,
-            "disableImageReuse": true
+            "path": "alsayerstore"
         }
-    ]
+    ],
+        "nodeVersion": "12"
 }
