@@ -1,10 +1,9 @@
 {
     "applications": [
         {
-            "name": "alsayerstore",
-            "path": "alsayerstore",
-            "enableSSR": true,
-            "disableImageReuse": true
+            "name": "spartacusstore",
+            "path": "spartacusstore"
         }
-    ]
+    ],
+        "nodeVersion": "12"
 }

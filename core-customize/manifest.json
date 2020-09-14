@@ -1,48 +1,162 @@
 {
     "commerceSuiteVersion": "2005",
-    "useCloudExtensionPack":true,
-    "disableImageReuse": true,
+    "enableImageProcessingService": true,
     "extensions": [
-"commerceservices",
-"basecommerce",
-"b2bapprovalprocess",
-"b2bcommerce",
-"backoffice",
-"commercefacades",
-"solrserver",
-"b2bcommercebackoffice",
-"basecommercebackoffice",
-"commerceservicesbackoffice",
-"customersupportbackoffice",
-"promotionsbackoffice",
-"rulebuilderbackoffice",
-"ruleenginebackoffice",
-"subscriptionbackoffice",
-"ticketsystembackoffice",
-"promotionenginebackoffice",
-"acceleratorservices",
-"acceleratorfacades",
-"acceleratorcms",
-"acceleratorstorefrontcommons",
-"b2bacceleratorfacades",
-"b2bacceleratorservices",
-"osanedfulfilmentprocess",
-"osanedcore",
-"osanedfacades",
-"osanedstorefront",
-"osanedinitialdata",
-"osanedbackoffice",
-"osanedtest",
-"cmsbackoffice",
-"productcockpit",
-"cmsoccaddon",
-"osanedcommercewebservices",
-"oauth2",
-"apiregistryservices",
-"apiregistrybackoffice"
-
+    "spartacussampledataaddon",
+    "adaptivesearch",
+    "adaptivesearchbackoffice",
+    "adaptivesearchfacades",
+    "adaptivesearchsamplesaddon",
+    "adaptivesearchsolr",
+    "adaptivesearchwebservices",
+    "apiregistrybackoffice",
+    "apiregistryservices",
+    "electronicsstore",
+    "captchaaddon",
+    "backoffice",
+    "backofficesolrsearch",
+    "platformbackoffice",
+    "alsayerbackoffice",
+    "alsayercore",
+    "alsayerfacades",
+    "alsayerinitialdata",
+    "alsayerstorefront",
+    "basecommerce",
+    "basecommercebackoffice",
+    "customerreview",
+    "payment",
+    "promotions",
+    "promotionsbackoffice",
+    "voucher",
+    "voucherbackoffice",
+    "commercefacades",
+    "commerceservices",
+    "commerceservicesbackoffice",
+    "commercewebservices",
+    "commercewebservicescommons",
+    "commercewebservicestests",
+    "alsayerocc",
+    "consignmenttrackingaddon",
+    "consignmenttrackingbackoffice",
+    "consignmenttrackingfacades",
+    "consignmenttrackingmock",
+    "consignmenttrackingocc",
+    "consignmenttrackingservices",
+    "acceleratorcms",
+    "acceleratorfacades",
+    "acceleratorocc",
+    "acceleratorservices",
+    "acceleratorstorefrontcommons",
+    "addonsupport",
+    "couponbackoffice",
+    "couponfacades",
+    "couponservices",
+    "couponwebservices",
+    "customercouponaddon",
+    "customercouponbackoffice",
+    "customercouponfacades",
+    "customercouponocc",
+    "customercouponsamplesaddon",
+    "customercouponservices",
+    "customersupportbackoffice",
+    "customerticketingaddon",
+    "customerticketingfacades",
+    "ticketsystem",
+    "ticketsystembackoffice",
+    "eventtrackingmodel",
+    "eventtrackingpublisher",
+    "eventtrackingservices",
+    "eventtrackingwsaddon",
+    "inboundservices",
+    "integrationbackoffice",
+    "integrationbackofficetest",
+    "integrationmonitoringbackoffice",
+    "integrationservices",
+    "odata2services",
+    "odata2webservices",
+    "odata2webservicesfeaturetests",
+    "outboundservices",
+    "outboundsync",
+    "outboundsyncbackoffice",
+    "messagecentercsfacades",
+    "messagecentercsocc",
+    "messagecentercsservices",
+    "notificationaddon",
+    "notificationfacades",
+    "notificationocc",
+    "notificationservices",
+    "npmancillary",
+    "ordermanagementaddon",
+    "ordermanagementfacades",
+    "ordermanagementwebservices",
+    "orderselfserviceaddon",
+    "warehousing",
+    "warehousingbackoffice",
+    "warehousingfacades",
+    "warehousingwebservices",
+    "alsayerordermanagement",
+    "personalizationcms",
+    "personalizationcmsbackoffice",
+    "personalizationcmsweb",
+    "personalizationfacades",
+    "personalizationsampledataaddon",
+    "personalizationservices",
+    "personalizationservicesbackoffice",
+    "personalizationsmartedit",
+    "personalizationwebservices",
+    "previewpersonalizationweb",
+    "personalizationpromotions",
+    "personalizationpromotionsbackoffice",
+    "personalizationpromotionssampledataaddon",
+    "personalizationpromotionssmartedit",
+    "personalizationpromotionsweb",
+    "personalizationsearch",
+    "personalizationsearchbackoffice",
+    "personalizationsearchsamplesaddon",
+    "personalizationsearchsmartedit",
+    "personalizationsearchweb",
+    "adminapi",
+    "auditreportservices",
+    "deltadetection",
+    "embeddedserver",
+    "groovynature",
+    "springintegrationlibs",
+    "tomcatembeddedserver",
+    "promotionenginebackoffice",
+    "promotionenginesamplesaddon",
+    "promotionengineservices",
+    "droolsruleengineservices",
+    "ordercalculation",
+    "rulebuilderbackoffice",
+    "ruledefinitions",
+    "ruleengine",
+    "ruleenginebackoffice",
+    "ruleengineservices",
+    "solrfacetsearch",
+    "solrfacetsearchbackoffice",
+    "solrserver",
+    "cmssmartedit",
+    "cmssmarteditwebservices",
+    "smartedit",
+    "smarteditaddon",
+    "smarteditwebservices",
+    "stocknotificationaddon",
+    "stocknotificationfacades",
+    "stocknotificationservices",
+    "cms2",
+    "cms2lib",
+    "cmsbackoffice",
+    "cmscockpit",
+    "cmsfacades",
+    "cmsocc",
+    "cmswebservices",
+    "previewwebservices",
+    "permissionsfacades",
+    "permissionswebservices",
+    "webservicescommons",
+    "alsayerwebservices"
 	],
-    "useConfig": {
+	"useConfig": {
         "properties": [
             {
                 "location": "/hybris/config/environments/local-dev.properties",
@@ -81,138 +195,290 @@
             ]
         }
     },
-    "properties": [
-        {
-            "key": "lang.packs",
-            "value": "de,en"
-        }
-    ],
-    "storefrontAddons": [
-		{
-            "addon": "cmsoccaddon",
-            "storefront": "osanedcommercewebservices",
-            "template": "ycommercewebservices"
-        }
-    ],
-    "aspects": [
-        {
-            "name": "backoffice",
-            "properties": [],
-            "webapps": [
-                {
-                    "name": "hac",
-                    "contextPath": "/hac"
-                },
-                {
-                    "name": "mediaweb",
-                    "contextPath": "/medias"
-                },
-                {
-                    "name": "backoffice",
-                    "contextPath": "/backoffice"
-                },
-                {
-                  "name":"odata2webservices",
-                  "contextPath":"/odata2webservices"
-               }
-            ]
-        },
-        {
-            "name": "accstorefront",
-            "properties": [
-                {
-                    "key": "spring.session.enabled",
-                    "value": "true"
-                },
-                {
-                    "key": "spring.session.osanedstorefront.save",
-                    "value": "async"
-                },
-                {
-                    "key": "spring.session.osanedstorefront.cookie.name",
-                    "value": "JSESSIONID"
-                },
-                {
-                    "key": "spring.session.osanedstorefront.cookie.path",
-                    "value": "/"
-                },
-                {
-                    "key": "storefrontContextRoot",
-                    "value": "/osanedstorefront"
-                }
-            ],
-            "webapps": [
-                {
-                    "name": "hac",
-                    "contextPath": "/hac"
-                },
-                {
-                    "name": "mediaweb",
-                    "contextPath": "/medias"
-                },
-                {
-                    "name": "osanedstorefront",
-                    "contextPath": "/osanedstorefront"
-                },
-                {
-                    "name": "acceleratorservices",
-                    "contextPath": "/acceleratorservices"
-                }
-            ]
-        },
-        {
-            "name": "backgroundProcessing",
-            "properties": [
-                {
-                    "key": "cluster.node.groups",
-                    "value": "integration,yHotfolderCandidate"
-                }
-            ],
-            "webapps": [
-                {
-                    "name": "hac",
-                    "contextPath": "/hac"
-                },
-                {
-                    "name": "mediaweb",
-                    "contextPath": "/medias"
-                }
-            ]
-        },
-        {
-            "name": "api",
-            "properties": [
-                {
-                    "key": "xss.filter.header.X-Frame-Options",
-                    "value": ""
-                },
-                {
-                    "key": "tomcat.maxthreads",
-                    "value": "1200"
-                },
-                {
-                    "key": "xss.filter.header.X-Frame-Options",
-                    "value": ""
-                },
-                {
-                    "key": "storefrontContextRoot",
-                    "value": "/osanedstorefront"
-                }
-            ],
-            "webapps": [
-                {
-                    "name": "mediaweb",
-                    "contextPath": "/medias"
-                },
-                {
-                    "name": "oauth2",
-                    "contextPath": "/authorizationserver"
-                },
-				 {
-                    "name": "osanedcommercewebservices",
-                    "contextPath": "/osanedcommercewebservices"
-                }
-            ]
-        }
-    ]
-}
+	"storefrontAddons":[
+  {
+      "addon": "spartacussampledataaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "adaptivesearchsamplesaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "captchaaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "consignmenttrackingaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "customercouponaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "customercouponsamplesaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "customerticketingaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "eventtrackingwsaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "notificationaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "ordermanagementaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "orderselfserviceaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "smarteditaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  },
+  {
+      "addon": "stocknotificationaddon",
+      "storefront": "alsayerstorefront",
+      "template": "yacceleratorstorefront"
+  }
+	],
+	"properties":[
+	   {
+		  "key":"lang.packs",
+		  "value":"de,en"
+	   },
+	   {
+		  "key":"test.property.1",
+		  "value":"test-property-1-value-prod",
+		  "persona":"production"
+	   },
+	   {
+		  "key":"test.property.1",
+		  "value":"test-property-1-value-dev",
+		  "persona":"development"
+	   },
+	   {
+		  "key":"test.property.1",
+		  "value":"test-property-1-value"
+	   },
+	   {
+		  "key":"test.property.2",
+		  "value":"test-property-2-value"
+	   },
+	   {
+		  "key":"googleApiKey",
+		  "value":""
+	   },
+	   {
+		  "key":"multicountrysampledataaddon.import.active",
+		  "value":"false"
+	   },
+	   {
+		  "key":"apiregistryservices.events.exporting",
+		  "value":"false"
+	   }
+	],
+	"aspects":[
+	   {
+		  "name":"backoffice",
+		  "properties":[],
+		  "webapps":[
+			 {
+				"name":"hac",
+				"contextPath":"/hac"
+			 },
+			 {
+				"name":"mediaweb",
+				"contextPath":"/medias"
+			 },
+			 {
+				"name":"backoffice",
+				"contextPath":"/backoffice"
+			 }
+		  ]
+	   },
+	   {
+		  "name":"accstorefront",
+		  "properties":[
+			 {
+				"key":"spring.session.enabled",
+				"value":"true"
+			 },
+			 {
+				"key":"spring.session.alsayerstorefront.save",
+				"value":"async"
+			 },
+			 {
+				"key":"spring.session.alsayerstorefront.cookie.name",
+				"value":"JSESSIONID"
+			 },
+			 {
+				"key":"spring.session.alsayerstorefront.cookie.path",
+				"value":"/"
+			 },
+			 {
+				"key":"storefrontContextRoot",
+				"value":""
+			 },
+			 {
+				"key":"xss.filter.header.X-Frame-Options",
+				"value":""
+			 }
+		  ],
+		  "webapps":[
+			 {
+				"name":"mediaweb",
+				"contextPath":"/medias"
+			 },
+			 {
+				"name":"alsayerstorefront",
+				"contextPath":""
+			 },
+			 {
+				"name":"acceleratorservices",
+				"contextPath":"/acceleratorservices"
+			 },
+			 {
+				"name":"hac",
+				"contextPath":"/hac"
+			 }
+		  ]
+	   },
+	   {
+		  "name":"api",
+		  "properties":[
+			 {
+				"key":"xss.filter.header.X-Frame-Options",
+				"value":""
+			 },
+			 {
+				"key":"storefrontContextRoot",
+				"value":"/alsayerstorefront"
+			 }
+		  ],
+		  "webapps":[
+			 {
+				"name":"mediaweb",
+				"contextPath":"/medias"
+			 },
+			 {
+				"name":"adaptivesearchwebservices",
+				"contextPath":"/adaptivesearchwebservices"
+			 },
+			 {
+				"name":"odata2webservices",
+				"contextPath":"/odata2webservices"
+			 },
+			 {
+				"name":"alsayerstorefront",
+				"contextPath":"/alsayerstorefront"
+			 },
+			 {
+				"name":"acceleratorservices",
+				"contextPath":"/acceleratorservices"
+			 },
+			 {
+				"name":"commercewebservices",
+				"contextPath":"/occ"
+			 },
+			 {
+				"name":"smartedit",
+				"contextPath":"/smartedit"
+			 },
+			 {
+				"name":"cmssmartedit",
+				"contextPath":"/cmssmartedit"
+			 },
+			 {
+				"name":"smarteditwebservices",
+				"contextPath":"/smarteditwebservices"
+			 },
+			 {
+				"name":"cmssmarteditwebservices",
+				"contextPath":"/cmssmarteditwebservices"
+			 },
+			 {
+				"name":"personalizationsmartedit",
+				"contextPath":"/personalizationsmartedit"
+			 },
+			 {
+				"name":"personalizationpromotionssmartedit",
+				"contextPath":"/personalizationpromotionssmartedit"
+			 },
+			 {
+				"name":"oauth2",
+				"contextPath":"/authorizationserver"
+			 },
+			 {
+				"name":"cmswebservices",
+				"contextPath":"/cmswebservices"
+			 },
+			 {
+				"name":"permissionswebservices",
+				"contextPath":"/permissionswebservices"
+			 },
+			 {
+				"name":"previewwebservices",
+				"contextPath":"/previewwebservices"
+			 },
+			 {
+				"name":"personalizationwebservices",
+				"contextPath":"/personalizationwebservices"
+			 },
+			 {
+				"name":"personalizationsearchsmartedit",
+				"contextPath":"/personalizationsearchsmartedit"
+			 },
+			 {
+				"name":"warehousingwebservices",
+				"contextPath":"/warehousingwebservices"
+			 }
+		  ]
+	   },
+	   {
+		  "name":"backgroundProcessing",
+		  "properties":[
+			 {
+				"key":"cluster.node.groups",
+				"value":"integration,yHotfolderCandidate"
+			 }
+		  ],
+		  "webapps":[
+			 {
+				"name":"hac",
+				"contextPath":"/hac"
+			 },
+			 {
+				"name":"mediaweb",
+				"contextPath":"/medias"
+			 }
+		  ]
+	   }
+	],
+	"tests": {
+      "excludedPackages": [ "de.hybris.*", "com.hybris.*", "com.alsayer.*" ]
+   },
+    "webTests": {
+      "excludedPackages": [ "de.hybris.*", "com.hybris.*", "com.alsayer.*" ]
+   }
+ }
