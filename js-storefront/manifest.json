@@ -1,8 +1,8 @@
 {
     "applications": [
         {
-            "name": "alsayerstore",
-            "path": "alsayerstore"
+            "name": "spartacusstore",
+            "path": "spartacusstore"
         }
     ],
         "nodeVersion": "12"
