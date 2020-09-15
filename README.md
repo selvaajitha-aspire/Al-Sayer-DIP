@@ -54,13 +54,13 @@ This document helps you setup local environment for Alsayer Project.
 
     Symlink for custom folder from the Alsayer codebase
 
-     **mklink /D {hybris_installation_dir}/hybris/bin/custom {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/custom**
+     **mklink /D {hybris_installation_dir}/hybris/bin/custom {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/hybris/bin/custom**
 
   * For Linux/Mac :
 
     Symlink for custom folder from the Alsayer codebase
 
-     **ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/custom {hybris_installation_dir}/hybris/bin/custom**
+     **ln -s {alsayer_codebase_dir}/Al-Sayer-DIP/core-customize/hybris/bin/custom {hybris_installation_dir}/hybris/bin/custom**
 
 
 4. Copy and paste alsayer-receipe in your {hybris_installation_dir}/installer/recipes which is present your codebase.
