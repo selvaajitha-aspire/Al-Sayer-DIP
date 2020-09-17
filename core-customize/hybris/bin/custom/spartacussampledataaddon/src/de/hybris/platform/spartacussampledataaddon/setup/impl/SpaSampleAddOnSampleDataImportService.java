@@ -60,7 +60,7 @@ public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDat
 		// 4- import content catalog from impex
 		super.importContentCatalog(context, importRoot, catalogName);
 
-		if (catalogName.equals("alsayer-spa") || catalogName.equals("powertools") || catalogName.equals("apparel-uk"))
+		if (catalogName.equals("alsayer") || catalogName.equals("powertools") || catalogName.equals("apparel-uk"))
 		{
 			// 5- synchronize spaContentCatalog:staged->online
 			synchronizeContentCatalog(context, catalogName + "-spa", true);
