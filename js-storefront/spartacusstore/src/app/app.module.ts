@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule } from '@spartacus/storefront';
-import { OccConfig } from '@spartacus/core';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig } from '@spartacus/storefront';
+import { OccConfig, ConfigModule } from '@spartacus/core';
 import { environment } from './../environments/environment';
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -42,9 +42,15 @@ else {
         fallbackLang: 'en'
       },
       features: {
-        level: '2.0'
+        level: '2.1'
       }
     }),
+    ConfigModule.withConfig({
+      direction: {
+          default: DirectionMode.LTR,
+          ltrLanguages: [],
+      },
+    } as DirectionConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
