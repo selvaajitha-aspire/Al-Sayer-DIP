@@ -1,0 +1,72 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+#
+# Import essential data for the Accelerator
+#
+
+# Language
+$lang=ar
+
+# Languages
+UPDATE Language;isocode[unique=true];name[lang=$lang]
+ ;en;"Englisch"
+ ;ar;"Arabic"
+
+# Currencies
+UPDATE Currency;isocode[unique=true];name[lang=$lang]
+ ;KWD;"Kuwaiti Dinar"
+
+# Titles
+UPDATE Title;code[unique=true];name[lang=$lang]
+ ;dr;"دكتور."
+ ;miss;"يغيب"
+ ;mr;"السيد."
+ ;mrs;"السيدة"
+ ;ms;"تصلب متعدد."
+
+# Credit / Debit Cards
+UPDATE CreditCardType;code[unique=true];name[lang=$lang]
+ ;amex;"American Express"
+ ;diners;"Diner's Club"
+ ;maestro;"Maestro"
+ ;master;"Mastercard"
+ ;mastercard_eurocard;"Mastercard/Eurocard"
+ ;switch;"Switch"
+ ;visa;"Visa"
+
+# DistanceUnits for Storelocator 
+UPDATE DistanceUnit;code[unique=true];name[lang=$lang]
+ ;km;"km"
+ ;miles;"miles"
+
+# MediaFormats
+UPDATE MediaFormat;qualifier[unique=true];name[lang=$lang];
+ ;1200Wx1200H;"1200Wx1200H"
+ ;300Wx300H;"300Wx300H"
+ ;30Wx30H;"30Wx30H"
+ ;365Wx246H;"365Wx246H"
+ ;515Wx515H;"515Wx515H"
+ ;65Wx65H;"65Wx65H"
+ ;96Wx96H;"96Wx96H"
+
+# Product Tax Groups
+UPDATE ProductTaxGroup;code[unique=true];name[lang=$lang]
+ ;kw-sales-tax-full;"ضريبة المبيعات في الكويت"
+# User Tax Groups
+UPDATE UserTaxGroup;code[unique=true];name[lang=$lang]
+ ;kw-taxes;"الضرائب الكويتية"
+
+# Tax
+UPDATE Tax;code[unique=true];name[lang=$lang]
+ ;kw-sales-tax-full;"ضريبة المبيعات"
+
+# Consginment statuses
+UPDATE ConsignmentStatus;code[unique=true];name[lang=$lang]
+ ;CANCELLED;"ألغيت"
+ ;PICKPACK;"اختيار حزمة"
+ ;PICKUP_COMPLETE;"اكتمل الاستلام"
+ ;READY;"جاهز"
+ ;READY_FOR_PICKUP;"جاهز للإستلام"
+ ;SHIPPED;"شحنها"
+ ;WAITING;"انتظار"

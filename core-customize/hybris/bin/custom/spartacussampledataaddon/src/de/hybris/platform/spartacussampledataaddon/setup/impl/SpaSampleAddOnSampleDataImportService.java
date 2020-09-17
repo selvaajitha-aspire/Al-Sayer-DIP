@@ -27,7 +27,7 @@ import de.hybris.platform.servicelayer.model.ModelService;
 @SuppressWarnings("deprecation")
 public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDataImportService
 {
-	private static final String SYNC_CONTENT_CATALOG = "electronics->spa";
+	private static final String SYNC_CONTENT_CATALOG = "alsayer->spa";
 	private static final String STORES_URL = "/stores/";
 
 	private ModelService modelService;
@@ -35,7 +35,7 @@ public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDat
 	@Override
 	protected void importContentCatalog(final SystemSetupContext context, final String importRoot, final String catalogName)
 	{
-		if (catalogName.equals("electronics") || catalogName.equals("powertools") || catalogName.equals("apparel-uk"))
+		if (catalogName.equals("alsayer") || catalogName.equals("powertools") || catalogName.equals("apparel-uk"))
 		{
 			// 1- create new catalog
 			importImpexFile(context, importRoot + "/contentCatalogs/" + catalogName + "ContentCatalog/catalog.impex", false);
@@ -60,7 +60,7 @@ public class SpaSampleAddOnSampleDataImportService extends DefaultAddonSampleDat
 		// 4- import content catalog from impex
 		super.importContentCatalog(context, importRoot, catalogName);
 
-		if (catalogName.equals("electronics") || catalogName.equals("powertools") || catalogName.equals("apparel-uk"))
+		if (catalogName.equals("alsayer-spa") || catalogName.equals("powertools") || catalogName.equals("apparel-uk"))
 		{
 			// 5- synchronize spaContentCatalog:staged->online
 			synchronizeContentCatalog(context, catalogName + "-spa", true);

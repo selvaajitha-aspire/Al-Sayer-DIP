@@ -87,11 +87,11 @@
             </itemtype>
         </typegroup>
 
-        <typegroup name="Electronics">
-            <itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
+        <typegroup name="Alsayer">
+            <itemtype code="AlsayerColorVariantProduct" extends="VariantProduct"
                       autocreate="true" generate="true"
-                      jaloclass="com.alsayer.core.jalo.ElectronicsColorVariantProduct">
-                <description>Electronics color variant type that contains additional attribute describing variant color.
+                      jaloclass="com.alsayer.core.jalo.AlsayerColorVariantProduct">
+                <description>Alsayer color variant type that contains additional attribute describing variant color.
                 </description>
                 <attributes>
                     <attribute qualifier="color" type="localized:java.lang.String"

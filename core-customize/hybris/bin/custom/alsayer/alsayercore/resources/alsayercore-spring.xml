@@ -76,16 +76,16 @@
 		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 
-	<bean id="electronicsCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+	<bean id="alsayerCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
 		<property name="categorySource" ref="electronicsCategorySource"/>
 	</bean>
-	<bean id="electronicsBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+	<bean id="alsayerBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
 		<property name="categorySource" ref="electronicsBrandCategorySource"/>
 	</bean>
-	<bean id="electronicsCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+	<bean id="alsayerCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
 		<property name="categorySource" ref="electronicsCategorySource"/>
 	</bean>
-	<bean id="electronicsBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+	<bean id="alsayerBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
 		<property name="categorySource" ref="electronicsBrandCategorySource"/>
 	</bean>
 
@@ -167,7 +167,7 @@
 		<property name="pointOfServiceService" ref="pointOfServiceService"/>
 	</bean>
 
-	<bean id="electronicsPointOfServiceFacetDisplayNameProvider"
+	<bean id="alsayerPointOfServiceFacetDisplayNameProvider"
 	      class="com.alsayer.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider"
 	      >
 		<property name="pointOfServiceService" ref="pointOfServiceService"/>

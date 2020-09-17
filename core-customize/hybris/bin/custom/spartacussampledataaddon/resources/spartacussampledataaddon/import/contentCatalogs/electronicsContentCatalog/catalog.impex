@@ -6,15 +6,15 @@
 # except as noted otherwise in the LICENSE file.
 # -----------------------------------------------------------------------
 #
-$contentCatalog=electronicsContentCatalog
-$spaContentCatalog=electronics-spaContentCatalog
+$contentCatalog=alsayerContentCatalog
+$spaContentCatalog=alsayer-spaContentCatalog
 $language=en
-$languages=ja,en,de,zh
+$languages=ar,en
 
 
 ###### Content catalog for spartacus ######
 INSERT_UPDATE ContentCatalog;id[unique=true];name[lang=$language]
-;$spaContentCatalog;"SPA Electronics Content Catalog"
+;$spaContentCatalog;"SPA Alsayer Content Catalog"
 
 ###### CatalogVersion for spartacus ######
 INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode);writePrincipals(usergroup.uid)[mode=append];readPrincipals(usergroup.uid)[mode=append]
