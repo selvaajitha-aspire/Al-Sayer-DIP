@@ -7,6 +7,8 @@ $contentCatalog=alsayerContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $picture=media(code, $contentCV);
 $siteResource=jar:com.alsayer.initialdata.constants.AlsayerInitialDataConstants&/alsayerinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$title=title(code, $contentCV);
+$color=color(code, $contentCV);
 
 # Language
 $lang=en
@@ -249,3 +251,40 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
 ;;EmptyCartParagraphComponent;"<h2>Your shopping cart is empty</h2><p>Suggestions</p><ul><li>Browse our products by selecting a category above</li></ul>"
 ;;HelpParagraphComponent;"<strong>Need Help with your checkout process?</strong> <span>Contact Us or Call phone number.</span>"
+
+###### START OF ALSAYER SITE ###############################################################################################################################
+
+# Media For Rotating Images Component
+
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+                      ;;HomePageBannerComponent1;Banner1.jpg
+                      ;;HomePageBannerComponent2;Banner2.jpg
+                      ;;HomePageBannerComponent3;Banner3.jpg
+                      ;;HomePageBannerComponent4;Banner4.jpg
+
+# Localisation Alsayer Tiles Components
+
+UPDATE AlsayerCustomCMSComponent;$contentCV[unique=true];uid[unique=true];$title[lang=$lang];$color[lang=$lang]
+                                ;;CarTradInComponent;"Car Trade-in";"RED"
+                                ;;RSAComponent;"Roadside Assistance";"RED"
+                                ;;ServiceHistoryComponent;"Service History";"RED"
+                                ;;CarReplacementComponent;"Car Replacement";"RED"
+                                ;;AccesoriesComponent;"Accessories";"RED"
+                                ;;InsuranceComponent;"Insurance";"RED"
+                                ;;TyresComponent;"Tyres";"RED"
+                                ;;ServiceAppointmentComponent;"Service Appointment";"RED"
+
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+                        ;;MyAccountNavNode;"My Account"
+
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+                       ;;MyProfileLink;"My Profile"
+                       ;;MyVehiclesLink;"My Vehicles"
+                       ;;MyPurchasesLink;"My Purchases"
+                       ;;MyTicketsLink;"My Tickets"
+                       ;;MyServicesLink;"My Services"
+                       ;;SignOutLink;"Sign Out"
+
+
+

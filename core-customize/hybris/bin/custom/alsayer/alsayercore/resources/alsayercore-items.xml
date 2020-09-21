@@ -102,6 +102,28 @@
                     </attribute>
                 </attributes>
             </itemtype>
+            <itemtype code="AlsayerCustomCMSComponent" extends="SimpleCMSComponent"
+                      autocreate="true" generate="true" abstract="false" jaloclass="com.alsayer.core.jalo.AlsayerCustomCMSComponent">
+                <description>ALSAYER Custom CMS Component with title, icon and color</description>
+                <attributes>
+                    <attribute qualifier="title" type="localized:java.lang.String">
+                        <description>It is localized title of the component.</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="icon" type="Media">
+                        <description>Media for component.</description>
+                        <modifiers read="true" write="true" />
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="color" type="localized:java.lang.String">
+                        <description>Color of the component.</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
 
     </itemtypes>
