@@ -249,3 +249,38 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
 ;;EmptyCartParagraphComponent;"<h2>Ihr Warenkorb ist leer</h2><p>Vorschläge</p><ul><li>Stöbern Sie in unseren Produkten, indem Sie eine Kategorie in der Menüleiste auswählen.</li></ul>"
 ;;HelpParagraphComponent;"<div class=""helpBanner""><span class=""bannerHeadline"" >BENÖTIGEN SIE HILFE?</span><span class=""bannerText"">Klicken Sie hier, wenn Sie Hilfe beim Bezahlen benötigen<a href=""#"" >LOS > ></a></span></div>"
+
+
+###### START OF ALSAYER SITE ###############################################################################################################################
+
+# Media For Rotating Images Component
+
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+                      ;;HomePageBannerComponent1;Banner1.jpg
+                      ;;HomePageBannerComponent2;Banner2.jpg
+                      ;;HomePageBannerComponent3;Banner3.jpg
+                      ;;HomePageBannerComponent4;Banner4.jpg
+
+# Localisation Service Tiles Components
+
+UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];$title[lang=$lang];$color[lang=$lang]
+                              ;;CarTradInComponent;"Car Trade-in";"RED"
+                              ;;RSAComponent;"Roadside Assistance";"RED"
+                              ;;ServiceHistoryComponent;"Service History";"RED"
+                              ;;CarReplacementComponent;"Car Replacement";"RED"
+                              ;;AccesoriesComponent;"Accessories";"RED"
+                              ;;InsuranceComponent;"Insurance";"RED"
+                              ;;TyresComponent;"Tyres";"RED"
+                              ;;ServiceAppointmentComponent;"Service Appointment";"RED"
+
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+                        ;;MyAccountNavNode;"My Account"
+
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+                       ;;MyProfileLink;"My Profile"
+                       ;;MyVehiclesLink;"My Vehicles"
+                       ;;MyPurchasesLink;"My Purchases"
+                       ;;MyTicketsLink;"My Tickets"
+                       ;;MyServicesLink;"My Services"
+                       ;;SignOutLink;"Sign Out"

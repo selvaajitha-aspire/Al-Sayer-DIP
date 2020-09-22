@@ -3,7 +3,7 @@
  */
 package com.alsayer.storefront.controllers;
 
-import com.alsayer.core.model.AlsayerCustomCMSComponentModel;
+import com.alsayer.core.model.ServiceTileCMSComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.CMSTabParagraphContainerModel;
 import de.hybris.platform.acceleratorcms.model.components.CartSuggestionComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.CategoryFeatureComponentModel;
@@ -57,7 +57,7 @@ public interface ControllerConstants
 			String SimpleResponsiveBannerComponent = _Prefix + SimpleResponsiveBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String CMSTabParagraphContainer = _Prefix + CMSTabParagraphContainerModel._TYPECODE + _Suffix; // NOSONAR
 
-			String AlsayerCustomCMSComponent = _Prefix + AlsayerCustomCMSComponentModel._TYPECODE + _Suffix;
+			String ServiceTileComponent = _Prefix + ServiceTileCMSComponentModel._TYPECODE + _Suffix;
 		}
 	}
 

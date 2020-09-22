@@ -18,9 +18,9 @@
                 <cms:component component="${feature}" element="div" class="col-xs-12 col-sm-6 no-space yComponentWrapper"/>
             </cms:pageSlot>
         </div>
-        <div class="col-xs-12 col-md-12 no-space">
+        <div class="col-xs-12 ">
             <cms:pageSlot position="Section2C" var="feature" element="div" class="landingLayout2PageSection2C">
-                <cms:component component="${feature}" element="div" class="col-xs-3 col-sm-3 no-space yComponentWrapper"/>
+                <cms:component component="${feature}" element="div" class="yComponentWrapper"/>
             </cms:pageSlot>
         </div>
     </div>

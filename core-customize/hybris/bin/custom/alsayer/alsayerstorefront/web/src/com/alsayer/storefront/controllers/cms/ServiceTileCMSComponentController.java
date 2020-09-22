@@ -10,23 +10,23 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.alsayer.core.model.AlsayerCustomCMSComponentModel;
+import com.alsayer.core.model.ServiceTileCMSComponentModel;
 import javax.servlet.http.HttpServletRequest;
 
-@Controller("AlsayerCustomCMSComponentController")
+@Controller("ServiceTileCMSComponentController")
 @Scope("tenant")
-@RequestMapping(value = ControllerConstants.Actions.Cms.AlsayerCustomCMSComponent)
-public class AlsayerCustomCMSComponentController extends AbstractCMSComponentController<AlsayerCustomCMSComponentModel>
+@RequestMapping(value = ControllerConstants.Actions.Cms.ServiceTileComponent)
+public class ServiceTileCMSComponentController extends AbstractCMSComponentController<ServiceTileCMSComponentModel>
 {
 	@Override
-	protected void fillModel(final HttpServletRequest request, final Model model, final AlsayerCustomCMSComponentModel component)
+	protected void fillModel(final HttpServletRequest request, final Model model, final ServiceTileCMSComponentModel component)
 	{
 	    model.addAttribute("title",component.getTitle());
 		model.addAttribute("color",component.getColor());
 		model.addAttribute("icon",component.getIcon());
 	}
 
-	protected String getView(AlsayerCustomCMSComponentModel component){
+	protected String getView(ServiceTileCMSComponentModel component){
 		return ControllerConstants.Views.Cms.ComponentPrefix + StringUtils.lowerCase(getTypeCode(component));
 	}
 }

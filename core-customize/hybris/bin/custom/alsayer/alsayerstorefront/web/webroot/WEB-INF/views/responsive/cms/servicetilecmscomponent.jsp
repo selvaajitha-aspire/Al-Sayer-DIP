@@ -11,6 +11,6 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/responsive/nav/breadcrumb" %>
 
-<div class="alsayerCustomComponent">
+<div class="serviceTileComponent">
 <img alt="${title}" src="${icon.url}" class="tile_image">
 </div>

@@ -771,10 +771,7 @@ INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&com
 INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
                                      ;;AlsayerHomepageCarouselComponent;ALSAYER Homepage Carousel;HomePageBannerComponent1,HomePageBannerComponent2,HomePageBannerComponent3,HomePageBannerComponent4;AlsayerHomepageCarouselComponent
 
-# Assigning ContentSlot For Rotating Images Component
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-                         ;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent
 
 
 # Media For Rotating Images Component
@@ -799,9 +796,9 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
                    ;;Tile7.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile7.jpg;;;"Tyres"
                    ;;Tile8.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile8.jpg;;;"Service Appointment"
 
-# Creating Alsayer Tiles Components
+# Creating Service Tiles Components
 
-INSERT_UPDATE AlsayerCustomCMSComponent;$contentCV[unique=true];uid[unique=true];name;$icon;&componentRef
+INSERT_UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];name;$icon;&componentRef
                                        ;;CarTradInComponent;Car Trade In Component;Tile1.jpg;CarTradInComponent
                                        ;;RSAComponent;Road Side Assistance Component;Tile2.jpg;RSAComponent
                                        ;;ServiceHistoryComponent;Service History Component;Tile3.jpg;ServiceHistoryComponent
@@ -811,21 +808,15 @@ INSERT_UPDATE AlsayerCustomCMSComponent;$contentCV[unique=true];uid[unique=true]
                                        ;;TyresComponent;Car Tyres Component;Tile7.jpg;TyresComponent
                                        ;;ServiceAppointmentComponent;Car Service Appointment Component;Tile8.jpg;ServiceAppointmentComponent
 
-###  Home page slot 2A  ####
+###  Home page slots  ####
+
+INSERT_UPDATE ServiceTileCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+                                              ;;TilesCollectionComponent;Tiles Collection Component;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent;TilesCollectionComponent
+
+# Assigning ContentSlot For Rotating Images Component and Service Tiles Component
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-                         ;;Section2ASlot-Homepage;true;CarTradInComponent,RSAComponent
-
-#### Home section 2B #######
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-                         ;;Section2BSlot-Homepage;true;ServiceHistoryComponent,CarReplacementComponent
-## Home section 2C
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-                         ;;Section2CSlot-Homepage;true;AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
-
-
-
+                         ;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,TilesCollectionComponent
 
 ###### Navigation for My Account Section #########################################################
 
