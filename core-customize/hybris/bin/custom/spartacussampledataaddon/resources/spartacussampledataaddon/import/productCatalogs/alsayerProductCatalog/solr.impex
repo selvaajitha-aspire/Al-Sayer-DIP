@@ -8,9 +8,9 @@
 
 # DEMO keyword redirect for category pages
 
-$productCatalog=electronicsProductCatalog
+$productCatalog=alsayerProductCatalog
 $productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default='Online'])[default=$productCatalog:Online]
-$facetSearchConfigName=electronicsIndex
+$facetSearchConfigName=alsayerIndex
 
 # Language
 $lang=en
@@ -18,7 +18,7 @@ $lang=en
 
 ## add the right display provider for allCategory index property
 UPDATE SolrIndexedProperty;name[unique=true];solrIndexedType(identifier)[unique=true];facetDisplayNameProvider(code)
-;allCategories;electronicsProductType;categoryFacetDisplayNameProvider
+;allCategories;alsayerProductType;categoryFacetDisplayNameProvider
 
 # Category Redirect examples (Must use INSERT_UPDATE here)
 INSERT_UPDATE SolrCategoryRedirect;redirectItem(code,$productCatalogVersion)[unique=true];&redirectRefID

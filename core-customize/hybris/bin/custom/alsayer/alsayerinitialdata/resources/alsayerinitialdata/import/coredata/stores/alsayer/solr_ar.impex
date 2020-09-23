@@ -9,7 +9,7 @@
 $solrIndexedType=alsayerProductType
 
 # Language
-$lang=ar
+$lang=en
 
 # Solr Indexed Property
 UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]

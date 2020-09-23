@@ -11,7 +11,7 @@ $facetSearchConfigDescription=Alsayer Solr Index
 $searchIndexNamePrefix=alsayer
 $solrIndexedType=alsayerProductType
 $indexBaseSite=alsayer
-$indexLanguages=ar,en
+$indexLanguages=en
 $indexCurrencies=KWD
 
 # Import config properties into impex macros
@@ -37,11 +37,12 @@ INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges
 
 # Define price ranges
 INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
-;rangeRefKWD1;alsayerPriceRangeKWD;      0KD-4,999KD;   0;  4999
-;rangeRefKWD2;alsayerPriceRangeKWD;    5,000KD-19,999KD;  5000; 19999
-;rangeRefKWD3;alsayerPriceRangeKWD;   20,000KD-49,999KD; 2000; 49999
-;rangeRefKWD4;alsayerPriceRangeKWD;   50,000KD-99,999KD; 50000; 99999
-;rangeRefKWD5;alsayerPriceRangeKWD;100,000KD-10,00,000KD,000;100000; 10000000
+;rangeRefKWD1;alsayerPriceRangeKWD;      0KD-49.99KD;   0;  49.99
+;rangeRefKWD2;alsayerPriceRangeKWD;    50KD-199.99KD;  50; 199.99
+;rangeRefKWD3;alsayerPriceRangeKWD;   200KD-499.99KD; 200; 499.99
+;rangeRefKWD4;alsayerPriceRangeKWD;   500KD-999.99KD; 500; 999.99
+;rangeRefKWD5;alsayerPriceRangeKWD;1,000KD-100,000KD;1000; 100000
+
 
 
 
