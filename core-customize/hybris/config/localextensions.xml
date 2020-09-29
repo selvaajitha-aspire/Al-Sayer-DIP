@@ -10,7 +10,6 @@
     <extension name='adaptivesearchwebservices' />
     <extension name='apiregistrybackoffice' />
     <extension name='apiregistryservices' />
-    <extension name='electronicsstore' />
     <extension name='captchaaddon' />
     <extension name='backoffice' />
     <extension name='backofficesolrsearch' />
