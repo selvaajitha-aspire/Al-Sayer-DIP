@@ -32,9 +32,9 @@ else {
     B2cStorefrontModule.withConfig({
       backend: occConfig.backend,
       context: {
-        currency: ['USD'],
+        currency: ['KWD'],
         language: ['en'],
-        baseSite: ['electronics-spa']
+        baseSite: ['alsayer-spa']
       },
       i18n: {
         resources: translations,

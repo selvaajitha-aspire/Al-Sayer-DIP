@@ -15,10 +15,14 @@ import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
 import com.alsayer.initialdata.constants.AlsayerInitialDataConstants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
+import de.hybris.platform.commerceservices.setup.data.ImportData;
+import de.hybris.platform.commerceservices.setup.events.CoreDataImportedEvent;
+import de.hybris.platform.commerceservices.setup.events.SampleDataImportedEvent;
 
 
 /**
@@ -29,6 +33,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 {
 	@SuppressWarnings("unused")
 	private static final Logger LOG = Logger.getLogger(InitialDataSystemSetup.class);
+
+	public static final String ALSAYER = "alsayer";
 
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
@@ -94,9 +100,20 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		/*
-		 * Add import data for each site you have configured
-		 */
+		final List<ImportData> importData = new ArrayList<ImportData>();
+
+	    final ImportData sampleImportData = new ImportData();
+	    sampleImportData.setProductCatalogName(ALSAYER);
+	    sampleImportData.setContentCatalogNames(Arrays.asList(ALSAYER));
+	    sampleImportData.setStoreNames(Arrays.asList(ALSAYER));
+	    importData.add(sampleImportData);
+
+	    getCoreDataImportService().execute(this, context, importData);
+	    getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+
+	    getSampleDataImportService().execute(this, context, importData);
+	    getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+
 	}
 
 	public CoreDataImportService getCoreDataImportService()

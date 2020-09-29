@@ -1,0 +1,19 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+#
+# Import Countries
+# Full country list conforming to ISO 3166-1 alpha-2
+#
+INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]
+;KW;"Kuwait"
+#
+# ISO 3166-2:KW
+#
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;KW;KW-AH;AH;"Al Ahmadi"
+;KW;KW-FA;FA;"Farwaniya"
+;KW;KW-JA;JA;"Al Jahra"
+;KW;KW-KU;KU;"Al Kuwayt"
+;KW;KW-HA;HA;"Hawalli"
+;KW;KW-MU;MU;"Mubarak Al-Kabeer"
