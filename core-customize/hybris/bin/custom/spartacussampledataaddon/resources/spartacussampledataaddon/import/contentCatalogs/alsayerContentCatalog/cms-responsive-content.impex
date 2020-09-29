@@ -8,7 +8,7 @@
 #
 $contentCatalog=alsayer-spaContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$siteResource=jar:de.hybris.platform.spartacussampledataaddon.constants.SpartacussampledataaddonConstants&/spartacussampledataaddon/import/contentCatalogs/$contentCatalog
+$siteResource=jar:de.hybris.platform.spartacussampledataaddon.constants.SpartacussampledataaddonConstants&/spartacussampledataaddon/import/contentCatalogs/alsayerContentCatalog
 
 ###### Update homepage preview image ######
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images'];;
@@ -571,3 +571,80 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];nam
 
 UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid, $contentCV)
 ;;FooterSlot;FooterNavigationComponent,AnonymousConsentOpenDialogComponent,NoticeTextParagraph,AnonymousConsentManagementBannerComponent
+
+#### Alsayer Spa Site ###
+
+## Creating Rotating Images Component
+
+# Creating Banner Components
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+                             ;;HomePageBannerComponent1;Home Page Banner Component 1;HomePageBannerComponent1;
+                             ;;HomePageBannerComponent2;Home Page Banner Component 2;HomePageBannerComponent2;
+                             ;;HomePageBannerComponent3;Home Page Banner Component 3;HomePageBannerComponent3;
+                             ;;HomePageBannerComponent4;Home Page Banner Component 4;HomePageBannerComponent4;
+
+# Creating Rotating Banner Component from Banner Components
+
+INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
+                                     ;;AlsayerHomepageCarouselComponent;ALSAYER Homepage Carousel;HomePageBannerComponent1,HomePageBannerComponent2,HomePageBannerComponent3,HomePageBannerComponent4;AlsayerHomepageCarouselComponent
+
+# Creating Tiles for Homepage
+
+INSERT_UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+                                     ;;CarTradInComponent;Car Trade In Component;CarTradInComponent
+                                     ;;RSAComponent;Road Side Assistance Component;RSAComponent
+                                     ;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent
+                                     ;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent
+                                     ;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent
+                                     ;;InsuranceComponent;Car Insurance Component;InsuranceComponent
+                                     ;;TyresComponent;Car Tyres Component;TyresComponent
+                                     ;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent
+
+###  Home page slots  ####
+
+INSERT_UPDATE ServiceTileCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+                                            ;;TilesCollectionComponent;Tiles Collection Component;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent;TilesCollectionComponent
+
+# Assigning ContentSlot For Rotating Images Component and Service Tiles Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+                         ;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,TilesCollectionComponent
+
+
+###### Navigation for My Account Section #########################################################3
+
+
+# create cms link components for my account pages
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+                              ;;MyProfileLink;MyProfileLink;/my-account/update-profile;MyProfileLink;;
+                              ;;MyVehiclesLink;MyVehiclesLink;/my-account/update-email;MyVehiclesLink;;
+                              ;;MyPurchasesLink;MyPurchasesLink;/my-account/update-password;MyPurchasesLink;;
+                              ;;MyTicketsLink;MyTicketsLink;/my-account/address-book;MyTicketsLink;;
+                              ;;MyServicesLink;MyServicesLink;/my-account/orders;MyServicesLink;;
+                              ;;SignOutLink;SignOutLink;/logout;SignOutLink;
+
+# create navigation root node for my account & child nodes for the root node
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+                               ;MyAccountNavNode;;My Account;AlsayerNavNode;;MyAccountNavNode
+# children for my account
+                               ;MyProfileNavNode;;My Profile;MyAccountNavNode;;MyProfileNavNode
+                               ;MyVehiclesNavNode;;My Vehicles;MyAccountNavNode;;MyVehiclesNavNode
+                               ;MyPurchasesNavNode;;My Purchases;MyAccountNavNode;;MyPurchasesNavNode
+                               ;MyTicketsNavNode;;My Tickets;MyAccountNavNode;;MyTicketsNavNode
+                               ;MyServicesNavNode;;My Services;MyAccountNavNode;;MyServicesNavNode
+                               ;SignOutNavNode;;Sign Out;MyAccountNavNode;;SignOutNavNode
+
+# create cms navigation entry for nvaigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+                                ;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileLink;
+                                ;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesLink;
+                                ;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesLink;
+                                ;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsLink;
+                                ;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesLink;
+                                ;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutLink;
+
+
+# create navigation component for my account
+
+UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$contentCV)
+                        ;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,SignOutNavNode
