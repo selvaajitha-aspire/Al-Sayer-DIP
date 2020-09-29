@@ -117,7 +117,7 @@
                     </attribute>
                     <attribute qualifier="icon" type="Media">
                         <description>Media for component.</description>
-                        <modifiers read="true" write="true" />
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
 
@@ -129,7 +129,7 @@
                 </attributes>
             </itemtype>
             <itemtype code="ServiceTileCollectionComponent"
-                      autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.alsayer.core.jalo.SimpleCMSComponent">
+                      autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.alsayer.core.jalo.ServiceTileCollectionComponent">
                 <description>It represents collection service tile component.</description>
                 <attributes>
                     <attribute qualifier="components" type="serviceTileComponentList">
