@@ -1,0 +1,14 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+#
+# Import Countries
+# Full country list conforming to ISO 3166-1 alpha-2
+#
+
+# Language
+$lang=en
+
+# Create Countries
+UPDATE Country;isocode[unique=true];name[lang=$lang]
+ ;KW;"Kuwait"

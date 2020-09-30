@@ -1,0 +1,25 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Alsayer Store Prices
+#% impex.setLocale( Locale.ENGLISH );
+
+$productCatalog=alsayerProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$taxGroup=Europe1PriceFactory_PTG(code)[default=kw-sales-tax-full]
+
+# Set product approval status to Approved only for those products that have prices.
+$approved=approvalstatus(code)[default='approved']
+
+UPDATE Product;code[unique=true];$approved;$catalogVersion;$taxGroup
+;1978440_md
+;1978440_md_red
+;1978440_md_green
+;1978440_md_blue
+
+INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
+;1978440_md;pieces;KWD;558,4;1;1;false
+;1978440_md_red;pieces;KWD;558,4;1;1;false
+;1978440_md_green;pieces;KWD;558,4;1;1;false
+;1978440_md_blue;pieces;KWD;558,4;1;1;false
+
