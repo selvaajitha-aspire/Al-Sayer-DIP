@@ -9,6 +9,7 @@ $picture=media(code, $contentCV);
 $siteResource=jar:com.alsayer.initialdata.constants.AlsayerInitialDataConstants&/alsayerinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $title=title(code, $contentCV);
 $color=color(code, $contentCV);
+$icon=icon(code, $contentCV);
 
 # Language
 $lang=en
@@ -257,34 +258,39 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[la
 # Media For Rotating Images Component
 
 UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-                      ;;HomePageBannerComponent1;Banner1.jpg
-                      ;;HomePageBannerComponent2;Banner2.jpg
-                      ;;HomePageBannerComponent3;Banner3.jpg
-                      ;;HomePageBannerComponent4;Banner4.jpg
+;;HomePageBannerComponent1;Banner1.jpg
+;;HomePageBannerComponent2;Banner2.jpg
+;;HomePageBannerComponent3;Banner3.jpg
+;;HomePageBannerComponent4;Banner4.jpg
 
 # Localisation Service Tiles Components
 
-UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];$title[lang=$lang];$color[lang=$lang]
-                                ;;CarTradInComponent;"Car Trade-in";"RED"
-                                ;;RSAComponent;"Roadside Assistance";"RED"
-                                ;;ServiceHistoryComponent;"Service History";"RED"
-                                ;;CarReplacementComponent;"Car Replacement";"RED"
-                                ;;AccesoriesComponent;"Accessories";"RED"
-                                ;;InsuranceComponent;"Insurance";"RED"
-                                ;;TyresComponent;"Tyres";"RED"
-                                ;;ServiceAppointmentComponent;"Service Appointment";"RED"
+UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];$title[lang=$lang];$color[lang=$lang];$icon[lang=$lang]
+;;CarTradInComponent;"Car Trade-in";"RED";Tile1.jpg
+;;RSAComponent;"Roadside Assistance";"RED";Tile2.jpg
+;;ServiceHistoryComponent;"Service History";"RED";Tile3.jpg
+;;CarReplacementComponent;"Car Replacement";"RED";Tile4.jpg
+;;AccesoriesComponent;"Accessories";"RED";Tile5.jpg
+;;InsuranceComponent;"Insurance";"RED";Tile6.jpg
+;;TyresComponent;"Tyres";"RED";Tile7.jpg
+;;ServiceAppointmentComponent;"Service Appointment";"RED";Tile8.jpg
 
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
-                        ;;MyAccountNavNode;"My Account"
+;;MyAccountNavNode;"My Account"
 
 
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
-                       ;;MyProfileLink;"My Profile"
-                       ;;MyVehiclesLink;"My Vehicles"
-                       ;;MyPurchasesLink;"My Purchases"
-                       ;;MyTicketsLink;"My Tickets"
-                       ;;MyServicesLink;"My Services"
-                       ;;SignOutLink;"Sign Out"
+;;MyProfileLink;"My Profile"
+;;MyVehiclesLink;"My Vehicles"
+;;MyPurchasesLink;"My Purchases"
+;;MyTicketsLink;"My Tickets"
+;;MyServicesLink;"My Services"
+;;SignOutLink;"Sign Out"
 
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;HomepageToyotaBrandBanner;Toyota.jpg
+;;HomepageLexusBrandBanner;Lexus.jpg
 
+UPDATE HomepageInformationComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;AboutUsInfoComponent;AboutUs.jpg
 
