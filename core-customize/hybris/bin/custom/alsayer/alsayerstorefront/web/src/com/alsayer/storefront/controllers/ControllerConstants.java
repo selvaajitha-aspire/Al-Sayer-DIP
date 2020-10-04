@@ -4,10 +4,7 @@
 package com.alsayer.storefront.controllers;
 
 import com.alsayer.core.model.ServiceTileCMSComponentModel;
-<<<<<<< HEAD
 import com.alsayer.core.model.HomepageInformationComponentModel;
-=======
->>>>>>> refs/remotes/origin/develop
 import de.hybris.platform.acceleratorcms.model.components.CMSTabParagraphContainerModel;
 import de.hybris.platform.acceleratorcms.model.components.CartSuggestionComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.CategoryFeatureComponentModel;
