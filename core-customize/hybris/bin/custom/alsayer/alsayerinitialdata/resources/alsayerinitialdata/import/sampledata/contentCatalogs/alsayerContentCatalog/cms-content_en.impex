@@ -293,4 +293,3 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 
 UPDATE HomepageInformationComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
 ;;AboutUsInfoComponent;AboutUs.jpg
-
