@@ -151,3 +151,14 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 
 UPDATE HomepageInformationComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
 ;;AboutUsInfoComponent;AboutUs.jpg
+
+# ALSAYER Footer Component
+
+UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=en][translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.CopyrightTranslator,dateFormat=yyyy]
+;;FooterComponent;"Copyright © {0}. ALSAYER Holding. All rights reserved."
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=en]
+;;AlsayerHayyakLink;"Alsayer Hayyak"
+;;TNCLink;"Terms & Conditions"
+;;PrivacyPolicyLink;"Privacy Policy"
+;;CustomerSupportLink;"Customer Support"

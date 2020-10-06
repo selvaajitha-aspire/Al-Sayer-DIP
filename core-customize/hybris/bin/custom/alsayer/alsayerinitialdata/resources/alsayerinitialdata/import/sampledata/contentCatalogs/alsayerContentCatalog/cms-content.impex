@@ -929,3 +929,27 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsCom
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
 ;;HeaderLinksSlot;MyAccountComponent,AlsayerInformationNavBarComponent
+
+## ALSAYER FooterComponent
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+;;AlsayerHayyakLink;ALSAYER Hayyak Link;"/#AlsayerHayyak";AlsayerHayyakLink;AlsayerHayyakLink;newWindow;;;
+;;TNCLink;Terms & Conditions Link;"/#TNC";TNCLink;TNCLink;newWindow;;;
+;;PrivacyPolicyLink;Privacy Policy Link;"/#PrivacyPolicy";PrivacyPolicyLink;PrivacyPolicyLink;newWindow;;;
+;;CustomerSupportLink;Customer Support Link;"/#CustomerSupport";CustomerSupportLink;CustomerSupportLink;newWindow;;;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;AlsayerHayyakNavNode;;ALSAYER Hayyak Nav Node;;AlsayerHayyakLink;AlsayerHayyakNavNode
+;TNCNavNode;;Terms & Conditions Nav Node;;TNCLink;TNCNavNode
+;PrivacyPolicyNavNode;;Privacy Policy Nav Node;;PrivacyPolicyLink;PrivacyPolicyNavNode
+;CustomerSupportNavNode;;Customer Support Nav Node;;CustomerSupportLink;CustomerSupportNavNode
+
+# Update CMS Footer Component with Nav Nodes
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef);&componentRef
+;;FooterComponent;AlsayerHayyakNavNode,TNCNavNode,PrivacyPolicyNavNode,CustomerSupportNavNode;FooterComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;FooterSlot;FooterComponent
