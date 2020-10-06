@@ -1,0 +1,38 @@
+<p>roadside-assistance works!</p>
+
+<div>
+    <form #f="ngForm"  novalidate>
+        <div>Vehicle Name 
+          <select class="form-control" id="vehicle"  name="vehicle"  *ngIf="this.vehicleList | async as vehicles" ngModel required>
+            <option *ngFor="let vehicle of vehicles" [value]="vehicle.uid">{{vehicle.model}} ,{{vehicle.chassis_no}}</option>
+          </select>
+        </div>
+        <div>Problem 
+          <select class="form-control" id="issue" name="issue" ngModel required>
+            <option *ngFor="let issue of IssueTypes | keyvalue" [value]="issue.key">{{issue.value}}</option>
+          </select>
+        </div>
+        <div>Location : Search the location
+           <input type="text" name="latitude" id="latitude" placeholder="Enter a location" ngModel/>
+           <input type="hidden" name="longitude" id="longitude" ngModel/>
+           <button class="btn btn-primary btn-block" (click)="getCurrentLocation()">OR Get Current Location</button> 
+          <div #map style="width:100%;height:400px" id="map"></div>
+          <div id="infowindow-content">
+            <img src="" width="16" height="16" id="place-icon" />
+            <span id="place-name" class="title"></span><br />
+            <span id="place-address"></span>
+          </div>
+        </div>
+      <div>
+        Notes <input type="text" name="notes" ngModel/>
+      </div>
+      <div>
+        Attachments <input type="text" name="attachments" ngModel/>
+      </div> 
+        <div><button (click)="onSubmit(f)"  class="btn btn-primary btn-block">Submit</button> </div> 
+      </form>
+  </div>   
+       <p>Form value: {{ f.value | json }}</p>
+      <p>Form valid: {{ f.valid }}</p> 
+
+      

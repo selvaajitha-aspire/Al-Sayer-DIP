@@ -4,6 +4,7 @@
 -->
 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
 
+
     <collectiontypes>
         <collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
@@ -11,7 +12,9 @@
         <collectiontype code="serviceTileComponentList"
                         elementtype="ServiceTileCMSComponent" autocreate="true" generate="true"
                         type="list" />
+        <collectiontype code="vehicleList" elementtype="Vehicle" autocreate="true" generate="true" type="list"/>
     </collectiontypes>
+
 
 
     <enumtypes>
@@ -29,6 +32,21 @@
             <value code="WHITE"/>
             <value code="YELLOW"/>
         </enumtype>
+
+
+        <enumtype code="ServiceStatus" autocreate="true" generate="true" dynamic="true">
+            <description>Status of service request to the target system</description>
+            <value code="STARTED"/>
+            <value code="IN_PROGRESS"/>
+            <value code="COMPLETED"/>
+        </enumtype>
+        <enumtype code="IssueType" autocreate="true" generate="true" dynamic="true">
+            <description>Status of service request to the target system</description>
+            <value code="FLAT_TYRE"/>
+            <value code="OUT_OF_FUEL"/>
+            <value code="DEAD_BATTERY"/>
+            <value code="RSA"/>
+
         <enumtype generate="true" autocreate="true" code="InformationType" dynamic="true">
             <value code="ABOUT_US"/>
             <value code="OUR_BUSINESS"/>
@@ -39,6 +57,17 @@
         </enumtype>
     </enumtypes>
 
+    <relations>
+        <relation code="CustomerToServiceRequests" localized="false" autocreate="true">
+            <sourceElement type="Customer" qualifier="customer" cardinality="one" >
+                <modifiers read="true" write="true" search="true" optional="true" />
+            </sourceElement>
+            <targetElement type="ServiceRequest" qualifier="serviceRequests" cardinality="many" collectiontype="list">
+                <modifiers read="true" write="true" search="true" optional="true" />
+            </targetElement>
+        </relation>
+    </relations>
+
     <itemtypes>
 
         <!-- Add your item definitions here -->
@@ -46,60 +75,10 @@
 
         <!-- TypeGroups are for structure of this file only -->
 
-        <typegroup name="Apparel">
-            <itemtype code="ApparelProduct" extends="Product"
-                      autocreate="true" generate="true"
-                      jaloclass="com.alsayer.core.jalo.ApparelProduct">
-                <description>Base apparel product extension that contains additional attributes.</description>
-                <attributes>
-                    <attribute qualifier="genders" type="GenderList">
-                        <description>List of genders that the ApparelProduct is designed for</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
 
-            <itemtype code="ApparelStyleVariantProduct" extends="VariantProduct"
-                      autocreate="true" generate="true"
-                      jaloclass="com.alsayer.core.jalo.ApparelStyleVariantProduct">
-                <description>Apparel style variant type that contains additional attribute describing variant style.
-                </description>
-                <attributes>
-                    <attribute qualifier="style" type="localized:java.lang.String"
-                               metatype="VariantAttributeDescriptor">
-                        <description>Color/Pattern of the product.</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-
-                    <attribute qualifier="swatchColors" type="SwatchColorSet">
-                        <description>A normalized color mapping to a standardized front-end navigable name.
-                        </description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-
-            </itemtype>
-
-            <itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
-                      autocreate="true" generate="true"
-                      jaloclass="com.alsayer.core.jalo.ApparelSizeVariantProduct">
-                <description>Apparel size variant type that contains additional attribute describing variant size.
-                </description>
-                <attributes>
-                    <attribute qualifier="size" type="localized:java.lang.String"
-                               metatype="VariantAttributeDescriptor">
-                        <description>Size of the product.</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
-        </typegroup>
-
+       
         <typegroup name="Alsayer">
+
             <itemtype code="AlsayerColorVariantProduct" extends="VariantProduct"
                       autocreate="true" generate="true"
                       jaloclass="com.alsayer.core.jalo.AlsayerColorVariantProduct">
@@ -147,6 +126,116 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+            <itemtype code="Vehicle" autocreate="true" generate="true" >
+                <deployment table="Vehicle" typecode="12002"/>
+                <attributes>
+                    <attribute qualifier="uid" type="java.lang.String">
+                        <description> unique ID</description>
+                        <modifiers read="true" write="false" optional="false" initial="true" unique="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="model" type="java.lang.String">
+                        <description>Model of car</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="chassisno" type="java.lang.String">
+                        <description>Chassis No of vehicle</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Customer" generate="false" autocreate="false">
+                <attributes>
+                    <attribute qualifier="vehicles" type="vehicleList">
+                        <description>Vehicle owned by Customer</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="FSM">
+            <itemtype code="DriverDetails" generate="true" autocreate="true"  jaloclass="com.alsayer.core.jalo.DriverDetails">
+                <deployment table="DriverDetails" typecode="12001"/>
+                <attributes>
+                    <attribute qualifier="name" type="localized:java.lang.String">
+                        <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="false"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="latitude" type="java.lang.Double">
+                        <description>Location of Driver: Latitude</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="longitude" type="java.lang.Double">
+                        <description>Location of Driver: Longitude</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="RSA">
+            <itemtype code="ServiceRequest" autocreate="true" generate="true" jaloclass="com.alsayer.core.jalo.ServiceRequest">
+                <deployment table="ServiceRequest" typecode="12003"/>
+                <attributes>
+                    <attribute qualifier="uid" type="java.lang.String">
+                        <description>Service Request unique ID</description>
+                        <modifiers read="true" write="false" optional="false" initial="true" unique="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="vehicle" type="Vehicle">
+                        <description>Attribute contains vehicle object that will be used in the process.</description>
+                        <modifiers read="true" write="true" optional="false" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="status" type="ServiceStatus">
+                        <description>Service status</description>
+                        <modifiers read="true" write="true" optional="false" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <description>Request Type(RSA/Musaada)</description>
+                        <modifiers read="true" write="true" optional="false" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="issue" type="IssueType">
+                        <description>Issue Type</description>
+                        <modifiers read="true" write="true" optional="false" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="latitude" type="java.lang.Double">
+                        <description>Location of Customer: Latitude</description>
+                        <modifiers read="true" write="true" optional="false" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="longitude" type="java.lang.Double">
+                        <description>Location of Customer: Longitude</description>
+                        <modifiers read="true" write="true" optional="false" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="driverinfo" type="DriverDetails">
+                        <description>Attribute contains driver details object</description>
+                        <modifiers read="true" write="true" optional="true" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="notes" type="localized:java.lang.String">
+                        <description>Description of issue</description>
+                        <modifiers read="true" write="true" optional="true" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="attachments" type="java.lang.String">
+                        <persistence type="property" />
+                        <description>It is a media container with additional images of the issue.</description>
+                        <modifiers read="true" write="true" optional="true" />
+                    </attribute>
+
             <itemtype code="HomepageInformationComponent" extends="SimpleCMSComponent"
                       autocreate="true" generate="true"
                       jaloclass="com.alsayer.core.jalo.HomepageInformationComponent">
@@ -178,9 +267,11 @@
                         <modifiers read="true" write="true" />
                         <persistence type="property"/>
                     </attribute>
+
                 </attributes>
             </itemtype>
         </typegroup>
+
 
     </itemtypes>
 </items>

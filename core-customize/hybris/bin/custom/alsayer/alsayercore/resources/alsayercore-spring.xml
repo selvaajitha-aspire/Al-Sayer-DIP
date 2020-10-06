@@ -538,4 +538,15 @@
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
+
+	<!--RSA-->
+	<bean id="roadSideAssistanceService" class="com.alsayer.core.roadsideassistance.services.impl.DefaultRoadSideAssistanceService">
+		<property name="userService" ref="userService"/>
+		<property name="roadSideAssistanceDao" ref="roadSideAssistanceDao"/>
+	</bean>
+
+	<bean id="roadSideAssistanceDao" class="com.alsayer.core.roadsideassistance.daos.impl.DefaultRoadSideAssistanceDao">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
 </beans>

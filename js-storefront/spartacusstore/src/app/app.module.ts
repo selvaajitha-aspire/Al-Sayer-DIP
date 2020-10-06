@@ -6,6 +6,7 @@ import { translations, translationChunksConfig } from '@spartacus/assets';
 import { B2cStorefrontModule, DirectionMode, DirectionConfig } from '@spartacus/storefront';
 import { OccConfig, ConfigModule } from '@spartacus/core';
 import { environment } from './../environments/environment';
+import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
 
 const occConfig: OccConfig = { backend: { occ: {} } };
 
@@ -50,7 +51,8 @@ else {
           default: DirectionMode.LTR,
           ltrLanguages: [],
       },
-    } as DirectionConfig)
+    } as DirectionConfig),
+    RoadsideAssistanceModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
