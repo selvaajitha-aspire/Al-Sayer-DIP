@@ -4,6 +4,7 @@
 package com.alsayer.storefront.controllers;
 
 import com.alsayer.core.model.ServiceTileCMSComponentModel;
+import com.alsayer.core.model.HomepageInformationComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.CMSTabParagraphContainerModel;
 import de.hybris.platform.acceleratorcms.model.components.CartSuggestionComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.CategoryFeatureComponentModel;
@@ -58,6 +59,7 @@ public interface ControllerConstants
 			String CMSTabParagraphContainer = _Prefix + CMSTabParagraphContainerModel._TYPECODE + _Suffix; // NOSONAR
 
 			String ServiceTileComponent = _Prefix + ServiceTileCMSComponentModel._TYPECODE + _Suffix;
+			String HomepageInformationComponent = _Prefix + HomepageInformationComponentModel._TYPECODE + _Suffix;
 		}
 	}
 
