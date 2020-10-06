@@ -1,6 +1,5 @@
 package com.alsayer.storefront.controllers.cms;
 
-import com.alsayer.core.jalo.HomepageInformationComponent;
 import com.alsayer.storefront.controllers.ControllerConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.cms.AbstractCMSComponentController;
 import com.alsayer.core.model.HomepageInformationComponentModel;

@@ -46,7 +46,7 @@
             <value code="OUT_OF_FUEL"/>
             <value code="DEAD_BATTERY"/>
             <value code="RSA"/>
-
+        </enumtype>
         <enumtype generate="true" autocreate="true" code="InformationType" dynamic="true">
             <value code="ABOUT_US"/>
             <value code="OUR_BUSINESS"/>
@@ -75,6 +75,58 @@
 
         <!-- TypeGroups are for structure of this file only -->
 
+        <typegroup name="Apparel">
+            <itemtype code="ApparelProduct" extends="Product"
+                      autocreate="true" generate="true"
+                      jaloclass="com.alsayer.core.jalo.ApparelProduct">
+                <description>Base apparel product extension that contains additional attributes.</description>
+                <attributes>
+                    <attribute qualifier="genders" type="GenderList">
+                        <description>List of genders that the ApparelProduct is designed for</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="ApparelStyleVariantProduct" extends="VariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="com.alsayer.core.jalo.ApparelStyleVariantProduct">
+                <description>Apparel style variant type that contains additional attribute describing variant style.
+                </description>
+                <attributes>
+                    <attribute qualifier="style" type="localized:java.lang.String"
+                               metatype="VariantAttributeDescriptor">
+                        <description>Color/Pattern of the product.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="swatchColors" type="SwatchColorSet">
+                        <description>A normalized color mapping to a standardized front-end navigable name.
+                        </description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+
+            </itemtype>
+
+            <itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="com.alsayer.core.jalo.ApparelSizeVariantProduct">
+                <description>Apparel size variant type that contains additional attribute describing variant size.
+                </description>
+                <attributes>
+                    <attribute qualifier="size" type="localized:java.lang.String"
+                               metatype="VariantAttributeDescriptor">
+                        <description>Size of the product.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
 
        
         <typegroup name="Alsayer">
@@ -164,7 +216,7 @@
                 <attributes>
                     <attribute qualifier="name" type="localized:java.lang.String">
                         <description>Driver Name</description>
-                        <modifiers read="true" write="true" optional="false"/>
+                        <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="latitude" type="java.lang.Double">
@@ -192,32 +244,32 @@
                     </attribute>
                     <attribute qualifier="vehicle" type="Vehicle">
                         <description>Attribute contains vehicle object that will be used in the process.</description>
-                        <modifiers read="true" write="true" optional="false" />
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="status" type="ServiceStatus">
                         <description>Service status</description>
-                        <modifiers read="true" write="true" optional="false" />
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="type" type="java.lang.String">
                         <description>Request Type(RSA/Musaada)</description>
-                        <modifiers read="true" write="true" optional="false" />
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="issue" type="IssueType">
                         <description>Issue Type</description>
-                        <modifiers read="true" write="true" optional="false" />
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="latitude" type="java.lang.Double">
                         <description>Location of Customer: Latitude</description>
-                        <modifiers read="true" write="true" optional="false" />
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="longitude" type="java.lang.Double">
                         <description>Location of Customer: Longitude</description>
-                        <modifiers read="true" write="true" optional="false" />
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="driverinfo" type="DriverDetails">
@@ -235,6 +287,8 @@
                         <description>It is a media container with additional images of the issue.</description>
                         <modifiers read="true" write="true" optional="true" />
                     </attribute>
+                </attributes>
+            </itemtype>
 
             <itemtype code="HomepageInformationComponent" extends="SimpleCMSComponent"
                       autocreate="true" generate="true"
