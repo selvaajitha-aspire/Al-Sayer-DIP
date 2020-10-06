@@ -548,4 +548,3 @@ INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=piec
 ;1099285;pieces;KWD;23;1;1;false
 
 ;1099413;pieces;KWD;360;1;1;false
-

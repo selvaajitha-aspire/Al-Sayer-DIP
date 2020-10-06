@@ -45,6 +45,15 @@
             <value code="OUT_OF_FUEL"/>
             <value code="DEAD_BATTERY"/>
             <value code="RSA"/>
+
+        <enumtype generate="true" autocreate="true" code="InformationType" dynamic="true">
+            <value code="ABOUT_US"/>
+            <value code="OUR_BUSINESS"/>
+            <value code="OUR_BRANDS"/>
+            <value code="NEWS"/>
+            <value code="OVERSEAS"/>
+            <value code="CONTACT_US"/>
+
         </enumtype>
     </enumtypes>
 
@@ -93,7 +102,7 @@
                         <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property" />
                     </attribute>
-                    <attribute qualifier="icon" type="Media">
+                    <attribute qualifier="icon" type="localized:Media">
                         <description>Media for component.</description>
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
@@ -117,6 +126,7 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
 
             <itemtype code="Vehicle" autocreate="true" generate="true" >
                 <deployment table="Vehicle" typecode="12002"/>
@@ -226,6 +236,39 @@
                         <description>It is a media container with additional images of the issue.</description>
                         <modifiers read="true" write="true" optional="true" />
                     </attribute>
+
+            <itemtype code="HomepageInformationComponent" extends="SimpleCMSComponent"
+                      autocreate="true" generate="true"
+                      jaloclass="com.alsayer.core.jalo.HomepageInformationComponent">
+                <description>ALSAYER Homepage Information Component With header, detail, media and url
+                </description>
+                <attributes>
+                    <attribute qualifier="media" type="localized:Media">
+                        <description>Display image for representing information.</description>
+                        <modifiers read="true" write="true" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="header" type="localized:java.lang.String">
+                        <description>Information Header.</description>
+                        <modifiers read="true" write="true" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="detail" type="localized:java.lang.String">
+                        <description>Information in detail.</description>
+                        <modifiers read="true" write="true" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="infoType" type="InformationType">
+                        <description>Information type, to apply different conditions.</description>
+                        <modifiers read="true" write="true" />
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="link" type="CMSLinkComponent">
+                        <description>Information URL.</description>
+                        <modifiers read="true" write="true" />
+                        <persistence type="property"/>
+                    </attribute>
+
                 </attributes>
             </itemtype>
         </typegroup>

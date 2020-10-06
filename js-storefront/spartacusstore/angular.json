@@ -127,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "spartacusstore"
+    }
+  },
+  "defaultProject": "spartacusstore",
+  "cli": {
+    "analytics": false
+  }
 }

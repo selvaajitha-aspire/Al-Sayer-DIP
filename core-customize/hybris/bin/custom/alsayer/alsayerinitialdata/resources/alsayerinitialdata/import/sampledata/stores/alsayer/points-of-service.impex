@@ -278,4 +278,3 @@ INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=tru
 ;Kawasaki Hotel Sunroute Kawasaki;Kawasaki Hotel Sunroute Kawasaki
 ;Kawasaki Pearl Hotel Kawasaki;Kawasaki Pearl Hotel Kawasaki
 ;Kawasaki Grand Hotel;Kawasaki Grand Hotel
-
