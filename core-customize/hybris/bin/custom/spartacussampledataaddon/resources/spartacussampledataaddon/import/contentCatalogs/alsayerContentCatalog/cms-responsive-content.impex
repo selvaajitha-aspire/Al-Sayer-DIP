@@ -578,37 +578,37 @@ UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid, $
 
 # Creating Banner Components
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-                             ;;HomePageBannerComponent1;Home Page Banner Component 1;HomePageBannerComponent1;
-                             ;;HomePageBannerComponent2;Home Page Banner Component 2;HomePageBannerComponent2;
-                             ;;HomePageBannerComponent3;Home Page Banner Component 3;HomePageBannerComponent3;
-                             ;;HomePageBannerComponent4;Home Page Banner Component 4;HomePageBannerComponent4;
+;;HomePageBannerComponent1;Home Page Banner Component 1;HomePageBannerComponent1;
+;;HomePageBannerComponent2;Home Page Banner Component 2;HomePageBannerComponent2;
+;;HomePageBannerComponent3;Home Page Banner Component 3;HomePageBannerComponent3;
+;;HomePageBannerComponent4;Home Page Banner Component 4;HomePageBannerComponent4;
 
 # Creating Rotating Banner Component from Banner Components
 
 INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
-                                     ;;AlsayerHomepageCarouselComponent;ALSAYER Homepage Carousel;HomePageBannerComponent1,HomePageBannerComponent2,HomePageBannerComponent3,HomePageBannerComponent4;AlsayerHomepageCarouselComponent
+;;AlsayerHomepageCarouselComponent;ALSAYER Homepage Carousel;HomePageBannerComponent1,HomePageBannerComponent2,HomePageBannerComponent3,HomePageBannerComponent4;AlsayerHomepageCarouselComponent
 
 # Creating Tiles for Homepage
 
 INSERT_UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-                                     ;;CarTradInComponent;Car Trade In Component;CarTradInComponent
-                                     ;;RSAComponent;Road Side Assistance Component;RSAComponent
-                                     ;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent
-                                     ;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent
-                                     ;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent
-                                     ;;InsuranceComponent;Car Insurance Component;InsuranceComponent
-                                     ;;TyresComponent;Car Tyres Component;TyresComponent
-                                     ;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent
+;;CarTradInComponent;Car Trade In Component;CarTradInComponent
+;;RSAComponent;Road Side Assistance Component;RSAComponent
+;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent
+;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent
+;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent
+;;InsuranceComponent;Car Insurance Component;InsuranceComponent
+;;TyresComponent;Car Tyres Component;TyresComponent
+;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent
 
 ###  Home page slots  ####
 
 INSERT_UPDATE ServiceTileCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
-                                            ;;TilesCollectionComponent;Tiles Collection Component;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent;TilesCollectionComponent
+;;TilesCollectionComponent;Tiles Collection Component;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent;TilesCollectionComponent
 
 # Assigning ContentSlot For Rotating Images Component and Service Tiles Component
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-                         ;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,TilesCollectionComponent
+;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,TilesCollectionComponent
 
 
 ###### Navigation for My Account Section #########################################################3
@@ -616,35 +616,128 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsCom
 
 # create cms link components for my account pages
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
-                              ;;MyProfileLink;MyProfileLink;/my-account/update-profile;MyProfileLink;;
-                              ;;MyVehiclesLink;MyVehiclesLink;/my-account/update-email;MyVehiclesLink;;
-                              ;;MyPurchasesLink;MyPurchasesLink;/my-account/update-password;MyPurchasesLink;;
-                              ;;MyTicketsLink;MyTicketsLink;/my-account/address-book;MyTicketsLink;;
-                              ;;MyServicesLink;MyServicesLink;/my-account/orders;MyServicesLink;;
-                              ;;SignOutLink;SignOutLink;/logout;SignOutLink;
+;;MyProfileLink;MyProfileLink;/my-account/update-profile;MyProfileLink;;
+;;MyVehiclesLink;MyVehiclesLink;/my-account/update-email;MyVehiclesLink;;
+;;MyPurchasesLink;MyPurchasesLink;/my-account/update-password;MyPurchasesLink;;
+;;MyTicketsLink;MyTicketsLink;/my-account/address-book;MyTicketsLink;;
+;;MyServicesLink;MyServicesLink;/my-account/orders;MyServicesLink;;
+;;SignOutLink;SignOutLink;/logout;SignOutLink;
 
 # create navigation root node for my account & child nodes for the root node
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
-                               ;MyAccountNavNode;;My Account;AlsayerNavNode;;MyAccountNavNode
+;MyAccountNavNode;;My Account;AlsayerNavNode;;MyAccountNavNode
 # children for my account
-                               ;MyProfileNavNode;;My Profile;MyAccountNavNode;;MyProfileNavNode
-                               ;MyVehiclesNavNode;;My Vehicles;MyAccountNavNode;;MyVehiclesNavNode
-                               ;MyPurchasesNavNode;;My Purchases;MyAccountNavNode;;MyPurchasesNavNode
-                               ;MyTicketsNavNode;;My Tickets;MyAccountNavNode;;MyTicketsNavNode
-                               ;MyServicesNavNode;;My Services;MyAccountNavNode;;MyServicesNavNode
-                               ;SignOutNavNode;;Sign Out;MyAccountNavNode;;SignOutNavNode
+;MyProfileNavNode;;My Profile;MyAccountNavNode;;MyProfileNavNode
+;MyVehiclesNavNode;;My Vehicles;MyAccountNavNode;;MyVehiclesNavNode
+;MyPurchasesNavNode;;My Purchases;MyAccountNavNode;;MyPurchasesNavNode
+;MyTicketsNavNode;;My Tickets;MyAccountNavNode;;MyTicketsNavNode
+;MyServicesNavNode;;My Services;MyAccountNavNode;;MyServicesNavNode
+;SignOutNavNode;;Sign Out;MyAccountNavNode;;SignOutNavNode
 
 # create cms navigation entry for nvaigation child nodes
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
-                                ;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileLink;
-                                ;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesLink;
-                                ;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesLink;
-                                ;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsLink;
-                                ;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesLink;
-                                ;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutLink;
+;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileLink;
+;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesLink;
+;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesLink;
+;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsLink;
+;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesLink;
+;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutLink;
 
 
 # create navigation component for my account
 
 UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$contentCV)
-                        ;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,SignOutNavNode
+;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,SignOutNavNode
+
+##### Brand Banner Images Component
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+;;Toyota.jpg;$siteResource/images/banners/alsayer/homepage/brands/Toyota.jpg;;;"Toyota"
+;;Lexus.jpg;$siteResource/images/banners/alsayer/homepage/brands/Lexus.jpg;;;"Lexus"
+
+# Brand Banner Component
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;HomepageToyotaBrandBanner;Homepage Toyota Brand Banner Component;HomepageToyotaBrandBanner
+;;HomepageLexusBrandBanner;Homepage Lexus Brand Banner Component;HomepageLexusBrandBanner
+
+## Creating ALSAYER Information Navigation Bar Component
+
+## CMS Navigation Links
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
+;;AboutUsNavNodeLink;About Us Link;/AboutUs;AboutUsNavNodeLink;;
+;;OurBrandsNavNodeLink;Our Brands Link;/OurBrands;OurBrandsNavNodeLink;;
+;;OurBussinessNavNodeLink;Our Bussiness Link;/OurBussiness;OurBussinessNavNodeLink;;
+;;OverseasNavNodeLink;Overseas Link;/Overseas;OverseasNavNodeLink;;
+;;NewsNavNodeLink;News Link;/News;NewsNavNodeLink;;
+;;ContactUsNavNodeLink;Contact Us;/ContactUs;ContactUsNavNodeLink;;
+
+# Create CMS Navigation Entry 
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;AboutUsNavNodeEntry;;About Us Navigation Node Entry;AboutUsNavNode;AboutUsNavNodeLink;
+;OurBrandsNavNodeEntry;;Our Brands Navigation Node Entry;OurBrandsNavNode;OurBrandsNavNodeLink;
+;OurBussinessNavNodeEntry;;Our Bussiness Navigation Node Entry;OurBussinessNavNode;OurBussinessNavNodeLink;
+;OverseasNavNodeEntry;;Overseas Navigation Node Entry;OverseasNavNode;OverseasNavNodeLink;
+;NewsNavNodeEntry;;News Navigation Node Entry;NewsNavNode;NewsNavNodeLink;
+;ContactUsNavNodeEntry;;Contact Us Navigation Node Entry;ContactUsNavNode;ContactUsNavNodeLink;
+
+# Create Navigation Root node for My Account & child nodes for the root node
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;AlsayerInformationNavNode;;Information Nav Node;;;AlsayerInformationNavNode
+# children for AlsayerInformation Nav Node
+;AboutUsNavNode;;About Us;AlsayerInformationNavNode;;AboutUsNavNode
+;OurBrandsNavNode;;Our Brands;AlsayerInformationNavNode;;OurBrandsNavNode
+;OurBussinessNavNode;;Our Bussiness;AlsayerInformationNavNode;;OurBussinessNavNode
+;OverseasNavNode;;Overseas;AlsayerInformationNavNode;;OverseasNavNode
+;NewsNavNode;;News;AlsayerInformationNavNode;;NewsNavNode
+;ContactUsNavNode;;ContactUs;AlsayerInformationNavNode;;ContactUsNavNode
+
+# Create Navigation Component 
+INSERT_UPDATE NavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef)
+;;AlsayerInformationNavBarComponent;Information Navigation Component;;AlsayerInformationNavBarComponent;AlsayerInformationNavNode
+
+
+# ALSAYER Custom Information Component
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+;;AboutUs.jpg;$siteResource/images/banners/alsayer/homepage/information/AboutUs.jpg;;;"About Us"
+
+INSERT_UPDATE HomepageInformationComponent;$contentCV[unique=true];uid[unique=true];header;detail;infoType(code);&componentRef
+;;AboutUsInfoComponent;"World-Class Service";"Long before oil was discovered in Kuwait in the 1930's ";"ABOUT_US";AboutUsInfoComponent
+
+# Assigning ContentSlot For Rotating Images Component and Service Tiles Component
+
+# Mapping with Section1Slot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,TilesCollectionComponent,HomepageLexusBrandBanner,HomepageToyotaBrandBanner,AboutUsInfoComponent
+
+# Mapping NAV bar with HeaderLinksSlot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;HeaderLinksSlot;MyAccountComponent,AlsayerInformationNavBarComponent
+
+## ALSAYER FooterComponent
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];;;
+;;AlsayerHayyakLink;ALSAYER Hayyak Link;"/#AlsayerHayyak";AlsayerHayyakLink;AlsayerHayyakLink;newWindow;;;
+;;TNCLink;Terms & Conditions Link;"/#TNC";TNCLink;TNCLink;newWindow;;;
+;;PrivacyPolicyLink;Privacy Policy Link;"/#PrivacyPolicy";PrivacyPolicyLink;PrivacyPolicyLink;newWindow;;;
+;;CustomerSupportLink;Customer Support Link;"/#CustomerSupport";CustomerSupportLink;CustomerSupportLink;newWindow;;;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;AlsayerHayyakNavNode;;ALSAYER Hayyak Nav Node;;AlsayerHayyakLink;AlsayerHayyakNavNode
+;TNCNavNode;;Terms & Conditions Nav Node;;TNCLink;TNCNavNode
+;PrivacyPolicyNavNode;;Privacy Policy Nav Node;;PrivacyPolicyLink;PrivacyPolicyNavNode
+;CustomerSupportNavNode;;Customer Support Nav Node;;CustomerSupportLink;CustomerSupportNavNode
+
+# Update CMS Footer Component with Nav Nodes
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef);&componentRef
+;;FooterComponent;AlsayerHayyakNavNode,TNCNavNode,PrivacyPolicyNavNode,CustomerSupportNavNode;FooterComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;FooterSlot;FooterComponent

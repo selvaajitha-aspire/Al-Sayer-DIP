@@ -9,5 +9,3 @@ INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=tru
 ;1978440_md_red;P0000000;KW
 ;1978440_md_green;P0000000;KW
 ;1978440_md_blue;P0000000;KW
-
-
