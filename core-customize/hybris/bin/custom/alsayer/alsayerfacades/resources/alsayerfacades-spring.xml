@@ -182,4 +182,38 @@
 	</bean>
 
 	<bean id="genderData" class="com.alsayer.facades.product.data.GenderData" scope="prototype"/>
+
+	<!--Roadside assistance start-->
+
+	<bean id="vehicleDataPopulator" class="com.alsayer.facades.populators.VehicleDataPopulator"></bean>
+
+	<bean id="vehicleDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.VehicleData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="vehicleDataPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="serviceRequestReversePopulator" class="com.alsayer.facades.populators.ServiceRequestReversePopulator">
+		<property name="userService" ref="userService"/>
+		<property name="roadSideAssistanceService" ref="roadSideAssistanceService"/>
+		<property name="i18nService" ref="i18nService"/>
+	</bean>
+
+	<bean id="serviceRequestReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.core.model.ServiceRequestModel"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="serviceRequestReversePopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="roadsideAssistanceFacade" class="com.alsayer.facades.roadsideassistance.impl.DefaultRoadSideAssistanceFacade" >
+		<property name="roadSideAssistanceService" ref="roadSideAssistanceService"/>
+		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
+		<property name="serviceRequestReverseConverter" ref="serviceRequestReverseConverter"/>
+	</bean>
+
 </beans>

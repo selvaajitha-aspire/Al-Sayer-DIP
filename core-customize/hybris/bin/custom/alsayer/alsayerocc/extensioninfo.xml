@@ -8,11 +8,12 @@
                 		
         
         <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
-                		
-        
+
+        <requires-extension name="alsayerfacades"/>
         <requires-extension name="commercewebservices"/>
-                		
-        
+        <requires-extension name="webservicescommons"/>
+
+
         <coremodule generated="true" manager="com.alsayer.occ.jalo.AlsayeroccManager" packageroot="com.alsayer.occ"/>
                 		
         
