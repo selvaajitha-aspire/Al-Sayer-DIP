@@ -187,7 +187,6 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ###### My Account Navigation Section ######
 # Create additional links
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
-;;SignOutLink;SignOutLink;/logout;SignOutLink;
 ;;NotificationPreferenceLink;Notification Preference Link;/my-account/notification-preference;NotificationPreferenceLink;
 ;;MyInterestsLink;My Interests Link;/my-account/my-interests;MyInterestsLink;
 ;;MyCouponsLink;My Coupons Link;/my-account/coupons;MyCouponsLink;
@@ -195,7 +194,6 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 
 # Create additional Navigation Nodes
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
-;SignOutNavNode;;Sign Out;MyAccountNavNode;;SignOutNavNode
 ;WishListNavNode;;Wish List;MyAccountNavNode;;WishListNavNode
 ;NotificationPreferenceNavNode;;Notification Preference Nav Node;MyAccountNavNode;;NotificationPreferenceNavNode
 ;MyInterestsNavNode;;My Interests Nav Node;MyAccountNavNode;;MyInterestsNavNode
@@ -203,15 +201,10 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 
 # Create additional cms navigation entries
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
-;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutLink;
 ;WishListNavNodeEntry;;WishListNavNodeEntry;WishListNavNode;WishListLink;
 ;NotificationPreferenceNavNodeEntry;;Notification Preference Nav Node Entry;NotificationPreferenceNavNode;NotificationPreferenceLink
 ;MyInterestsNavNodeEntry;;MyInterests Nav Node Entry;MyInterestsNavNode;MyInterestsLink
 ;MyCouponsNavNodeEntry;;My Coupons Navigation Node Entry;MyCouponsNavNode;MyCouponsLink;
-
-# Set the order or the items in the My Account Menu
-UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$contentCV)
-;MyAccountNavNode;;OrderHistoryNavNode,WishListNavNode,AddressBookNavNode,PaymentDetailsNavNode,PersonalDetailsNavNode,ChangePasswordNavNode,UpdateEmailNavNode,ConsentManagementNavNode,CloseAccountNavNode,MyInterestsNavNode,NotificationPreferenceNavNode,MyCouponsNavNode,SignOutNavNode
 
 
 ###### Create Forgot/Reset Password Pages and Components ######
@@ -602,11 +595,6 @@ INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true
 
 ###  Home page slots  ####
 
-# Assigning ContentSlot For Rotating Images Component and Service Tiles Component
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent
-
 
 ###### Navigation for My Account Section #########################################################3
 
@@ -614,10 +602,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsCom
 # create cms link components for my account pages
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
 ;;MyProfileLink;MyProfileLink;/my-account/update-profile;MyProfileLink;;
-;;MyVehiclesLink;MyVehiclesLink;/my-account/update-email;MyVehiclesLink;;
-;;MyPurchasesLink;MyPurchasesLink;/my-account/update-password;MyPurchasesLink;;
-;;MyTicketsLink;MyTicketsLink;/my-account/address-book;MyTicketsLink;;
-;;MyServicesLink;MyServicesLink;/my-account/orders;MyServicesLink;;
+;;MyVehiclesLink;MyVehiclesLink;/my-account/my-vehicles;MyVehiclesLink;;
+;;MyPurchasesLink;MyPurchasesLink;/my-account/my-purchases;MyPurchasesLink;;
+;;MyTicketsLink;MyTicketsLink;/my-account/my-tickets;MyTicketsLink;;
+;;MyServicesLink;MyServicesLink;/my-account/my-services;MyServicesLink;;
 ;;SignOutLink;SignOutLink;/logout;SignOutLink;
 
 # create navigation root node for my account & child nodes for the root node
@@ -738,3 +726,26 @@ INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigatio
 # Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;FooterSlot;FooterComponent
+
+### Roadside Assistance Page ####
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+                         ;;roadsideassistancepage;Roadside Assistance Page;AccountPageTemplate;/my-services/roadsideassistance
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+                         ;;SideContent-roadside-assistance;Side Content Slot for Services;true;;;;
+                         ;;BodyContent-roadside-assistance;Body Content Slot for Services;true;RoadsideAssistanceComponent;;;
+
+INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
+                              ;;RoadsideAssistanceComponent;Roadside Assistance Component;RoadsideAssistanceComponent;RoadsideAssistanceComponent
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='roadsideassistancepage'];contentSlot(uid,$contentCV)[unique=true];;;
+                                ;;SideContent-roadside-assistance;SideContent;;SideContent-roadside-assistance;;;
+                                ;;BodyContent-roadside-assistance;BodyContent;;BodyContent-roadside-assistance;;;
+
+
+
+
+

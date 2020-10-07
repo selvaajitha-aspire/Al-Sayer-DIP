@@ -4,7 +4,7 @@
     <form #f="ngForm"  novalidate>
         <div>Vehicle Name 
           <select class="form-control" id="vehicle"  name="vehicle"  *ngIf="this.vehicleList | async as vehicles" ngModel required>
-            <option *ngFor="let vehicle of vehicles" [value]="vehicle.uid">{{vehicle.model}} ,{{vehicle.chassis_no}}</option>
+            <option *ngFor="let vehicle of vehicles" [value]="vehicle.uid">{{vehicle.model}} ,{{vehicle.chassisno}}</option>
           </select>
         </div>
         <div>Problem 

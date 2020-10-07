@@ -83,7 +83,6 @@ public class RoadsideAssistanceController {
         ResponseWsDTO response = new ResponseWsDTO();
         try {
             LOG.debug(data.toString() + "" + SUCCESS_STATUS);
-            System.out.println("Inside try");
             response.setData("vehicleName:" + data.getVehicle() + " /problem:" + data.getIssue() + " /latitude:" + data.getLatitude().toString() + " /longitude:" + data.getLongitude().toString()+ " /notes:" + data.getNotes() + " /attachments:" + data.getAttachments());
             response.setStatus(SUCCESS_STATUS);
             response.setMessage(SUCCESS_MSG);
