@@ -25,6 +25,6 @@
 	<bean class="com.alsayer.facades.data.VehicleData">
 		<property name="uid" type="String"/>
 		<property name="model" type="String"/>
-		<property name="chassisno" type="String"/>
+		<property name="chassisNumber" type="String"/>
 	</bean>
 </beans>

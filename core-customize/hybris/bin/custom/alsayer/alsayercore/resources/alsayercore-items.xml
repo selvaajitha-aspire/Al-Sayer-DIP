@@ -166,7 +166,7 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="chassisno" type="java.lang.String">
+                    <attribute qualifier="chassisNumber" type="java.lang.String">
                         <description>Chassis No of vehicle</description>
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
