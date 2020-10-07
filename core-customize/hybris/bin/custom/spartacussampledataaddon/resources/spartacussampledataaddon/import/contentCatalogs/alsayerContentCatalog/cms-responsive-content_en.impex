@@ -121,7 +121,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 ;;Tile8.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile8.jpg;;;"Service Appointment"
 
 
-UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];$icon[lang=$lang];$title[lang=$lang];$color[lang=$lang]
+UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media[lang=$lang];headline[lang=$lang];color[lang=$lang]
 ;;CarTradInComponent;Tile1.jpg;"Car Trade-in";"RED"
 ;;RSAComponent;Tile2.jpg;"Roadside Assistance";"RED"
 ;;ServiceHistoryComponent;Tile3.jpg;"Service History";"RED"

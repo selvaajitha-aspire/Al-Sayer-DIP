@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule, DirectionMode, DirectionConfig } from '@spartacus/storefront';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig } from '@spartacus/storefront';
 import { OccConfig, ConfigModule } from '@spartacus/core';
 import { environment } from './../environments/environment';
 import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
@@ -52,6 +52,22 @@ else {
           ltrLanguages: [],
       },
     } as DirectionConfig),
+    ConfigModule.withConfig({
+      layoutSlots:{
+        LandingPage2Template: {
+          slots: [
+            'Section1',
+            'ServiceTileSection',
+            'Section2A',
+            'Section2B',
+            'Section2C',
+            'Section3',
+            'Section4',
+            'Section5',
+          ],
+        }
+      }
+    } as LayoutConfig),
     RoadsideAssistanceModule,
   ],
   providers: [],

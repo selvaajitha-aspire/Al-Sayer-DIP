@@ -265,7 +265,7 @@ UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$l
 
 # Localisation Service Tiles Components
 
-UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];$title[lang=$lang];$color[lang=$lang];$icon[lang=$lang]
+UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];color[lang=$lang];media[lang=$lang]
 ;;CarTradInComponent;"Car Trade-in";"RED";Tile1.jpg
 ;;RSAComponent;"Roadside Assistance";"RED";Tile2.jpg
 ;;ServiceHistoryComponent;"Service History";"RED";Tile3.jpg

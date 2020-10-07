@@ -9,13 +9,8 @@
         <collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
                         type="set"/>
-        <collectiontype code="serviceTileComponentList"
-                        elementtype="ServiceTileCMSComponent" autocreate="true" generate="true"
-                        type="list" />
         <collectiontype code="vehicleList" elementtype="Vehicle" autocreate="true" generate="true" type="list"/>
     </collectiontypes>
-
-
 
     <enumtypes>
         <enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
@@ -145,39 +140,18 @@
                     </attribute>
                 </attributes>
             </itemtype>
-            <itemtype code="ServiceTileCMSComponent" extends="SimpleCMSComponent"
-                      autocreate="true" generate="true" abstract="false" jaloclass="com.alsayer.core.jalo.ServiceTileCMSComponent">
+            <itemtype code="ServiceTileBannerComponent" extends="BannerComponent"
+                      autocreate="true" generate="true" jaloclass="com.alsayer.core.jalo.ServiceTileBannerComponent">
                 <description>ALSAYER Custom CMS Component with title, icon and color</description>
                 <attributes>
-                    <attribute qualifier="title" type="localized:java.lang.String">
-                        <description>It is localized title of the component.</description>
-                        <modifiers read="true" write="true" optional="true"/>
-                        <persistence type="property" />
-                    </attribute>
-                    <attribute qualifier="icon" type="localized:Media">
-                        <description>Media for component.</description>
-                        <modifiers read="true" write="true" optional="true" />
-                        <persistence type="property"/>
-                    </attribute>
-
-                    <attribute qualifier="color" type="localized:java.lang.String">
+                    <attribute qualifier="color" type="java.lang.String">
                         <description>Color of the component.</description>
                         <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
                 </attributes>
             </itemtype>
-            <itemtype code="ServiceTileCollectionComponent"
-                      autocreate="true" generate="true" extends="SimpleCMSComponent" jaloclass="com.alsayer.core.jalo.ServiceTileCollectionComponent">
-                <description>It represents collection service tile component.</description>
-                <attributes>
-                    <attribute qualifier="components" type="serviceTileComponentList">
-                        <persistence type="property" />
-                        <modifiers />
-                        <description>A collection of service tile component.</description>
-                    </attribute>
-                </attributes>
-            </itemtype>
+
 
             <itemtype code="Vehicle" autocreate="true" generate="true" >
                 <deployment table="Vehicle" typecode="12002"/>

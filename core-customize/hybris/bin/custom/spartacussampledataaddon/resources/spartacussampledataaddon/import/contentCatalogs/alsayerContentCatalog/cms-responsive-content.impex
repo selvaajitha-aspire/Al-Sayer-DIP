@@ -590,7 +590,7 @@ INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];n
 
 # Creating Tiles for Homepage
 
-INSERT_UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;CarTradInComponent;Car Trade In Component;CarTradInComponent
 ;;RSAComponent;Road Side Assistance Component;RSAComponent
 ;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent
@@ -602,13 +602,10 @@ INSERT_UPDATE ServiceTileCMSComponent;$contentCV[unique=true];uid[unique=true];n
 
 ###  Home page slots  ####
 
-INSERT_UPDATE ServiceTileCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
-;;TilesCollectionComponent;Tiles Collection Component;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent;TilesCollectionComponent
-
 # Assigning ContentSlot For Rotating Images Component and Service Tiles Component
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,TilesCollectionComponent
+;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent
 
 
 ###### Navigation for My Account Section #########################################################3
@@ -711,7 +708,7 @@ INSERT_UPDATE HomepageInformationComponent;$contentCV[unique=true];uid[unique=tr
 # Mapping with Section1Slot
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,TilesCollectionComponent,HomepageLexusBrandBanner,HomepageToyotaBrandBanner,AboutUsInfoComponent
+;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,HomepageLexusBrandBanner,HomepageToyotaBrandBanner,AboutUsInfoComponent
 
 # Mapping NAV bar with HeaderLinksSlot
 
