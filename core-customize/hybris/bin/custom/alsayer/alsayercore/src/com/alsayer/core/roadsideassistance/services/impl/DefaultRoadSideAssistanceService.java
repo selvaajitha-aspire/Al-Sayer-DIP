@@ -13,38 +13,11 @@ import java.util.List;
 
 public class DefaultRoadSideAssistanceService implements RoadSideAssistanceService {
 
-
-    private UserService userService;
-
     private DefaultRoadSideAssistanceDao roadSideAssistanceDao;
-
-    @Override
-    public List<VehicleModel> getVehiclesForCustomer(){
-
-    final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
-
-        if(CollectionUtils.isNotEmpty(customer.getVehicles()))
-        {
-            return customer.getVehicles();
-        }
-        return Collections.emptyList();
-    }
 
     @Override
     public void saveServiceRequest(ServiceRequestModel serviceRequestModel){
          getRoadSideAssistanceDao().saveServiceRequestinDB(serviceRequestModel);
-    }
-
-    public VehicleModel getVehicleByUID(String vehicle_uid){
-       return roadSideAssistanceDao.getVehicle(vehicle_uid);
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 
     public DefaultRoadSideAssistanceDao getRoadSideAssistanceDao() {
