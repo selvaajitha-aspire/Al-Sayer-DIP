@@ -37,7 +37,7 @@ import java.util.List;
 @Api(tags = "")
 public class RoadsideAssistanceController {
 
-    final static Logger LOG = LoggerFactory.getLogger(AlsayeroccController.class);
+    final static Logger LOG = LoggerFactory.getLogger(RoadsideAssistanceController.class);
 
     private static final String ERROR_MSG = "error";
     private static final String SUCCESS_MSG = "success";
@@ -54,25 +54,6 @@ public class RoadsideAssistanceController {
     private static final String BASIC_FIELD_SET = "BASIC";
 
     @Secured(
-            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/get-vehicles", method = RequestMethod.GET,
-            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    @ResponseBody
-    @ApiOperation(value = "Get Vehicles of Customer", notes = "Only registered users can get vehicles")
-    public VehicleListWsDTO getVehicles(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
-                                                   @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
-    {
-        List<VehicleData> dataList = roadsideAssistanceFacade.getVehicles();
-        VehicleListWsDTO vehicleList = new VehicleListWsDTO();
-        if(CollectionUtils.isNotEmpty(dataList))
-        {
-            vehicleList.setVehicleList(dataMapper.mapAsList(dataList, VehicleWsDTO.class, fields));
-        }
-        return vehicleList;
-    }
-
-
-    @Secured(
             {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP"})
     @RequestMapping(value = "/save-details", method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -83,7 +64,6 @@ public class RoadsideAssistanceController {
         ResponseWsDTO response = new ResponseWsDTO();
         try {
             LOG.debug(data.toString() + "" + SUCCESS_STATUS);
-            System.out.println("Inside try");
             response.setData("vehicleName:" + data.getVehicle() + " /problem:" + data.getIssue() + " /latitude:" + data.getLatitude().toString() + " /longitude:" + data.getLongitude().toString()+ " /notes:" + data.getNotes() + " /attachments:" + data.getAttachments());
             response.setStatus(SUCCESS_STATUS);
             response.setMessage(SUCCESS_MSG);
