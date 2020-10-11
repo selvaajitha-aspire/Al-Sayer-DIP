@@ -82,7 +82,7 @@ public class RegistrationEventListener extends AbstractAcceleratorSiteEventListe
 		final String token = getSecureTokenService().encryptData(data);
 		registerEvent.getCustomer().setToken(token);
 		getModelService().save(registerEvent.getCustomer());
-		//storeFrontCustomerProcessModel.setActiveToken(token);
+		storeFrontCustomerProcessModel.setActiveToken(token);
 		getBusinessProcessService().startProcess(storeFrontCustomerProcessModel);
 	}
 

@@ -61,8 +61,6 @@ public class AlsayerCustomerAccountService extends DefaultCustomerAccountService
         headers.setContentType(MediaType.APPLICATION_JSON);
         Map<String, Object> map = new HashMap<>();
         map.put("name", code);
-        map.put("salary", "111");
-        map.put("age", "1233");
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
         System.out.println("enity : " + entity.getBody());
 
@@ -117,7 +115,7 @@ public class AlsayerCustomerAccountService extends DefaultCustomerAccountService
         headers.setContentType(MediaType.APPLICATION_JSON);
         String otp= new DecimalFormat("000000").format(new Random().nextInt(999999));
         Map<String, Object> map = new HashMap<>();
-        map.put("name", registerData.getName());
+            map.put("name", registerData.getName());
         map.put("arabicName", registerData.getArabicName());
         map.put("mobileNumber", registerData.getMobileNumber());
         map.put("emailId", registerData.getEmailId());
