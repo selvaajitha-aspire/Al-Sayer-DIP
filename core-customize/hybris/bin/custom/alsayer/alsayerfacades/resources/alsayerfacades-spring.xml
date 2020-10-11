@@ -216,4 +216,12 @@
 		<property name="serviceRequestReverseConverter" ref="serviceRequestReverseConverter"/>
 	</bean>
 
+	<!--Customer Registration beans-->
+
+
+	<alias alias="customerFacade" name="alsayerCustomerFacadeImpl"/>
+	<bean id="alsayerCustomerFacadeImpl" class="com.alsayer.facades.customer.impl.AlsayerCustomerFacadeImpl" parent="defaultCustomerFacade" >
+		<property name="alsayerCustomerAccountService" ref="alsayerCustomerAccountService"/>
+	</bean>
+
 </beans>

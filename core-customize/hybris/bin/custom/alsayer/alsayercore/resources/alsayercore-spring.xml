@@ -204,6 +204,8 @@
 	<bean id="customerRegistrationEventListener"
 	      class="com.alsayer.core.event.RegistrationEventListener" parent="abstractAcceleratorSiteEventListener">
 		<property name="modelService" ref="modelService"/>
+		<property name="secureTokenService" ref="secureTokenService"/>
+		<property name="tokenValiditySeconds" value="1800"/>
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
 	<bean id="forgottenPasswordEventListener"
@@ -548,5 +550,19 @@
 	<bean id="roadSideAssistanceDao" class="com.alsayer.core.roadsideassistance.daos.impl.DefaultRoadSideAssistanceDao">
 		<property name="modelService" ref="modelService"/>
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<!--Customer Registration-->
+
+	<!-- added for testing the email context issue -->
+	<bean depends-on="processContextResolutionStrategyMap" parent="mapMergeDirective">
+		<property name="key">
+			<value type="java.lang.Class">de.hybris.platform.processengine.model.BusinessProcessModel</value>
+		</property>
+		<property name="value" ref="storeFrontProcessContextStrategy"/>
+	</bean>
+
+	<alias alias="customerAccountService" name="alsayerCustomerAccountService"/>
+	<bean id="alsayerCustomerAccountService"  class="com.alsayer.core.customer.AlsayerCustomerAccountService" parent="defaultCustomerAccountService">
 	</bean>
 </beans>
