@@ -541,12 +541,32 @@
 
 	<!--RSA-->
 	<bean id="roadSideAssistanceService" class="com.alsayer.core.roadsideassistance.services.impl.DefaultRoadSideAssistanceService">
-		<property name="userService" ref="userService"/>
 		<property name="roadSideAssistanceDao" ref="roadSideAssistanceDao"/>
 	</bean>
 
 	<bean id="roadSideAssistanceDao" class="com.alsayer.core.roadsideassistance.daos.impl.DefaultRoadSideAssistanceDao">
 		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<!--My Vehicles-->
+	<bean id="myVehiclesService" class="com.alsayer.core.vehicles.services.impl.DefaultMyVehiclesService">
+		<property name="userService" ref="userService"/>
+		<property name="myVehiclesDao" ref="myVehiclesDao"/>
+	</bean>
+
+	<bean id="myVehiclesDao" class="com.alsayer.core.vehicles.daos.impl.DefaultMyVehiclesDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
+
+	<!--Service Request-->
+	<bean id="serviceRequestService" class="com.alsayer.core.servicerequest.service.impl.DefaultServiceRequestService">
+		<property name="serviceRequestDao" ref="serviceRequestDao"/>
+	</bean>
+
+	<bean id="serviceRequestDao" class="com.alsayer.core.servicerequest.dao.impl.DefaultServiceRequestDao">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<!--Service Request-->
+
 </beans>

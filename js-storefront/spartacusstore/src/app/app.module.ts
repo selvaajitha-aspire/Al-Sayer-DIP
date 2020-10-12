@@ -20,7 +20,7 @@ if (environment.prefix) {
   occConfig.backend.occ.prefix = environment.prefix;
 }
 else {
-  occConfig.backend.occ.prefix = '/occ/v2/';
+  occConfig.backend.occ.prefix = '/occ/url';
 }
 
 

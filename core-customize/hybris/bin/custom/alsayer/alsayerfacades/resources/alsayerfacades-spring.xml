@@ -185,20 +185,9 @@
 
 	<!--Roadside assistance start-->
 
-	<bean id="vehicleDataPopulator" class="com.alsayer.facades.populators.VehicleDataPopulator"></bean>
-
-	<bean id="vehicleDataConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.alsayer.facades.data.VehicleData"/>
-		<property name="populators">
-			<list merge="true">
-				<ref bean="vehicleDataPopulator" />
-			</list>
-		</property>
-	</bean>
-
 	<bean id="serviceRequestReversePopulator" class="com.alsayer.facades.populators.ServiceRequestReversePopulator">
 		<property name="userService" ref="userService"/>
-		<property name="roadSideAssistanceService" ref="roadSideAssistanceService"/>
+		<property name="myVehiclesService" ref="myVehiclesService"/>
 		<property name="i18nService" ref="i18nService"/>
 	</bean>
 
@@ -212,8 +201,39 @@
 	</bean>
 	<bean id="roadsideAssistanceFacade" class="com.alsayer.facades.roadsideassistance.impl.DefaultRoadSideAssistanceFacade" >
 		<property name="roadSideAssistanceService" ref="roadSideAssistanceService"/>
-		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
 		<property name="serviceRequestReverseConverter" ref="serviceRequestReverseConverter"/>
+	</bean>
+
+	
+	<!--My Vehicles  start-->
+
+	<bean id="vehicleDataPopulator" class="com.alsayer.facades.populators.VehicleDataPopulator"></bean>
+
+	<bean id="vehicleDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.VehicleData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="vehicleDataPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="myVehiclesFacade" class="com.alsayer.facades.vehicles.impl.DefaultMyVehiclesFacade" >
+		<property name="myVehiclesService" ref="myVehiclesService"/>
+		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
+	</bean>
+
+	<bean id="serviceRequestPopulator" class="com.alsayer.facades.populators.ServiceRequestPopulator">
+		<property name="i18nService" ref="i18nService"/>
+	</bean>
+
+	<bean id="serviceRequestConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.ServiceRequestData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="serviceRequestPopulator" />
+			</list>
+		</property>
 	</bean>
 
 </beans>

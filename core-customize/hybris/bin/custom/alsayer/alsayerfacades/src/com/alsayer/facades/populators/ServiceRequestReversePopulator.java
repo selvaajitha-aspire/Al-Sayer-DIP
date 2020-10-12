@@ -4,24 +4,23 @@ import com.alsayer.core.enums.IssueType;
 import com.alsayer.core.enums.ServiceStatus;
 import com.alsayer.core.model.ServiceRequestModel;
 import com.alsayer.core.model.VehicleModel;
-import com.alsayer.core.roadsideassistance.services.impl.DefaultRoadSideAssistanceService;
+import com.alsayer.core.vehicles.services.impl.DefaultMyVehiclesService;
 import com.alsayer.facades.data.ServiceRequestData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.user.UserService;
+
 import java.util.UUID;
 
 public class ServiceRequestReversePopulator implements Populator<ServiceRequestData, ServiceRequestModel> {
 
     private UserService userService;
 
-    private DefaultRoadSideAssistanceService roadSideAssistanceService;
+    private DefaultMyVehiclesService myVehiclesService;
 
     private I18NService i18nService;
-
-
 
 
     @Override
@@ -50,7 +49,7 @@ public class ServiceRequestReversePopulator implements Populator<ServiceRequestD
     }
 
     private VehicleModel getVehicleforUID(String vehicle_uid) {
-        return  getRoadSideAssistanceService().getVehicleByUID(vehicle_uid);
+        return  getMyVehiclesService().getVehicleByUID(vehicle_uid);
     }
 
 
@@ -62,12 +61,12 @@ public class ServiceRequestReversePopulator implements Populator<ServiceRequestD
         this.userService = userService;
     }
 
-    public DefaultRoadSideAssistanceService getRoadSideAssistanceService() {
-        return roadSideAssistanceService;
+    public DefaultMyVehiclesService getMyVehiclesService() {
+        return myVehiclesService;
     }
 
-    public void setRoadSideAssistanceService(DefaultRoadSideAssistanceService roadSideAssistanceService) {
-        this.roadSideAssistanceService = roadSideAssistanceService;
+    public void setMyVehiclesService(DefaultMyVehiclesService myVehiclesService) {
+        this.myVehiclesService = myVehiclesService;
     }
 
     public I18NService getI18nService() {

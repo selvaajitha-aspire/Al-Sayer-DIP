@@ -17,14 +17,7 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
 
     private ModelService modelService;
 
-    private FlexibleSearchService flexibleSearchService;
-
-    private static final String SERVICE_REQUEST_QUERY= "SELECT {v.pk}"
-            + " FROM {" + VehicleModel._TYPECODE + " as v}"
-            + " WHERE {v."+VehicleModel.UID + "} = ?uid";
-
-    final StringBuilder builder = new StringBuilder(SERVICE_REQUEST_QUERY);
-
+    @Override
     public boolean saveServiceRequestinDB(ServiceRequestModel serviceRequest) {
         Boolean saved=true;
         try {
@@ -39,18 +32,6 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
         return saved;
     }
 
-    /**
-     * @param vehicleUid the UID of the Product
-     * @return the Product
-     * @throws NullPointerException if no Vehicle with the specified UID is found
-     */
-    public VehicleModel getVehicle(final String vehicleUid){
-        final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
-        query.addQueryParameter("uid", vehicleUid);
-        final SearchResult<VehicleModel> result = getFlexibleSearchService().search(query);
-        return result.getResult()!=null?result.getResult().get(0):null;
-    }
-
     @Override
     public ModelService getModelService() {
         return modelService;
@@ -61,13 +42,4 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
         this.modelService = modelService;
     }
 
-    @Override
-    public FlexibleSearchService getFlexibleSearchService() {
-        return flexibleSearchService;
-    }
-
-    @Override
-    public void setFlexibleSearchService(FlexibleSearchService flexibleSearchService) {
-        this.flexibleSearchService = flexibleSearchService;
-    }
 }
