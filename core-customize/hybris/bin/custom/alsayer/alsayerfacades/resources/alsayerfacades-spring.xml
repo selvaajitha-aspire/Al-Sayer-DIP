@@ -202,8 +202,19 @@
 	<bean id="roadsideAssistanceFacade" class="com.alsayer.facades.roadsideassistance.impl.DefaultRoadSideAssistanceFacade" >
 		<property name="roadSideAssistanceService" ref="roadSideAssistanceService"/>
 		<property name="serviceRequestReverseConverter" ref="serviceRequestReverseConverter"/>
+		<property name="driverDetailsConverter" ref="driverDetailsConverter"/>
 	</bean>
 
+	<bean id="driverDetailsPopulator" class="com.alsayer.facades.populators.DriverDetailsPopulator"></bean>
+
+	<bean id="driverDetailsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.DriverDetailsData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="driverDetailsPopulator" />
+			</list>
+		</property>
+	</bean>
 	<!--My Vehicles  start-->
 
 	<bean id="vehicleDataPopulator" class="com.alsayer.facades.populators.VehicleDataPopulator"></bean>

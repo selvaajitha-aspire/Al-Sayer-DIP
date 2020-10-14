@@ -49,6 +49,11 @@
 		<property name="attachments" type="String"/>
 	</bean>
 
+	<bean class="com.alsayer.occ.dto.DriverDetailsWsDTO">
+		<property name="name" type="String"/>
+		<property name="latitude" type="Double"/>
+		<property name="longitude" type="Double"/>
+	</bean>
 
 	<bean class="com.alsayer.occ.dto.VehicleWsDTO">
 		<property name="uid" type="String"/>

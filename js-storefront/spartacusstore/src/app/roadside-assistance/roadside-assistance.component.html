@@ -30,6 +30,8 @@
         Attachments <input type="text" name="attachments" ngModel/>
       </div> 
         <div><button (click)="onSubmit(f)"  class="btn btn-primary btn-block">Submit</button> </div> 
+
+        <div><button (click)="getDriverDetails()"  class="btn btn-primary btn-block">Driver Details</button> </div> 
       </form>
   </div>   
        <p>Form value: {{ f.value | json }}</p>

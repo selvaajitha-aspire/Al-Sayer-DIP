@@ -6,13 +6,11 @@
 
 package com.alsayer.occ.controllers;
 
+import com.alsayer.facades.data.DriverDetailsData;
 import com.alsayer.facades.data.ServiceRequestData;
 import com.alsayer.facades.data.VehicleData;
 import com.alsayer.facades.roadsideassistance.impl.DefaultRoadSideAssistanceFacade;
-import com.alsayer.occ.dto.ResponseWsDTO;
-import com.alsayer.occ.dto.ServiceWsDTO;
-import com.alsayer.occ.dto.VehicleListWsDTO;
-import com.alsayer.occ.dto.VehicleWsDTO;
+import com.alsayer.occ.dto.*;
 import de.hybris.platform.webservicescommons.dto.error.ErrorWsDTO;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import io.swagger.annotations.Api;
@@ -82,6 +80,25 @@ public class RoadsideAssistanceController {
         ServiceRequestData serviceRequestData=new ServiceRequestData();
         BeanUtils.copyProperties(serviceWsDTO,serviceRequestData);
     return serviceRequestData;
+    }
+
+    @Secured(
+            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
+    @RequestMapping(value = "/get-driver", method = RequestMethod.GET,
+            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    @ApiOperation(value = "Get Vehicles of Customer", notes = "Only registered users can get driver details")
+    public DriverDetailsWsDTO getDriverDetails(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                        @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
+    {
+        DriverDetailsData driverDetails= roadsideAssistanceFacade.getDriverDetails();
+        if(driverDetails!=null)
+        {
+            DriverDetailsWsDTO  driverWsDTO = dataMapper.map(driverDetails, DriverDetailsWsDTO.class, fields);
+
+            return driverWsDTO;
+        }
+        return new DriverDetailsWsDTO();
     }
 
 }

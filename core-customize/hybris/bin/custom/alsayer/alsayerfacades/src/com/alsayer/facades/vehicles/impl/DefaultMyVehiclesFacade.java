@@ -1,7 +1,7 @@
 package com.alsayer.facades.vehicles.impl;
 
 import com.alsayer.core.model.VehicleModel;
-import com.alsayer.core.vehicles.services.impl.DefaultMyVehiclesService;
+import com.alsayer.core.vehicles.services.MyVehiclesService;
 import com.alsayer.facades.data.VehicleData;
 import com.alsayer.facades.vehicles.MyVehiclesFacade;
 import de.hybris.platform.converters.Converters;
@@ -13,7 +13,7 @@ import java.util.List;
 public class DefaultMyVehiclesFacade implements MyVehiclesFacade {
 
 
-    private DefaultMyVehiclesService myVehiclesService;
+    private MyVehiclesService myVehiclesService;
 
     private Converter<VehicleModel, VehicleData> vehicleDataConverter;
 
@@ -24,11 +24,11 @@ public class DefaultMyVehiclesFacade implements MyVehiclesFacade {
 
     }
 
-    public DefaultMyVehiclesService getMyVehiclesService() {
+    public MyVehiclesService getMyVehiclesService() {
         return myVehiclesService;
     }
 
-    public void setMyVehiclesService(DefaultMyVehiclesService myVehiclesService) {
+    public void setMyVehiclesService(MyVehiclesService myVehiclesService) {
         this.myVehiclesService = myVehiclesService;
     }
 
