@@ -22,6 +22,14 @@
 	<bean id="acceleratorCoreSystemSetup" class="com.alsayer.core.setup.CoreSystemSetup"
 	       parent="abstractCoreSystemSetup"/>
 
+	<!-- added for testing the email context issue -->
+	<bean depends-on="processContextResolutionStrategyMap" parent="mapMergeDirective">
+		<property name="key">
+			<value type="java.lang.Class">de.hybris.platform.processengine.model.BusinessProcessModel</value>
+		</property>
+		<property name="value" ref="storeFrontProcessContextStrategy"/>
+	</bean>
+
 	<!-- Solr field value providers -->
 
 	<bean id="volumeAwareProductPriceValueProvider" class="com.alsayer.core.search.solrfacetsearch.provider.impl.VolumeAwareProductPriceValueProvider"  parent="abstractPropertyFieldValueProvider">
@@ -320,6 +328,11 @@
 		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
 	</bean>
 
+	<bean id="getCustomerDetails" class="com.alsayer.core.customer.GetCustomerDetails">
+		<property name="modelService" ref="modelService"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
 	<bean id="generateForgottenPasswordEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate"/>
 	</bean>
@@ -554,15 +567,70 @@
 
 	<!--Customer Registration-->
 
-	<!-- added for testing the email context issue -->
-	<bean depends-on="processContextResolutionStrategyMap" parent="mapMergeDirective">
-		<property name="key">
-			<value type="java.lang.Class">de.hybris.platform.processengine.model.BusinessProcessModel</value>
-		</property>
-		<property name="value" ref="storeFrontProcessContextStrategy"/>
-	</bean>
+
 
 	<alias alias="customerAccountService" name="alsayerCustomerAccountService"/>
 	<bean id="alsayerCustomerAccountService"  class="com.alsayer.core.customer.AlsayerCustomerAccountService" parent="defaultCustomerAccountService">
+	</bean>
+
+	<alias alias="alsayerSignUpDTOValidator" name="alsayerUserSignUpDTOValidator"/>
+	<bean id="alsayerUserSignUpDTOValidator" parent="passwordStrengthValidator"
+		  class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+		<property name="validators">
+			<list merge="true">
+
+				<bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+					<property name="fieldPath" value="password"/>
+				</bean>
+				<bean class="de.hybris.platform.webservicescommons.validators.EmailValidator">
+					<property name="fieldPath" value="uid"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="passwordStrengthValidator"
+		  class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+		<property name="validators">
+			<list>
+				<bean class="de.hybris.platform.webservicescommons.validators.RegexpValidator">
+					<property name="errorMessageID" value="field.password.notallowed.chars" />
+					<property name="fieldPath" value="password" />
+					<property name="regularExpression" value= "^.*[a-zA-Z0-9!@#$%^*()_\-+{};:.,]$" />
+				</bean>
+				<bean class="de.hybris.platform.webservicescommons.validators.RegexpValidator">
+					<property name="errorMessageID" value="field.password.min.one.number" />
+					<property name="fieldPath" value="password" />
+					<property name="regularExpression" value= "(?=(?:.*?[0-9]){1}).*" />
+				</bean>
+				<bean class="de.hybris.platform.webservicescommons.validators.RegexpValidator">
+					<property name="errorMessageID" value="field.password.min.one.uppercase" />
+					<property name="fieldPath" value="password" />
+					<property name="regularExpression" value= "(?=(?:.*?[A-Z]){1}).*" />
+				</bean>
+				<bean class="de.hybris.platform.webservicescommons.validators.RegexpValidator">
+					<property name="errorMessageID" value="field.password.min.one.special.char" />
+					<property name="fieldPath" value="password" />
+					<property name="regularExpression" value= "(?=(?:.*?[!@#$%^*()_\-+{};:.,]){1}).*" />
+				</bean>
+				<bean class="de.hybris.platform.webservicescommons.validators.RegexpValidator">
+					<property name="errorMessageID" value="field.password.min.six.characters" />
+					<property name="fieldPath" value="password" />
+					<property name="regularExpression" value= "^.{6,}$" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userSignUpFieldMapper" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="com.alsayer.occ.dto.AlsayerUserSignUpWsDTO"/>
+		<property name="destClass"
+				  value="de.hybris.platform.commercefacades.user.data.RegisterData"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="uid" value="login"/>
+			</map>
+		</property>
 	</bean>
 </beans>

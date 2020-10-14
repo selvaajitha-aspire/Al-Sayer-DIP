@@ -9,6 +9,7 @@ package com.alsayer.core.constants;
 public final class AlsayerCoreConstants extends GeneratedAlsayerCoreConstants
 {
 	public static final String EXTENSIONNAME = "alsayercore";
+	public static final String SCPI_URL = "scpi.commerce.url";
 
 
 	private AlsayerCoreConstants()
@@ -24,5 +25,6 @@ public final class AlsayerCoreConstants extends GeneratedAlsayerCoreConstants
 	public static final String QUOTE_TO_EXPIRE_SOON_EMAIL_PROCESS = "quote-to-expire-soon-email-process";
 	public static final String QUOTE_EXPIRED_EMAIL_PROCESS = "quote-expired-email-process";
 	public static final String QUOTE_POST_CANCELLATION_PROCESS = "quote-post-cancellation-process";
+
 
 }

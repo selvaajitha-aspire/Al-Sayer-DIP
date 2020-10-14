@@ -1,11 +1,13 @@
 package com.alsayer.core.customer;
 
-import com.alsayer.facades.data.RegisterData;
+import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
+import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.security.SecureToken;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +26,11 @@ import java.util.Random;
 public class AlsayerCustomerAccountService extends DefaultCustomerAccountService {
 
     private static final Logger LOG = Logger.getLogger(AlsayerCustomerAccountService.class);
+    protected static final String HEADER_AUTH_KEY = "Authorization";
+    protected static final String HEDER_AUTH_VALUE = "Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=";
+
+    public final String url = AlsayerCoreConstants.SCPI_URL;
+
 
 
     public void activateUser(@RequestParam(name = "token") String token) throws TokenInvalidatedException {
@@ -57,16 +64,13 @@ public class AlsayerCustomerAccountService extends DefaultCustomerAccountService
         RestTemplate restTemplate  = new RestTemplate(requestFactory);
         ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization","Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=");
+        headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
         Map<String, Object> map = new HashMap<>();
         map.put("name", code);
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
         System.out.println("enity : " + entity.getBody());
-
-        String url = "https://e100104-iflmap.hcisbt.eu1.hana.ondemand.com/http/cpi/commerce";
-
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
         System.out.println("Response came is" +response.getBody());
 
 
@@ -81,9 +85,9 @@ public class AlsayerCustomerAccountService extends DefaultCustomerAccountService
         RestTemplate restTemplate  = new RestTemplate(requestFactory);
         ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization","Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=");
+        headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String otp= new DecimalFormat("000000").format(new Random().nextInt(999999));
+        String otp = getOtp();
         Map<String, Object> map = new HashMap<>();
         map.put("otp", otp);
         map.put("salary", "111");
@@ -92,9 +96,7 @@ public class AlsayerCustomerAccountService extends DefaultCustomerAccountService
         System.out.println("enity : " + entity.getBody());
 
 
-        String url = "https://e100104-iflmap.hcisbt.eu1.hana.ondemand.com/http/cpi/commerce";
-
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
         System.out.println("Response came is" +response.getBody());
 
         //Response and request need to be add as per the service.
@@ -102,8 +104,9 @@ public class AlsayerCustomerAccountService extends DefaultCustomerAccountService
 
     }
 
-
-
+    private String getOtp() {
+        return new DecimalFormat("000000").format(new Random().nextInt(999999));
+    }
 
 
     public void eccRecordSynchronization(RegisterData registerData) {
@@ -111,51 +114,26 @@ public class AlsayerCustomerAccountService extends DefaultCustomerAccountService
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         RestTemplate restTemplate  = new RestTemplate(requestFactory);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization","Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=");
+        headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String otp= new DecimalFormat("000000").format(new Random().nextInt(999999));
+        String otp = getOtp();
         Map<String, Object> map = new HashMap<>();
             map.put("name", registerData.getName());
         map.put("arabicName", registerData.getArabicName());
         map.put("mobileNumber", registerData.getMobileNumber());
         map.put("emailId", registerData.getEmailId());
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
-        System.out.println("enity : " + entity.getBody());
+        LOG.info("enity : " + entity.getBody());
+        LOG.info("URL is : " + getConfigurationService().getConfiguration().getString(url));
 
 
-        String url = "https://e100104-iflmap.hcisbt.eu1.hana.ondemand.com/http/cpi/commerce";
-
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
         System.out.println("Response came is" +response.getBody());
 
         //Response and request need to be add as per the service.
 
     }
 
-    public void fetchECCCustomerRecord(RegisterData civilId) {
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        RestTemplate restTemplate  = new RestTemplate(requestFactory);
-        ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization","Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=");
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        Map<String, Object> map = new HashMap<>();
-        map.put("civilId", civilId);
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
-        System.out.println("enity : " + entity.getBody());
-
-
-        String url = "https://e100104-iflmap.hcisbt.eu1.hana.ondemand.com/http/cpi/commerce";
-
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
-        System.out.println("Response came is" +response.getBody());
-
-       //set the response with Register Data.
-
-
-        //Response and request need to be add as per the service.
-
-    }
 
 }

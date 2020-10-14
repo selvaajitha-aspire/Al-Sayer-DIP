@@ -2,10 +2,10 @@ package com.alsayer.facades.customer.impl;
 
 import com.alsayer.core.customer.AlsayerCustomerAccountService;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
-import com.alsayer.facades.data.RegisterData;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -31,12 +31,13 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
     }
 
 
+    @Override
     public void register(final RegisterData registerData) throws DuplicateUidException {
         validateParameterNotNullStandardMessage("registerData", registerData);
         Assert.hasText(registerData.getName(), "The field [name] cannot be empty");
         Assert.hasText(registerData.getArabicName(), "The field [arabicName] cannot be empty");
         Assert.hasText(registerData.getMobileNumber(), "The field [mobileNumber] cannot be empty");
-        Assert.hasText(registerData.getEmailId(), "The field [emailId] cannot be empty");
+       Assert.hasText(registerData.getEmailId(), "The field [emailId] cannot be empty");
 
 
         final CustomerModel newCustomer = getModelService().create(CustomerModel.class);
@@ -51,10 +52,17 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
         // setTitleForRegister(registerData, customerModel);
         setUidForRegister(registerData, customerModel);
         customerModel.setCivilId(registerData.getCivilId());
+        customerModel.setUid(registerData.getEmailId());
         customerModel.setArabicName(registerData.getArabicName());
         customerModel.setMobileNumber(registerData.getMobileNumber());
         customerModel.setSessionLanguage(getCommonI18NService().getCurrentLanguage());
         customerModel.setSessionCurrency(getCommonI18NService().getCurrentCurrency());
+    }
+
+    protected void setUidForRegister(final RegisterData registerData, final CustomerModel customer)
+    {
+        customer.setUid(registerData.getEmailId().toLowerCase());
+        customer.setOriginalUid(registerData.getEmailId());
     }
 
 
@@ -82,10 +90,7 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
 
     }
 
-    @Override
-    public void fetchECCCustomerRecord(RegisterData registerData) {
-        getAlsayerCustomerAccountService().fetchECCCustomerRecord(registerData);
-    }
+
 
 
     @Override

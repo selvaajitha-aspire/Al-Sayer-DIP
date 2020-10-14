@@ -1,9 +1,9 @@
 package com.alsayer.facades.customer;
 
-import com.alsayer.facades.data.RegisterData;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -43,6 +43,5 @@ public interface AlsayerCustomerFacade extends CustomerFacade {
     void eccRecordSynchronization(RegisterData registerData);
 
 
-    void fetchECCCustomerRecord(RegisterData civilId);
 }
 

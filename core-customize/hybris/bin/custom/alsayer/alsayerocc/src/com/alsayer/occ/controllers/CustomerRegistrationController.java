@@ -7,19 +7,20 @@
 package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
-import com.alsayer.facades.data.RegisterData;
+
+import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
 import com.alsayer.occ.dto.CustomerRegistrationWsDTO;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import com.alsayer.occ.dto.user.ActiveUserWsDTO;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.customergroups.CustomerGroupFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.commercefacades.user.data.RegisterData;
+import de.hybris.platform.commercewebservices.core.constants.YcommercewebservicesConstants;
 import de.hybris.platform.commercefacades.user.data.UserGroupDataList;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
-import de.hybris.platform.commercewebservices.core.constants.YcommercewebservicesConstants;
 import de.hybris.platform.commercewebservicescommons.dto.user.UserGroupListWsDTO;
-import de.hybris.platform.commercewebservicescommons.dto.user.UserSignUpWsDTO;
 import de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -91,8 +92,8 @@ public class CustomerRegistrationController
 
     @Resource(name="customerFacade")
     private AlsayerCustomerFacade customerFacade;
-    @Resource(name = "userSignUpDTOValidator")
-    private Validator userSignUpDTOValidator;
+    @Resource(name = "alsayerSignUpDTOValidator")
+    private Validator alsayerSignUpDTOValidator;
     @Resource(name = "guestConvertingDTOValidator")
     private Validator guestConvertingDTOValidator;
     @Resource(name = "passwordStrengthValidator")
@@ -100,7 +101,7 @@ public class CustomerRegistrationController
     @Resource(name = "customerGroupFacade")
     private CustomerGroupFacade customerGroupFacade;
     @Resource(name = "HttpRequestUserSignUpDTOPopulator")
-    private Populator<HttpServletRequest, UserSignUpWsDTO> httpRequestUserSignUpDTOPopulator;
+    private Populator<HttpServletRequest, AlsayerUserSignUpWsDTO> httpRequestUserSignUpDTOPopulator;
     @Resource(name = "putUserDTOValidator")
     private Validator putUserDTOValidator;
 
@@ -152,13 +153,13 @@ public class CustomerRegistrationController
     @ApiOperation(nickname = "createUser", value = " Registers a customer", notes = "Registers a customer. Requires the following "
             + "parameters: login, password, name, arabicName, mobileNumber,otp,civilId.")
     @ApiBaseSiteIdParam
-    public CustomerRegistrationWsDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final UserSignUpWsDTO user,
+    public CustomerRegistrationWsDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final AlsayerUserSignUpWsDTO user,
                                                 @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
                                                 final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
     {
-        validate(user, "user", userSignUpDTOValidator);
+        validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
-                .map(user, RegisterData.class, "login, password, name, arabicName, mobileNumber,otp,civilId");
+                .map(user, RegisterData.class, "login, password, name, arabicName, mobileNumber,civilId,emailId");
         boolean userExists = false;
         try
         {
@@ -172,10 +173,10 @@ public class CustomerRegistrationController
         //Sending record for Synchronisation
         customerFacade.eccRecordSynchronization(registerData);
         //Fetching All values regarding the customer and vehicles
-       // customerFacade.fetchECCCustomerRecord(registerData);
+        //customerFacade.fetchECCCustomerRecord(registerData);
 
         final String userId = user.getUid().toLowerCase(Locale.ENGLISH);
-        httpResponse.setHeader(YcommercewebservicesConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
+       httpResponse.setHeader(YcommercewebservicesConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
         final CustomerData customerData = getCustomerData(registerData, userExists, userId);
         return getDataMapper().map(customerData, CustomerRegistrationWsDTO.class, fields);
     }
