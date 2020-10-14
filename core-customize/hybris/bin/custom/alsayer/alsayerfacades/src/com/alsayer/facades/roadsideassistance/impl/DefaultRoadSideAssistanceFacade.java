@@ -1,7 +1,9 @@
 package com.alsayer.facades.roadsideassistance.impl;
 
+import com.alsayer.core.model.DriverDetailsModel;
 import com.alsayer.core.model.ServiceRequestModel;
-import com.alsayer.core.roadsideassistance.services.impl.DefaultRoadSideAssistanceService;
+import com.alsayer.core.roadsideassistance.services.RoadSideAssistanceService;
+import com.alsayer.facades.data.DriverDetailsData;
 import com.alsayer.facades.data.ServiceRequestData;
 import com.alsayer.facades.roadsideassistance.RoadSideAssistanceFacade;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
@@ -10,9 +12,16 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 public class DefaultRoadSideAssistanceFacade implements RoadSideAssistanceFacade {
 
 
-    private DefaultRoadSideAssistanceService roadSideAssistanceService;
+    private RoadSideAssistanceService roadSideAssistanceService;
 
     private Converter<ServiceRequestData, ServiceRequestModel> serviceRequestReverseConverter;
+
+    private Converter<DriverDetailsModel, DriverDetailsData> driverDetailsConverter;
+
+    @Override
+    public DriverDetailsData getDriverDetails(){
+        return getDriverDetailsConverter().convert(getRoadSideAssistanceService().getDriverDetails());
+    }
 
     @Override
     public void  storeServiceRequest(ServiceRequestData data){
@@ -28,11 +37,19 @@ public class DefaultRoadSideAssistanceFacade implements RoadSideAssistanceFacade
         this.serviceRequestReverseConverter = serviceRequestReverseConverter;
     }
 
-    public DefaultRoadSideAssistanceService getRoadSideAssistanceService() {
+    public RoadSideAssistanceService getRoadSideAssistanceService() {
         return roadSideAssistanceService;
     }
 
-    public void setRoadSideAssistanceService(DefaultRoadSideAssistanceService roadSideAssistanceService) {
+    public void setRoadSideAssistanceService(RoadSideAssistanceService roadSideAssistanceService) {
         this.roadSideAssistanceService = roadSideAssistanceService;
+    }
+
+    public Converter<DriverDetailsModel, DriverDetailsData> getDriverDetailsConverter() {
+        return driverDetailsConverter;
+    }
+
+    public void setDriverDetailsConverter(Converter<DriverDetailsModel, DriverDetailsData> driverDetailsConverter) {
+        this.driverDetailsConverter = driverDetailsConverter;
     }
 }

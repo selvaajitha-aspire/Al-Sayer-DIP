@@ -22,8 +22,8 @@ public class DefaultMyVehiclesDao extends AbstractItemDao implements MyVehiclesD
     final StringBuilder builder = new StringBuilder(MY_VEHICLE_QUERY);
 
     /**
-     * @param vehicleUid the UID of the Product
-     * @return the Product
+     * @param vehicleUid the UID of the Vehicle
+     * @return the Vehicle
      * @throws NullPointerException if no Vehicle with the specified UID is found
      */
     @Override

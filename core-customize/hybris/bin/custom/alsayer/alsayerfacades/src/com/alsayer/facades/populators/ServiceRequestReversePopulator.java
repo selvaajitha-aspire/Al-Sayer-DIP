@@ -4,7 +4,7 @@ import com.alsayer.core.enums.IssueType;
 import com.alsayer.core.enums.ServiceStatus;
 import com.alsayer.core.model.ServiceRequestModel;
 import com.alsayer.core.model.VehicleModel;
-import com.alsayer.core.vehicles.services.impl.DefaultMyVehiclesService;
+import com.alsayer.core.vehicles.services.MyVehiclesService;
 import com.alsayer.facades.data.ServiceRequestData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -18,7 +18,7 @@ public class ServiceRequestReversePopulator implements Populator<ServiceRequestD
 
     private UserService userService;
 
-    private DefaultMyVehiclesService myVehiclesService;
+    private MyVehiclesService myVehiclesService;
 
     private I18NService i18nService;
 
@@ -61,11 +61,11 @@ public class ServiceRequestReversePopulator implements Populator<ServiceRequestD
         this.userService = userService;
     }
 
-    public DefaultMyVehiclesService getMyVehiclesService() {
+    public MyVehiclesService getMyVehiclesService() {
         return myVehiclesService;
     }
 
-    public void setMyVehiclesService(DefaultMyVehiclesService myVehiclesService) {
+    public void setMyVehiclesService(MyVehiclesService myVehiclesService) {
         this.myVehiclesService = myVehiclesService;
     }
 

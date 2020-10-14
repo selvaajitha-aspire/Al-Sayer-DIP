@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="createServiceRequest" name="service-process" processClass="com.alsayer.core.model.ServiceRequestProcessModel">
+
+	<action id="createServiceRequest" bean="createServiceRequestAction">
+		<transition name="NOK" to="failed"/>
+		<transition name="OK" to="success"/>
+	</action>
+
+	<end id="error" state="ERROR">All went wrong.</end>
+	<end id="failed" state="FAILED">Service request cancelled.</end>
+	<end id="success" state="SUCCEEDED">Service request created.</end>
+</process>

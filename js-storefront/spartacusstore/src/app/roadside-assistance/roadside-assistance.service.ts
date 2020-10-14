@@ -4,6 +4,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,12 +14,14 @@ export class RoadsideAssistanceService {
   private long: any = '';
   
 
+
   public async initialize() {
     await this.getPosition().then(pos => {
       this.lat = pos.lat;
       this.long = pos.lng;
     });
   }
+  
   
   constructor(public http:HttpClient,public url:OccEndpointsService) { }
 
@@ -29,7 +32,7 @@ export class RoadsideAssistanceService {
   };
 
   getVehicles(): Observable<any> {
-      return this.http.get<any>(this.url.getUrl('getItems'), this.httpOptions).pipe(map((res => res['vehicleList'])));
+      return this.http.get<any>(this.url.getUrl('getItems'), this.httpOptions).pipe(map(res => res['vehicleList']));
     }
     
   
@@ -41,6 +44,18 @@ export class RoadsideAssistanceService {
   }
   
 
+  getDriverDetailsPro(): Promise<any> 
+  {
+    return new Promise((resolve,reject)=>{
+
+      this.http.get<any>(this.url.getUrl('getDriverDetails'),this.httpOptions).toPromise().then((res:any) =>{
+          resolve({name: res.name, lat: res.latitude,lng : res.longitude})
+      },
+      err => {
+        reject(err);
+      }); 
+    });
+  }
   
   getPosition(): Promise<any>
   {

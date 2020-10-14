@@ -3,7 +3,8 @@ export const rsaOccConfig = {
         occ: {
             endpoints: {
                 saveItems: 'rsa/save-details',
-                getItems: 'my-vehicles/get-vehicles/?fields=FULL'
+                getItems: 'my-vehicles/get-vehicles/?fields=FULL',
+                getDriverDetails: 'rsa//get-driver/?fields=FULL'
             },
         },
     },
