@@ -87,5 +87,9 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;storefinderPage;"Find a Store"
  ;;update-profile;"Update Personal Details"
  ;;updatePassword;"Update Password"
+## Roadside Assistance
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+                         ;;roadsideassistancepage;Roadside Assistance
 
     

@@ -162,3 +162,8 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 ;;TNCLink;"Terms & Conditions"
 ;;PrivacyPolicyLink;"Privacy Policy"
 ;;CustomerSupportLink;"Customer Support"
+
+## Roadside Assistance
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+                         ;;roadsideassistancepage;Roadside Assistance

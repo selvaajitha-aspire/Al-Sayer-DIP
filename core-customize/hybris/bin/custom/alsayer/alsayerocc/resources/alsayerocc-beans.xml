@@ -91,11 +91,6 @@
         <property name="password" type="String"/>
     </bean>
 
-
-
-
-
-
     <bean class="com.alsayer.occ.dto.user.ActiveUserWsDTO">
         <description>Representation of Active User</description>
         <hints>
@@ -111,5 +106,61 @@
             </hints>
         </property>
     </bean>
+	<!--
+		Example Data POJO
+	
+	<bean class="yemptypackage.data.MyPojo">
+		<property name="id" type="String"/>
+		<property name="flag" type="boolean"/>
+	</bean>
+	-->
+	<bean class="com.alsayer.occ.dto.ResponseWsDTO">
+		<description>Representation of common response </description>
+		<hints>
+			<hint name="wsRelated"/>
+			<hint name="alias">Response</hint>
+		</hints>
+		<property name="data"
+				  type="java.lang.String">
+			<description>Respone Data</description>
+		</property>
+		<property name="status"
+				  type="java.lang.String">
+			<description>Respone Status</description>
+		</property>
+		<property name="message"
+				  type="java.lang.String">
+			<description>Respone Message</description>
+		</property>
+		<property name="errors"
+				  type="java.lang.String">
+			<description>Respone Error</description>
+		</property>
+	</bean>
+
+	<bean class="com.alsayer.occ.dto.ServiceWsDTO">
+		<property name="vehicle" type="String"/>
+		<property name="issue" type="String"/>
+		<property name="latitude" type="Double"/>
+		<property name="longitude" type="Double"/>
+		<property name="notes" type="String"/>
+		<property name="attachments" type="String"/>
+	</bean>
+
+	<bean class="com.alsayer.occ.dto.DriverDetailsWsDTO">
+		<property name="name" type="String"/>
+		<property name="latitude" type="Double"/>
+		<property name="longitude" type="Double"/>
+	</bean>
+
+	<bean class="com.alsayer.occ.dto.VehicleWsDTO">
+		<property name="uid" type="String"/>
+		<property name="model" type="String"/>
+		<property name="chassisNumber" type="String"/>
+	</bean>
+
+	<bean class="com.alsayer.occ.dto.VehicleListWsDTO">
+		<property name="vehicleList" type="java.util.List&lt;com.alsayer.occ.dto.VehicleWsDTO>"/>
+	</bean>
 
 </beans>

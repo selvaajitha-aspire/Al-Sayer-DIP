@@ -62,6 +62,7 @@ public class SendDeliveryMessageEventListener extends AbstractAcceleratorSiteEve
 		this.modelService = modelService;
 	}
 
+
 	@Override
 	protected void onSiteEvent(final SendDeliveryMessageEvent sendDeliveryMessageEvent)
 	{
