@@ -8,11 +8,18 @@ import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.enums.SiteChannel;
 import de.hybris.platform.commerceservices.event.RegisterEvent;
 import de.hybris.platform.commerceservices.model.process.StoreFrontCustomerProcessModel;
+import de.hybris.platform.commerceservices.security.SecureToken;
+import de.hybris.platform.commerceservices.security.SecureTokenService;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 import org.springframework.beans.factory.annotation.Required;
+
+import java.util.Date;
+
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 
 /**
@@ -23,6 +30,9 @@ public class RegistrationEventListener extends AbstractAcceleratorSiteEventListe
 
 	private ModelService modelService;
 	private BusinessProcessService businessProcessService;
+	private UserService userService;
+	private SecureTokenService secureTokenService;
+	private long tokenValiditySeconds;
 
 	protected BusinessProcessService getBusinessProcessService()
 	{
@@ -66,6 +76,13 @@ public class RegistrationEventListener extends AbstractAcceleratorSiteEventListe
 		storeFrontCustomerProcessModel.setCurrency(registerEvent.getCurrency());
 		storeFrontCustomerProcessModel.setStore(registerEvent.getBaseStore());
 		getModelService().save(storeFrontCustomerProcessModel);
+		validateParameterNotNullStandardMessage("customerModel", registerEvent.getCustomer().getUid());
+		final long timeStamp = getTokenValiditySeconds() > 0L ? new Date().getTime() : 0L;
+		final SecureToken data = new SecureToken(registerEvent.getCustomer().getUid(), timeStamp);
+		final String token = getSecureTokenService().encryptData(data);
+		registerEvent.getCustomer().setToken(token);
+		getModelService().save(registerEvent.getCustomer());
+		storeFrontCustomerProcessModel.setActiveToken(token);
 		getBusinessProcessService().startProcess(storeFrontCustomerProcessModel);
 	}
 
@@ -73,7 +90,44 @@ public class RegistrationEventListener extends AbstractAcceleratorSiteEventListe
 	protected SiteChannel getSiteChannelForEvent(final RegisterEvent event)
 	{
 		final BaseSiteModel site = event.getSite();
-		ServicesUtil.validateParameterNotNullStandardMessage("event.order.site", site);
+		validateParameterNotNullStandardMessage("event.order.site", site);
 		return site.getChannel();
+	}
+
+	protected UserService getUserService()
+	{
+		return userService;
+	}
+
+	@Required
+	public void setUserService(final UserService userService)
+	{
+		this.userService = userService;
+	}
+
+	protected SecureTokenService getSecureTokenService()
+	{
+		return secureTokenService;
+	}
+
+	@Required
+	public void setSecureTokenService(final SecureTokenService secureTokenService)
+	{
+		this.secureTokenService = secureTokenService;
+	}
+
+	protected long getTokenValiditySeconds()
+	{
+		return tokenValiditySeconds;
+	}
+
+	@Required
+	public void setTokenValiditySeconds(final long tokenValiditySeconds)
+	{
+		if (tokenValiditySeconds < 0)
+		{
+			throw new IllegalArgumentException("tokenValiditySeconds has to be >= 0");
+		}
+		this.tokenValiditySeconds = tokenValiditySeconds;
 	}
 }
