@@ -26,16 +26,65 @@ public class DefaultServiceRequestDao extends AbstractItemDao implements Service
     private FlexibleSearchService flexibleSearchService;
 
     private static final String SERVICE_REQUEST_BASE_QUERY=
-            "SELECT * FROM {" + ServiceRequestModel._TYPECODE + " as E }";
+            "SELECT {A.pk} FROM {" + ServiceRequestModel._TYPECODE + " as A }";
 
     private String getBaseQuery(){
         return SERVICE_REQUEST_BASE_QUERY;
     }
 
     private String getServiceRequestsByStatusQuery(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+                .append(" JOIN ServiceStatus as B on {B.pk} = {A."+ServiceRequestModel.STATUS+"}} ")
+                .append(" WHERE ")
+                .append(" {B.code} = ?status");
+        return builder.toString();
+    }
+
+    private String getServiceRequestsByUIDQuery(){
         StringBuilder builder = new StringBuilder(getBaseQuery());
         builder.append(" WHERE ")
-                .append(" E."+ServiceRequestModel.STATUS+" = ?status");
+                .append(" {A.pk} = ?pk");
+        return builder.toString();
+    }
+
+    private String getServiceRequestsByCustomerIDQuery(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+                .append(" JOIN Customer as C on {C.pk} = {A."+ServiceRequestModel.CUSTOMER+"}} ")
+                .append(" WHERE ")
+                .append(" {C.pk} = ?customerID");
+        return builder.toString();
+    }
+
+    private String getServiceRequestsByCustomerIDAndStatusQuery(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+                .append(" JOIN Customer as B on {B.pk} = {A."+ServiceRequestModel.CUSTOMER+"} ")
+                .append(" JOIN ServiceStatus as C on {C.pk} = {A."+ServiceRequestModel.STATUS+"}} ")
+                .append(" WHERE ")
+                .append(" {B.pk} = ?customerID")
+                .append(" AND {C.code} = ?status");
+        return builder.toString();
+    }
+
+    private String getServiceRequestsByVehicleIDQuery(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+                .append(" JOIN Vehicle as B on {B.pk} = {A."+ServiceRequestModel.VEHICLE+"}} ")
+                .append(" WHERE ")
+                .append(" {B.pk} = ?vehicleID");
+        return builder.toString();
+    }
+
+    private String getServiceRequestsByVehicleIDAndStatusQuery(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+                .append(" JOIN Vehicle as B on {B.pk} = {A."+ServiceRequestModel.VEHICLE+"} ")
+                .append(" JOIN ServiceStatus as C on {C.pk} = {A."+ServiceRequestModel.STATUS+"}} ")
+                .append(" WHERE ")
+                .append(" {B.pk} = ?vehicleID")
+                .append(" AND {C.code} = ?status");
         return builder.toString();
     }
 
@@ -61,10 +110,60 @@ public class DefaultServiceRequestDao extends AbstractItemDao implements Service
 
     @Override
     public List<ServiceRequestModel> getAllServiceRequests() {
-        return getServiceRequests(getBaseQuery());
+        return getServiceRequests(getBaseQuery(),null);
+    }
+
+    @Override
+    public List<ServiceRequestModel> getServiceRequestsByStatus(String status) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("status",status);
+        return getServiceRequests(getServiceRequestsByStatusQuery(),params);
+    }
+
+    @Override
+    public ServiceRequestModel getServiceRequestByUID(String pk) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("pk",pk);
+        return getServiceRequest(getServiceRequestsByUIDQuery(),params);
+    }
+
+    @Override
+    public List<ServiceRequestModel> getServiceRequestsByCustomerId(String customerID) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("customerID",customerID);
+        return getServiceRequests(getServiceRequestsByCustomerIDQuery(),params);
+    }
+
+    @Override
+    public List<ServiceRequestModel> getServiceRequestsByCustomerIdAndStatus(String customerID, String status) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("customerID",customerID);
+        params.put("status",status);
+        return getServiceRequests(getServiceRequestsByCustomerIDAndStatusQuery()
+                ,params);
+    }
+
+    @Override
+    public List<ServiceRequestModel> getServiceRequestsByVehicleId(String vehicleID) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("vehicleID",vehicleID);
+        return getServiceRequests(getServiceRequestsByVehicleIDQuery()
+                ,params);
+    }
+
+    @Override
+    public List<ServiceRequestModel> getServiceRequestsByVehicleIdAndStatus(String vehicleID, String status) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("vehicleID",vehicleID);
+        params.put("status",status);
+        return getServiceRequests(getServiceRequestsByVehicleIDAndStatusQuery()
+                ,params);
     }
 
     private FlexibleSearchQuery getFlexiQueryInstance(String query, Map<String,Object> params){
+        if(null == query || "".equals(query)){
+            return null;
+        }
         final FlexibleSearchQuery flexiQuery = new FlexibleSearchQuery(query);
         if( null != params && !params.isEmpty()){
             for (Map.Entry<String, Object> entry : params.entrySet()) {
@@ -76,15 +175,25 @@ public class DefaultServiceRequestDao extends AbstractItemDao implements Service
         return flexiQuery;
     }
 
-    private List<ServiceRequestModel> getServiceRequests(String queryStr) {
-        final FlexibleSearchQuery query = getFlexiQueryInstance(queryStr,null);
-        final SearchResult<ServiceRequestModel> result = getFlexibleSearchService().search(query);
-        return result.getResult()!=null?result.getResult():null;
+    private List<ServiceRequestModel> getServiceRequests(String queryStr,Map<String,Object> params) {
+        try{
+            final FlexibleSearchQuery query = getFlexiQueryInstance(queryStr,params);
+            final SearchResult<ServiceRequestModel> result = getFlexibleSearchService().search(query);
+            return (result.getResult()!=null && !result.getResult().isEmpty())?result.getResult():null;
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     private ServiceRequestModel getServiceRequest(String queryStr,Map<String,Object> params) {
-        final FlexibleSearchQuery query = getFlexiQueryInstance(queryStr,params);
-        final SearchResult<ServiceRequestModel> result = getFlexibleSearchService().search(query);
-        return result.getResult()!=null?result.getResult().get(0):null;
+        try {
+            final FlexibleSearchQuery query = getFlexiQueryInstance(queryStr, params);
+            final SearchResult<ServiceRequestModel> result = getFlexibleSearchService().search(query);
+            return (result.getResult() != null && !result.getResult().isEmpty()) ? result.getResult().get(0) : null;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

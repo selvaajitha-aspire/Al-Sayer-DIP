@@ -6,10 +6,14 @@ import java.util.List;
 import com.alsayer.core.model.ServiceRequestModel;
 import com.alsayer.facades.data.ServiceRequestData;
 
+import javax.annotation.Resource;
+
 public class AbstractService {
 
+    @Resource
     private Converter<ServiceRequestModel,ServiceRequestData> serviceRequestConverter;
 
+    @Resource
     private Converter<ServiceRequestData, ServiceRequestModel> serviceRequestReverseConverter;
 
     private Converter<ServiceRequestModel, ServiceRequestData> getServiceRequestConverter() {

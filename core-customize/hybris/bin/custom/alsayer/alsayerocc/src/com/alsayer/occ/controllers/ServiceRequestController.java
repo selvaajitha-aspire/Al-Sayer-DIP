@@ -18,6 +18,8 @@ import java.util.List;
 import com.alsayer.core.servicerequest.service.ServiceRequestService;
 import com.alsayer.facades.data.ServiceRequestData;
 
+import javax.annotation.Resource;
+
 @Controller
 @RequestMapping(value = "{baseSiteId}/service_request")
 @Api(tags = "")
@@ -25,6 +27,10 @@ public class ServiceRequestController {
 
     final static Logger LOG = LoggerFactory.getLogger(ServiceRequestController.class);
 
+
+    private static final String BASIC_FIELD_SET = "BASIC";
+
+    @Resource
     private ServiceRequestService serviceRequestService;
 
     @Secured(
@@ -33,10 +39,25 @@ public class ServiceRequestController {
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get All Service Requests", notes = "For ALSAYER ADMIN")
-    public List<ServiceRequestData> getAllServiceRequests()
+    public List<ServiceRequestData> getAllServiceRequests(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.",
+            allowableValues = "BASIC, DEFAULT, FULL")
+                                                              @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
     {
+    	serviceRequestService.getAllServiceRequests();
 
-        return serviceRequestService.getAllServiceRequests();
+        serviceRequestService.getServiceRequestsByStatus("STARTED");
+
+        serviceRequestService.getServiceRequestByUID("8796093066979");
+
+        serviceRequestService.getServiceRequestsByCustomerId("8796125954052");
+
+        serviceRequestService.getServiceRequestsByCustomerIdAndStatus("8796125954052","STARTED");
+
+        serviceRequestService.getServiceRequestsByVehicleId("8796093066978");
+
+        serviceRequestService.getServiceRequestsByVehicleIdAndStatus("8796093066978","STARTED");
+
+        return null;
     }
 
 }

@@ -8,6 +8,104 @@
 
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
+    <!--
+        Example Data POJO
+
+    <bean class="yemptypackage.data.MyPojo">
+        <property name="id" type="String"/>
+        <property name="flag" type="boolean"/>
+    </bean>
+    -->
+    <bean class="com.alsayer.occ.dto.ResponseWsDTO">
+        <description>Representation of common response</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">Response</hint>
+        </hints>
+        <property name="data"
+                  type="java.lang.String">
+            <description>Respone Data</description>
+        </property>
+        <property name="status"
+                  type="java.lang.String">
+            <description>Respone Status</description>
+        </property>
+        <property name="message"
+                  type="java.lang.String">
+            <description>Respone Message</description>
+        </property>
+        <property name="errors"
+                  type="java.lang.String">
+            <description>Respone Error</description>
+        </property>
+    </bean>
+
+    <bean class="com.alsayer.occ.dto.ServiceWsDTO">
+        <property name="vehicle" type="String"/>
+        <property name="issue" type="String"/>
+        <property name="latitude" type="Double"/>
+        <property name="longitude" type="Double"/>
+        <property name="notes" type="String"/>
+        <property name="attachments" type="String"/>
+    </bean>
+
+
+    <bean class="com.alsayer.occ.dto.VehicleWsDTO">
+        <property name="uid" type="String"/>
+        <property name="model" type="String"/>
+        <property name="chassis_no" type="String"/>
+        <property name="register_no" type="String"/>
+        <property name="attachment" type="String"/>
+    </bean>
+
+    <bean class="com.alsayer.occ.dto.VehicleListWsDTO">
+        <property name="vehicleList" type="java.util.List&lt;com.alsayer.occ.dto.VehicleWsDTO>"/>
+    </bean>
+
+    <bean class="com.alsayer.occ.dto.ECCCustomerWsDTO">
+        <property name="name" type="String"/>
+        <property name="arabicName" type="String"/>
+        <property name="mobileNumber" type="String"/>
+    </bean>
+
+    <bean class="com.alsayer.occ.dto.CustomerRegistrationWsDTO">
+        <property name="civilId" type="String"/>
+        <property name="name" type="String"/>
+        <property name="arabicName" type="String"/>
+        <property name="mobileNumber" type="String"/>
+        <property name="emailId" type="String"/>
+        <property name="vehicle" type="com.alsayer.occ.dto.VehicleWsDTO"/>
+    </bean>
+    <bean class="com.alsayer.occ.dto.AlsayerUserSignUpWsDTO">
+        <description>Representation of an UserSignUp. Consists of fields required to register new customer</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">UserSignUp</hint>
+        </hints>
+        <property name="civilId" type="String"/>
+        <property name="name" type="String"/>
+        <property name="arabicName" type="String"/>
+        <property name="mobileNumber" type="String"/>
+        <property name="uid" type="String"/>
+        <property name="emailId" type="String"/>
+        <property name="password" type="String"/>
+    </bean>
+
+    <bean class="com.alsayer.occ.dto.user.ActiveUserWsDTO">
+        <description>Representation of Active User</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">Active</hint>
+        </hints>
+        <property name="token" type="String">
+            <description>token value which will be generated as unique string that will be sent with email to allow user
+                for activating his account
+            </description>
+            <hints>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+    </bean>
 	<!--
 		Example Data POJO
 	
@@ -41,12 +139,18 @@
 	</bean>
 
 	<bean class="com.alsayer.occ.dto.ServiceWsDTO">
-		<property name="vehicle" type="String"/>
+		<property name="vehicle" type="com.alsayer.occ.dto.VehicleWsDTO"/>
 		<property name="issue" type="String"/>
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 		<property name="notes" type="String"/>
 		<property name="attachments" type="String"/>
+<!--    <property name="customer" type="de.hybris.platform.commercefacades.user.data.CustomerData" />-->
+		<property name="serviceDate" type="java.util.Date" />
+		<property name="mileage" type="java.lang.Integer" />
+		<property name="driverDetails" type="com.alsayer.occ.dto.DriverDetailsWsDTO" />
+		<property name="type" type="java.lang.String" />
+		<property name="status" type="String" />
 	</bean>
 
 	<bean class="com.alsayer.occ.dto.DriverDetailsWsDTO">

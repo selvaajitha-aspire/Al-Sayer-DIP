@@ -9,4 +9,15 @@ public interface ServiceRequestDao {
 
     public List<ServiceRequestModel> getAllServiceRequests();
 
+    public List<ServiceRequestModel> getServiceRequestsByStatus(String status);
+
+    public ServiceRequestModel getServiceRequestByUID(String uid);
+
+    public List<ServiceRequestModel> getServiceRequestsByCustomerId(String customerID);
+
+    public List<ServiceRequestModel> getServiceRequestsByCustomerIdAndStatus(String customerID,String status);
+
+    public List<ServiceRequestModel> getServiceRequestsByVehicleId(String vehicleID);
+
+    public List<ServiceRequestModel> getServiceRequestsByVehicleIdAndStatus(String vehicleID,String status);
 }

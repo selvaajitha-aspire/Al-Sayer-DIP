@@ -26,7 +26,7 @@ public class ServiceRequestReversePopulator implements Populator<ServiceRequestD
     @Override
     public void populate(ServiceRequestData serviceRequestData, ServiceRequestModel serviceRequestModel) throws ConversionException {
 
-        String vehicle_uid=serviceRequestData.getVehicle();
+        String vehicle_uid=serviceRequestData.getVehicle().getUid();
         String issueType=serviceRequestData.getIssue();
         serviceRequestModel.setUid(UUID.randomUUID().toString());
         serviceRequestModel.setCustomer((CustomerModel) userService.getCurrentUser());

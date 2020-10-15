@@ -247,6 +247,7 @@ autocompleteFocus() {
  }
  }
   onSubmit(f: NgForm) { 
+    debugger;
     f.value.latitude=this.latitude;
     f.value.longitude=this.longitude;
     console.log(f.value); 

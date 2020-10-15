@@ -23,4 +23,34 @@ public class DefaultServiceRequestService extends AbstractService implements Ser
     public List<ServiceRequestData> getAllServiceRequests() {
         return convertAllModel(getServiceRequestDao().getAllServiceRequests());
     }
+
+    @Override
+    public List<ServiceRequestData> getServiceRequestsByStatus(String status) {
+        return convertAllModel(getServiceRequestDao().getServiceRequestsByStatus(status));
+    }
+
+    @Override
+    public ServiceRequestData getServiceRequestByUID(String uid) {
+        return convert(getServiceRequestDao().getServiceRequestByUID(uid));
+    }
+
+    @Override
+    public List<ServiceRequestData> getServiceRequestsByCustomerId(String customerID) {
+        return convertAllModel(getServiceRequestDao().getServiceRequestsByCustomerId(customerID));
+    }
+
+    @Override
+    public List<ServiceRequestData> getServiceRequestsByCustomerIdAndStatus(String customerID, String status) {
+        return convertAllModel(getServiceRequestDao().getServiceRequestsByCustomerIdAndStatus(customerID,status));
+    }
+
+    @Override
+    public List<ServiceRequestData> getServiceRequestsByVehicleId(String vehicleID) {
+        return convertAllModel(getServiceRequestDao().getServiceRequestsByVehicleId(vehicleID));
+    }
+
+    @Override
+    public List<ServiceRequestData> getServiceRequestsByVehicleIdAndStatus(String vehicleID, String status) {
+        return convertAllModel(getServiceRequestDao().getServiceRequestsByVehicleIdAndStatus(vehicleID,status));
+    }
 }

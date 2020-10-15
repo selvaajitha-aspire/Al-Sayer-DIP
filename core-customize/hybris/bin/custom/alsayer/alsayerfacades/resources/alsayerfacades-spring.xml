@@ -205,6 +205,15 @@
 		<property name="driverDetailsConverter" ref="driverDetailsConverter"/>
 	</bean>
 
+
+	<!--Customer Registration beans-->
+
+
+	<alias alias="customerFacade" name="alsayerCustomerFacadeImpl"/>
+	<bean id="alsayerCustomerFacadeImpl" class="com.alsayer.facades.customer.impl.AlsayerCustomerFacadeImpl" parent="defaultCustomerFacade" >
+		<property name="alsayerCustomerAccountService" ref="alsayerCustomerAccountService"/>
+	</bean>
+
 	<bean id="driverDetailsPopulator" class="com.alsayer.facades.populators.DriverDetailsPopulator"></bean>
 
 	<bean id="driverDetailsConverter" parent="abstractPopulatingConverter">
@@ -235,6 +244,8 @@
 
 	<bean id="serviceRequestPopulator" class="com.alsayer.facades.populators.ServiceRequestPopulator">
 		<property name="i18nService" ref="i18nService"/>
+		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
+		<property name="driverDetailsConverter" ref="driverDetailsConverter"/>
 	</bean>
 
 	<bean id="serviceRequestConverter" parent="abstractPopulatingConverter">
