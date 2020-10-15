@@ -28,6 +28,23 @@
 		<property name="chassisNumber" type="String"/>
 	</bean>
 
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+		<property name="civilId" type="String"/>
+		<property name="name" type="String"/>
+		<property name="arabicName" type="String"/>
+		<property name="mobileNumber" type="String"/>
+		<property name="emailId" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="civilId" type="String"/>
+		<property name="login" type="String"/>
+		<property name="password" type="String"/>
+		<property name="name" type="String"/>
+		<property name="arabicName" type="String"/>
+		<property name="mobileNumber" type="String"/>
+		<property name="emailId" type="String"/>
+
 	<bean class="com.alsayer.facades.data.DriverDetailsData">
 		<property name="name" type="String"/>
 		<property name="latitude" type="Double"/>

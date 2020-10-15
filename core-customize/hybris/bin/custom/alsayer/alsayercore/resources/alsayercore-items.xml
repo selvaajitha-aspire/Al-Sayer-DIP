@@ -10,6 +10,7 @@
         <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
                         type="set"/>
         <collectiontype code="vehicleList" elementtype="Vehicle" autocreate="true" generate="true" type="list"/>
+
     </collectiontypes>
 
     <enumtypes>
@@ -64,6 +65,16 @@
             </targetElement>
         </relation>
 
+
+        <relation code="CustomerVehicleRelation" localized="false" autocreate="true">
+            <sourceElement type="Customer" qualifier="customer" cardinality="one" >
+                <modifiers read="true" write="true" search="true" optional="true" />
+            </sourceElement>
+             <targetElement type="Vehicle" qualifier="vehicle" cardinality="many" collectiontype="list">
+                 <modifiers read="true" write="true" search="true" optional="true" />
+             </targetElement>
+        </relation>
+
         <!--Process Relations-->
         <relation  localized="false" code="ServiceRequest2ServiceRequestProcess" autocreate="true">
             <sourceElement type="ServiceRequest" cardinality="one"
@@ -75,6 +86,7 @@
                 <modifiers initial="true" optional="true" />
             </targetElement>
         </relation>
+
     </relations>
 
 
@@ -186,6 +198,12 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="registrationNumber" type="java.lang.String">
+                        <description>Registration No of vehicle</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+
                 </attributes>
             </itemtype>
             <itemtype code="Customer" generate="false" autocreate="false">
@@ -193,6 +211,26 @@
                     <attribute qualifier="vehicles" type="vehicleList">
                         <description>Vehicle owned by Customer</description>
                         <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="civilId" type="java.lang.String">
+                        <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="arabicName" type="java.lang.String">
+                        <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="mobileNumber" type="java.lang.String">
+                    <description>Driver Name</description>
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                    <attribute qualifier="emailId" type="java.lang.String">
+                        <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
                 </attributes>
@@ -314,6 +352,16 @@
                 </attributes>
             </itemtype>
 
+
+            <itemtype code="StoreFrontCustomerProcess" extends="StoreFrontProcess"
+                      autocreate="false" generate="true"
+                      jaloclass="de.hybris.platform.commerceservices.jalo.process.StoreFrontCustomerProcess">
+                <description>Represents customer related store front business process.</description>
+                <attributes>
+                    <attribute qualifier="activeToken" type="java.lang.String">
+                        <persistence type="property" />
+                        <description>Attribute contains token for activation.</description>
+
             <itemtype code="ServiceRequestProcess" autocreate="true"
                       generate="true" jaloclass="com.alsayer.core.jalo.ServiceRequestProcess"
                       extends="BusinessProcess">
@@ -324,13 +372,11 @@
                         <persistence type="property" />
                         <defaultvalue>Boolean.FALSE</defaultvalue>
                     </attribute>
-
                     <attribute qualifier="serviceState" type="ServiceStatus">
                         <description>State of RSA process.</description>
                         <persistence type="property" />
                         <modifiers initial="false" optional="true" />
                     </attribute>
-
                 </attributes>
             </itemtype>
         </typegroup>
