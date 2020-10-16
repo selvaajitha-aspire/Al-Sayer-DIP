@@ -372,6 +372,10 @@
                     <attribute qualifier="activeToken" type="java.lang.String">
                         <persistence type="property" />
                         <description>Attribute contains token for activation.</description>
+                    </attribute>
+
+                </attributes>
+            </itemtype>
 
             <itemtype code="ServiceRequestProcess" autocreate="true"
                       generate="true" jaloclass="com.alsayer.core.jalo.ServiceRequestProcess"
