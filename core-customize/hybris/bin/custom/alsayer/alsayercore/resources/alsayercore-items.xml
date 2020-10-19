@@ -35,6 +35,8 @@
             <value code="STARTED"/>
             <value code="IN_PROGRESS"/>
             <value code="COMPLETED"/>
+            <value code="FAILED"/>
+            <value code="CANCELLED"/>
         </enumtype>
         <enumtype code="IssueType" autocreate="true" generate="true" dynamic="true">
             <description>Status of service request to the target system</description>
@@ -63,6 +65,7 @@
             </targetElement>
         </relation>
 
+
         <relation code="CustomerVehicleRelation" localized="false" autocreate="true">
             <sourceElement type="Customer" qualifier="customer" cardinality="one" >
                 <modifiers read="true" write="true" search="true" optional="true" />
@@ -72,7 +75,20 @@
              </targetElement>
         </relation>
 
+        <!--Process Relations-->
+        <relation  localized="false" code="ServiceRequest2ServiceRequestProcess" autocreate="true">
+            <sourceElement type="ServiceRequest" cardinality="one"
+                           qualifier="serviceRequest">
+                <modifiers initial="true" optional="true" />
+            </sourceElement>
+            <targetElement type="ServiceRequestProcess" cardinality="many"
+                           qualifier="serviceRequestProcesses">
+                <modifiers initial="true" optional="true" />
+            </targetElement>
+        </relation>
+
     </relations>
+
 
     <itemtypes>
 
@@ -177,7 +193,7 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="chassisno" type="java.lang.String">
+                    <attribute qualifier="chassisNumber" type="java.lang.String">
                         <description>Chassis No of vehicle</description>
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
@@ -304,7 +320,7 @@
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="driverinfo" type="DriverDetails">
+                    <attribute qualifier="driverDetails" type="DriverDetails">
                         <description>Attribute contains driver details object</description>
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
@@ -357,6 +373,7 @@
                 </attributes>
             </itemtype>
 
+
             <itemtype code="StoreFrontCustomerProcess" extends="StoreFrontProcess"
                       autocreate="false" generate="true"
                       jaloclass="de.hybris.platform.commerceservices.jalo.process.StoreFrontCustomerProcess">
@@ -365,8 +382,22 @@
                     <attribute qualifier="activeToken" type="java.lang.String">
                         <persistence type="property" />
                         <description>Attribute contains token for activation.</description>
-                    </attribute>
 
+            <itemtype code="ServiceRequestProcess" autocreate="true"
+                      generate="true" jaloclass="com.alsayer.core.jalo.ServiceRequestProcess"
+                      extends="BusinessProcess">
+                <attributes>
+                    <attribute qualifier="done" type="boolean">
+                        <description>Mark process as done</description>
+                        <modifiers optional="false" initial="false"/>
+                        <persistence type="property" />
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="serviceState" type="ServiceStatus">
+                        <description>State of RSA process.</description>
+                        <persistence type="property" />
+                        <modifiers initial="false" optional="true" />
+                    </attribute>
                 </attributes>
             </itemtype>
 

@@ -1,30 +1,26 @@
 package com.alsayer.facades.roadsideassistance.impl;
 
+import com.alsayer.core.model.DriverDetailsModel;
 import com.alsayer.core.model.ServiceRequestModel;
-import com.alsayer.core.model.VehicleModel;
-import com.alsayer.core.roadsideassistance.services.impl.DefaultRoadSideAssistanceService;
+import com.alsayer.core.roadsideassistance.services.RoadSideAssistanceService;
+import com.alsayer.facades.data.DriverDetailsData;
 import com.alsayer.facades.data.ServiceRequestData;
-import com.alsayer.facades.data.VehicleData;
 import com.alsayer.facades.roadsideassistance.RoadSideAssistanceFacade;
-import de.hybris.platform.converters.Converters;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import java.util.List;
 
 
 public class DefaultRoadSideAssistanceFacade implements RoadSideAssistanceFacade {
 
 
-    private DefaultRoadSideAssistanceService roadSideAssistanceService;
+    private RoadSideAssistanceService roadSideAssistanceService;
 
     private Converter<ServiceRequestData, ServiceRequestModel> serviceRequestReverseConverter;
 
-    private Converter<VehicleModel, VehicleData> vehicleDataConverter;
+    private Converter<DriverDetailsModel, DriverDetailsData> driverDetailsConverter;
 
     @Override
-    public List<VehicleData> getVehicles(){
-        List<VehicleModel> vehicles  = getRoadSideAssistanceService().getVehiclesForCustomer();
-        return Converters.convertAll(vehicles, getVehicleDataConverter());
-
+    public DriverDetailsData getDriverDetails(){
+        return getDriverDetailsConverter().convert(getRoadSideAssistanceService().getDriverDetails());
     }
 
     @Override
@@ -41,19 +37,19 @@ public class DefaultRoadSideAssistanceFacade implements RoadSideAssistanceFacade
         this.serviceRequestReverseConverter = serviceRequestReverseConverter;
     }
 
-    public DefaultRoadSideAssistanceService getRoadSideAssistanceService() {
+    public RoadSideAssistanceService getRoadSideAssistanceService() {
         return roadSideAssistanceService;
     }
 
-    public void setRoadSideAssistanceService(DefaultRoadSideAssistanceService roadSideAssistanceService) {
+    public void setRoadSideAssistanceService(RoadSideAssistanceService roadSideAssistanceService) {
         this.roadSideAssistanceService = roadSideAssistanceService;
     }
 
-    public Converter<VehicleModel, VehicleData> getVehicleDataConverter() {
-        return vehicleDataConverter;
+    public Converter<DriverDetailsModel, DriverDetailsData> getDriverDetailsConverter() {
+        return driverDetailsConverter;
     }
 
-    public void setVehicleDataConverter(Converter<VehicleModel, VehicleData> vehicleDataConverter) {
-        this.vehicleDataConverter = vehicleDataConverter;
+    public void setDriverDetailsConverter(Converter<DriverDetailsModel, DriverDetailsData> driverDetailsConverter) {
+        this.driverDetailsConverter = driverDetailsConverter;
     }
 }

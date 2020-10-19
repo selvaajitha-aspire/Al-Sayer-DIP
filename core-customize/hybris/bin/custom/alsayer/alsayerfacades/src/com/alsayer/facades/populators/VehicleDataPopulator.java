@@ -11,7 +11,7 @@ public class VehicleDataPopulator implements Populator<VehicleModel, VehicleData
         if(source!=null){
             target.setUid(source.getUid());
             target.setModel(source.getModel());
-            target.setChassis_no(source.getChassisno());
+            target.setChassisNumber(source.getChassisNumber());
         }
     }
 }

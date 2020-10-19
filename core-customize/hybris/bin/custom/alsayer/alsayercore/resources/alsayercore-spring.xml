@@ -548,6 +548,7 @@
 	</bean>
 
 	<!-- CsTicket Stagnation action -->
+
 	<alias name="defaultCSTicketStagnationAction" alias="csTicketStagnationAction"/>
 	<bean id="defaultCSTicketStagnationAction" class="com.alsayer.core.retention.impl.DefaultCSTicketStagnationAction" parent="abstractExtensibleRemoveCleanupAction">
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
@@ -555,16 +556,27 @@
 	</bean>
 
 	<!--RSA-->
+
 	<bean id="roadSideAssistanceService" class="com.alsayer.core.roadsideassistance.services.impl.DefaultRoadSideAssistanceService">
-		<property name="userService" ref="userService"/>
 		<property name="roadSideAssistanceDao" ref="roadSideAssistanceDao"/>
 	</bean>
 
 	<bean id="roadSideAssistanceDao" class="com.alsayer.core.roadsideassistance.daos.impl.DefaultRoadSideAssistanceDao">
 		<property name="modelService" ref="modelService"/>
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="eventService" ref="eventService" />
 	</bean>
 
+	<!--My Vehicles-->
+
+	<bean id="myVehiclesService" class="com.alsayer.core.vehicles.services.impl.DefaultMyVehiclesService">
+		<property name="userService" ref="userService"/>
+		<property name="myVehiclesDao" ref="myVehiclesDao"/>
+	</bean>
+
+	<bean id="myVehiclesDao" class="com.alsayer.core.vehicles.daos.impl.DefaultMyVehiclesDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
 
 
 	<!--Customer Registration-->
@@ -642,4 +654,21 @@
 			</map>
 		</property>
 	</bean>
+	<!-- Process Actions -->
+
+	<import resource="/alsayercore/processes/process/service-process-spring.xml"/>
+
+	<!-- Process Definitions -->
+
+	<bean id="serviceProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/alsayercore/processes/process/service-process.xml"/>
+	</bean>
+
+	<!--Service Request Event Listener-->
+
+	<bean id="serviceRequestStartEventListener" class="com.alsayer.core.event.rsa.ServiceRequestStartEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
 </beans>
