@@ -2,11 +2,13 @@
 
 <div>
     <form #f="ngForm"  novalidate>
-        <div>Vehicle Name 
-          <select class="form-control" id="vehicle"  name="vehicle"  *ngIf="this.vehicleList | async as vehicles" ngModel required>
+      <fieldset ngModelGroup="vehicle">
+      <div>Vehicle Name 
+          <select class="form-control" id="vehicle"  name="uid"  *ngIf="this.vehicleList | async as vehicles" ngModel required>
             <option *ngFor="let vehicle of vehicles" [value]="vehicle.uid">{{vehicle.model}} ,{{vehicle.chassisNumber}}</option>
           </select>
         </div>
+      </fieldset>  
         <div>Problem 
           <select class="form-control" id="issue" name="issue" ngModel required>
             <option *ngFor="let issue of IssueTypes | keyvalue" [value]="issue.key">{{issue.value}}</option>
