@@ -43,5 +43,6 @@ public interface AlsayerCustomerFacade extends CustomerFacade {
     void eccRecordSynchronization(RegisterData registerData);
 
 
+    boolean validateOTP(RegisterData registerData);
 }
 

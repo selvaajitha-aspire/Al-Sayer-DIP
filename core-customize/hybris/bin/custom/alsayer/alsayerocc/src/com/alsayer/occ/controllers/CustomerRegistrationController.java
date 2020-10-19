@@ -9,6 +9,7 @@ package com.alsayer.occ.controllers;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
 
 import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
+import com.alsayer.occ.dto.CustomerRegistrationResultDTO;
 import com.alsayer.occ.dto.CustomerRegistrationWsDTO;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import com.alsayer.occ.dto.user.ActiveUserWsDTO;
@@ -153,16 +154,25 @@ public class CustomerRegistrationController
     @ApiOperation(nickname = "createUser", value = " Registers a customer", notes = "Registers a customer. Requires the following "
             + "parameters: login, password, name, arabicName, mobileNumber,otp,civilId.")
     @ApiBaseSiteIdParam
-    public CustomerRegistrationWsDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final AlsayerUserSignUpWsDTO user,
-                                                @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
-                                                final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
+    public CustomerRegistrationResultDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final AlsayerUserSignUpWsDTO user,
+                                                    @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
+                                                    final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
     {
         validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
                 .map(user, RegisterData.class, "login, password, name, arabicName, mobileNumber,civilId,emailId");
         boolean userExists = false;
+        CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try
         {
+            boolean result =  customerFacade.validateOTP(registerData);
+            System.out.println(result);
+            if(result == false)
+            {
+                customerRegistrationResultDTO.setReason("OTP is Invalid");
+                customerRegistrationResultDTO.setStatus("Failure");
+                return  customerRegistrationResultDTO;
+            }
             customerFacade.register(registerData);
         }
         catch (final DuplicateUidException ex)
@@ -171,14 +181,16 @@ public class CustomerRegistrationController
             LOG.debug("Duplicated UID", ex);
         }
         //Sending record for Synchronisation
-        customerFacade.eccRecordSynchronization(registerData);
+        //customerFacade.eccRecordSynchronization(registerData);
         //Fetching All values regarding the customer and vehicles
         //customerFacade.fetchECCCustomerRecord(registerData);
 
         final String userId = user.getUid().toLowerCase(Locale.ENGLISH);
        httpResponse.setHeader(YcommercewebservicesConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
-        final CustomerData customerData = getCustomerData(registerData, userExists, userId);
-        return getDataMapper().map(customerData, CustomerRegistrationWsDTO.class, fields);
+        //final CustomerData customerData = getCustomerData(registerData, userExists, userId);
+        customerRegistrationResultDTO.setReason("OTP is valid");
+        customerRegistrationResultDTO.setStatus("Success");
+        return customerRegistrationResultDTO;
     }
 
     protected CustomerData getCustomerData(final RegisterData registerData, final boolean userExists, final String userId)

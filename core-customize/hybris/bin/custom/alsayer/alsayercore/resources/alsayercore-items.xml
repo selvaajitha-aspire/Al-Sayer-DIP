@@ -219,6 +219,27 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+            <itemtype code="CustomerAuthentication" generate="true" autocreate="true"  jaloclass="com.alsayer.core.jalo.CustomerAuthentication">
+                <deployment table="CustomerAuthentication" typecode="12004"/>
+                <attributes>
+                    <attribute qualifier="oneTimePassword" type="java.lang.String">
+                        <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="civilId" type="java.lang.String">
+                        <description>Location of Driver: Latitude</description>
+                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="jsessionId" type="java.lang.String">
+                        <description>Location of Driver: Longitude</description>
+                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
 
         <typegroup name="FSM">
@@ -348,6 +369,7 @@
 
                 </attributes>
             </itemtype>
+
         </typegroup>
 
 

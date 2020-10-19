@@ -1,6 +1,6 @@
 package com.alsayer.facades.customer.impl;
 
-import com.alsayer.core.customer.AlsayerCustomerAccountService;
+import com.alsayer.core.customer.services.AlsayerCustomerAccountService;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
@@ -90,7 +90,12 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
 
     }
 
+    @Override
+    public boolean validateOTP(RegisterData registerData) {
 
+      boolean result =  getAlsayerCustomerAccountService().getOTPForValidation(registerData);
+        return result;
+    }
 
 
     @Override
