@@ -79,6 +79,9 @@ public class RoadsideAssistanceController {
     private  ServiceRequestData storeServiceRequest(ServiceWsDTO serviceWsDTO){
         ServiceRequestData serviceRequestData=new ServiceRequestData();
         BeanUtils.copyProperties(serviceWsDTO,serviceRequestData);
+        VehicleData vehicleData = new VehicleData();
+        BeanUtils.copyProperties(serviceWsDTO.getVehicle(),vehicleData);
+        serviceRequestData.setVehicle(vehicleData);
     return serviceRequestData;
     }
 
