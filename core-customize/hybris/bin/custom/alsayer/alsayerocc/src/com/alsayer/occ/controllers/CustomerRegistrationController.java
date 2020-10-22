@@ -44,6 +44,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.*;
 
 import io.swagger.annotations.*;
@@ -130,18 +131,26 @@ public class CustomerRegistrationController
     @Secured({ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT" })
     @RequestMapping(value = "/activateUser", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE })
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
     @ApiOperation(nickname = "activateUser", value = "Activate the customer on clicking the activation link.", notes = "Activate the customer on clicking the activation link.", authorizations = {
             @Authorization(value = "oauth2_client_credentials") })
     @ApiBaseSiteIdParam
-    public String activateUser(
-            @ApiParam(value = "Request body parameter that contains details such as token and new password", required = true) @RequestBody final ActiveUserWsDTO activeUser)
+    public CustomerRegistrationResultDTO activateUser(
+            @ApiParam(value = "Request body parameter that contains details such as token and new password", required = true)
+            @RequestParam(value = "token", required = false) final String token,
+            @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
             throws TokenInvalidatedException, UnsupportedEncodingException {
-        LOG.debug("Executing method doResetPassword");
-        String token = URLDecoder.decode(activeUser.getToken(), "UTF-8");
+        LOG.info("Executing method doResetPassword");
+        //String token = URLDecoder.decode(code, "UTF-8");
         customerFacade.activateUser(token);
 
-        return "success";
+        CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
+
+        customerRegistrationResultDTO.setReason("Token is valid");
+        customerRegistrationResultDTO.setStatus("Success");
+
+        return customerRegistrationResultDTO;
 
     }
 
@@ -175,7 +184,7 @@ public class CustomerRegistrationController
             }
             customerFacade.register(registerData);
         }
-        catch (final DuplicateUidException ex)
+        catch (final DuplicateUidException | ParseException ex)
         {
             userExists = true;
             LOG.debug("Duplicated UID", ex);
