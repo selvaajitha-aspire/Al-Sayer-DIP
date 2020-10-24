@@ -34,6 +34,7 @@
 		<property name="arabicName" type="String"/>
 		<property name="mobileNumber" type="String"/>
 		<property name="emailId" type="String"/>
+		<property name="oneTimePassword" type="String"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
@@ -44,6 +45,7 @@
 		<property name="arabicName" type="String"/>
 		<property name="mobileNumber" type="String"/>
 		<property name="emailId" type="String"/>
+	</bean>
 
 	<bean class="com.alsayer.facades.data.DriverDetailsData">
 		<property name="name" type="String"/>

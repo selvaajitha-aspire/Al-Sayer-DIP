@@ -1,31 +1,24 @@
-package com.alsayer.core.customer;
+package com.alsayer.core.customer.services;
 
 import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
-import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
-import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
-import de.hybris.platform.commerceservices.security.SecureToken;
-import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.processengine.action.AbstractProceduralAction;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import de.hybris.platform.processengine.model.BusinessProcessModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.task.RetryLaterException;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class GetCustomerDetails  extends AbstractSimpleDecisionAction {
 
@@ -53,11 +46,18 @@ public class GetCustomerDetails  extends AbstractSimpleDecisionAction {
         headers.setContentType(MediaType.APPLICATION_JSON);
         Map<String, Object> map = new HashMap<>();
         //map.put("civilId",  currentUser.getCivilId());
-        map.put("name", "ashlam");
-        map.put("salary", "111");
-        map.put("age", "1233");
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
-        LOG.info("This is the service getting details : " + entity.getBody());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("civilid","290010195209");
+        jsonObject.put("Kunnr","1000051987");
+
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(jsonObject);
+
+        JSONObject finalObj = new JSONObject();
+        finalObj.put("HeaderData",jsonArray);
+
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
+        System.out.println("enity : " + entity.getBody());
 
         ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
         LOG.info("it came in the process and fetched details" + response.getBody());

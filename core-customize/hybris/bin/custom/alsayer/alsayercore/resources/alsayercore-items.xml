@@ -235,6 +235,27 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+            <itemtype code="CustomerAuthentication" generate="true" autocreate="true"  jaloclass="com.alsayer.core.jalo.CustomerAuthentication">
+                <deployment table="CustomerAuthentication" typecode="12004"/>
+                <attributes>
+                    <attribute qualifier="oneTimePassword" type="java.lang.String">
+                        <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="civilId" type="java.lang.String">
+                        <description>Location of Driver: Latitude</description>
+                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="jsessionId" type="java.lang.String">
+                        <description>Location of Driver: Longitude</description>
+                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
 
         <typegroup name="FSM">
@@ -352,7 +373,6 @@
                 </attributes>
             </itemtype>
 
-
             <itemtype code="StoreFrontCustomerProcess" extends="StoreFrontProcess"
                       autocreate="false" generate="true"
                       jaloclass="de.hybris.platform.commerceservices.jalo.process.StoreFrontCustomerProcess">
@@ -361,6 +381,11 @@
                     <attribute qualifier="activeToken" type="java.lang.String">
                         <persistence type="property" />
                         <description>Attribute contains token for activation.</description>
+                    </attribute>
+
+                </attributes>
+            </itemtype>
+
 
             <itemtype code="ServiceRequestProcess" autocreate="true"
                       generate="true" jaloclass="com.alsayer.core.jalo.ServiceRequestProcess"
@@ -379,6 +404,7 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
         </typegroup>
 
 

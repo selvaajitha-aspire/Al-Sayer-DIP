@@ -328,7 +328,7 @@
 		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
 	</bean>
 
-	<bean id="getCustomerDetails" class="com.alsayer.core.customer.GetCustomerDetails">
+	<bean id="getCustomerDetails" class="com.alsayer.core.customer.services.GetCustomerDetails">
 		<property name="modelService" ref="modelService"/>
 		<property name="configurationService" ref="configurationService"/>
 	</bean>
@@ -581,10 +581,17 @@
 
 	<!--Customer Registration-->
 
+	<bean id="alsayerCustomerServicesDao" class="com.alsayer.core.customer.daos.impl.AlsayerCustomerServicesDaoImpl">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
 
 
 	<alias alias="customerAccountService" name="alsayerCustomerAccountService"/>
-	<bean id="alsayerCustomerAccountService"  class="com.alsayer.core.customer.AlsayerCustomerAccountService" parent="defaultCustomerAccountService">
+	<bean id="alsayerCustomerAccountService" class="com.alsayer.core.customer.services.impl.AlsayerCustomerAccountServiceImpl" parent="defaultCustomerAccountService">
+		<property name="sessionService" ref="sessionService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="alsayerCustomerServicesDao" ref="alsayerCustomerServicesDao"/>
 	</bean>
 
 	<alias alias="alsayerSignUpDTOValidator" name="alsayerUserSignUpDTOValidator"/>

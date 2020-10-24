@@ -8,6 +8,8 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 
+import java.text.ParseException;
+
 public interface AlsayerCustomerFacade extends CustomerFacade {
 
 
@@ -43,5 +45,6 @@ public interface AlsayerCustomerFacade extends CustomerFacade {
     void eccRecordSynchronization(RegisterData registerData);
 
 
+    boolean validateOTP(RegisterData registerData) throws ParseException;
 }
 
