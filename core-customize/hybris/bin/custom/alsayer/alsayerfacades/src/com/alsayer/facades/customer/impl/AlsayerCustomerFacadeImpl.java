@@ -1,6 +1,6 @@
 package com.alsayer.facades.customer.impl;
 
-import com.alsayer.core.customer.AlsayerCustomerAccountService;
+import com.alsayer.core.customer.services.AlsayerCustomerAccountService;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 
+import java.text.ParseException;
 import java.util.UUID;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
@@ -37,7 +38,7 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
         Assert.hasText(registerData.getName(), "The field [name] cannot be empty");
         Assert.hasText(registerData.getArabicName(), "The field [arabicName] cannot be empty");
         Assert.hasText(registerData.getMobileNumber(), "The field [mobileNumber] cannot be empty");
-       Assert.hasText(registerData.getEmailId(), "The field [emailId] cannot be empty");
+        Assert.hasText(registerData.getEmailId(), "The field [emailId] cannot be empty");
 
 
         final CustomerModel newCustomer = getModelService().create(CustomerModel.class);
@@ -90,7 +91,12 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
 
     }
 
+    @Override
+    public boolean validateOTP(RegisterData registerData) throws ParseException {
 
+        boolean result =  getAlsayerCustomerAccountService().getOTPForValidation(registerData);
+        return result;
+    }
 
 
     @Override

@@ -9,6 +9,7 @@ package com.alsayer.occ.controllers;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
 import com.alsayer.occ.constants.AlsayeroccConstants;
 import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
+import com.alsayer.occ.dto.CustomerRegistrationResultDTO;
 import com.alsayer.occ.dto.CustomerRegistrationWsDTO;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import com.alsayer.occ.dto.user.ActiveUserWsDTO;
@@ -108,18 +109,26 @@ public class CustomerRegistrationController
     @Secured({ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT" })
     @RequestMapping(value = "/activateUser", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE })
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
     @ApiOperation(nickname = "activateUser", value = "Activate the customer on clicking the activation link.", notes = "Activate the customer on clicking the activation link.", authorizations = {
             @Authorization(value = "oauth2_client_credentials") })
     @ApiBaseSiteIdParam
-    public String activateUser(
-            @ApiParam(value = "Request body parameter that contains details such as token and new password", required = true) @RequestBody final ActiveUserWsDTO activeUser)
+    public CustomerRegistrationResultDTO activateUser(
+            @ApiParam(value = "Request body parameter that contains details such as token and new password", required = true)
+            @RequestParam(value = "token", required = false) final String token,
+            @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
             throws TokenInvalidatedException, UnsupportedEncodingException {
-        LOG.debug("Executing method doResetPassword");
-        String token = URLDecoder.decode(activeUser.getToken(), "UTF-8");
+        LOG.info("Executing method doResetPassword");
+        //String token = URLDecoder.decode(code, "UTF-8");
         customerFacade.activateUser(token);
 
-        return "success";
+        CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
+
+        customerRegistrationResultDTO.setReason("Token is valid");
+        customerRegistrationResultDTO.setStatus("Success");
+
+        return customerRegistrationResultDTO;
 
     }
 
@@ -132,32 +141,43 @@ public class CustomerRegistrationController
     @ApiOperation(nickname = "createUser", value = " Registers a customer", notes = "Registers a customer. Requires the following "
             + "parameters: login, password, name, arabicName, mobileNumber,otp,civilId.")
     @ApiBaseSiteIdParam
-    public CustomerRegistrationWsDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final AlsayerUserSignUpWsDTO user,
-                                                @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
-                                                final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
+    public CustomerRegistrationResultDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final AlsayerUserSignUpWsDTO user,
+                                                    @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
+                                                    final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
     {
         validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
                 .map(user, RegisterData.class, "login, password, name, arabicName, mobileNumber,civilId,emailId");
         boolean userExists = false;
+        CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try
         {
+            boolean result =  customerFacade.validateOTP(registerData);
+            System.out.println(result);
+            if(result == false)
+            {
+                customerRegistrationResultDTO.setReason("OTP is Invalid");
+                customerRegistrationResultDTO.setStatus("Failure");
+                return  customerRegistrationResultDTO;
+            }
             customerFacade.register(registerData);
         }
-        catch (final DuplicateUidException ex)
+        catch (final DuplicateUidException | ParseException ex)
         {
             userExists = true;
             LOG.debug("Duplicated UID", ex);
         }
         //Sending record for Synchronisation
-        customerFacade.eccRecordSynchronization(registerData);
+        //customerFacade.eccRecordSynchronization(registerData);
         //Fetching All values regarding the customer and vehicles
         //customerFacade.fetchECCCustomerRecord(registerData);
 
         final String userId = user.getUid().toLowerCase(Locale.ENGLISH);
        httpResponse.setHeader(AlsayeroccConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
-        final CustomerData customerData = getCustomerData(registerData, userExists, userId);
-        return getDataMapper().map(customerData, CustomerRegistrationWsDTO.class, fields);
+        //final CustomerData customerData = getCustomerData(registerData, userExists, userId);
+        customerRegistrationResultDTO.setReason("OTP is valid");
+        customerRegistrationResultDTO.setStatus("Success");
+        return customerRegistrationResultDTO;
     }
 
     protected CustomerData getCustomerData(final RegisterData registerData, final boolean userExists, final String userId)

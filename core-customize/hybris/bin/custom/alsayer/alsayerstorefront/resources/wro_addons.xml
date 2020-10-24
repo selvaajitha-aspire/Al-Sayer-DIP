@@ -9,8 +9,6 @@
       <js>/_ui/addons/orderselfserviceaddon/responsive/common/js/cms/cancelorderaction.js</js>
       <js>/_ui/addons/orderselfserviceaddon/responsive/common/js/cms/returnorderaction.js</js>
       <css>/_ui/addons/orderselfserviceaddon/responsive/common/css/orderselfserviceaddon.css</css>
-      <js>/_ui/addons/spartacussampledataaddon/responsive/common/js/spartacussampledataaddon.js</js>
-      <css>/_ui/addons/spartacussampledataaddon/responsive/common/css/spartacussampledataaddon.css</css>
       <js>/_ui/addons/captchaaddon/responsive/common/js/captchaaddon.js</js>
       <js>/_ui/addons/consignmenttrackingaddon/responsive/common/js/consignmenttrackingaddon.js</js>
       <css>/_ui/addons/consignmenttrackingaddon/responsive/common/css/consignmenttrackingaddon.css</css>
