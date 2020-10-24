@@ -1,0 +1,106 @@
+:root {
+  --white: #ffffff;
+  --gradient-red: #dd231b;
+  --maroon: #800500;
+  --woodsmoke: #2e3131;
+  --free-speech-red: #cc0000;
+}
+$desktop: 960px;
+$mobile-large: 640px;
+
+.bar-icon,
+.bar-icon-mobile{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    font-size: 22px;
+    z-index: 1;
+    height: 100px; 
+    width: 100%;
+}
+.bar-icon{
+    padding: 20px 20px 20px 50px;
+    margin: 20px 0px 20px 0px;
+    text-align: left;
+    color: var(--white);
+}
+.bar-icon-mobile{
+  padding: 20px;
+  text-align: center;
+  margin-top: 25px;
+  transition: 0.5s;
+}
+
+.overlay {
+    height: 0;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    bottom: 100%;
+    z-index: 1000;
+    overflow-x: hidden;
+    opacity: 0.75;
+    background: linear-gradient(180deg, #dd231b, #800500);
+    transition: 0.5s;
+  }
+  
+  .overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: left;
+    margin-top: -20px;
+  }
+  
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 24px;
+    color: var(--white);
+    display: block;
+    transition: 0.3s;
+    font-weight: 500;
+  }
+  
+  .overlay a:hover, .overlay a:focus {
+    color: var(--woodsmoke);
+  }
+  
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    left: 45px;
+    font-size: 30px;
+  }
+  
+  .childs{
+    color: var(--white);
+  }
+  @media screen and (max-height: 450px) {
+    .overlay a {font-size: 18px}
+    .overlay .closebtn {
+      font-size: 18px;
+      top: 15px;
+      right: 35px;
+    }
+    
+  }
+
+  @media only screen and (max-width: $desktop){
+    .overlay{
+      opacity: 1;
+      background: transparent;
+      margin-top: -10px;
+    }
+    .closebtn{
+      display: none !important;
+    }
+    .menu-arrow-red{
+      color: #cc0000;
+    }
+    .menu-arrow-white{
+      color: var(--white);
+    }
+  }

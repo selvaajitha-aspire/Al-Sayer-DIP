@@ -1,0 +1,8 @@
+<ng-container *ngIf="component.data$ | async as data">
+    <div class="ServiceTileBannerComponent">
+        <div class="tile-item text-center pt-4" [style.background] = 'getBackgroundColor(data.color)'>
+            <img class="tile-img" [src]="getImageUrl(data.media.url)" />
+            <span class="d-block tile-headline font-weight-bold">{{data.headline}}</span>
+        </div>
+    </div>
+</ng-container>

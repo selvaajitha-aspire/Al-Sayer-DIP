@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RoadsideAssistanceComponent } from './roadside-assistance.component';
 import { FormsModule } from '@angular/forms';
 import {ConfigModule, CmsConfig} from '@spartacus/core';
-import { rsaOccConfig } from './roadside-assistance-occ-config';
+import { rsaOccConfig } from '../config/roadside-assistance-occ-config';
 
 
 
