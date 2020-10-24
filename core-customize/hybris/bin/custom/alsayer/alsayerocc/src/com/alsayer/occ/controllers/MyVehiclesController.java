@@ -7,6 +7,7 @@
 package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.data.VehicleData;
+import com.alsayer.facades.vehicles.MyVehiclesFacade;
 import com.alsayer.facades.vehicles.impl.DefaultMyVehiclesFacade;
 import com.alsayer.occ.dto.VehicleListWsDTO;
 import com.alsayer.occ.dto.VehicleWsDTO;
@@ -39,7 +40,7 @@ public class MyVehiclesController {
     private static final String SUCCESS_STATUS = "SUCCESS_STATUS";
 
     @Resource
-    private DefaultMyVehiclesFacade myVehiclesFacade;
+    private MyVehiclesFacade myVehiclesFacade;
 
 
     @Resource
