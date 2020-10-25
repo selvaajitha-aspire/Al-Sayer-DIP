@@ -1,9 +1,4 @@
 
-/*
- * Author: Archana Prasad
- * Roadside Assistance Controller
- */
-
 package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
@@ -49,6 +44,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.util.Locale;
 
 
