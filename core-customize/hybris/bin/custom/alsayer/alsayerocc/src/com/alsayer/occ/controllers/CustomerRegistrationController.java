@@ -1,77 +1,51 @@
 
-/*
- * Author: Archana Prasad
- * Roadside Assistance Controller
- */
-
 package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
-
+import com.alsayer.occ.constants.AlsayeroccConstants;
 import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
 import com.alsayer.occ.dto.CustomerRegistrationResultDTO;
 import com.alsayer.occ.dto.CustomerRegistrationWsDTO;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import com.alsayer.occ.dto.user.ActiveUserWsDTO;
-import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.customergroups.CustomerGroupFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
-import de.hybris.platform.commercewebservices.core.constants.YcommercewebservicesConstants;
-import de.hybris.platform.commercefacades.user.data.UserGroupDataList;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
-import de.hybris.platform.commercewebservicescommons.dto.user.UserGroupListWsDTO;
-import de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO;
 import de.hybris.platform.converters.Populator;
-import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.webservicescommons.cache.CacheControl;
 import de.hybris.platform.webservicescommons.cache.CacheControlDirective;
 import de.hybris.platform.webservicescommons.errors.exceptions.WebserviceValidationException;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import de.hybris.platform.webservicescommons.mapping.FieldSetLevelHelper;
-import de.hybris.platform.webservicescommons.swagger.ApiBaseSiteIdAndUserIdParam;
 import de.hybris.platform.webservicescommons.swagger.ApiBaseSiteIdParam;
 import de.hybris.platform.webservicescommons.swagger.ApiFieldsParam;
-
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.util.*;
-
-import io.swagger.annotations.*;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.validator.routines.EmailValidator;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.*;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.util.Locale;
 
 
 @Controller
@@ -118,7 +92,7 @@ public class CustomerRegistrationController
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
     @ApiOperation(value = "To get the customer details", notes = "Only registered users will get the information from ECC")
-    public ECCCustomerWsDTO getVehicles(@PathVariable("id") final String code,
+    public ECCCustomerWsDTO getCustomerDetails(@PathVariable("id") final String code,
                                         @ApiFieldsParam(defaultValue = BASIC_FIELD_SET)
                                         final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
     {
@@ -195,7 +169,7 @@ public class CustomerRegistrationController
         //customerFacade.fetchECCCustomerRecord(registerData);
 
         final String userId = user.getUid().toLowerCase(Locale.ENGLISH);
-       httpResponse.setHeader(YcommercewebservicesConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
+       httpResponse.setHeader(AlsayeroccConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
         //final CustomerData customerData = getCustomerData(registerData, userExists, userId);
         customerRegistrationResultDTO.setReason("OTP is valid");
         customerRegistrationResultDTO.setStatus("Success");

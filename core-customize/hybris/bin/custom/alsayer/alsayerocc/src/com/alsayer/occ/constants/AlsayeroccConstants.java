@@ -4,7 +4,8 @@ package com.alsayer.occ.constants;
 public class AlsayeroccConstants extends GeneratedAlsayeroccConstants
 {
 	public static final String EXTENSIONNAME = "alsayerocc";
-	
+	public static final String LOCATION = "Location";
+
 	private AlsayeroccConstants()
 	{
 		//empty

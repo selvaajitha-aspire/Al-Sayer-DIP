@@ -53,8 +53,8 @@
     <bean class="com.alsayer.occ.dto.VehicleWsDTO">
         <property name="uid" type="String"/>
         <property name="model" type="String"/>
-        <property name="chassis_no" type="String"/>
-        <property name="register_no" type="String"/>
+        <property name="chassisNumber" type="String"/>
+        <property name="registerNumber" type="String"/>
         <property name="attachment" type="String"/>
     </bean>
 
@@ -113,21 +113,11 @@
             </hints>
         </property>
     </bean>
-	<!--
-		Example Data POJO
-	
-	<bean class="yemptypackage.data.MyPojo">
-		<property name="id" type="String"/>
-		<property name="flag" type="boolean"/>
-	</bean>
-	-->
-
 
 	<bean class="com.alsayer.occ.dto.DriverDetailsWsDTO">
 		<property name="name" type="String"/>
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 	</bean>
-
 
 </beans>
