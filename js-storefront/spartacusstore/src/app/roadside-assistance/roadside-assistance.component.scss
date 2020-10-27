@@ -1,0 +1,13 @@
+:root{
+    --link-water : #d3d6db;
+    --white : #ffffff;
+}
+.box-to-line{
+    border: none;
+    border-bottom: solid black 1px;
+    border-radius: 0;
+}
+
+.form-control[type=text]:focus{
+    background-color: var(--white);
+}
