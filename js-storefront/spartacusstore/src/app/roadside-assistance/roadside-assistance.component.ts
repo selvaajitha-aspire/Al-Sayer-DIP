@@ -1,7 +1,7 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {} from 'googlemaps';
-import { RoadsideAssistanceService } from './roadside-assistance.service';
+import { RoadsideAssistanceService } from '../../services/roadside-assistance/roadside-assistance.service';
 import { NgForm } from '@angular/forms';
 import { IssueTypes } from '../models/issue-type.model';
 

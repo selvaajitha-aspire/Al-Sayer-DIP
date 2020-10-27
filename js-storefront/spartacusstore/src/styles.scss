@@ -59,6 +59,11 @@ cx-login a{
     color: var(--white);
 }
 
+cx-navigation-ui h5{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,
