@@ -21,7 +21,7 @@ import com.alsayer.facades.data.ServiceRequestData;
 import javax.annotation.Resource;
 
 @Controller
-@RequestMapping(value = "{baseSiteId}/service_request")
+@RequestMapping(value = "{baseSiteId}/service-request")
 @Api(tags = "")
 public class ServiceRequestController {
 
@@ -35,29 +35,85 @@ public class ServiceRequestController {
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/get_all_service_requests", method = RequestMethod.GET,
+    @RequestMapping(value = "/get-all-services", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    @ApiOperation(value = "Get All Service Requests", notes = "For ALSAYER ADMIN")
-    public List<ServiceRequestData> getAllServiceRequests(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.",
-            allowableValues = "BASIC, DEFAULT, FULL")
+    @ApiOperation(value = "Get all Service Requests", notes = "Only ADMIN users can get all service requests")
+    public List<ServiceRequestData> getAllServiceRequests(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                               @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
     {
-    	serviceRequestService.getAllServiceRequests();
-
-        serviceRequestService.getServiceRequestsByStatus("STARTED");
-
-        serviceRequestService.getServiceRequestByUID("8796093066979");
-
-        serviceRequestService.getServiceRequestsByCustomerId("8796125954052");
-
-        serviceRequestService.getServiceRequestsByCustomerIdAndStatus("8796125954052","STARTED");
-
-        serviceRequestService.getServiceRequestsByVehicleId("8796093066978");
-
-        serviceRequestService.getServiceRequestsByVehicleIdAndStatus("8796093066978","STARTED");
-
-        return null;
+    	return serviceRequestService.getAllServiceRequests();
     }
 
+    @Secured(
+            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
+    @RequestMapping(value = "/get-services-by-status", method = RequestMethod.GET,
+            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    @ApiOperation(value = "Get all Service Requests", notes = "Only ADMIN users can get all service requests")
+    public List<ServiceRequestData> getServiceRequestsByStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("status") String status )
+    {
+        return serviceRequestService.getServiceRequestsByStatus(status);
+    }
+
+    @Secured(
+            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
+    @RequestMapping(value = "/get-services-by-id", method = RequestMethod.GET,
+            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    @ApiOperation(value = "Get all Service Requests", notes = "Only ADMIN users can get all service requests")
+    public ServiceRequestData getServiceRequestsById(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("serviceId") String serviceId )
+    {
+        return serviceRequestService.getServiceRequestByUID(serviceId);
+    }
+
+    @Secured(
+            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
+    @RequestMapping(value = "/get-services-by-customer", method = RequestMethod.GET,
+            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    @ApiOperation(value = "Get all Service Requests", notes = "Only ADMIN users can get all service requests")
+    public List<ServiceRequestData> getServicesByCustomer(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("customerId") String customerId)
+    {
+        return serviceRequestService.getServiceRequestsByCustomerId(customerId);
+    }
+
+    @Secured(
+            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
+    @RequestMapping(value = "/get-services-by-customer-status", method = RequestMethod.GET,
+            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    @ApiOperation(value = "Get all Service Requests", notes = "Only ADMIN users can get all service requests")
+    public List<ServiceRequestData> getServicesByCustomerStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("customerId") String customerId,@RequestParam("status") String status)
+    {
+        return serviceRequestService.getServiceRequestsByCustomerIdAndStatus(customerId,status);
+    }
+
+    @Secured(
+            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
+    @RequestMapping(value = "/get-services-by-vehicle", method = RequestMethod.GET,
+            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    @ApiOperation(value = "Get all Service Requests", notes = "Only ADMIN users can get all service requests")
+    public List<ServiceRequestData> getServicesByVehicle(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                                @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("vehicleId") String vehicleId)
+    {
+        return serviceRequestService.getServiceRequestsByVehicleId(vehicleId);
+    }
+
+    @Secured(
+            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
+    @RequestMapping(value = "/get-services-by-vehicle-status", method = RequestMethod.GET,
+            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    @ApiOperation(value = "Get all Service Requests", notes = "Only ADMIN users can get all service requests")
+    public List<ServiceRequestData> getServicesByVehicleStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                         @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("vehicleId") String vehicleId,@RequestParam("status") String status)
+    {
+        return serviceRequestService.getServiceRequestsByVehicleIdAndStatus(vehicleId,status);
+    }
 }
