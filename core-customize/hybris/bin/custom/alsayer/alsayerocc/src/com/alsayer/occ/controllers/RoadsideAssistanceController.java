@@ -8,15 +8,15 @@ package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.data.DriverDetailsData;
 import com.alsayer.facades.data.ServiceRequestData;
-import com.alsayer.facades.data.VehicleData;
-import com.alsayer.facades.roadsideassistance.impl.DefaultRoadSideAssistanceFacade;
-import com.alsayer.occ.dto.*;
+import com.alsayer.facades.roadsideassistance.RoadSideAssistanceFacade;
+import com.alsayer.occ.dto.DriverDetailsWsDTO;
+import com.alsayer.occ.dto.ResponseWsDTO;
+import com.alsayer.occ.dto.ServiceWsDTO;
 import de.hybris.platform.webservicescommons.dto.error.ErrorWsDTO;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -27,7 +27,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 
 @Controller
@@ -43,7 +42,7 @@ public class RoadsideAssistanceController {
     private static final String SUCCESS_STATUS = "SUCCESS_STATUS";
 
     @Resource
-    private DefaultRoadSideAssistanceFacade roadsideAssistanceFacade;
+    private RoadSideAssistanceFacade roadsideAssistanceFacade;
 
 
     @Resource

@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig } from '@spartacus/storefront';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule } from '@spartacus/storefront';
 import { OccConfig, ConfigModule } from '@spartacus/core';
 import { environment } from './../environments/environment';
 import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
+
+import { HomePageModule } from './home-page-components/home-page.module';
+import { HeaderMenuComponent } from './home-page-components/header/header-menu/header-menu.component';
+import { SigninMenuComponent } from './home-page-components/header/signin-menu/signin-menu.component';
 
 const occConfig: OccConfig = { backend: { occ: {} } };
 
@@ -20,16 +24,21 @@ if (environment.prefix) {
   occConfig.backend.occ.prefix = environment.prefix;
 }
 else {
-  occConfig.backend.occ.prefix = '/occ/url';
+  occConfig.backend.occ.prefix = '/occ/v2/';
 }
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SigninMenuComponent,
+    HeaderMenuComponent
   ],
   imports: [
     BrowserModule,
+    HomePageModule,
+    PageSlotModule,
+    NavigationModule,
     B2cStorefrontModule.withConfig({
       backend: occConfig.backend,
       context: {
@@ -48,12 +57,12 @@ else {
     }),
     ConfigModule.withConfig({
       direction: {
-          default: DirectionMode.LTR,
-          ltrLanguages: [],
+        default: DirectionMode.LTR,
+        ltrLanguages: [],
       },
     } as DirectionConfig),
     ConfigModule.withConfig({
-      layoutSlots:{
+      layoutSlots: {
         LandingPage2Template: {
           slots: [
             'Section1',

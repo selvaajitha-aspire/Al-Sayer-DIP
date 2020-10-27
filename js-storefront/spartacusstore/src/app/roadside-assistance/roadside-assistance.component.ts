@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {} from 'googlemaps';
 import { RoadsideAssistanceService } from './roadside-assistance.service';
 import { NgForm } from '@angular/forms';
-import { IssueTypes } from './issue-type-enum'
+import { IssueTypes } from '../models/issue-type.model';
+
 
 
 @Component({
@@ -247,7 +248,6 @@ autocompleteFocus() {
  }
  }
   onSubmit(f: NgForm) { 
-    debugger;
     f.value.latitude=this.latitude;
     f.value.longitude=this.longitude;
     console.log(f.value); 
