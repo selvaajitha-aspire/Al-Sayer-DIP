@@ -21,7 +21,7 @@ export class ServiceTileComponent implements OnInit {
   }
   getBackgroundColor(color){
     if(color){
-      return "linear-gradient(180deg,"+color +", #FFFFFF," +color+")";
+      return "linear-gradient(180deg,"+color +", #FFFFFF)";
     }
     else{
       return "";

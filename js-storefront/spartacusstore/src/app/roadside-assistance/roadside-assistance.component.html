@@ -1,61 +1,68 @@
 <div>
-    <form #f="ngForm"  novalidate>
-      <div class="row mb-4">
-        <div class="col-md-6">
-          <label for="name" class="d-block">Vehicle Name </label>
-          <select class="form-control form-control-sm d-block w-100 box-to-line" id="vehicle"  name="vehicle"   ngModel required>
-            <!-- *ngIf="this.vehicleList | async as vehicles" -->
-            <!-- <option *ngFor="let vehicle of vehicles" [value]="vehicle.uid">{{vehicle.model}} ,{{vehicle.chassisNumber}}</option> -->
-          </select>
-          </div>
+  <form #f="ngForm" novalidate>
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="name" class="d-block">Vehicle Name </label>
+        <select class="form-control form-control-sm d-block w-100 box-to-line" id="vehicle" name="vehicle"
+          *ngIf="this.vehicleList | async as vehicles" ngModel required>
+          <option *ngFor="let vehicle of vehicles" [value]="vehicle.uid">{{vehicle.model}} ,{{vehicle.chassisNumber}}
+          </option>
+        </select>
       </div>
-        
-          
-        
-        <div class="row">
-          <div class="col-md-6">
-            <div>
-              <label for="problem" class="d-block">Problem </label>
-              <select class="form-contorl form-control-sm d-block w-100 box-to-line mr-4" style="text-align:center" id="issue" name="issue" ngModel required>
-                <!-- <option value="" class="default-select-value">Select</option> -->
-                <option *ngFor="let issue of IssueTypes | keyvalue" [value]="issue.key">{{issue.value}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div>
-              <label for="location" class="d-block ml-4">Location </label> 
-              <input class="form-control form-control-sm d-inline w-75 box-to-line ml-4" type="text" name="latitude" id="latitude" placeholder="Area / City" ngModel/>
-              <input type="hidden" name="longitude" id="longitude" ngModel/>
-              <i class="fa fa-map-marker text-danger ml-5" (click)="getCurrentLocation()" title="Current Location" aria-hidden="true"></i> 
-             
-           </div>    
-          </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 mb-4">
+        <div>
+          <label for="problem" class="d-block">Problem </label>
+          <select class="form-contorl form-control-sm d-block w-100 box-to-line mr-4" style="text-align:center"
+            id="issue" name="issue" ngModel required>
+            <option *ngFor="let issue of IssueTypes | keyvalue" [value]="issue.key">{{issue.value}}</option>
+          </select>
         </div>
-        
-        
-        <div class="mt-4">
-          <div #map style="width:100%;height:400px" id="map"></div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <label for="location" class="d-block">Location </label>
+        <input class="form-control form-control-sm d-inline box-to-line" type="text" name="latitude" id="latitude"
+          placeholder="Area / City" ngModel disabled />
+      </div>
+      <div class="col-md-6 col-sm-12 mt-4">
+        <input type="hidden" name="longitude" id="longitude" ngModel />
+        <button class="btn btn-default form-control round-default-btn btn-text" data-toggle="modal"
+          (click)="getCurrentLocation()"><i class="fa fa-map-marker text-danger mr-4" title="Current Location"
+            aria-hidden="true"></i> Get My Current Location</button>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-6 mb-4">
+        <label for="notes d-block">Notes</label> <input type="text" class="form-contorl w-100 box-to-line" name="notes"
+          ngModel />
+      </div>
+      <div class="col-md-6 mb-4">
+        <label for="attachments d-block">Attachments </label><input type="file" id="myFile" class="mt-1"
+          name="attachments" ngModel />
+      </div>
+    </div>
+    <div><button (click)="onSubmit(f)" class="btn btn-default btn-block round-primary-btn mb-4">Submit</button> </div>
+  </form>
+
+  <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-body">
+          <div #map style="width:100%;height:80vh" id="map"></div>
           <div id="infowindow-content">
             <img src="" width="16" height="16" id="place-icon" />
             <span id="place-name" class="title"></span><br />
             <span id="place-address"></span>
           </div>
         </div>
-        <div class="row mb-5">
-          <div class="col-md-6">
-            <label for="notes d-block">Notes</label> <input type="text" class="form-contorl w-100 box-to-line" name="notes" ngModel/>
-          </div>
-          <div class="col-md-6">
-            <label for="attachments d-block">Attachments </label><input type="text" class="form-contorl w-100 box-to-line" name="attachments" ngModel/>
-          </div>
-        </div>
-        <div><button (click)="onSubmit(f)"  class="btn btn-primary btn-block mb-4">Submit</button> </div> 
-
-        <div><button (click)="getDriverDetails()"  class="btn btn-primary btn-block">Driver Details</button> </div> 
-      </form>
-  </div>   
-       <!-- <p>Form value: {{ f.value | json }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <p>Form value: {{ f.value | json }}</p>
       <p>Form valid: {{ f.valid }}</p>  -->
-
-      

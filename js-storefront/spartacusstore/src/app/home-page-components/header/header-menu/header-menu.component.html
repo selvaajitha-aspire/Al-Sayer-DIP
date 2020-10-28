@@ -6,11 +6,15 @@
     </div>
 </div>
 
-<div class="bar-icon-mobile" *ngIf="isMobile">
+<div class="bar-icon-mobile" id="bar-mobile" *ngIf="isMobile">
     <div class="logo-area">
-        <a data-toggle="dropdown" id="openNav1" (click)="openMenu()">
-            <i class="fa fa-chevron-down menu-arrow-red" aria-hidden="true" *ngIf="!isDropdownOpen"></i>
-            <i class="fa fa-chevron-up menu-arrow-white" aria-hidden="true" *ngIf="isDropdownOpen"></i>
+        <a data-toggle="dropdown" id="openNav1" (click)="openMenu()"  *ngIf="isDropdownOpen">
+            <!-- <i class="fa fa-chevron-down menu-arrow-red" aria-hidden="true" *ngIf="!isDropdownOpen"></i> -->
+            <i class="fa fa-chevron-up menu-arrow-white" aria-hidden="true"></i>
+        </a>
+        <a data-toggle="dropdown" id="openNav1" (click)="openMenu()" *ngIf="!isDropdownOpen">
+            <i class="fa fa-chevron-down menu-arrow-red" aria-hidden="true" ></i>
+            <!-- <i class="fa fa-chevron-up menu-arrow-white" aria-hidden="true" *ngIf="isDropdownOpen"></i> -->
         </a>
     </div>
 </div>
