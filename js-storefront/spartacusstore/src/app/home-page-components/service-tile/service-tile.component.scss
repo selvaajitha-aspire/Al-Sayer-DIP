@@ -33,6 +33,13 @@ $mobile-large: 640px;
     width: 25%;
 }
 
+.tile-link{
+    color: #000000 !important;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
 @media only screen and (max-width: $desktop){
     .ServiceTileBannerComponent{
         width: 50%;
