@@ -24,9 +24,9 @@ export class SigninMenuComponent implements OnInit{
   openMenu() {
     if (this.isMobile) {
       if (!this.isDropdownOpen) {
-        $('.header').css("height", "450px");
-        $('.bar-icon-mobile').css("margin-top", "400px");
-        $('#myNav').height("400px");
+        $('.header').css("height", "90vh");
+        $('.bar-icon-mobile').css("margin-top", "80vh");
+        $('#myNav').height("85vh");
         $('body').css("overflow", "hidden");
         this.isDropdownOpen = true;
       } else {
