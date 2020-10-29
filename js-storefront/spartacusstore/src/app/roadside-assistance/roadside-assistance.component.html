@@ -1,25 +1,25 @@
-<div>
+<div class="container mt-5">
   <form #f="ngForm" novalidate>
     <div class="row mb-4">
       <div class="col-md-6">
         <label for="name" class="d-block">Vehicle Name </label>
         <select class="form-control form-control-sm d-block w-100 box-to-line" id="vehicle" name="vehicle"
-          *ngIf="this.vehicleList | async as vehicles" ngModel required>
-          <option *ngFor="let vehicle of vehicles" [value]="vehicle.uid">{{vehicle.model}} ,{{vehicle.chassisNumber}}
-          </option>
+           ngModel required>
+           <!-- *ngIf="this.vehicleList | async as vehicles" -->
+          <!-- <option *ngFor="let vehicle of vehicles" [value]="vehicle.uid">{{vehicle.model}} ,{{vehicle.chassisNumber}} -->
+          <!-- </option> -->
         </select>
       </div>
-    </div>
-    <div class="row">
       <div class="col-md-6 col-sm-12 mb-4">
-        <div>
-          <label for="problem" class="d-block">Problem </label>
-          <select class="form-contorl form-control-sm d-block w-100 box-to-line mr-4" style="text-align:center"
-            id="issue" name="issue" ngModel required>
-            <option *ngFor="let issue of IssueTypes | keyvalue" [value]="issue.key">{{issue.value}}</option>
-          </select>
-        </div>
-      </div>
+        <label for="problem" class="d-block">Problem </label>
+        <select class="form-contorl form-control-sm d-block w-100 box-to-line mr-4" style="text-align:center"
+          id="issue" name="issue" ngModel required>
+          <option *ngFor="let issue of IssueTypes | keyvalue" [value]="issue.key">{{issue.value}}</option>
+        </select>
+    </div>
+    </div>
+    
+    <div class="row mt-3 mb-4">
       <div class="col-md-6 col-sm-12">
         <label for="location" class="d-block">Location </label>
         <input class="form-control form-control-sm d-inline box-to-line" type="text" name="latitude" id="latitude"
@@ -27,12 +27,12 @@
       </div>
       <div class="col-md-6 col-sm-12 mt-4">
         <input type="hidden" name="longitude" id="longitude" ngModel />
-        <button class="btn btn-default form-control round-default-btn btn-text" data-toggle="modal"
+        <button class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal"
           (click)="getCurrentLocation()"><i class="fa fa-map-marker text-danger mr-4" title="Current Location"
             aria-hidden="true"></i> Get My Current Location</button>
       </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-3 mb-4">
       <div class="col-md-6 mb-4">
         <label for="notes d-block">Notes</label> <input type="text" class="form-contorl w-100 box-to-line" name="notes"
           ngModel />
@@ -42,7 +42,7 @@
           name="attachments" ngModel />
       </div>
     </div>
-    <div><button (click)="onSubmit(f)" class="btn btn-default btn-block round-primary-btn mb-4">Submit</button> </div>
+    <div class="d-flex justify-content-center mt-5"><button (click)="onSubmit(f)" class="btn btn-default btn-block round-primary-btn mb-4 w-50 mt-5">Submit</button> </div>
   </form>
 
   <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

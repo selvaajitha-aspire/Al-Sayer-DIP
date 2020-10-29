@@ -2,6 +2,10 @@
     --link-water : #d3d6db;
     --white : #ffffff;
 }
+
+$desktop: 960px;
+$mobile-large: 640px;
+
 .box-to-line{
     border: none;
     border-bottom: solid black 1px;
@@ -10,4 +14,14 @@
 
 .form-control[type=text]:focus{
     background-color: var(--white);
+}
+
+.location-btn{
+    width: 75%;
+}
+
+@media only screen and (max-width: $desktop){
+    .location-btn{
+        width: 100%;
+    }
 }
