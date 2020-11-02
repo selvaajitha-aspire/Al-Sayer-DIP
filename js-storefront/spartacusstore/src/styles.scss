@@ -6,9 +6,34 @@
     --fire-engine-red: #dd231b;
     --white: #ffffff;
 }
-
 $desktop: 960px;
 $mobile-large: 640px;
+
+/*Default Style - START*/
+body{
+    font-size: 16px;
+}
+
+label{
+    font-weight: 600; 
+}
+
+.round-default-btn{
+    border-color: var(--fire-engine-red) !important;
+    color: var(--fire-engine-red) !important;
+}
+
+.round-primary-btn{
+    background-color: var(--fire-engine-red) !important;
+    color: var(--white) !important;
+}
+.round-primary-btn,
+.round-default-btn{
+    font-weight: bold !important;
+    border-radius: 20px !important;
+    font-size: 17px !important;
+}
+/*Default Style - END*/
 header{
     position: sticky;
     top: 0;
@@ -18,7 +43,6 @@ header{
 header .SiteLogo {
     position: absolute;
     right: 20px;
-    top: 10px;
     padding: 0 !important;
     margin: 20px;
 }
@@ -52,13 +76,18 @@ header .header {
 }
 
 header .SiteLogin{
-    margin-left: 80%;
+    margin-left: 85%;
 }
 
 cx-login a{
     color: var(--white);
 }
 
+cx-navigation-ui h5{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,
@@ -76,6 +105,10 @@ cx-login a{
         margin-top: 0;
         width: 20%;
         left: 40%;
+        width: 15%;
+        left: 37%;
+        background-color: var(--fire-engine-red);
+        border-radius: 50%;
     }
     header{
         border-radius: 0 0 20px 20px;
@@ -87,5 +120,11 @@ cx-login a{
         justify-content: center;
         text-align: center;
         line-height: 3;
+    }
+    header .SiteLogo {
+        top: 10px;
+    }
+    .ServiceTileSection{
+        margin: 11% 10% 5% 10%;
     }
 }

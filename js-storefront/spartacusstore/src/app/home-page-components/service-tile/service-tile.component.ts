@@ -16,12 +16,15 @@ export class ServiceTileComponent implements OnInit {
   constructor(public component: CmsComponentData<ServiceTileBannerComponent>) { }
   ngOnInit(): void {
   }
-  getImageUrl(url: string) {
+  getUrl(url: string) {
+    if(url && !url.startsWith("/")){
+      url = "/"+url;
+    }
     return environment.occBaseUrl + url;
   }
   getBackgroundColor(color){
     if(color){
-      return "linear-gradient(180deg,"+color +", #FFFFFF," +color+")";
+      return "linear-gradient(180deg,"+color +", #FFFFFF)";
     }
     else{
       return "";

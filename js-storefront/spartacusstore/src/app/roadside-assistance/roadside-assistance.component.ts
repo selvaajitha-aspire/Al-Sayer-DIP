@@ -2,13 +2,15 @@
 
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, NgZone } from '@angular/core';
 import {} from 'googlemaps';
-import { RoadsideAssistanceService } from './roadside-assistance.service';
 import {
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { RoadsideAssistanceService } from '../../services/roadside-assistance/roadside-assistance.service';
 import { IssueTypes } from '../models/issue-type.model';
+
+declare var $: any;
 
 @Component({
   selector: 'app-roadside-assistance',
@@ -55,8 +57,8 @@ export class RoadsideAssistanceComponent implements OnInit {
   constructor(private assistanceService : RoadsideAssistanceService,protected fb: FormBuilder,  private ngZone: NgZone) { }
 
   ngOnInit(): void {
-
-    this.vehicleList=this.assistanceService.getVehicles();
+  
+    this.vehicleList=this.assistanceService.getVehicles() || [];
     const mapProperties = {
       center:this.latLng ,
       zoom: 15,
@@ -106,8 +108,7 @@ export class RoadsideAssistanceComponent implements OnInit {
         });
       });
      });
-    
-     
+     $("#locationPopup").modal('show');
  }
 
  getAddress(){      

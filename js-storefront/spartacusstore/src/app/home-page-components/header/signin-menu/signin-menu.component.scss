@@ -17,7 +17,7 @@ $mobile-large: 640px;
     font-size: 22px;
     z-index: 1;
     height: 100px; 
-    width: 100%;
+    width: 20%;
     padding: 20px;
     position: absolute;
 }
@@ -28,8 +28,9 @@ $mobile-large: 640px;
 
 .bar-icon-mobile{
   text-align: center;
-  margin-top: 25px;
+  margin-top: 65px;
   transition: 0.5s;
+  padding: 0;
 }
 
 .overlay {
@@ -74,7 +75,17 @@ $mobile-large: 640px;
     left: 45px;
     font-size: 30px;
   }
-  
+
+.bar-icon-mobile-menu-open{
+   margin-top: 80vh !important;
+   padding: 20px !important;
+}
+
+.bar-icon-mobile-menu-close{
+  margin-top: 65px !important;
+  padding: 0 !important;
+}
+
   @media screen and (max-height: 450px) {
     .overlay a {
       font-size: 18px
@@ -109,5 +120,8 @@ $mobile-large: 640px;
 
     .menu-arrow-white{
       color: var(--white);
+    }
+    .bar-icon-mobile{
+      width: 100%;
     }
   }

@@ -24,17 +24,22 @@ export class SigninMenuComponent implements OnInit{
   openMenu() {
     if (this.isMobile) {
       if (!this.isDropdownOpen) {
-        $('.header').css("height", "450px");
-        $('.bar-icon-mobile').css("margin-top", "400px");
-        $('#myNav').height("400px");
+        $('.header').css("height", "90vh");
+        $('#bar-mobile').removeClass("bar-icon-mobile-menu-close");
+        $('#bar-mobile').addClass("bar-icon-mobile-menu-open");
+        $('#myNav').height("85vh");
         $('body').css("overflow", "hidden");
         this.isDropdownOpen = true;
+
+        
       } else {
         $('#myNav').height("0%");
         $('.header').css("height", "30px");
-        $('.bar-icon-mobile').css("margin-top", "25px");
+        $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
+        $('#bar-mobile').addClass("bar-icon-mobile-menu-close");
         $('body').css("overflow", "auto");
         this.isDropdownOpen = false;
+        
       }
     } else {
       $('#myNav').css("height", "100%");
