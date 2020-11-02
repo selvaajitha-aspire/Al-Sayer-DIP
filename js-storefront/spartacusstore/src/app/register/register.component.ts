@@ -1,6 +1,6 @@
-import { RegisterService } from './register.service';
+import { RegisterService } from '../../services/register/register.service';
 import { UserRegister } from './../models/user-register.model';
-import { RecaptchaService } from './recaptcha.service';
+import { RecaptchaService } from '../../services/recaptcha/recaptcha.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
