@@ -28,7 +28,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(value = "{baseSiteId}/my-vehicles")
+@RequestMapping(value = "{baseSiteId}/myVehicles")
 @Api(tags = "")
 public class MyVehiclesController {
 
@@ -50,7 +50,7 @@ public class MyVehiclesController {
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/get-vehicles", method = RequestMethod.GET,
+    @RequestMapping(value = "/getVehicles", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Vehicles of Customer", notes = "Only registered users can get vehicles")
