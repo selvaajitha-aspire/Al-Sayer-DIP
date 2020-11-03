@@ -52,7 +52,7 @@ public class RoadsideAssistanceController {
 
     @Secured(
             {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP"})
-    @RequestMapping(value = "/save-details", method = RequestMethod.POST,
+    @RequestMapping(value = "/saveDetails", method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(value = HttpStatus.OK)
     @ResponseBody
@@ -83,7 +83,7 @@ public class RoadsideAssistanceController {
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/get-driver", method = RequestMethod.GET,
+    @RequestMapping(value = "/getDriver", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Vehicles of Customer", notes = "Only registered users can get driver details")

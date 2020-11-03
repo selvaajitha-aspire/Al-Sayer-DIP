@@ -39,6 +39,7 @@
     "i18next": "~19.3.4",
     "i18next-xhr-backend": "~3.2.2",
     "jquery": "~3.5.1",
+    "ng-recaptcha": "^6.0.2",
     "ngx-device-detector": "~2.0.0",
     "ngx-infinite-scroll": "~8.0.0",
     "popper.js": "~1.16.1",

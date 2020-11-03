@@ -1,3 +1,4 @@
+import { RegisterModule } from './register/register.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -78,6 +79,7 @@ else {
       }
     } as LayoutConfig),
     RoadsideAssistanceModule,
+    RegisterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

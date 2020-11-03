@@ -4,7 +4,11 @@ import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.core.customer.daos.impl.AlsayerCustomerServicesDaoImpl;
 import com.alsayer.core.customer.services.AlsayerCustomerAccountService;
 import com.alsayer.core.model.CustomerAuthenticationModel;
+import com.alsayer.core.response.EccCustomerDetailsResponse;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
@@ -81,7 +85,6 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
 
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         RestTemplate restTemplate  = new RestTemplate(requestFactory);
-        ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
         HttpHeaders headers = new HttpHeaders();
         headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -101,9 +104,23 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
         LOG.info("CustomerDetails Service request : " + entity.getBody());
         ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
-        LOG.info("CustomerDetails Service response : " +response.getBody());
+        LOG.info("CustomerDetails Service response Name : " +response.getBody());
+        ObjectMapper objectMapper=new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        ECCCustomerWsDTO eccCustomerWsDTO=new ECCCustomerWsDTO();
+        try {
 
+            EccCustomerDetailsResponse eccCustomerDetailsResponse =objectMapper.readValue(response.getBody(), EccCustomerDetailsResponse.class);
+            LOG.info("ECC Response : " + eccCustomerDetailsResponse.toString());
 
+            if(eccCustomerDetailsResponse.getNavCust()!=null) {
+                eccCustomerWsDTO.setName(eccCustomerDetailsResponse.getNavCust().getResults().getName());
+                eccCustomerWsDTO.setArabicName(eccCustomerDetailsResponse.getNavCust().getResults().getNamearabic());
+                eccCustomerWsDTO.setMobile(eccCustomerDetailsResponse.getNavCust().getResults().getMobile());
+            }
+        }catch (JsonProcessingException ex){
+            ex.printStackTrace();
+        }
         //Response and request need to be add as per the service.
 
         return eccCustomerWsDTO;
@@ -159,8 +176,8 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         Map<String, Object> map = new HashMap<>();
             map.put("name", registerData.getName());
         map.put("arabicName", registerData.getArabicName());
-        map.put("mobileNumber", registerData.getMobileNumber());
-        map.put("emailId", registerData.getEmailId());
+        map.put("mobile", registerData.getMobile());
+        map.put("emailId", registerData.getUid());
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
         LOG.info("enity : " + entity.getBody());
         LOG.info("URL is : " + getConfigurationService().getConfiguration().getString(url));
