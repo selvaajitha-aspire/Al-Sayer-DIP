@@ -5,7 +5,9 @@ import com.alsayer.facades.customer.AlsayerCustomerFacade;
 import com.alsayer.occ.constants.AlsayeroccConstants;
 import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
 import com.alsayer.occ.dto.CustomerRegistrationResultDTO;
+import com.alsayer.occ.dto.CustomerRegistrationWsDTO;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
+import com.alsayer.occ.dto.user.ActiveUserWsDTO;
 import de.hybris.platform.commercefacades.customergroups.CustomerGroupFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
@@ -40,6 +42,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.Locale;
@@ -84,7 +87,7 @@ public class CustomerRegistrationController
 
     private static final String BASIC_FIELD_SET = "BASIC";
 
-
+    @Secured({ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT" })
     @RequestMapping(value = "/getCustomerDetails/{id}",method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
@@ -98,7 +101,6 @@ public class CustomerRegistrationController
         return eccCustomerWsDTO;
 
     }
-
 
     @Secured({ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT" })
     @RequestMapping(value = "/activateUser", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
@@ -127,11 +129,13 @@ public class CustomerRegistrationController
     }
 
 
+
+    @Secured({ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
     @RequestMapping(value="/createUser",method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
     @ApiOperation(nickname = "createUser", value = " Registers a customer", notes = "Registers a customer. Requires the following "
-            + "parameters: password, name, arabicName, mobileNumber,otp,civilId.")
+            + "parameters: login, password, name, arabicName, mobileNumber,otp,civilId.")
     @ApiBaseSiteIdParam
     public CustomerRegistrationResultDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final AlsayerUserSignUpWsDTO user,
                                                     @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
@@ -139,12 +143,12 @@ public class CustomerRegistrationController
     {
         validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
-                .map(user, RegisterData.class, "login, password, name, arabicName, mobile,civilId,uid,oneTimePassword");
+                .map(user, RegisterData.class, "login, password, name, arabicName, mobileNumber,civilId,emailId");
         boolean userExists = false;
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try
         {
-           boolean result =  customerFacade.validateOTP(registerData);
+            boolean result =  customerFacade.validateOTP(registerData);
             System.out.println(result);
             if(result == false)
             {
