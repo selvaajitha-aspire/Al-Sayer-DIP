@@ -37,8 +37,8 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
         validateParameterNotNullStandardMessage("registerData", registerData);
         Assert.hasText(registerData.getName(), "The field [name] cannot be empty");
         Assert.hasText(registerData.getArabicName(), "The field [arabicName] cannot be empty");
-        Assert.hasText(registerData.getMobileNumber(), "The field [mobileNumber] cannot be empty");
-        Assert.hasText(registerData.getEmailId(), "The field [emailId] cannot be empty");
+        Assert.hasText(registerData.getMobile(), "The field [mobile] cannot be empty");
+        Assert.hasText(registerData.getUid(), "The field [uid] cannot be empty");
 
 
         final CustomerModel newCustomer = getModelService().create(CustomerModel.class);
@@ -53,26 +53,23 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
         // setTitleForRegister(registerData, customerModel);
         setUidForRegister(registerData, customerModel);
         customerModel.setCivilId(registerData.getCivilId());
-        customerModel.setUid(registerData.getEmailId());
+        customerModel.setUid(registerData.getUid());
         customerModel.setArabicName(registerData.getArabicName());
-        customerModel.setMobileNumber(registerData.getMobileNumber());
+        customerModel.setMobile(registerData.getMobile());
         customerModel.setSessionLanguage(getCommonI18NService().getCurrentLanguage());
         customerModel.setSessionCurrency(getCommonI18NService().getCurrentCurrency());
     }
 
     protected void setUidForRegister(final RegisterData registerData, final CustomerModel customer)
     {
-        customer.setUid(registerData.getEmailId().toLowerCase());
-        customer.setOriginalUid(registerData.getEmailId());
+        customer.setUid(registerData.getUid().toLowerCase());
+        customer.setOriginalUid(registerData.getUid());
     }
 
 
     @Override
     public ECCCustomerWsDTO getCustomerECCDetails(String code) {
-        ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
-        getAlsayerCustomerAccountService().getCustomerECCDetails(code);
-
-        return eccCustomerWsDTO;
+        return getAlsayerCustomerAccountService().getCustomerECCDetails(code);
     }
 
     @Override
