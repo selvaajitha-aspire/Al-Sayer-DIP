@@ -2,9 +2,9 @@ export const rsaOccConfig = {
     backend: {
         occ: {
             endpoints: {
-                saveItems: 'rsa/saveDetails',
-                getItems: 'myVehicles/getVehicles/?fields=FULL',
-                getDriverDetails: 'rsa/getDriver',
+                saveItems: 'rsa/save-details',
+                getItems: 'my-vehicles/get-vehicles/?fields=FULL',
+                getDriverDetails: 'rsa/get-driver'
             },
         },
     },
