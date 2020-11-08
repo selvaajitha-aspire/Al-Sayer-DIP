@@ -12,6 +12,7 @@ import com.alsayer.facades.roadsideassistance.RoadSideAssistanceFacade;
 import com.alsayer.occ.dto.DriverDetailsWsDTO;
 import com.alsayer.occ.dto.ResponseWsDTO;
 import com.alsayer.occ.dto.ServiceWsDTO;
+import com.alsayer.facades.data.VehicleData;
 import de.hybris.platform.webservicescommons.dto.error.ErrorWsDTO;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import io.swagger.annotations.Api;
@@ -78,6 +79,9 @@ public class RoadsideAssistanceController {
     private  ServiceRequestData storeServiceRequest(ServiceWsDTO serviceWsDTO){
         ServiceRequestData serviceRequestData=new ServiceRequestData();
         BeanUtils.copyProperties(serviceWsDTO,serviceRequestData);
+        VehicleData vehicleData = new VehicleData();
+        BeanUtils.copyProperties(serviceWsDTO.getVehicle(),vehicleData);
+        serviceRequestData.setVehicle(vehicleData);
     return serviceRequestData;
     }
 

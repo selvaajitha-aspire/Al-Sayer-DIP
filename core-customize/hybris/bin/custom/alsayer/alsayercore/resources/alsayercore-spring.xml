@@ -578,6 +578,16 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 
+	<!--Service Request-->
+	<bean id="serviceRequestService" class="com.alsayer.core.servicerequest.service.impl.DefaultServiceRequestService">
+		<property name="serviceRequestDao" ref="serviceRequestDao"/>
+	</bean>
+
+	<bean id="serviceRequestDao" class="com.alsayer.core.servicerequest.dao.impl.DefaultServiceRequestDao">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<!--Service Request-->
 
 	<!--Customer Registration-->
 

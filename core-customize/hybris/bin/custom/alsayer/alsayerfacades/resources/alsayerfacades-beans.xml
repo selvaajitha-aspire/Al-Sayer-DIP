@@ -14,12 +14,18 @@
 	</bean>
 
 	<bean class="com.alsayer.facades.data.ServiceRequestData">
-		<property name="vehicle" type="String"/>
+		<property name="vehicle" type="com.alsayer.facades.data.VehicleData"/>
 		<property name="issue" type="String"/>
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 		<property name="notes" type="String"/>
 		<property name="attachments" type="String"/>
+		<property name="customer" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
+		<property name="serviceDate" type="java.util.Date" />
+		<property name="mileage" type="java.lang.Integer" />
+		<property name="driverDetails" type="com.alsayer.facades.data.DriverDetailsData" />
+		<property name="type" type="java.lang.String" />
+		<property name="status" type="String" />
 	</bean>
 
 	<bean class="com.alsayer.facades.data.VehicleData">

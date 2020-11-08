@@ -330,6 +330,17 @@
                         <description>It is a media container with additional images of the issue.</description>
                         <modifiers read="true" write="true" optional="true" />
                     </attribute>
+                    <attribute qualifier="serviceDate" type="java.util.Date" >
+                        <persistence type="property" />
+                        <description>Date of Service</description>
+                        <modifiers read="true" write="true" search="true" optional="true" />
+                    </attribute>
+                    <attribute qualifier="mileage" type="java.lang.Integer">
+                        <persistence type="property" />
+                        <description>Mileage at time of service</description>
+                        <modifiers read="true" write="true" optional="true" />
+                    </attribute>
+
                 </attributes>
             </itemtype>
 
@@ -380,7 +391,6 @@
 
                 </attributes>
             </itemtype>
-
 
             <itemtype code="ServiceRequestProcess" autocreate="true"
                       generate="true" jaloclass="com.alsayer.core.jalo.ServiceRequestProcess"
