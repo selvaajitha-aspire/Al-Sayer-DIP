@@ -787,14 +787,14 @@ INSERT_UPDATE Media;mediaFormat(qualifier);$contentCV[unique=true];code[unique=t
 
 # Media For Tiles
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
-;;Tile1.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile1.jpg;;;"Car Trade In"
-;;Tile2.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile2.jpg;;;"Roadside Assistance"
-;;Tile3.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile3.jpg;;;"Service History"
-;;Tile4.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile4.jpg;;;"Car Replacement"
-;;Tile5.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile5.jpg;;;"Accesories"
-;;Tile6.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile6.jpg;;;"Insurance"
-;;Tile7.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile7.jpg;;;"Tyres"
-;;Tile8.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile8.jpg;;;"Service Appointment"
+;;Tile1.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile1.png;;;"Car Trade In"
+;;Tile2.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile2.png;;;"Roadside Assistance"
+;;Tile3.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile3.png;;;"Service History"
+;;Tile4.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile4.png;;;"Car Replacement"
+;;Tile5.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile5.png;;;"Accesories"
+;;Tile6.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile6.png;;;"Insurance"
+;;Tile7.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile7.png;;;"Tyres"
+;;Tile8.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile8.png;;;"Service Appointment"
 
 # Creating Service Tiles Components
 

@@ -1,8 +1,14 @@
 package com.alsayer.occ.controllers;
 
+import com.alsayer.core.servicerequest.service.RsaRequestService;
+import com.alsayer.facades.data.RsaRequestData;
+import com.alsayer.occ.dto.RsaRequestListWsDTO;
+import com.alsayer.occ.dto.RsaRequestWsDTO;
+import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -13,11 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-import com.alsayer.core.servicerequest.service.RsaRequestService;
-import com.alsayer.facades.data.RsaRequestData;
-
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "{baseSiteId}/rsa-request")
@@ -32,6 +35,9 @@ public class RsaRequestController
 
     @Resource
     private RsaRequestService rsaRequestService;
+
+    @Resource
+    private DataMapper dataMapper;
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
@@ -75,10 +81,16 @@ public class RsaRequestController
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Service Requests by customer PK", notes = "Can be used by customer himself or alsayer to get all services requests for a specific customer")
-    public List<RsaRequestData> getRsaRequestsByCustomer(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+    public RsaRequestListWsDTO getRsaRequestsByCustomer(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                           @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
     {
-        return rsaRequestService.getRsaRequestsByCustomerId();
+        List<RsaRequestData> dataList = rsaRequestService.getRsaRequestsByCustomerId();
+        RsaRequestListWsDTO rsaRequestListWsDTO = new RsaRequestListWsDTO();
+        if(CollectionUtils.isNotEmpty(dataList))
+        {
+            rsaRequestListWsDTO.setRsaRequestsList(dataMapper.mapAsList(dataList, RsaRequestWsDTO.class, fields));
+        }
+        return rsaRequestListWsDTO;
     }
 
     @Secured(
