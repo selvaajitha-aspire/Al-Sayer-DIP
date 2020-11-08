@@ -14,9 +14,9 @@ public interface RsaRequestService
 
     public RsaRequestData getRsaRequestByUID(String uid);
 
-    public List<RsaRequestData> getRsaRequestsByCustomerId(String customerID);
+    public List<RsaRequestData> getRsaRequestsByCustomerId();
 
-    public List<RsaRequestData> getRsaRequestsByCustomerIdAndStatus(String customerID,String status);
+    public List<RsaRequestData> getRsaRequestsByCustomerIdAndStatus(String status);
 
     public List<RsaRequestData> getRsaRequestsByVehicleId(String vehicleID);
 

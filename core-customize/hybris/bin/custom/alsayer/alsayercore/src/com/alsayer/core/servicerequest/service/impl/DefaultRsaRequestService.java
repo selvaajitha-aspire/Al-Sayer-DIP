@@ -3,8 +3,10 @@ package com.alsayer.core.servicerequest.service.impl;
 import com.alsayer.core.servicerequest.dao.RsaRequestDao;
 import com.alsayer.core.servicerequest.service.RsaRequestService;
 import com.alsayer.facades.data.RsaRequestData;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import com.alsayer.core.model.RsaRequestModel;
+import de.hybris.platform.servicelayer.user.UserService;
 
 
 import javax.annotation.Resource;
@@ -18,6 +20,8 @@ public class DefaultRsaRequestService implements RsaRequestService
 
     @Resource
     private Converter<RsaRequestData, RsaRequestModel> rsaRequestReverseConverter;
+
+    private UserService userService;
 
     private RsaRequestDao rsaRequestDao;
 
@@ -45,13 +49,16 @@ public class DefaultRsaRequestService implements RsaRequestService
     }
 
     @Override
-    public List<RsaRequestData> getRsaRequestsByCustomerId(String customerID) {
-        return convertAllModel(getRsaRequestDao().getRsaRequestsByCustomerId(customerID));
+    public List<RsaRequestData> getRsaRequestsByCustomerId()
+    {
+        final CustomerModel currentCustomer = (CustomerModel) userService.getCurrentUser();
+        return convertAllModel(getRsaRequestDao().getRsaRequestsByCustomerId(currentCustomer));
     }
 
     @Override
-    public List<RsaRequestData> getRsaRequestsByCustomerIdAndStatus(String customerID, String status) {
-        return convertAllModel(getRsaRequestDao().getRsaRequestsByCustomerIdAndStatus(customerID,status));
+    public List<RsaRequestData> getRsaRequestsByCustomerIdAndStatus(String status) {
+        final CustomerModel currentCustomer = (CustomerModel) userService.getCurrentUser();
+        return convertAllModel(getRsaRequestDao().getRsaRequestsByCustomerIdAndStatus(currentCustomer,status));
     }
 
     @Override
@@ -94,5 +101,15 @@ public class DefaultRsaRequestService implements RsaRequestService
 
     public List<RsaRequestModel> convertAllDto(List<RsaRequestData> dataList) {
         return getRsaRequestReverseConverter().convertAll(dataList);
+    }
+
+    public UserService getUserService()
+    {
+        return userService;
+    }
+
+    public void setUserService(final UserService userService)
+    {
+        this.userService = userService;
     }
 }

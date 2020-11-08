@@ -2,6 +2,7 @@ package com.alsayer.core.servicerequest.dao;
 
 
 import com.alsayer.core.model.RsaRequestModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ public interface RsaRequestDao
 
     public RsaRequestModel getRsaRequestByUID(String uid);
 
-    public List<RsaRequestModel> getRsaRequestsByCustomerId(String customerID);
+    public List<RsaRequestModel> getRsaRequestsByCustomerId(CustomerModel customerID);
 
-    public List<RsaRequestModel> getRsaRequestsByCustomerIdAndStatus(String customerID,String status);
+    public List<RsaRequestModel> getRsaRequestsByCustomerIdAndStatus(CustomerModel customerID,String status);
 
     public List<RsaRequestModel> getRsaRequestsByVehicleId(String vehicleID);
 

@@ -581,6 +581,7 @@
 	<!--Service Request-->
 	<bean id="rsaRequestService" class="com.alsayer.core.servicerequest.service.impl.DefaultRsaRequestService">
 		<property name="rsaRequestDao" ref="rsaRequestDao"/>
+		<property name="userService" ref="userService"/>
 	</bean>
 
 	<bean id="rsaRequestDao" class="com.alsayer.core.servicerequest.dao.impl.DefaultRsaRequestDao">

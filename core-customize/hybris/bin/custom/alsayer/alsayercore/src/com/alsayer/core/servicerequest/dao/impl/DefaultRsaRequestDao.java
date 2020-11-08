@@ -2,6 +2,7 @@ package com.alsayer.core.servicerequest.dao.impl;
 
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.servicerequest.dao.RsaRequestDao;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -48,20 +49,18 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
 
     private String getServiceRequestsByCustomerIDQuery(){
         StringBuilder builder = new StringBuilder();
-        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
-                .append(" JOIN Customer as C on {C.pk} = {A."+RsaRequestModel.CUSTOMER+"}} ")
+        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A} ")
                 .append(" WHERE ")
-                .append(" {C.pk} = ?customerID");
+                .append(" {").append(RsaRequestModel.CUSTOMER).append("} = ?customerID");
         return builder.toString();
     }
 
     private String getServiceRequestsByCustomerIDAndStatusQuery(){
         StringBuilder builder = new StringBuilder();
         builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
-                .append(" JOIN Customer as B on {B.pk} = {A."+RsaRequestModel.CUSTOMER+"} ")
                 .append(" JOIN ServiceStatus as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
                 .append(" WHERE ")
-                .append(" {B.pk} = ?customerID")
+                .append(" {").append(RsaRequestModel.CUSTOMER).append("} = ?customerID")
                 .append(" AND {C.code} = ?status");
         return builder.toString();
     }
@@ -126,16 +125,16 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
     }
 
     @Override
-    public List<RsaRequestModel> getRsaRequestsByCustomerId(String customerID) {
+    public List<RsaRequestModel> getRsaRequestsByCustomerId(CustomerModel customer) {
         Map<String,Object> params = new HashMap<>();
-        params.put("customerID",customerID);
+        params.put("customerID",customer);
         return getRsaRequests(getServiceRequestsByCustomerIDQuery(),params);
     }
 
     @Override
-    public List<RsaRequestModel> getRsaRequestsByCustomerIdAndStatus(String customerID, String status) {
+    public List<RsaRequestModel> getRsaRequestsByCustomerIdAndStatus(CustomerModel customer, String status) {
         Map<String,Object> params = new HashMap<>();
-        params.put("customerID",customerID);
+        params.put("customerID",customer);
         params.put("status",status);
         return getRsaRequests(getServiceRequestsByCustomerIDAndStatusQuery()
                 ,params);
