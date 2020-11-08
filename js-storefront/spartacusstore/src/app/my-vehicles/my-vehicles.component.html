@@ -8,7 +8,7 @@
         <option
             *ngFor="let vehicle of vehicles$ "
             [value]="vehicle.uid"
-            >{{vehicle.model}} ,{{vehicle.chassisNumber}}</option>
+            >{{vehicle.model}} ,{{vehicle.chassisNumber}},{{vehicle.warrantyType}},{{vehicle.warrantyExpiryDate}}</option>
     </select>
     </label>
     </div>
