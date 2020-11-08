@@ -10,6 +10,7 @@ public final class AlsayerCoreConstants extends GeneratedAlsayerCoreConstants
 {
 	public static final String EXTENSIONNAME = "alsayercore";
 	public static final String SCPI_URL = "scpi.commerce.url";
+	public static final String SCPI_CUSTDETAILS_URL="scpi.commerce.custdetails.url";
     public static final String OTP_TIME = "scpi.commerce.otp.time" ;
 
 

@@ -1,3 +1,4 @@
+import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -80,6 +81,7 @@ else {
     } as LayoutConfig),
     RoadsideAssistanceModule,
     RegisterModule,
+    MyVehiclesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

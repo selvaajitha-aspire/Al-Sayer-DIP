@@ -32,7 +32,7 @@ import { CustomFormValidators, sortTitles } from '@spartacus/storefront';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   titles$: Observable<Title[]>;
-
+  
   private subscription = new Subscription();
 
   anonymousConsent$: Observable<{
@@ -42,8 +42,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   registerForm: FormGroup = this.fb.group(
     {
-      titleCode: [''],
       civilId: ['',Validators.required],
+      eccCustId: [''],
       name: ['', Validators.required],
       arabicName: ['', Validators.required],
       mobile: ['',Validators.required],
@@ -81,20 +81,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.titles$ = this.userService.getTitles().pipe(
+    // this.titles$ = this.userService.getTitles().pipe(
       
-      tap((titles) => {
-        if (Object.keys(titles).length === 0) {
-          this.userService.loadTitles();
-        }
-      }),
-      map((titles) => {
-        return titles.sort(sortTitles);
-      })
+    //   tap((titles) => {
+    //     if (Object.keys(titles).length === 0) {
+    //       this.userService.loadTitles();
+    //     }
+    //   }),
+    //   map((titles) => {
+    //     return titles.sort(sortTitles);
+    //   })
 
       
      
-    );
+    // );
     
    
     this.registerUserProcessInit();
@@ -172,9 +172,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   collectDataFromRegisterForm(formData: any): UserRegister {
-    const { civilId, name, arabicName, mobile,oneTimePassword, email, password, titleCode } = formData;  
+    const { civilId,eccCustId, name, arabicName, mobile,oneTimePassword, email, password, titleCode } = formData;  
     return {
       civilId,
+      eccCustId,
       name,
       arabicName,
       mobile,
@@ -190,14 +191,30 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if(civilId!=null){
       this.customer=this.registerService.getECCCustomerDetails(civilId).then(pos=>
         {
-          console.log(`Customer : ${pos.name} ${pos.arabicName} ${pos.mobile}`);
+          console.log(`Customer : ${pos.civilId} ${pos.arabicName} ${pos.eccCustId}`);
+          var email=`${pos.email}`;
+          this.registerForm.get('civilId').patchValue(`${pos.civilId}`);
+          this.registerForm.get('eccCustId').patchValue(`${pos.eccCustId}`);
           this.registerForm.get('name').patchValue(`${pos.name}`);
           this.registerForm.get('arabicName').patchValue(`${pos.arabicName}`);
           this.registerForm.get('mobile').patchValue(`${pos.mobile}`);
-          //this.registerForm.get('email').patchValue(`${res.email}`);
+          if(email != null){
+          this.registerForm.get('email').patchValue(email);}
         })   
     }
   }
+
+  sendOTP(){  
+    var mobile= this.registerForm.controls['mobile'].value;
+    var civilId=this.registerForm.controls['civilId'].value;
+    if (mobile!=null) {
+      
+      this.registerService.sendOtpOnMobile(mobile,civilId);
+    }else {
+      this.registerForm.markAllAsTouched();
+    }
+  }
+
   isConsentGiven(consent: AnonymousConsent): boolean {
     return this.anonymousConsentsService.isConsentGiven(consent);
   }

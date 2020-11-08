@@ -203,6 +203,16 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="warrantyType" type="java.lang.String">
+                        <description>Model of car</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="warrantyExpiryDate" type="java.util.Date">
+                        <description>Model of car</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
 
                 </attributes>
             </itemtype>
@@ -215,6 +225,11 @@
                     </attribute>
                     <attribute qualifier="civilId" type="java.lang.String">
                         <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="eccCustId" type="java.lang.String">
+                        <description>ECC Customer Id</description>
                         <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
