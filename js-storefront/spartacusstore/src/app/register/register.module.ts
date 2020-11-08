@@ -21,7 +21,6 @@ import { registerOccConfig } from '../config/register-config';
    RouterModule,
    FormErrorsModule,
    RecaptchaModule,
-  // AuthModule.forRoot(),
    ConfigModule.withConfig(registerOccConfig),
   ],
   providers: [

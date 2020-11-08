@@ -85,16 +85,25 @@ public class CustomerRegistrationController
     private static final String BASIC_FIELD_SET = "BASIC";
 
 
+    @RequestMapping(value = "/sendOTP/{id}",method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @ResponseBody
+    @ApiOperation(value = "Send otp to customer's mobile no", notes = "OTP wil be sent on the number given by the user")
+    @ApiBaseSiteIdParam
+    public void sendOTP(@PathVariable("id") final String id,@ApiParam(value = "User's mobile no.", required = true) @RequestBody final String mobile,@ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
+    {
+        customerFacade.sendOTP(id);
+    }
+
     @RequestMapping(value = "/getCustomerDetails/{id}",method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
     @ApiOperation(value = "To get the customer details", notes = "Only registered users will get the information from ECC")
-    public ECCCustomerWsDTO getCustomerDetails(@PathVariable("id") final String code,
+    public ECCCustomerWsDTO getCustomerDetails(@PathVariable("id") final String id,
                                         @ApiFieldsParam(defaultValue = BASIC_FIELD_SET)
                                         final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
     {
-        ECCCustomerWsDTO eccCustomerWsDTO = customerFacade.getCustomerECCDetails(code);
-        customerFacade.sendOTP();
+        ECCCustomerWsDTO eccCustomerWsDTO = customerFacade.getCustomerECCDetails(id);
         return eccCustomerWsDTO;
 
     }
@@ -139,7 +148,7 @@ public class CustomerRegistrationController
     {
         validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
-                .map(user, RegisterData.class, "login, password, name, arabicName, mobile,civilId,uid,oneTimePassword");
+                .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, mobile,civilId,uid,oneTimePassword");
         boolean userExists = false;
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try

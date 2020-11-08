@@ -1,4 +1,5 @@
 export interface UserRegister {
+    eccCustId?:string;
     civilId?:number;
     name?: string;
     arabicName?: string;

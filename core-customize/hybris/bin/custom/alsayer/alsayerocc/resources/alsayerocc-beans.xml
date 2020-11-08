@@ -63,6 +63,8 @@
     </bean>
 
     <bean class="com.alsayer.occ.dto.ECCCustomerWsDTO">
+        <property name="civilId" type="String"/>
+        <property name="eccCustId" type="String"/>
         <property name="name" type="String"/>
         <property name="arabicName" type="String"/>
         <property name="mobile" type="String"/>
@@ -84,6 +86,7 @@
             <hint name="alias">UserSignUp</hint>
         </hints>
         <property name="civilId" type="String"/>
+        <property name="eccCustId" type="String"/>
         <property name="name" type="String"/>
         <property name="arabicName" type="String"/>
         <property name="mobile" type="String"/>
