@@ -241,4 +241,20 @@
 		<property name="myVehiclesService" ref="myVehiclesService"/>
 		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
 	</bean>
+
+	<bean id="serviceRequestPopulator" class="com.alsayer.facades.populators.ServiceRequestPopulator">
+		<property name="i18nService" ref="i18nService"/>
+		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
+		<property name="driverDetailsConverter" ref="driverDetailsConverter"/>
+	</bean>
+
+	<bean id="serviceRequestConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.ServiceRequestData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="serviceRequestPopulator" />
+			</list>
+		</property>
+	</bean>
+
 </beans>
