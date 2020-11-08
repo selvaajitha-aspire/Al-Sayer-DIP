@@ -33,7 +33,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
 
     private String getServiceRequestsByStatusQuery(){
         StringBuilder builder = new StringBuilder();
-        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+        builder.append(" SELECT {A.pk} FROM {RsaRequest as A ")
                 .append(" JOIN ServiceStatus as B on {B.pk} = {A."+RsaRequestModel.STATUS+"}} ")
                 .append(" WHERE ")
                 .append(" {B.code} = ?status");
@@ -49,7 +49,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
 
     private String getServiceRequestsByCustomerIDQuery(){
         StringBuilder builder = new StringBuilder();
-        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A} ")
+        builder.append(" SELECT {A.pk} FROM {" + RsaRequestModel._TYPECODE + " as A} ")
                 .append(" WHERE ")
                 .append(" {").append(RsaRequestModel.CUSTOMER).append("} = ?customerID");
         return builder.toString();
@@ -57,7 +57,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
 
     private String getServiceRequestsByCustomerIDAndStatusQuery(){
         StringBuilder builder = new StringBuilder();
-        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+        builder.append(" SELECT {A.pk} FROM {" + RsaRequestModel._TYPECODE + " as A ")
                 .append(" JOIN ServiceStatus as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
                 .append(" WHERE ")
                 .append(" {").append(RsaRequestModel.CUSTOMER).append("} = ?customerID")
@@ -67,7 +67,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
 
     private String getServiceRequestsByVehicleIDQuery(){
         StringBuilder builder = new StringBuilder();
-        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+        builder.append(" SELECT {A.pk} FROM {RsaRequest as A ")
                 .append(" JOIN Vehicle as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"}} ")
                 .append(" WHERE ")
                 .append(" {B.pk} = ?vehicleID");
@@ -76,7 +76,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
 
     private String getServiceRequestsByVehicleIDAndStatusQuery(){
         StringBuilder builder = new StringBuilder();
-        builder.append(" SELECT {A.pk} FROM {ServiceRequest as A ")
+        builder.append(" SELECT {A.pk} FROM {RsaRequest as A ")
                 .append(" JOIN Vehicle as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"} ")
                 .append(" JOIN ServiceStatus as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
                 .append(" WHERE ")
