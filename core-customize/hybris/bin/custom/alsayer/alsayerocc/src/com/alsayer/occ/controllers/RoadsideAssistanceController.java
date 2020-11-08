@@ -7,11 +7,11 @@
 package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.data.DriverDetailsData;
-import com.alsayer.facades.data.ServiceRequestData;
+import com.alsayer.facades.data.RsaRequestData;
 import com.alsayer.facades.roadsideassistance.RoadSideAssistanceFacade;
 import com.alsayer.occ.dto.DriverDetailsWsDTO;
 import com.alsayer.occ.dto.ResponseWsDTO;
-import com.alsayer.occ.dto.ServiceWsDTO;
+import com.alsayer.occ.dto.RsaRequestWsDTO;
 import com.alsayer.facades.data.VehicleData;
 import de.hybris.platform.webservicescommons.dto.error.ErrorWsDTO;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
@@ -58,7 +58,7 @@ public class RoadsideAssistanceController {
     @ResponseStatus(value = HttpStatus.OK)
     @ResponseBody
     @ApiOperation(value = "", notes = "Services for logged in user")
-    public ResponseWsDTO displayServiceDetails(@RequestBody ServiceWsDTO data) {
+    public ResponseWsDTO displayServiceDetails(@RequestBody RsaRequestWsDTO data) {
         ResponseWsDTO response = new ResponseWsDTO();
         try {
             LOG.debug(data.toString() + "" + SUCCESS_STATUS);
@@ -76,8 +76,8 @@ public class RoadsideAssistanceController {
         return response;
     }
 
-    private  ServiceRequestData storeServiceRequest(ServiceWsDTO serviceWsDTO){
-        ServiceRequestData serviceRequestData=new ServiceRequestData();
+    private  RsaRequestData storeServiceRequest(RsaRequestWsDTO serviceWsDTO){
+        RsaRequestData serviceRequestData=new RsaRequestData();
         BeanUtils.copyProperties(serviceWsDTO,serviceRequestData);
         VehicleData vehicleData = new VehicleData();
         BeanUtils.copyProperties(serviceWsDTO.getVehicle(),vehicleData);

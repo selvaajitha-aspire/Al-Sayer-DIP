@@ -4,8 +4,8 @@ import com.alsayer.core.constants.GeneratedAlsayerCoreConstants;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
-import com.alsayer.core.model.ServiceRequestModel;
-import com.alsayer.facades.data.ServiceRequestData;
+import com.alsayer.core.model.RsaRequestModel;
+import com.alsayer.facades.data.RsaRequestData;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 
 import java.util.UUID;
@@ -17,7 +17,7 @@ import com.alsayer.facades.data.DriverDetailsData;
 
 import javax.annotation.Resource;
 
-public class ServiceRequestPopulator implements Populator<ServiceRequestModel,ServiceRequestData> {
+public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequestData> {
 
     private I18NService i18nService;
 
@@ -42,9 +42,9 @@ public class ServiceRequestPopulator implements Populator<ServiceRequestModel,Se
     }
 
     @Override
-    public void populate(ServiceRequestModel serviceRequestModel, ServiceRequestData serviceRequestData) throws ConversionException {
+    public void populate(RsaRequestModel serviceRequestModel, RsaRequestData serviceRequestData) throws ConversionException {
         if(null != serviceRequestModel && null != serviceRequestData
-                && serviceRequestModel instanceof ServiceRequestModel && serviceRequestData instanceof ServiceRequestData){
+                && serviceRequestModel instanceof RsaRequestModel && serviceRequestData instanceof RsaRequestData){
             if(null != serviceRequestModel.getLatitude()){
                 serviceRequestData.setLatitude(serviceRequestModel.getLatitude());
             }
@@ -57,12 +57,7 @@ public class ServiceRequestPopulator implements Populator<ServiceRequestModel,Se
             if(null != serviceRequestModel.getAttachments()){
                 serviceRequestData.setAttachments(serviceRequestModel.getAttachments());
             }
-            if(null != serviceRequestModel.getServiceDate()){
-                serviceRequestData.setServiceDate(serviceRequestModel.getServiceDate());
-            }
-            if(null != serviceRequestModel.getMileage()){
-                serviceRequestData.setMileage(serviceRequestModel.getMileage());
-            }
+
             if(null != serviceRequestModel.getVehicle()
                     && serviceRequestModel.getVehicle() instanceof VehicleModel){
                 VehicleData vehicle = getVehicleDataConverter().convert(serviceRequestModel.getVehicle());

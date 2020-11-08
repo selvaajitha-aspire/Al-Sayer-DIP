@@ -1,10 +1,10 @@
 package com.alsayer.facades.roadsideassistance.impl;
 
 import com.alsayer.core.model.DriverDetailsModel;
-import com.alsayer.core.model.ServiceRequestModel;
+import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.roadsideassistance.services.RoadSideAssistanceService;
 import com.alsayer.facades.data.DriverDetailsData;
-import com.alsayer.facades.data.ServiceRequestData;
+import com.alsayer.facades.data.RsaRequestData;
 import com.alsayer.facades.roadsideassistance.RoadSideAssistanceFacade;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
@@ -14,7 +14,7 @@ public class DefaultRoadSideAssistanceFacade implements RoadSideAssistanceFacade
 
     private RoadSideAssistanceService roadSideAssistanceService;
 
-    private Converter<ServiceRequestData, ServiceRequestModel> serviceRequestReverseConverter;
+    private Converter<RsaRequestData, RsaRequestModel> rsaRequestReverseConverter;
 
     private Converter<DriverDetailsModel, DriverDetailsData> driverDetailsConverter;
 
@@ -24,17 +24,17 @@ public class DefaultRoadSideAssistanceFacade implements RoadSideAssistanceFacade
     }
 
     @Override
-    public void  storeServiceRequest(ServiceRequestData data){
-        ServiceRequestModel serviceRequestModel=getServiceRequestReverseConverter().convert(data);
+    public void  storeServiceRequest(RsaRequestData data){
+        RsaRequestModel serviceRequestModel=getRsaRequestReverseConverter().convert(data);
        getRoadSideAssistanceService().saveServiceRequest(serviceRequestModel);
     }
 
-    public Converter<ServiceRequestData, ServiceRequestModel> getServiceRequestReverseConverter() {
-        return serviceRequestReverseConverter;
+    public Converter<RsaRequestData, RsaRequestModel> getRsaRequestReverseConverter() {
+        return rsaRequestReverseConverter;
     }
 
-    public void setServiceRequestReverseConverter(Converter<ServiceRequestData, ServiceRequestModel> serviceRequestReverseConverter) {
-        this.serviceRequestReverseConverter = serviceRequestReverseConverter;
+    public void setRsaRequestReverseConverter(Converter<RsaRequestData, RsaRequestModel> rsaRequestReverseConverter) {
+        this.rsaRequestReverseConverter = rsaRequestReverseConverter;
     }
 
     public RoadSideAssistanceService getRoadSideAssistanceService() {

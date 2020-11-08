@@ -122,14 +122,14 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 
 
 UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media[lang=$lang];headline[lang=$lang];color[lang=$lang]
-;;CarTradInComponent;Tile1.jpg;"Car Trade-in";"RED"
-;;RSAComponent;Tile2.jpg;"Roadside Assistance";"RED"
-;;ServiceHistoryComponent;Tile3.jpg;"Service History";"RED"
-;;CarReplacementComponent;Tile4.jpg;"Car Replacement";"RED"
-;;AccesoriesComponent;Tile5.jpg;"Accessories";"RED"
-;;InsuranceComponent;Tile6.jpg;"Insurance";"RED"
-;;TyresComponent;Tile7.jpg;"Tyres";"RED"
-;;ServiceAppointmentComponent;Tile8.jpg;"Service Appointment";"RED"
+;;CarTradInComponent;Tile1.jpg;"Car Trade-in";
+;;RSAComponent;Tile2.jpg;"Roadside Assistance";
+;;ServiceHistoryComponent;Tile3.jpg;"Service History";
+;;CarReplacementComponent;Tile4.jpg;"Car Replacement";
+;;AccesoriesComponent;Tile5.jpg;"Accessories";
+;;InsuranceComponent;Tile6.jpg;"Insurance";
+;;TyresComponent;Tile7.jpg;"Tyres";
+;;ServiceAppointmentComponent;Tile8.jpg;"Service Appointment";
 
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 ;;MyAccountNavNode;"My Account"
@@ -167,3 +167,95 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
                          ;;roadsideassistancepage;Roadside Assistance
+
+
+
+#######
+$contentCatalog=alsayer-spaContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$siteResource=jar:de.hybris.platform.spartacussampledataaddon.constants.SpartacussampledataaddonConstants&/spartacussampledataaddon/import/contentCatalogs/alsayerContentCatalog
+$lang=en
+
+### Service History Page ####
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+                         ;;ServiceHistoryPage;Service History Page;AccountPageTemplate;/my-account/service-history
+
+INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
+                              ;;MyServiceHistoryComponent;Service History Component;MyServiceHistoryComponent;MyServiceHistoryComponent
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+                         ;;SideContent-ServiceHistoryPage;Side Content Slot for Services;true;;;;
+                         ;;BodyContent-ServiceHistoryPage;Body Content Slot for Services;true;MyServiceHistoryComponent;;;
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='ServiceHistoryPage'];contentSlot(uid,$contentCV)[unique=true];;;
+                                ;;SideContent-ServiceHistory-Slot;SideContent;;SideContent-ServiceHistoryPage;;;
+                                ;;BodyContent-ServiceHistory-Slot;BodyContent;;BodyContent-ServiceHistoryPage;;;
+
+### Vehicle History Page ####
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+                         ;;MyVehiclesPage;Service History Page;AccountPageTemplate;/my-account/my-vehicles
+
+INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
+                              ;;MyVehiclesComponent;Service History Component;MyVehiclesComponent;MyVehiclesComponent
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+                         ;;SideContent-MyVehiclesPage;Side Content Slot for Services;true;;;;
+                         ;;BodyContent-MyVehiclesPage;Body Content Slot for Services;true;MyVehiclesComponent;;;
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='MyVehiclesPage'];contentSlot(uid,$contentCV)[unique=true];;;
+                                ;;SideContent-MyVehicles-Slot;SideContent;;SideContent-MyVehiclesPage;;;
+                                ;;BodyContent-MyVehicles-Slot;BodyContent;;BodyContent-MyVehiclesPage;;;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
+                             ;SiteLogo;;;logo
+                             ;HeaderLinks;;;headerlinks
+                             ;SearchBox;;;searchbox
+                             ;MiniCart;;;minicart
+                             ;NavigationBar;;;navigation
+                             ;Section1;;;wide
+                             ;Section2A;;;narrow
+                             ;Section2B;;;narrow
+                             ;Section2C;;;wide
+                             ;Section3;;;wide
+                             ;Section4;;;narrow
+                             ;Section5;;;wide
+                             ;Footer;;;footer
+                             ;TopHeaderSlot;;;wide
+                             ;BottomHeaderSlot;;;wide
+                             ;PlaceholderContentSlot;;;
+                             ;ServiceTileSection;;;
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(uid,$contentCV)
+                         ;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
+                                ;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+                   ;;Tile1.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile1.jpg;;;"Car Trade In"
+                   ;;Tile2.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile2.jpg;;;"Roadside Assistance"
+                   ;;Tile3.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile3.jpg;;;"Service History"
+                   ;;Tile4.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile4.jpg;;;"Car Replacement"
+                   ;;Tile5.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile5.jpg;;;"Accesories"
+                   ;;Tile6.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile6.jpg;;;"Insurance"
+                   ;;Tile7.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile7.jpg;;;"Tyres"
+                   ;;Tile8.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile8.jpg;;;"Service Appointment"
+
+
+UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media(code,$contentCV)[lang=$lang];headline[lang=$lang];color
+                                 ;;CarTradInComponent;Tile1.jpg;"Car Trade-in";
+                                 ;;RSAComponent;Tile2.jpg;"Roadside Assistance";
+                                 ;;ServiceHistoryComponent;Tile3.jpg;"Service History";
+                                 ;;CarReplacementComponent;Tile4.jpg;"Car Replacement";
+                                 ;;AccesoriesComponent;Tile5.jpg;"Accessories";
+                                 ;;InsuranceComponent;Tile6.jpg;"Insurance";
+                                 ;;TyresComponent;Tile7.jpg;"Tyres";
+                                 ;;ServiceAppointmentComponent;Tile8.jpg;"Service Appointment";

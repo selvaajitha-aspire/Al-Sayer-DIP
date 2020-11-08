@@ -1,6 +1,6 @@
 package com.alsayer.core.vehicles.services;
 
-import com.alsayer.core.model.ServiceRequestModel;
+import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.model.VehicleModel;
 
 import java.util.List;

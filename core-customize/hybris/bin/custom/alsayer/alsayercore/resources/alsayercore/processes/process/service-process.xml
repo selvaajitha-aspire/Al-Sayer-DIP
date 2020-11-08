@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<process xmlns="http://www.hybris.de/xsd/processdefinition" start="createServiceRequest" name="service-process" processClass="com.alsayer.core.model.ServiceRequestProcessModel">
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="createServiceRequest" name="service-process" processClass="com.alsayer.core.model.RsaRequestProcessModel">
 
 	<action id="createServiceRequest" bean="createServiceRequestAction">
 		<transition name="NOK" to="failed"/>
