@@ -329,8 +329,9 @@
 	</bean>
 
 	<bean id="getCustomerDetails" class="com.alsayer.core.customer.services.GetCustomerDetails">
-		<property name="modelService" ref="modelService"/>
 		<property name="configurationService" ref="configurationService"/>
+		<property name="userService" ref="userService"/>
+		<property name="modelService" ref="modelService"/>
 	</bean>
 
 	<bean id="generateForgottenPasswordEmail" parent="abstractGenerateEmailAction">

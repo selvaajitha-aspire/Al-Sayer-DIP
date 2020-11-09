@@ -30,8 +30,8 @@ public class DefaultMyVehiclesService implements MyVehiclesService {
     }
 
     @Override
-    public VehicleModel getVehicleByUID(String vehicle_uid){
-        return getMyVehiclesDao().getVehicle(vehicle_uid);
+    public VehicleModel getVehicleByChassisNo(String chassisNumber){
+        return getMyVehiclesDao().getVehicle(chassisNumber);
     }
 
     public UserService getUserService() {

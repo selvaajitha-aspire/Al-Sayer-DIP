@@ -14,11 +14,11 @@
           <label>
               <span for="name" class="label-content d-block">Vehicle</span>
               <fieldset formGroupName="vehicle">
-              <select formControlName="uid" class="form-control form-control-sm d-block w-100 box-to-line"  *ngIf="vehicleList | async as vehicles$" >
+              <select formControlName="chassisNumber" class="form-control form-control-sm d-block w-100 box-to-line"  *ngIf="vehicleList | async as vehicles$" >
               <option selected value="" disabled>Select Vehicle</option>
               <option
                   *ngFor="let vehicle of vehicles$ "
-                  [value]="vehicle.uid"
+                  [value]="vehicle.chassisNumber"
                   >{{vehicle.model}} ,{{vehicle.chassisNumber}}</option>
               </select>
               </fieldset>

@@ -17,19 +17,19 @@ public class DefaultMyVehiclesDao extends AbstractItemDao implements MyVehiclesD
 
     private static final String MY_VEHICLE_QUERY= "SELECT {v.pk}"
             + " FROM {" + VehicleModel._TYPECODE + " as v}"
-            + " WHERE {v."+VehicleModel.UID + "} = ?uid";
+            + " WHERE {v."+VehicleModel.CHASSISNUMBER + "} = ?chassisNumber";
 
     final StringBuilder builder = new StringBuilder(MY_VEHICLE_QUERY);
 
     /**
-     * @param vehicleUid the UID of the Vehicle
+     * @param chassisNum the chassis number of the Vehicle
      * @return the Vehicle
      * @throws NullPointerException if no Vehicle with the specified UID is found
      */
     @Override
-    public VehicleModel getVehicle(final String vehicleUid){
+    public VehicleModel getVehicle(final String chassisNum){
         final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
-        query.addQueryParameter("uid", vehicleUid);
+        query.addQueryParameter("chassisNumber", chassisNum);
         final SearchResult<VehicleModel> result = getFlexibleSearchService().search(query);
         return result.getResult()!=null?result.getResult().get(0):null;
     }

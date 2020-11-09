@@ -1,12 +1,13 @@
 import { RegisterService } from '../../services/register/register.service';
 import { UserRegister } from './../models/user-register.model';
 import { RecaptchaService } from '../../services/recaptcha/recaptcha.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
+  NgForm,
 } from '@angular/forms';
 import {
   AnonymousConsent,
@@ -25,14 +26,15 @@ import { filter, map, tap } from 'rxjs/operators';
 import { CustomFormValidators, sortTitles } from '@spartacus/storefront';
 
 
-
+declare var $: any;
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements OnInit, OnDestroy {
+  @ViewChild('registrationForm') registrationFormElement: NgForm;
   titles$: Observable<Title[]>;
-  
+  oneTimePassword:number;
   private subscription = new Subscription();
 
   anonymousConsent$: Observable<{
@@ -47,7 +49,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
       arabicName: ['', Validators.required],
       mobile: ['',Validators.required],
-      oneTimePassword: ['',Validators.required],
       email: ['', [Validators.required, CustomFormValidators.emailValidator]],
       password: [
         '',
@@ -153,6 +154,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if (this.registerForm.valid) {
       this.registerUser();
+      $("#otpPopup").modal('hide');
     } else {
       this.registerForm.markAllAsTouched();
     }
@@ -172,15 +174,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   collectDataFromRegisterForm(formData: any): UserRegister {
-    const { civilId,eccCustId, name, arabicName, mobile,oneTimePassword, email, password, titleCode } = formData;  
+    const { civilId,eccCustId, name, arabicName, mobile, email, password, titleCode } = formData; 
+    const oneTimePassword=this.oneTimePassword; 
     return {
       civilId,
       eccCustId,
       name,
       arabicName,
-      mobile,
       oneTimePassword,
-      uid: email.toLowerCase(),
+      mobile,
+      uid : email ? email.toLowerCase() : "",
       password,
       titleCode,
     };
@@ -198,7 +201,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.registerForm.get('name').patchValue(`${pos.name}`);
           this.registerForm.get('arabicName').patchValue(`${pos.arabicName}`);
           this.registerForm.get('mobile').patchValue(`${pos.mobile}`);
-          if(email != null){
+          if(email && email != null){
           this.registerForm.get('email').patchValue(email);}
         })   
     }
@@ -213,6 +216,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }else {
       this.registerForm.markAllAsTouched();
     }
+    $("#otpPopup").modal('show');
+  }
+
+  submitOtp(){
+    this.registrationFormElement.ngSubmit.emit();
+
   }
 
   isConsentGiven(consent: AnonymousConsent): boolean {

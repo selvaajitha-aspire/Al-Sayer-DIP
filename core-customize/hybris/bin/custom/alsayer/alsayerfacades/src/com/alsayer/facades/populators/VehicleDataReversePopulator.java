@@ -9,9 +9,11 @@ public class VehicleDataReversePopulator implements Populator<VehicleData, Vehic
     @Override
     public void populate(VehicleData vehicleData, VehicleModel vehicleModel) throws ConversionException {
 
-        vehicleModel.setUid(vehicleData.getUid());
-        vehicleModel.setModel(vehicleData.getModel());
         vehicleModel.setChassisNumber(vehicleData.getChassisNumber());
+        vehicleModel.setStatus(vehicleData.getStatus());
+        vehicleModel.setModline(vehicleData.getModline());
+        vehicleModel.setModyear(vehicleData.getModyear());
+        vehicleModel.setPlateNumber(vehicleModel.getPlateNumber());
         vehicleModel.setWarrantyType(vehicleData.getWarrantyType());
         vehicleModel.setWarrantyExpiryDate(vehicleData.getWarrantyExpiryDate());
     }

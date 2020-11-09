@@ -26,11 +26,11 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
     @Override
     public void populate(RsaRequestData serviceRequestData, RsaRequestModel serviceRequestModel) throws ConversionException {
 
-        String vehicle_uid=serviceRequestData.getVehicle().getUid();
+        String chassisNumber=serviceRequestData.getVehicle().getChassisNumber();
         String issueType=serviceRequestData.getIssue();
         serviceRequestModel.setUid(UUID.randomUUID().toString());
         serviceRequestModel.setCustomer((CustomerModel) userService.getCurrentUser());
-        serviceRequestModel.setVehicle(getVehicleforUID(vehicle_uid));
+        serviceRequestModel.setVehicle(getVehicleByChassis(chassisNumber));
         serviceRequestModel.setStatus(ServiceStatus.STARTED);
         serviceRequestModel.setType(issueType.equalsIgnoreCase("RSA")?"RSA":"MUSAADA");
 
@@ -48,8 +48,8 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
         serviceRequestModel.setAttachments(serviceRequestData.getAttachments());
     }
 
-    private VehicleModel getVehicleforUID(String vehicle_uid) {
-        return  getMyVehiclesService().getVehicleByUID(vehicle_uid);
+    private VehicleModel getVehicleByChassis(String chassisNumber) {
+        return  getMyVehiclesService().getVehicleByChassisNo(chassisNumber);
     }
 
 
