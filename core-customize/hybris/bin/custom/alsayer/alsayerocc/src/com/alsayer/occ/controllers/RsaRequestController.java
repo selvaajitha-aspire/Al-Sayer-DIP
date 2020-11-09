@@ -1,5 +1,10 @@
 package com.alsayer.occ.controllers;
 
+import com.alsayer.core.servicerequest.service.RsaRequestService;
+import com.alsayer.facades.data.RsaRequestData;
+import com.alsayer.occ.dto.RsaRequestListWsDTO;
+import com.alsayer.occ.dto.RsaRequestWsDTO;
+import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -14,106 +19,113 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-import com.alsayer.core.servicerequest.service.ServiceRequestService;
-import com.alsayer.facades.data.ServiceRequestData;
-
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
-@RequestMapping(value = "{baseSiteId}/service-request")
+@RequestMapping(value = "{baseSiteId}/rsa-request")
 @Api(tags = "")
-public class ServiceRequestController {
+public class RsaRequestController
+{
 
-    final static Logger LOG = LoggerFactory.getLogger(ServiceRequestController.class);
+    final static Logger LOG = LoggerFactory.getLogger(RsaRequestController.class);
 
 
     private static final String BASIC_FIELD_SET = "BASIC";
 
     @Resource
-    private ServiceRequestService serviceRequestService;
+    private RsaRequestService rsaRequestService;
+
+    @Resource
+    private DataMapper dataMapper;
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/getAllServices", method = RequestMethod.GET,
+    @RequestMapping(value = "/getAllRsaRequests", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get all Service Requests", notes = "Only ADMIN users can get all service requests")
-    public List<ServiceRequestData> getAllServiceRequests(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+    public List<RsaRequestData> getAllRsaRequests(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                               @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
     {
-    	return serviceRequestService.getAllServiceRequests();
+    	return rsaRequestService.getAllRsaRequests();
     }
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/getServicesByStatus", method = RequestMethod.GET,
+    @RequestMapping(value = "/getRsaRequestsByStatus", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Service Requests by service request status", notes = "")
-    public List<ServiceRequestData> getServiceRequestsByStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+    public List<RsaRequestData> getRsaRequestsByStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                           @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("status") String status )
     {
-        return serviceRequestService.getServiceRequestsByStatus(status);
+        return rsaRequestService.getRsaRequestsByStatus(status);
     }
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/getServicesById", method = RequestMethod.GET,
+    @RequestMapping(value = "/getRsaRequestById", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Service Request by pk", notes = "")
-    public ServiceRequestData getServiceRequestsById(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+    public RsaRequestData getRsaRequestById(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                           @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("serviceId") String serviceId )
     {
-        return serviceRequestService.getServiceRequestByUID(serviceId);
+        return rsaRequestService.getRsaRequestByUID(serviceId);
     }
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/getServicesByCustomer", method = RequestMethod.GET,
+    @RequestMapping(value = "/getRsaRequestsByCustomer", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Service Requests by customer PK", notes = "Can be used by customer himself or alsayer to get all services requests for a specific customer")
-    public List<ServiceRequestData> getServicesByCustomer(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
-                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("customerId") String customerId)
+    public RsaRequestListWsDTO getRsaRequestsByCustomer(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
     {
-        return serviceRequestService.getServiceRequestsByCustomerId(customerId);
+        List<RsaRequestData> dataList = rsaRequestService.getRsaRequestsByCustomerId();
+        RsaRequestListWsDTO rsaRequestListWsDTO = new RsaRequestListWsDTO();
+        if(CollectionUtils.isNotEmpty(dataList))
+        {
+            rsaRequestListWsDTO.setRsaRequestsList(dataMapper.mapAsList(dataList, RsaRequestWsDTO.class, fields));
+        }
+        return rsaRequestListWsDTO;
     }
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/getServicesByCustomerStatus", method = RequestMethod.GET,
+    @RequestMapping(value = "/getRsaRequestsByCustomerStatus", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Service Requests by Customer PK and status", notes = "Can be used by customer himself or alsayer to get all services requests for a specific customer with specific status")
-    public List<ServiceRequestData> getServicesByCustomerStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
-                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("customerId") String customerId,@RequestParam("status") String status)
+    public List<RsaRequestData> getRsaRequestsByCustomerStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("status") String status)
     {
-        return serviceRequestService.getServiceRequestsByCustomerIdAndStatus(customerId,status);
+        return rsaRequestService.getRsaRequestsByCustomerIdAndStatus(status);
     }
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/getServicesByVehicle", method = RequestMethod.GET,
+    @RequestMapping(value = "/getRsaRequestsByVehicle", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Service Requests by Vehicle PK", notes = "Can be used by customer himself or alsayer to get all services requests for a specific Vehicle")
-    public List<ServiceRequestData> getServicesByVehicle(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+    public List<RsaRequestData> getRsaRequestsByVehicle(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                                 @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("vehicleId") String vehicleId)
     {
-        return serviceRequestService.getServiceRequestsByVehicleId(vehicleId);
+        return rsaRequestService.getRsaRequestsByVehicleId(vehicleId);
     }
 
     @Secured(
             { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/getServicesByVehicleStatus", method = RequestMethod.GET,
+    @RequestMapping(value = "/getRsaRequestsByVehicleStatus", method = RequestMethod.GET,
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Service Requests by Vehicle PK and status", notes = "Can be used by customer himself or alsayer to get all services requests for a specific Vehicle and a specific status")
-    public List<ServiceRequestData> getServicesByVehicleStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+    public List<RsaRequestData> getRsaRequestsByVehicleStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("vehicleId") String vehicleId,@RequestParam("status") String status)
     {
-        return serviceRequestService.getServiceRequestsByVehicleIdAndStatus(vehicleId,status);
+        return rsaRequestService.getRsaRequestsByVehicleIdAndStatus(vehicleId,status);
     }
 }

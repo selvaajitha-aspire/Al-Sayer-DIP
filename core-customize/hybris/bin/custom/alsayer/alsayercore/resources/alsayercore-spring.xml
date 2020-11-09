@@ -579,11 +579,12 @@
 	</bean>
 
 	<!--Service Request-->
-	<bean id="serviceRequestService" class="com.alsayer.core.servicerequest.service.impl.DefaultServiceRequestService">
-		<property name="serviceRequestDao" ref="serviceRequestDao"/>
+	<bean id="rsaRequestService" class="com.alsayer.core.servicerequest.service.impl.DefaultRsaRequestService">
+		<property name="rsaRequestDao" ref="rsaRequestDao"/>
+		<property name="userService" ref="userService"/>
 	</bean>
 
-	<bean id="serviceRequestDao" class="com.alsayer.core.servicerequest.dao.impl.DefaultServiceRequestDao">
+	<bean id="rsaRequestDao" class="com.alsayer.core.servicerequest.dao.impl.DefaultRsaRequestDao">
 		<property name="modelService" ref="modelService"/>
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
@@ -676,7 +677,7 @@
 
 	<!--Service Request Event Listener-->
 
-	<bean id="serviceRequestStartEventListener" class="com.alsayer.core.event.rsa.ServiceRequestStartEventListener" parent="abstractEventListener">
+	<bean id="rsaRequestStartEventListener" class="com.alsayer.core.event.rsa.RsaRequestStartEventListener" parent="abstractEventListener">
 		<property name="modelService" ref="modelService"/>
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>

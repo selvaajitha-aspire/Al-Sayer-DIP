@@ -185,23 +185,23 @@
 
 	<!--Roadside assistance start-->
 
-	<bean id="serviceRequestReversePopulator" class="com.alsayer.facades.populators.ServiceRequestReversePopulator">
+	<bean id="rsaRequestReversePopulator" class="com.alsayer.facades.populators.RsaRequestReversePopulator">
 		<property name="userService" ref="userService"/>
 		<property name="myVehiclesService" ref="myVehiclesService"/>
 		<property name="i18nService" ref="i18nService"/>
 	</bean>
 
-	<bean id="serviceRequestReverseConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.alsayer.core.model.ServiceRequestModel"/>
+	<bean id="rsaRequestReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.core.model.RsaRequestModel"/>
 		<property name="populators">
 			<list merge="true">
-				<ref bean="serviceRequestReversePopulator" />
+				<ref bean="rsaRequestReversePopulator" />
 			</list>
 		</property>
 	</bean>
 	<bean id="roadsideAssistanceFacade" class="com.alsayer.facades.roadsideassistance.impl.DefaultRoadSideAssistanceFacade" >
 		<property name="roadSideAssistanceService" ref="roadSideAssistanceService"/>
-		<property name="serviceRequestReverseConverter" ref="serviceRequestReverseConverter"/>
+		<property name="rsaRequestReverseConverter" ref="rsaRequestReverseConverter"/>
 		<property name="driverDetailsConverter" ref="driverDetailsConverter"/>
 	</bean>
 
@@ -242,17 +242,17 @@
 		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
 	</bean>
 
-	<bean id="serviceRequestPopulator" class="com.alsayer.facades.populators.ServiceRequestPopulator">
+	<bean id="rsaRequestPopulator" class="com.alsayer.facades.populators.RsaRequestPopulator">
 		<property name="i18nService" ref="i18nService"/>
 		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
 		<property name="driverDetailsConverter" ref="driverDetailsConverter"/>
 	</bean>
 
-	<bean id="serviceRequestConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.alsayer.facades.data.ServiceRequestData"/>
+	<bean id="rsaRequestConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.RsaRequestData"/>
 		<property name="populators">
 			<list merge="true">
-				<ref bean="serviceRequestPopulator" />
+				<ref bean="rsaRequestPopulator" />
 			</list>
 		</property>
 	</bean>

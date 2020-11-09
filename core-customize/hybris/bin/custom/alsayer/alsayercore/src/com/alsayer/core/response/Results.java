@@ -16,6 +16,9 @@ public class Results {
     @JsonProperty("mobile")
     String mobile;
 
+    @JsonProperty("email")
+    String email;
+
     @Override
     public String toString() {
         return "Results{" +
@@ -24,6 +27,7 @@ public class Results {
                 ", name='" + name + '\'' +
                 ", namearabic='" + namearabic + '\'' +
                 ", mobile='" + mobile + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
@@ -65,5 +69,13 @@ public class Results {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

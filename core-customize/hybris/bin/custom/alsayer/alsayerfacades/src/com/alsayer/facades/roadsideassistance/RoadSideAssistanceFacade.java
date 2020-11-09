@@ -1,13 +1,13 @@
 package com.alsayer.facades.roadsideassistance;
 
 import com.alsayer.facades.data.DriverDetailsData;
-import com.alsayer.facades.data.ServiceRequestData;
+import com.alsayer.facades.data.RsaRequestData;
 import com.alsayer.facades.data.VehicleData;
 
 import java.util.List;
 
 public interface RoadSideAssistanceFacade {
-    public void  storeServiceRequest(ServiceRequestData data);
+    public void  storeServiceRequest(RsaRequestData data);
     public DriverDetailsData getDriverDetails();
 }
 

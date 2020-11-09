@@ -56,33 +56,33 @@
     </enumtypes>
 
     <relations>
-        <relation code="CustomerToServiceRequests" localized="false" autocreate="true">
+        <relation code="CustomerToRsaRequests" localized="false" autocreate="true">
             <sourceElement type="Customer" qualifier="customer" cardinality="one" >
-                <modifiers read="true" write="true" search="true" optional="true" />
+                <modifiers read="true" write="true" optional="true" />
             </sourceElement>
-            <targetElement type="ServiceRequest" qualifier="serviceRequests" cardinality="many" collectiontype="list">
-                <modifiers read="true" write="true" search="true" optional="true" />
+            <targetElement type="RsaRequest" qualifier="rsaRequests" cardinality="many" collectiontype="list">
+                <modifiers read="true" write="true" optional="true" />
             </targetElement>
         </relation>
 
 
         <relation code="CustomerVehicleRelation" localized="false" autocreate="true">
             <sourceElement type="Customer" qualifier="customer" cardinality="one" >
-                <modifiers read="true" write="true" search="true" optional="true" />
+                <modifiers read="true" write="true" optional="true" />
             </sourceElement>
              <targetElement type="Vehicle" qualifier="vehicle" cardinality="many" collectiontype="list">
-                 <modifiers read="true" write="true" search="true" optional="true" />
+                 <modifiers read="true" write="true"  optional="true" />
              </targetElement>
         </relation>
 
         <!--Process Relations-->
-        <relation  localized="false" code="ServiceRequest2ServiceRequestProcess" autocreate="true">
-            <sourceElement type="ServiceRequest" cardinality="one"
-                           qualifier="serviceRequest">
+        <relation  localized="false" code="RsaRequest2RsaRequestProcess" autocreate="true">
+            <sourceElement type="RsaRequest" cardinality="one"
+                           qualifier="rsaRequest">
                 <modifiers initial="true" optional="true" />
             </sourceElement>
-            <targetElement type="ServiceRequestProcess" cardinality="many"
-                           qualifier="serviceRequestProcesses">
+            <targetElement type="RsaRequestProcess" cardinality="many"
+                           qualifier="rsaRequestProcesses">
                 <modifiers initial="true" optional="true" />
             </targetElement>
         </relation>
@@ -203,6 +203,16 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="warrantyType" type="java.lang.String">
+                        <description>Model of car</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="warrantyExpiryDate" type="java.util.Date">
+                        <description>Model of car</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
 
                 </attributes>
             </itemtype>
@@ -210,11 +220,16 @@
                 <attributes>
                     <attribute qualifier="vehicles" type="vehicleList">
                         <description>Vehicle owned by Customer</description>
-                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <modifiers read="true" write="true"  optional="true"/>
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="civilId" type="java.lang.String">
                         <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="eccCustId" type="java.lang.String">
+                        <description>ECC Customer Id</description>
                         <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
@@ -236,17 +251,17 @@
                 <attributes>
                     <attribute qualifier="oneTimePassword" type="java.lang.String">
                         <description>Driver Name</description>
-                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="civilId" type="java.lang.String">
                         <description>Location of Driver: Latitude</description>
-                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="jsessionId" type="java.lang.String">
                         <description>Location of Driver: Longitude</description>
-                        <modifiers read="true" write="true" optional="true" search="true"/>
+                        <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
                 </attributes>
@@ -277,8 +292,8 @@
         </typegroup>
 
         <typegroup name="RSA">
-            <itemtype code="ServiceRequest" autocreate="true" generate="true" jaloclass="com.alsayer.core.jalo.ServiceRequest">
-                <deployment table="ServiceRequest" typecode="12003"/>
+            <itemtype code="RsaRequest" autocreate="true" generate="true" jaloclass="com.alsayer.core.jalo.RsaRequest">
+                <deployment table="RsaRequest" typecode="13003"/>
                 <attributes>
                     <attribute qualifier="uid" type="java.lang.String">
                         <description>Service Request unique ID</description>
@@ -328,16 +343,6 @@
                     <attribute qualifier="attachments" type="java.lang.String">
                         <persistence type="property" />
                         <description>It is a media container with additional images of the issue.</description>
-                        <modifiers read="true" write="true" optional="true" />
-                    </attribute>
-                    <attribute qualifier="serviceDate" type="java.util.Date" >
-                        <persistence type="property" />
-                        <description>Date of Service</description>
-                        <modifiers read="true" write="true" search="true" optional="true" />
-                    </attribute>
-                    <attribute qualifier="mileage" type="java.lang.Integer">
-                        <persistence type="property" />
-                        <description>Mileage at time of service</description>
                         <modifiers read="true" write="true" optional="true" />
                     </attribute>
 
@@ -392,8 +397,8 @@
                 </attributes>
             </itemtype>
 
-            <itemtype code="ServiceRequestProcess" autocreate="true"
-                      generate="true" jaloclass="com.alsayer.core.jalo.ServiceRequestProcess"
+            <itemtype code="RsaRequestProcess" autocreate="true"
+                      generate="true" jaloclass="com.alsayer.core.jalo.RsaRequestProcess"
                       extends="BusinessProcess">
                 <attributes>
                     <attribute qualifier="done" type="boolean">

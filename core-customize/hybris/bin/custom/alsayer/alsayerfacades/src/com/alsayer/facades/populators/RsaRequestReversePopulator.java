@@ -2,10 +2,10 @@ package com.alsayer.facades.populators;
 
 import com.alsayer.core.enums.IssueType;
 import com.alsayer.core.enums.ServiceStatus;
-import com.alsayer.core.model.ServiceRequestModel;
+import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.model.VehicleModel;
 import com.alsayer.core.vehicles.services.MyVehiclesService;
-import com.alsayer.facades.data.ServiceRequestData;
+import com.alsayer.facades.data.RsaRequestData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
@@ -14,7 +14,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 
 import java.util.UUID;
 
-public class ServiceRequestReversePopulator implements Populator<ServiceRequestData, ServiceRequestModel> {
+public class RsaRequestReversePopulator implements Populator<RsaRequestData, RsaRequestModel> {
 
     private UserService userService;
 
@@ -24,7 +24,7 @@ public class ServiceRequestReversePopulator implements Populator<ServiceRequestD
 
 
     @Override
-    public void populate(ServiceRequestData serviceRequestData, ServiceRequestModel serviceRequestModel) throws ConversionException {
+    public void populate(RsaRequestData serviceRequestData, RsaRequestModel serviceRequestModel) throws ConversionException {
 
         String vehicle_uid=serviceRequestData.getVehicle().getUid();
         String issueType=serviceRequestData.getIssue();

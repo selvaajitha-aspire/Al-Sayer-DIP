@@ -17,14 +17,20 @@ export class RegisterService {
     }) 
   };
   
+  sendOtpOnMobile(mobile,civilId){
+    let url = this.url.getUrl('sendOTP') + civilId;
+    this.http.post(url, mobile, this.httpOptions).toPromise()
+    .then(data => {
+    });
+  }
 
 
   getECCCustomerDetails(civilId): Promise<any> 
   {  
-    let params = new HttpParams().set("civilId",civilId)
     return new Promise((resolve,reject)=>{
-      this.http.get<any>(this.url.getUrl('getEccCustomer',{params: params}),this.httpOptions).toPromise().then((res:any) =>{
-          resolve({name: res.name, arabicName: res.arabicName,mobile : res.mobile})
+      let url = this.url.getUrl('getEccCustomer')+civilId;
+      this.http.get<any>(url,this.httpOptions).toPromise().then((res:any) =>{
+          resolve({civilId: res.civilId,eccCustId: res.eccCustId,name: res.name, arabicName: res.arabicName,mobile : res.mobile})
       },
       err => {
         reject(err);
@@ -33,7 +39,7 @@ export class RegisterService {
   }
 
   register(registerData){
-    this.http.post(this.url.getUrl('registerCustomer'), registerData,).toPromise()
+    this.http.post(this.url.getUrl('registerCustomer'), registerData).toPromise()
     .then(data => {
     });
   }

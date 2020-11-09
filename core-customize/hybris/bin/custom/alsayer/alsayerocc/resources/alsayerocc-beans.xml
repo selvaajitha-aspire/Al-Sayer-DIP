@@ -41,6 +41,8 @@
     </bean>
 
     <bean class="com.alsayer.occ.dto.ECCCustomerWsDTO">
+        <property name="civilId" type="String"/>
+        <property name="eccCustId" type="String"/>
         <property name="name" type="String"/>
         <property name="arabicName" type="String"/>
         <property name="mobile" type="String"/>
@@ -62,6 +64,7 @@
             <hint name="alias">UserSignUp</hint>
         </hints>
         <property name="civilId" type="String"/>
+        <property name="eccCustId" type="String"/>
         <property name="name" type="String"/>
         <property name="arabicName" type="String"/>
         <property name="mobile" type="String"/>
@@ -91,16 +94,13 @@
             </hints>
         </property>
     </bean>
-	<bean class="com.alsayer.occ.dto.ServiceWsDTO">
+	<bean class="com.alsayer.occ.dto.RsaRequestWsDTO">
 		<property name="vehicle" type="com.alsayer.occ.dto.VehicleWsDTO"/>
 		<property name="issue" type="String"/>
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 		<property name="notes" type="String"/>
 		<property name="attachments" type="String"/>
-<!--    <property name="customer" type="de.hybris.platform.commercefacades.user.data.CustomerData" />-->
-		<property name="serviceDate" type="java.util.Date" />
-		<property name="mileage" type="java.lang.Integer" />
 		<property name="driverDetails" type="com.alsayer.occ.dto.DriverDetailsWsDTO" />
 		<property name="type" type="java.lang.String" />
 		<property name="status" type="String" />
@@ -116,10 +116,16 @@
 		<property name="uid" type="String"/>
 		<property name="model" type="String"/>
 		<property name="chassisNumber" type="String"/>
+        <property name="warrantyType" type="String"/>
+        <property name="warrantyExpiryDate" type="java.util.Date"/>
 	</bean>
 
 	<bean class="com.alsayer.occ.dto.VehicleListWsDTO">
 		<property name="vehicleList" type="java.util.List&lt;com.alsayer.occ.dto.VehicleWsDTO>"/>
 	</bean>
+
+    <bean class="com.alsayer.occ.dto.RsaRequestListWsDTO">
+        <property name="rsaRequestsList" type="java.util.List&lt;com.alsayer.occ.dto.RsaRequestWsDTO>"/>
+    </bean>
 
 </beans>

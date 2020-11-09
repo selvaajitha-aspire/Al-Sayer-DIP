@@ -1,10 +1,9 @@
 package com.alsayer.core.roadsideassistance.daos.impl;
 
-import com.alsayer.core.event.rsa.ServiceRequestStartEvent;
+import com.alsayer.core.event.rsa.RsaRequestStartEvent;
 import com.alsayer.core.model.DriverDetailsModel;
-import com.alsayer.core.model.ServiceRequestModel;
-import com.alsayer.core.model.ServiceRequestProcessModel;
-import com.alsayer.core.model.VehicleModel;
+import com.alsayer.core.model.RsaRequestModel;
+import com.alsayer.core.model.RsaRequestProcessModel;
 import com.alsayer.core.roadsideassistance.daos.RoadSideAssistanceDao;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
@@ -28,23 +27,23 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
     private FlexibleSearchService flexibleSearchService;
 
     private static final String DRIVER_DETAILS_QUERY= "SELECT {s.pk}"
-            + " FROM {" + ServiceRequestModel._TYPECODE + " as s}"
-            + " WHERE {s."+ServiceRequestModel.UID + "} = ?uid";
+            + " FROM {" + RsaRequestModel._TYPECODE + " as s}"
+            + " WHERE {s."+RsaRequestModel.UID + "} = ?uid";
 
     final StringBuilder builder = new StringBuilder(DRIVER_DETAILS_QUERY);
 
 
 
     @Override
-    public boolean saveServiceRequestinDB(ServiceRequestModel serviceRequest) {
+    public boolean saveServiceRequestinDB(RsaRequestModel serviceRequest) {
         Boolean saved=true;
         try {
             lastServiceRequestUid=serviceRequest.getUid();
            getModelService().save(serviceRequest);
-            ServiceRequestProcessModel process= new ServiceRequestProcessModel();
-            process.setServiceRequest(serviceRequest);
+            RsaRequestProcessModel process= new RsaRequestProcessModel();
+            process.setRsaRequest(serviceRequest);
             process.setServiceState(serviceRequest.getStatus());
-            getEventService().publishEvent(new ServiceRequestStartEvent(process));
+            getEventService().publishEvent(new RsaRequestStartEvent(process));
         }
         catch (final Exception e)
         {
@@ -64,7 +63,7 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
     public DriverDetailsModel getDriverDeatailsFromServiceRequest(){
         final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
         query.addQueryParameter("uid", lastServiceRequestUid);
-        final SearchResult<ServiceRequestModel> result = getFlexibleSearchService().search(query);
+        final SearchResult<RsaRequestModel> result = getFlexibleSearchService().search(query);
         return result.getResult()!=null?result.getResult().get(0).getDriverDetails():null;
     }
 
