@@ -45,7 +45,9 @@ export class RoadsideAssistanceComponent implements OnInit {
   geocoder = new google.maps.Geocoder();
   rsaForm: FormGroup = this.fb.group(
     {
-      vehicle: ['',Validators.required],
+      vehicle: this.fb.group({
+        uid:['',Validators.required]
+      }),
       issue: ['',Validators.required],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
