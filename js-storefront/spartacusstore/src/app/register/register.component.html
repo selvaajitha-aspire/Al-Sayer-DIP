@@ -3,7 +3,8 @@
 <div class="row justify-content-center">
   <div class="col-md-6">
     <div class="section">
-      <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm" >
+      <!-- <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm > -->
+        <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm" >
         <div class="form-group">
           <label>
             <span class="label-content">Register</span>
@@ -197,6 +198,7 @@
 </div>
 </section>
 
+
 <div class="modal fade" id="otpPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -212,7 +214,7 @@
               class="form-control"
               type="text"
               name="oneTimePassword"
-             [(ngModel)]="oneTimePassword" 
+             [(ngModel)]="oneTimePassword"
             />
           </label>
         </div>
@@ -222,4 +224,7 @@
         </div>
       </div>
     </div>
-</div> 
+</div>
+
+<p>Form value: {{ registerForm.value | json }}</p>
+  <p>Form valid: {{ registerForm.valid }}</p>

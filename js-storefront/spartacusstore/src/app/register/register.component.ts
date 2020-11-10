@@ -174,16 +174,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   collectDataFromRegisterForm(formData: any): UserRegister {
-    const { civilId,eccCustId, name, arabicName, mobile, email, password, titleCode } = formData;  
-    const oneTimePassword=this.oneTimePassword; 
+    const { civilId,eccCustId, name, arabicName, mobile, email, password, titleCode } = formData;
+    const oneTimePassword=this.oneTimePassword;
     return {
       civilId,
       eccCustId,
       name,
       arabicName,
-      mobile,
       oneTimePassword,
-      uid: email.toLowerCase(),
+      mobile,
+      uid : email ? email.toLowerCase() : "",
       password,
       titleCode,
     };
@@ -201,7 +201,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.registerForm.get('name').patchValue(`${pos.name}`);
           this.registerForm.get('arabicName').patchValue(`${pos.arabicName}`);
           this.registerForm.get('mobile').patchValue(`${pos.mobile}`);
-          if(email != null){
+          if(email && email != null){
           this.registerForm.get('email').patchValue(email);}
         })   
     }

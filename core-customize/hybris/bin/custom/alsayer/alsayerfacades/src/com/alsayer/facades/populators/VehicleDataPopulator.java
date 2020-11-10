@@ -9,8 +9,10 @@ public class VehicleDataPopulator implements Populator<VehicleModel, VehicleData
     @Override
     public void populate(VehicleModel source, VehicleData target) throws ConversionException {
         if(source!=null){
-            target.setUid(source.getUid());
-            target.setModel(source.getModel());
+            target.setPlateNumber(source.getPlateNumber());
+            target.setModline(source.getModline());
+            target.setModyear(source.getModyear());
+            target.setStatus(source.getStatus());
             target.setChassisNumber(source.getChassisNumber());
             target.setWarrantyType(source.getWarrantyType());
             target.setWarrantyExpiryDate(source.getWarrantyExpiryDate());
