@@ -13,8 +13,7 @@ import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assista
 import { HomePageModule } from './home-page-components/home-page.module';
 import { HeaderMenuComponent } from './home-page-components/header/header-menu/header-menu.component';
 import { SigninMenuComponent } from './home-page-components/header/signin-menu/signin-menu.component';
-import { MyTicketsComponent } from './my-tickets/my-tickets.component';
-import { MyTicketsModule } from './my-tickets/my-tickets.module';
+import { FooterComponent } from './home-page-components/footer/footer.component';
 
 const occConfig: OccConfig = { backend: { occ: {} } };
 
@@ -36,7 +35,8 @@ else {
   declarations: [
     AppComponent,
     SigninMenuComponent,
-    HeaderMenuComponent
+    HeaderMenuComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +84,6 @@ else {
     RoadsideAssistanceModule,
     RegisterModule,
     MyVehiclesModule,
-    MyTicketsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

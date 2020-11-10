@@ -88,6 +88,16 @@ cx-navigation-ui h5{
     font-weight: bold;
     margin-bottom: 20px;
 }
+
+cx-page-layout {
+    display: inline !important;
+    width: auto !important;
+}
+
+.LoginPageTemplate cx-page-slot, .CheckoutLoginPageTemplate cx-page-slot, .AccountPageTemplate cx-page-slot {
+    max-width: inherit !important;
+    padding: 0 !important;
+}
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,
