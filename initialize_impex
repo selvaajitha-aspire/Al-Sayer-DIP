@@ -107,10 +107,10 @@ UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media
 ;;ServiceAppointmentComponent;Tile8.jpg;"Service Appointment";
 
 
-INSERT_UPDATE Customer;groups(uid);uid[unique=true];name;customerId;password;vehicles(uid);rsaRequests(uid)
-;customergroup;keenreviewer14@hybris.com;Stefan Reviewer;keenreviewer0@hybris.com;1234;vehicle1,vehicle2;f53d20ac-3ff4-4456-b32a-9d25788e57cf
-INSERT_UPDATE Vehicle;uid[unique=true];model;chassisNumber;warrantyType;warrantyExpiryDate
-;vehicle1;Toyota Camry;KW1000001;"12-MNSS - TOY - Extended Warranty - SERVICE";Mar 22, 2018 5:06:07 AM
-;vehicle2;Toyota Corolla;KW1000002;"08-MNSS - OEM Warranty";Aug 22, 2019 5:06:07 AM
-INSERT_UPDATE RsaRequest;uid[unique=true];vehicle(uid);status(code);type;issue(code);latitude;longitude;notes[lang=en]
-;f53d20ac-3ff4-4456-b32a-9d25788e57cf;vehicle1;STARTED;MUSAADA;DEAD_BATTERY;73.9838868;18.5767007;"Two tyres got burst"
+INSERT_UPDATE Customer;groups(uid);uid[unique=true];name;customerId;password;vehicles(chassisNumber);rsaRequests(uid)
+;customergroup;keenreviewer14@hybris.com;Stefan Reviewer;keenreviewer0@hybris.com;1234;KW1000001,KW1000002;f53d20ac-3ff4-4456-b32a-9d25788e57cf
+INSERT_UPDATE Vehicle;modline;modyear;chassisNumber[unique=true];warrantyType;warrantyExpiryDate
+;Toyota Camry;2017;KW1000001;"12-MNSS - TOY - Extended Warranty - SERVICE";Mar 22, 2018 5:06:07 AM
+;Toyota Corolla;2018;KW1000002;"08-MNSS - OEM Warranty";Aug 22, 2019 5:06:07 AM
+INSERT_UPDATE RsaRequest;uid[unique=true];vehicle(chassisNumber);status(code);type;issue(code);latitude;longitude;notes[lang=en]
+;f53d20ac-3ff4-4456-b32a-9d25788e57cf;KW1000001;STARTED;MUSAADA;DEAD_BATTERY;73.9838868;18.5767007;"Two tyres got burst"
