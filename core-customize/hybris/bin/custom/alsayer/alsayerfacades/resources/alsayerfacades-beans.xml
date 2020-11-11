@@ -19,7 +19,7 @@
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 		<property name="notes" type="String"/>
-		<property name="attachments" type="String"/>
+		<property name="attachments" type="java.util.Collection&lt;de.hybris.platform.cmsfacades.data.MediaData&gt;"/>
 		<property name="customer" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
 		<property name="driverDetails" type="com.alsayer.facades.data.DriverDetailsData" />
 		<property name="type" type="java.lang.String" />
@@ -32,8 +32,6 @@
 		<property name="modline" type="String"/>
 		<property name="modyear" type="String"/>
 		<property name="plateNumber" type="String"/>
-		<property name="warrantyType" type="String"/>
-		<property name="warrantyExpiryDate" type="java.util.Date"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
@@ -61,5 +59,6 @@
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 	</bean>
+
 
 </beans>

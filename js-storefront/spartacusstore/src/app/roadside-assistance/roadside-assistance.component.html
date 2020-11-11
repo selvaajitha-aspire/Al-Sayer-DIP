@@ -19,7 +19,7 @@
               <option
                   *ngFor="let vehicle of vehicles$ "
                   [value]="vehicle.chassisNumber"
-                  >{{vehicle.model}} ,{{vehicle.chassisNumber}}</option>
+                  >{{vehicle.modline}} ,{{vehicle.chassisNumber}}</option>
               </select>
               </fieldset>
               <cx-form-errors
@@ -99,7 +99,8 @@
                 class="form-control mt-1"
                 type="file" id="myFile"
                 name="attachments"
-                formControlName="attachments"
+                
+                (change)="onFileSelect($event)"
               />
               <cx-form-errors
                   [control]="rsaForm.get('attachments')"
@@ -130,7 +131,7 @@
 </div> 
 
 
-   <!-- <p>Form value: {{ rsaForm.value | json }}</p>
-  <p>Form valid: {{ rsaForm.valid }}</p>  -->
+    <p>Form value: {{ rsaForm.value | json }}</p>
+  <p>Form valid: {{ rsaForm.valid }}</p>  
   
  

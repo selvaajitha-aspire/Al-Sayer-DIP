@@ -330,7 +330,7 @@
 
 	<bean id="getCustomerDetails" class="com.alsayer.core.customer.services.GetCustomerDetails">
 		<property name="configurationService" ref="configurationService"/>
-		<property name="userService" ref="userService"/>
+
 		<property name="modelService" ref="modelService"/>
 	</bean>
 

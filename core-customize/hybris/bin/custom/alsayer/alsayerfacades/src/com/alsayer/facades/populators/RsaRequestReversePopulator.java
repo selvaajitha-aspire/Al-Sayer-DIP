@@ -6,21 +6,33 @@ import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.model.VehicleModel;
 import com.alsayer.core.vehicles.services.MyVehiclesService;
 import com.alsayer.facades.data.RsaRequestData;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
+import de.hybris.platform.cmsfacades.data.MediaContainerData;
+import de.hybris.platform.cmsfacades.data.MediaData;
 import de.hybris.platform.converters.Populator;
+import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.user.UserService;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public class RsaRequestReversePopulator implements Populator<RsaRequestData, RsaRequestModel> {
 
     private UserService userService;
 
+    private Converter<MediaContainerData, MediaContainerModel> ReverseConverter;
     private MyVehiclesService myVehiclesService;
 
     private I18NService i18nService;
+
+    /** The media model converter. */
+    private Converter<MediaData,CatalogUnawareMediaModel> mediaModelConverter;
 
 
     @Override
@@ -45,7 +57,16 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
         serviceRequestModel.setLatitude(serviceRequestData.getLatitude());
         serviceRequestModel.setLongitude(serviceRequestData.getLongitude());
         serviceRequestModel.setNotes(serviceRequestData.getNotes(), getI18nService().getCurrentLocale());
-        serviceRequestModel.setAttachments(serviceRequestData.getAttachments());
+        final List<CatalogUnawareMediaModel> unAwareMediaModel = new ArrayList();
+        final Collection<MediaData> attachments = serviceRequestData.getAttachments();
+        if (attachments != null) {
+            for (final MediaData media : attachments) {
+                unAwareMediaModel.add(getMediaModelConverter().convert(media));
+
+            }
+            serviceRequestModel.setAttachments(unAwareMediaModel);
+        }
+
     }
 
     private VehicleModel getVehicleByChassis(String chassisNumber) {
@@ -76,4 +97,14 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
     public void setI18nService(I18NService i18nService) {
         this.i18nService = i18nService;
     }
+
+    public Converter<MediaData, CatalogUnawareMediaModel> getMediaModelConverter() {
+        return mediaModelConverter;
+    }
+
+    public void setMediaModelConverter(Converter<MediaData, CatalogUnawareMediaModel> mediaModelConverter) {
+        this.mediaModelConverter = mediaModelConverter;
+    }
 }
+
+

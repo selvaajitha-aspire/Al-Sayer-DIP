@@ -2,9 +2,6 @@
 package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
-import com.alsayer.occ.Reaponse.E_Vehicle_Info;
-import com.alsayer.occ.Reaponse.EccVehicleDetailsResponse;
-import com.alsayer.occ.Reaponse.VehicleResults;
 import com.alsayer.occ.constants.AlsayeroccConstants;
 import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
 import com.alsayer.occ.dto.CustomerRegistrationResultDTO;
@@ -45,8 +42,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -90,25 +85,6 @@ public class CustomerRegistrationController
     private static final String BASIC_FIELD_SET = "BASIC";
 
 
-    @RequestMapping(value = "/getResponseBody",method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    @ResponseStatus(value = HttpStatus.CREATED)
-    @ResponseBody
-    @ApiOperation(value = "Send otp to customer's mobile no", notes = "OTP wil be sent on the number given by the user")
-    @ApiBaseSiteIdParam
-    public EccVehicleDetailsResponse  getResponseBody( @ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
-    {
-        EccVehicleDetailsResponse response=new EccVehicleDetailsResponse();
-
-        E_Vehicle_Info e_vehicle_info=new E_Vehicle_Info();
-        VehicleResults vehicleResults=new VehicleResults();
-        List<VehicleResults>  vehicleResultsList=new LinkedList<>();
-        vehicleResultsList.add(vehicleResults);
-        e_vehicle_info.setVehicleResultsList(vehicleResultsList);
-        response.setE_vehicle_info(e_vehicle_info);
-return response;
-    }
-
-
     @RequestMapping(value = "/sendOTP/{id}",method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
@@ -134,7 +110,7 @@ return response;
 
 
     @Secured({ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT" })
-    @RequestMapping(value = "/activateUser", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/activateUser", method = RequestMethod.GET, consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody

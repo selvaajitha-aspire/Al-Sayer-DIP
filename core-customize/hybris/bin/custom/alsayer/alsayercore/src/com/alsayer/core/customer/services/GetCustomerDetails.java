@@ -2,17 +2,19 @@ package com.alsayer.core.customer.services;
 
 import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.core.model.VehicleModel;
-import com.alsayer.core.response.*;
-import com.alsayer.occ.dto.ECCCustomerWsDTO;
+import com.alsayer.core.model.WarrantyModel;
+import com.alsayer.core.response.E_Vehicle_Info;
+import com.alsayer.core.response.E_wty_info;
+import com.alsayer.core.response.EccVehicleDetailsResponse;
+import com.alsayer.core.response.EccWarrantyResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.hybris.platform.commerceservices.model.process.StoreFrontCustomerProcessModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
-import de.hybris.platform.processengine.model.BusinessProcessModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
-import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.task.RetryLaterException;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -24,56 +26,57 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class GetCustomerDetails  extends AbstractSimpleDecisionAction {
+public class GetCustomerDetails  extends AbstractSimpleDecisionAction<StoreFrontCustomerProcessModel>  {
 
     private static final Logger LOG = Logger.getLogger(GetCustomerDetails.class);
     protected static final String HEADER_AUTH_KEY = "Authorization";
     protected static final String HEDER_AUTH_VALUE = "Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=";
+    protected static final String EVEHICLESET= "E_Vehicle_Info";
+    protected static final String EWTYSET="E_wty_info";
+    protected static final String CIVILID ="civilid";
+    protected static final String CHASSIS_NO="vhvin";
     public final String vehicleInfoUrl = AlsayerCoreConstants.SCPI_VEHICLE_INFO_URL;
     public final String wtyInfoUrl=AlsayerCoreConstants.SCPI_WTY_INFO_URL;
 
 
     private ConfigurationService configurationService;
-    private UserService userService;
+
     private ModelService modelService;
 
 
 
 
     @Override
-    public Transition executeAction(BusinessProcessModel businessProcessModel) throws RetryLaterException, Exception {
+    public Transition executeAction(StoreFrontCustomerProcessModel businessProcessModel) throws RetryLaterException, Exception {
 
-
+        CustomerModel customer= businessProcessModel.getCustomer();
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         RestTemplate restTemplate  = new RestTemplate(requestFactory);
-        ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
         HttpHeaders headers = new HttpHeaders();
         headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        Map<String, Object> map = new HashMap<>();
-        //map.put("civilId",  currentUser.getCivilId());
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("civilid","290100903547");
+        jsonObject.put(CIVILID,customer.getCivilId());
         JSONArray jsonArray = new JSONArray();
         jsonArray.add(jsonObject);
 
         JSONObject finalObj = new JSONObject();
-        finalObj.put("E_Vehicle_Info",jsonArray);
+        finalObj.put(EVEHICLESET,jsonArray);
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
-        System.out.println("enity : " + entity.getBody());
-
         ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(vehicleInfoUrl), entity, String.class);
-        LOG.info("GetCustomerDetails: it came in the process and fetched details" + response.getBody());
+        LOG.debug("customerRegistrationEmailProcess started" + response.getBody());
         ObjectMapper objectMapper=new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        CustomerModel customer= (CustomerModel) getUserService().getCurrentUser();
-        //getVehicleWarranty();
+
+
         try {
 
             EccVehicleDetailsResponse responseBody =objectMapper.readValue(response.getBody(), EccVehicleDetailsResponse.class);
@@ -92,9 +95,10 @@ public class GetCustomerDetails  extends AbstractSimpleDecisionAction {
                 }
                if(!vehicleList.isEmpty())
                {
-                   customer.setVehicle(vehicleList);
-                   modelService.save(customer);
 
+                  customer.setVehicles(vehicleList);
+                  modelService.save(customer);
+                  getVehicleWarranty(customer);
                }
             }
         }catch (JsonProcessingException ex){
@@ -105,51 +109,50 @@ public class GetCustomerDetails  extends AbstractSimpleDecisionAction {
 
     }
 
-    private void getVehicleWarranty() {
+    private void getVehicleWarranty(CustomerModel customerModel) {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         RestTemplate restTemplate  = new RestTemplate(requestFactory);
-        ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
+        headers.add(HEADER_AUTH_KEY, HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        Map<String, Object> map = new HashMap<>();
-        //map.put("civilId",  currentUser.getCivilId());
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("vhvin","UMNSSTESTVIN1");
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.add(jsonObject);
+        for(VehicleModel vehicle:customerModel.getVehicles()) {
+           // jsonObject.put(CHASSIS_NO, "UMNSSTESTVIN1");
+            jsonObject.put(CHASSIS_NO, vehicle.getChassisNumber());
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.add(jsonObject);
 
-        JSONObject finalObj = new JSONObject();
-        finalObj.put("E_wty_info",jsonArray);
+            JSONObject finalObj = new JSONObject();
+            finalObj.put(EWTYSET, jsonArray);
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
-        System.out.println("enity : " + entity.getBody());
+            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
+            ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(wtyInfoUrl), entity, String.class);
+            LOG.debug("Warranty Details " + response.getBody());
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(wtyInfoUrl), entity, String.class);
-        LOG.info("it came in the process and fetched details" + response.getBody());
-        ObjectMapper objectMapper=new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            try {
 
-        try {
+                EccWarrantyResponse responseBody = objectMapper.readValue(response.getBody(), EccWarrantyResponse.class);
+                List<E_wty_info> warrantyResults = responseBody.geteWtyInfo();
+                List<WarrantyModel> warrantyModelList=new ArrayList<>();
+                for(E_wty_info warranty: warrantyResults) {
+                    WarrantyModel warrantyModel=new WarrantyModel();
+                    warrantyModel.setWarrantyType(warranty.getDescription());
+                    warrantyModel.setWarrantyExpiryDate( new SimpleDateFormat("MMM d, yyyy h:mm:ss a").parse(warranty.getWty_e_date()));
+                    warrantyModelList.add(warrantyModel);
+                }
+                vehicle.setWarranties(warrantyModelList);
+                getModelService().save(vehicle);
 
-            EccWarrantyResponse responseBody =objectMapper.readValue(response.getBody(), EccWarrantyResponse.class);
-            LOG.info("ECC Response 1 : " + responseBody.geteWtyInfo().getWarrantyResults().get(0).toString());
-            List<WarrantyResult> warrantyResults=responseBody.geteWtyInfo().getWarrantyResults();
-
-
-        }catch (JsonProcessingException ex){
-            ex.printStackTrace();
+            } catch (JsonProcessingException | ParseException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
 
-    public UserService getUserService() {
-        return userService;
-    }
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
 
 

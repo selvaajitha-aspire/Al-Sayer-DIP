@@ -1,5 +1,4 @@
 
-
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, NgZone } from '@angular/core';
 import {} from 'googlemaps';
 import {
@@ -298,13 +297,30 @@ getDuration(){
 //  });
 //  }
 //  }
+
+onFileSelect(event) {
+  if (event.target.files.length > 0) {
+    const attachments = event.target.files[0];
+    this.rsaForm.patchValue({
+      attachments: attachments
+    });
+    this.rsaForm.get('attachments').updateValueAndValidity();
+  }
+}
+
  submitForm(): void {
   if (this.rsaForm.valid) {
     console.log(this.rsaForm.value);
-    this.assistanceService.storeServiceRequest(this.rsaForm.value);
+    const formData = new FormData();
+    //formData.append('rsaRequestWsDTO',this.rsaForm.value);
+    formData.append('attachments', this.rsaForm.get('attachments').value);
+    this.assistanceService.storeServiceRequest(formData);
   } else {
     this.rsaForm.markAllAsTouched();
   }
 }
+
+
+
 
 }

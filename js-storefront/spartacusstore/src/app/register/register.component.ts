@@ -201,8 +201,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.registerForm.get('name').patchValue(`${pos.name}`);
           this.registerForm.get('arabicName').patchValue(`${pos.arabicName}`);
           this.registerForm.get('mobile').patchValue(`${pos.mobile}`);
-          if(email && email != null){
-          this.registerForm.get('email').patchValue(email);}
+         
         })   
     }
   }

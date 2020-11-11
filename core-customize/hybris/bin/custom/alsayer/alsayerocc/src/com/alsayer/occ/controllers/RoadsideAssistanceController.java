@@ -13,8 +13,11 @@ import com.alsayer.occ.dto.DriverDetailsWsDTO;
 import com.alsayer.occ.dto.ResponseWsDTO;
 import com.alsayer.occ.dto.RsaRequestWsDTO;
 import com.alsayer.facades.data.VehicleData;
+import de.hybris.platform.cmsfacades.data.MediaData;
+import de.hybris.platform.cmsfacades.dto.MediaFileDto;
 import de.hybris.platform.webservicescommons.dto.error.ErrorWsDTO;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
+import de.hybris.platform.webservicescommons.swagger.ApiBaseSiteIdAndUserIdParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -26,8 +29,13 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -51,21 +59,62 @@ public class RoadsideAssistanceController {
 
     private static final String BASIC_FIELD_SET = "BASIC";
 
+
+
+
+//    @Secured(
+//            {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP"})
+//    @RequestMapping(value = "/saveDetails", method = RequestMethod.POST,
+//            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @ResponseBody
+//    @ApiOperation(value = "", notes = "Services for logged in user")
+//    @ApiBaseSiteIdAndUserIdParam
+//    public ResponseWsDTO displayServiceDetails(@RequestBody
+//    final RsaRequestWsDTO data) {
+//        ResponseWsDTO response = new ResponseWsDTO();
+//        try {
+//            LOG.debug(data.toString() + "" + SUCCESS_STATUS);
+////            MediaFileDto media = null;
+////            if (null != attachments && attachments.getSize() > 0)
+////            {
+////                media = getFile(attachments, attachments.getInputStream());
+////            }
+//            response.setData("vehicleName:" + data.getVehicle() + " /problem:" + data.getIssue() + " /latitude:" + data.getLatitude().toString() + " /longitude:" + data.getLongitude().toString()+ " /notes:" + data.getNotes() + " /attachments:" +data.getAttachments());
+//            response.setStatus(SUCCESS_STATUS);
+//            response.setMessage(SUCCESS_MSG);
+//            roadsideAssistanceFacade.storeServiceRequest(storeServiceRequest(data));
+//        } catch (IllegalArgumentException ex) {
+//            LOG.error("failed to save details: ", ex.getMessage());
+//            ErrorWsDTO error = new ErrorWsDTO();
+//            response.setStatus(ERROR_STATUS);
+//            response.setMessage(ERROR_MSG);
+//            response.setErrors(ERROR_MSG);
+//        }
+//        return response;
+//    }
+
     @Secured(
             {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP"})
-    @RequestMapping(value = "/saveDetails", method = RequestMethod.POST,
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @RequestMapping(value = "/saveDetails", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     @ResponseBody
     @ApiOperation(value = "", notes = "Services for logged in user")
-    public ResponseWsDTO displayServiceDetails(@RequestBody RsaRequestWsDTO data) {
+    @ApiBaseSiteIdAndUserIdParam
+    public ResponseWsDTO displayServiceDetails(@ApiParam(value = "attachments", required = false)@RequestParam(value = "attachments", required = false)
+                                                   final MultipartFile attachments){
         ResponseWsDTO response = new ResponseWsDTO();
         try {
-            LOG.debug(data.toString() + "" + SUCCESS_STATUS);
-            response.setData("vehicleName:" + data.getVehicle() + " /problem:" + data.getIssue() + " /latitude:" + data.getLatitude().toString() + " /longitude:" + data.getLongitude().toString()+ " /notes:" + data.getNotes() + " /attachments:" + data.getAttachments());
+            //LOG.debug(data.toString() + "" + SUCCESS_STATUS);
+//            MediaFileDto media = null;
+//            if (null != attachments && attachments.getSize() > 0)
+//            {
+//                media = getFile(attachments, attachments.getInputStream());
+//            }
+            response.setData(attachments.getName());
             response.setStatus(SUCCESS_STATUS);
             response.setMessage(SUCCESS_MSG);
-            roadsideAssistanceFacade.storeServiceRequest(storeServiceRequest(data));
+            //roadsideAssistanceFacade.storeServiceRequest(storeServiceRequest(data));
         } catch (IllegalArgumentException ex) {
             LOG.error("failed to save details: ", ex.getMessage());
             ErrorWsDTO error = new ErrorWsDTO();
@@ -75,13 +124,26 @@ public class RoadsideAssistanceController {
         }
         return response;
     }
+    public MediaFileDto getFile(final MultipartFile file, final InputStream inputStream)
+    {
+        final MediaFileDto mediaFile = new MediaFileDto();
+        mediaFile.setInputStream(inputStream);
+        mediaFile.setName(file.getOriginalFilename());
+        mediaFile.setSize(file.getSize());
+        mediaFile.setMime(file.getContentType());
+        return mediaFile;
+    }
 
     private  RsaRequestData storeServiceRequest(RsaRequestWsDTO serviceWsDTO){
         RsaRequestData serviceRequestData=new RsaRequestData();
         BeanUtils.copyProperties(serviceWsDTO,serviceRequestData);
         VehicleData vehicleData = new VehicleData();
+
         BeanUtils.copyProperties(serviceWsDTO.getVehicle(),vehicleData);
         serviceRequestData.setVehicle(vehicleData);
+        List<MediaData> mediaDataList=new ArrayList<>();
+        BeanUtils.copyProperties(serviceWsDTO.getAttachments(),mediaDataList);
+        serviceRequestData.setAttachments(mediaDataList);
     return serviceRequestData;
     }
 

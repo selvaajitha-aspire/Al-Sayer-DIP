@@ -31,14 +31,24 @@ export class RoadsideAssistanceService {
     })
   };
 
+  httpMultipartOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'multipart/form-data'
+
+    })
+  };
+
   getVehicles(): Observable<any> {
       return this.http.get<any>(this.url.getUrl('getItems'), this.httpOptions).pipe(map(res => res['vehicleList']));
     }
     
   
 
-  storeServiceRequest(postData:any){
-    this.http.post(this.url.getUrl('saveItems'), postData,).toPromise()
+  storeServiceRequest(postData:FormData){
+   // const attachments=postData.get("attachments").valueOf();
+    let url = this.url.getUrl('saveItems');
+   
+    this.http.post(url,postData).toPromise()
     .then(data => {
     });
   }
