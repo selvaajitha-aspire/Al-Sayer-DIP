@@ -100,10 +100,7 @@
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 		<property name="notes" type="String"/>
-<!--		<property name="attachments" type="com.alsayer.occ.dto.MediaListWsDTO"/>-->
-        <property name="attachments" type="java.util.List&lt;de.hybris.platform.cmsocc.data.MediaWsDTO&gt;" />
-<!--        <property name="attachments" type="java.util.List&lt;org.springframework.web.multipart.MultipartFile&gt;" />-->
-
+        <property name="attachments" type="java.util.List&lt;de.hybris.platform.cmsfacades.dto.MediaFileDto&gt;" />
 		<property name="driverDetails" type="com.alsayer.occ.dto.DriverDetailsWsDTO" />
 		<property name="type" type="java.lang.String" />
 		<property name="status" type="String" />
@@ -129,22 +126,6 @@
     <bean class="com.alsayer.occ.dto.RsaRequestListWsDTO">
         <property name="rsaRequestsList" type="java.util.List&lt;com.alsayer.occ.dto.RsaRequestWsDTO>"/>
     </bean>
-    <bean class="com.alsayer.occ.dto.MediaWsDTO">
-        <hints>
-            <hint name="wsRelated"/>
-        </hints>
-        <property name="code" type="String" />
-        <property name="catalogId" type="String" />
-        <property name="catalogVersion" type="String" />
-        <property name="mime" type="String" />
-        <property name="altText" type="String" />
-        <property name="description" type="String" />
-        <property name="url" type="String" />
-        <property name="downloadUrl" type="String" />
-    </bean>
 
-    <bean class="com.alsayer.occ.dto.MediaListWsDTO">
-        <property name="mediaList" type="java.util.List&lt;com.alsayer.occ.dto.MediaWsDTO>"/>
-    </bean>
 
 </beans>

@@ -31,12 +31,6 @@ export class RoadsideAssistanceService {
     })
   };
 
-  httpMultipartOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'multipart/form-data'
-
-    })
-  };
 
   getVehicles(): Observable<any> {
       return this.http.get<any>(this.url.getUrl('getItems'), this.httpOptions).pipe(map(res => res['vehicleList']));

@@ -34,6 +34,7 @@ export class RoadsideAssistanceComponent implements OnInit {
   marker1:google.maps.Marker;
   marker2:google.maps.Marker;
   public IssueTypes = IssueTypes;
+  ReqJson: any = {};
   directionsService: google.maps.DirectionsService;
   directionsRenderer: google.maps.DirectionsRenderer;
   originIcon = 'https://chart.googleapis.com/chart?' +
@@ -309,10 +310,16 @@ onFileSelect(event) {
 }
 
  submitForm(): void {
+  
   if (this.rsaForm.valid) {
     console.log(this.rsaForm.value);
     const formData = new FormData();
-    //formData.append('rsaRequestWsDTO',this.rsaForm.value);
+    this.ReqJson["vehicle"] = this.rsaForm.get('vehicle').value;
+    this.ReqJson["issue"] = this.rsaForm.get('issue').value;
+    this.ReqJson["latitude"] = this.rsaForm.get('latitude').value;
+    this.ReqJson["longitude"] = this.rsaForm.get('longitude').value;
+    this.ReqJson["notes"] = this.rsaForm.get('notes').value;
+    formData.append( 'form', JSON.stringify( this.ReqJson ) );
     formData.append('attachments', this.rsaForm.get('attachments').value);
     this.assistanceService.storeServiceRequest(formData);
   } else {

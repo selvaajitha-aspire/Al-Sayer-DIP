@@ -189,7 +189,9 @@
 		<property name="userService" ref="userService"/>
 		<property name="myVehiclesService" ref="myVehiclesService"/>
 		<property name="i18nService" ref="i18nService"/>
-		<property name="mediaModelConverter" ref="mediaModelConverter"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
 
 	</bean>
 

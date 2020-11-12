@@ -14,6 +14,12 @@ public final class AlsayerCoreConstants extends GeneratedAlsayerCoreConstants
 	public static final String SCPI_VEHICLE_INFO_URL="scpi.commerce.vehicleinfo.url";
 	public static final String SCPI_WTY_INFO_URL= "scpi.commerce.wtyinfo.url";
     public static final String OTP_TIME = "scpi.commerce.otp.time" ;
+    public static final String CUST_DETAILS_RESPONSE="Customer Details Service response : ";
+	public static final String VEHICLE_RESPONSE="Vehicle Set Response: ";
+	public static final String WTY_DETAILS_RESPONSE="Warranty Details Response";
+	public static final String CUST_REG_PROCESS="customerRegistrationEmailProcess started";
+	public static final String TOKEN_ERR_MSG="User for token not found";
+	public static final String EXPRED_TOKEN_ERR_MSG="Token Expired";
 
 
     private AlsayerCoreConstants()

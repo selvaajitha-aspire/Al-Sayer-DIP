@@ -4,7 +4,6 @@ import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.core.customer.daos.impl.AlsayerCustomerServicesDaoImpl;
 import com.alsayer.core.customer.services.AlsayerCustomerAccountService;
 import com.alsayer.core.model.CustomerAuthenticationModel;
-import com.alsayer.core.response.EccCustomerDetailsResponse;
 import com.alsayer.core.response.Results;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,13 +34,20 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountService  implements AlsayerCustomerAccountService {
+public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountService implements AlsayerCustomerAccountService {
 
     private static final Logger LOG = Logger.getLogger(AlsayerCustomerAccountServiceImpl.class);
     protected static final String HEADER_AUTH_KEY = "Authorization";
     protected static final String HEDER_AUTH_VALUE = "Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=";
-    protected static final String ECUSTDETAILSSET= "E_CUSTDETAILS";
-    protected static final String CIVILID ="civilid";
+    protected static final String ECUSTDETAILSSET = "E_CUSTDETAILS";
+    protected static final String CIVILID = "civilid";
+    protected static final String NAME = "name";
+    protected static final String ARABICNAME = "namearabic";
+    protected static final String MOBILE = "mobie";
+    protected static final String EMAIL = "email";
+    protected static final String OTP_PATTERN="000000";
+    protected static final Integer OTP_BOUND=999999;
+    protected static final String DATE_FORMAT="EEE MMM dd HH:mm:ss zzz yyyy";
 
     public final String url = AlsayerCoreConstants.SCPI_URL;
     public final String custDetailsUrl = AlsayerCoreConstants.SCPI_CUSTDETAILS_URL;
@@ -53,31 +59,23 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
     private TimeService timeService;
 
 
-
     private AlsayerCustomerServicesDaoImpl alsayerCustomerServicesDao;
-
-
-
 
 
     public void activateUser(@RequestParam(name = "token") String token) throws TokenInvalidatedException {
         final SecureToken data = getSecureTokenService().decryptData(token);
-        if (getTokenValiditySeconds() > 0L)
-        {
+        if (getTokenValiditySeconds() > 0L) {
             final long delta = new Date().getTime() - data.getTimeStamp();
-            if (delta / 1000 > getTokenValiditySeconds())
-            {
-                throw new IllegalArgumentException("token expired");
+            if (delta / 1000 > getTokenValiditySeconds()) {
+                throw new IllegalArgumentException(AlsayerCoreConstants.EXPRED_TOKEN_ERR_MSG);
             }
         }
 
         final CustomerModel customer = getUserService().getUserForUID(data.getData(), CustomerModel.class);
-        if (customer == null)
-        {
-            throw new IllegalArgumentException("user for token not found");
+        if (customer == null) {
+            throw new IllegalArgumentException(AlsayerCoreConstants.TOKEN_ERR_MSG);
         }
-        if (!token.equals(customer.getToken()))
-        {
+        if (!token.equals(customer.getToken())) {
             throw new TokenInvalidatedException();
         }
         customer.setToken(null);
@@ -88,152 +86,73 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
     public ECCCustomerWsDTO getCustomerECCDetails(String code) {
 
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        RestTemplate restTemplate  = new RestTemplate(requestFactory);
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
+        headers.add(HEADER_AUTH_KEY, HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
         JSONObject jsonObject = new JSONObject();
-       jsonObject.put(CIVILID,code);
+        jsonObject.put(CIVILID, code);
         JSONArray jsonArray = new JSONArray();
         jsonArray.add(jsonObject);
 
         JSONObject finalObj = new JSONObject();
-       finalObj.put(ECUSTDETAILSSET,jsonArray);
+        finalObj.put(ECUSTDETAILSSET, jsonArray);
 
-         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
-        LOG.info("CustomerDetails Service request : " + entity.getBody());
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(custDetailsUrl), entity, String.class);
-        LOG.info("CustomerDetails Service response Name : " +response.getBody());
-        ObjectMapper objectMapper=new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        ECCCustomerWsDTO eccCustomerWsDTO=new ECCCustomerWsDTO();
+        ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
         try {
 
-            Results responseBody =objectMapper.readValue(response.getBody(), Results.class);
-            LOG.info("ECC Response : " + responseBody.toString());
+            Results responseBody = objectMapper.readValue(response.getBody(), Results.class);
+            LOG.debug(AlsayerCoreConstants.CUST_DETAILS_RESPONSE + responseBody.toString());
 
-            if(responseBody!=null) {
+            if (responseBody != null) {
                 eccCustomerWsDTO.setCivilId(responseBody.getCivilid());
                 eccCustomerWsDTO.setEccCustId(responseBody.getCustid());
                 eccCustomerWsDTO.setName(responseBody.getName());
                 eccCustomerWsDTO.setArabicName(responseBody.getNamearabic());
                 eccCustomerWsDTO.setMobile(responseBody.getMobile());
-                eccCustomerWsDTO.setEmail(responseBody.getEmail()!=null?responseBody.getEmail():null);
+                eccCustomerWsDTO.setEmail(responseBody.getEmail() != null ? responseBody.getEmail() : null);
             }
-        }catch (JsonProcessingException ex){
+        } catch (JsonProcessingException ex) {
             ex.printStackTrace();
         }
-        //Response and request need to be add as per the service.
-
         return eccCustomerWsDTO;
     }
-//    public ECCCustomerWsDTO getCustomerECCDetails(String code) {
-//
-//        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-//        RestTemplate restTemplate  = new RestTemplate(requestFactory);
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        /*map.put("civilid", "290010195209");
-//        map.put("Kunnr", "1000051987");*/
-//
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("civilid","290010195209");
-//        jsonObject.put("Kunnr","1000051987");
-//
-//         JSONArray jsonArray = new JSONArray();
-//         jsonArray.add(jsonObject);
-//
-//        JSONObject finalObj = new JSONObject();
-//        finalObj.put("HeaderData",jsonArray);
-//
-//        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
-//        LOG.info("CustomerDetails Service request : " + entity.getBody());
-//        ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
-//        LOG.info("CustomerDetails Service response Name : " +response.getBody());
-//        ObjectMapper objectMapper=new ObjectMapper();
-//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//        ECCCustomerWsDTO eccCustomerWsDTO=new ECCCustomerWsDTO();
-//        try {
-//
-//            EccCustomerDetailsResponse eccCustomerDetailsResponse =objectMapper.readValue(response.getBody(), EccCustomerDetailsResponse.class);
-//            LOG.info("ECC Response : " + eccCustomerDetailsResponse.toString());
-//
-//            if(eccCustomerDetailsResponse.getNavCust()!=null) {
-//                eccCustomerWsDTO.setName(eccCustomerDetailsResponse.getNavCust().getResults().getName());
-//                eccCustomerWsDTO.setArabicName(eccCustomerDetailsResponse.getNavCust().getResults().getNamearabic());
-//                eccCustomerWsDTO.setMobile(eccCustomerDetailsResponse.getNavCust().getResults().getMobile());
-//            }
-//        }catch (JsonProcessingException ex){
-//            ex.printStackTrace();
-//        }
-//        //Response and request need to be add as per the service.
-//
-//        return eccCustomerWsDTO;
-//    }
 
     @Override
     public void sendOTP(String code) {
-
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        RestTemplate restTemplate  = new RestTemplate(requestFactory);
-        ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
-        headers.setContentType(MediaType.APPLICATION_JSON);
         String otp = getOtp();
         CustomerAuthenticationModel customerAuthentication = getModelService().create(CustomerAuthenticationModel.class);
         customerAuthentication.setCivilId(code);
         customerAuthentication.setOneTimePassword(otp);
         customerAuthentication.setJsessionId(getSessionService().getCurrentSession().getSessionId());
         getModelService().save(customerAuthentication);
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("civilid","290010195209");
-//        jsonObject.put("Kunnr","1000051987");
-//
-//        JSONArray jsonArray = new JSONArray();
-//        jsonArray.add(jsonObject);
-//
-//        JSONObject finalObj = new JSONObject();
-//        finalObj.put("HeaderData",jsonArray);
-//
-//        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
-//       LOG.info("OTP Service request : " + entity.getBody());
-//        ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
-//        LOG.info("OTP Service response : " +response.getBody());
-
-        //Response and request need to be add as per the service.
-
-
     }
 
     private String getOtp() {
-        return new DecimalFormat("000000").format(new Random().nextInt(999999));
+        return new DecimalFormat(OTP_PATTERN).format(new Random().nextInt(OTP_BOUND));
     }
 
 
     public void eccRecordSynchronization(RegisterData registerData) {
 
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        RestTemplate restTemplate  = new RestTemplate(requestFactory);
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HEADER_AUTH_KEY,HEDER_AUTH_VALUE);
+        headers.add(HEADER_AUTH_KEY, HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
         String otp = getOtp();
         Map<String, Object> map = new HashMap<>();
-            map.put("name", registerData.getName());
-        map.put("arabicName", registerData.getArabicName());
-        map.put("mobile", registerData.getMobile());
-        map.put("emailId", registerData.getUid());
+        map.put(NAME, registerData.getName());
+        map.put(ARABICNAME, registerData.getArabicName());
+        map.put(MOBILE, registerData.getMobile());
+        map.put(EMAIL, registerData.getUid());
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
-        LOG.info("enity : " + entity.getBody());
-        LOG.info("URL is : " + getConfigurationService().getConfiguration().getString(url));
-
-
         ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
-        System.out.println("Response came is" +response.getBody());
 
-        //Response and request need to be add as per the service.
 
     }
 
@@ -241,7 +160,7 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
     public boolean getOTPForValidation(RegisterData registerData) throws ParseException {
 
         CustomerAuthenticationModel otp = getAlsayerCustomerServicesDao().getSavedOtp(registerData.getCivilId());
-        SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
 
         Date createdTime = format.parse(String.valueOf(otp.getCreationtime()));
         Date currentTime = format.parse(String.valueOf(getTimeService().getCurrentTime()));
@@ -249,8 +168,8 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         long difference_In_Hours = TimeUnit.MILLISECONDS.toHours(difference_In_Time) % 60;
         long difference_In_Minutes = TimeUnit.MILLISECONDS.toMinutes(difference_In_Time) % 60;
         long difference_In_Days = TimeUnit.MILLISECONDS.toDays(difference_In_Time) % 365;
-        if(difference_In_Days < 1 && difference_In_Hours <1 && difference_In_Minutes < getConfigurationService().getConfiguration().getInt(OTP_VALIDATION)) {
-            return  true;
+        if (difference_In_Days < 1 && difference_In_Hours < 1 && difference_In_Minutes < getConfigurationService().getConfiguration().getInt(OTP_VALIDATION)) {
+            return true;
         }
 
         return false;
@@ -295,7 +214,6 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
     public void setTimeService(TimeService timeService) {
         this.timeService = timeService;
     }
-
 
 
 }

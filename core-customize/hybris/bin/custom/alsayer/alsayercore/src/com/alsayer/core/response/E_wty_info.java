@@ -1,8 +1,9 @@
 package com.alsayer.core.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.format.annotation.DateTimeFormat;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class E_wty_info {
 
     @JsonProperty("vhvin")
@@ -14,7 +15,7 @@ public class E_wty_info {
     @JsonProperty("description")
     String description;
 
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+
     @JsonProperty("wty_e_date")
     String wty_e_date;
 

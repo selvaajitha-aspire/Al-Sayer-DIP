@@ -19,7 +19,7 @@
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 		<property name="notes" type="String"/>
-		<property name="attachments" type="java.util.Collection&lt;de.hybris.platform.cmsfacades.data.MediaData&gt;"/>
+		<property name="attachments" type="java.util.List&lt;de.hybris.platform.cmsfacades.dto.MediaFileDto&gt;"/>
 		<property name="customer" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
 		<property name="driverDetails" type="com.alsayer.facades.data.DriverDetailsData" />
 		<property name="type" type="java.lang.String" />

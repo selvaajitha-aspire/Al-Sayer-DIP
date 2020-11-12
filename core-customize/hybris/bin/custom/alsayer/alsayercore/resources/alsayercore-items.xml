@@ -83,14 +83,14 @@
             </targetElement>
         </relation>
 
-        <relation code="RsaRequest2CatalogUnawareMedia" generate="true"
+        <relation code="RsaRequest2Media" generate="true"
                   localized="false" autocreate="true">
             <sourceElement type="RsaRequest" qualifier="rsaRequest"
                            cardinality="one">
                 <modifiers read="true" write="true" search="true"
                            optional="true" />
             </sourceElement>
-            <targetElement type="CatalogUnawareMedia" qualifier="attachments"
+            <targetElement type="Media" qualifier="attachments"
                            cardinality="many" ordered="false">
                 <modifiers read="true" write="true" search="true" />
             </targetElement>
@@ -366,11 +366,6 @@
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
-<!--                    <attribute qualifier="attachments" type="MediaContainerList">-->
-<!--                        <persistence type="property" />-->
-<!--                        <description>It is a media container with additional images of the issue.</description>-->
-<!--                        <modifiers read="true" write="true" optional="true" />-->
-<!--                    </attribute>-->
 
                 </attributes>
             </itemtype>
