@@ -174,8 +174,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   collectDataFromRegisterForm(formData: any): UserRegister {
-    const { civilId,eccCustId, name, arabicName, mobile, email, password, titleCode } = formData; 
-    const oneTimePassword=this.oneTimePassword; 
+    const { civilId,eccCustId, name, arabicName, mobile, email, password, titleCode } = formData;
+    const oneTimePassword=this.oneTimePassword;
     return {
       civilId,
       eccCustId,
@@ -222,7 +222,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.registrationFormElement.ngSubmit.emit();
 
   }
-
   isConsentGiven(consent: AnonymousConsent): boolean {
     return this.anonymousConsentsService.isConsentGiven(consent);
   }

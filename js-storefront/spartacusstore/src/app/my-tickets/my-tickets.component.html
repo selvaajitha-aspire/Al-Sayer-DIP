@@ -1,0 +1,15 @@
+<p>my-tickets works!</p>
+
+
+<div class="form-group col-md-6">
+    <label>
+        <span for="name" class="label-content d-block">Rsa Requests</span>
+        <select formControlName="ticket" class="form-control form-control-sm d-block w-100 box-to-line"  *ngIf="ticketsList | async as ticket$" >
+        <option selected value="" disabled>Select Ticket</option>
+        <option
+            *ngFor="let ticket of ticket$ "
+            [value]="ticket"
+            >{{ticket.notes}}  |   {{ticket.type}}  |  {{ticket.status}}</option>
+    </select>
+    </label>
+    </div>

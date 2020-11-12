@@ -4,6 +4,7 @@ import { CmsConfig, ConfigModule, AuthGuard } from '@spartacus/core';
 import { BannerComponent } from '@spartacus/storefront';
 import { ServiceTileComponent } from './service-tile/service-tile.component';
 import { HeaderMenuComponent } from './header/header-menu/header-menu.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,9 @@ import { HeaderMenuComponent } from './header/header-menu/header-menu.component'
         },
         PreHeader: {
           component: HeaderMenuComponent
+        },
+        FooterComponent : {
+          component: FooterComponent
         }
       }
     } as CmsConfig),
