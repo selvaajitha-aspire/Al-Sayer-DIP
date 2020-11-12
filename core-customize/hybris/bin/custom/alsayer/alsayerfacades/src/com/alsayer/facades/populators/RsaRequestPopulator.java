@@ -55,7 +55,7 @@ public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequest
                 serviceRequestData.setNotes(serviceRequestModel.getNotes());
             }
             if(null != serviceRequestModel.getAttachments()){
-                serviceRequestData.setAttachments(serviceRequestModel.getAttachments());
+               // serviceRequestData.setAttachments(serviceRequestModel.getAttachments());
             }
 
             if(null != serviceRequestModel.getVehicle()

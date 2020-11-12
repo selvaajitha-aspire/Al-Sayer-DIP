@@ -2,9 +2,6 @@
 package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
-import com.alsayer.occ.Reaponse.E_Vehicle_Info;
-import com.alsayer.occ.Reaponse.EccVehicleDetailsResponse;
-import com.alsayer.occ.Reaponse.VehicleResults;
 import com.alsayer.occ.constants.AlsayeroccConstants;
 import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
 import com.alsayer.occ.dto.CustomerRegistrationResultDTO;
@@ -45,8 +42,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -54,21 +49,19 @@ import java.util.Locale;
 @RequestMapping(value = "{baseSiteId}/register")
 @CacheControl(directive = CacheControlDirective.PRIVATE)
 @Api(tags = "Customer")
-public class CustomerRegistrationController
-{
+public class CustomerRegistrationController {
 
     final static Logger LOG = LoggerFactory.getLogger(CustomerRegistrationController.class);
     public static final String USER_MAPPER_CONFIG = "firstName,lastName,titleCode,currency(isocode),language(isocode)";
 
     private static final String ERROR_MSG = "error";
     private static final String SUCCESS_MSG = "success";
-    private static final String ERROR_STATUS = "";
+    private static final String ERROR_STATUS = "ERROR";
     private static final String SUCCESS_STATUS = "SUCCESS_STATUS";
     protected static final String DEFAULT_FIELD_SET = FieldSetLevelHelper.DEFAULT_LEVEL;
 
 
-
-    @Resource(name="customerFacade")
+    @Resource(name = "customerFacade")
     private AlsayerCustomerFacade customerFacade;
     @Resource(name = "alsayerSignUpDTOValidator")
     private Validator alsayerSignUpDTOValidator;
@@ -90,77 +83,51 @@ public class CustomerRegistrationController
     private static final String BASIC_FIELD_SET = "BASIC";
 
 
-    @RequestMapping(value = "/getResponseBody",method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @RequestMapping(value = "/sendOTP/{id}", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
     @ApiOperation(value = "Send otp to customer's mobile no", notes = "OTP wil be sent on the number given by the user")
     @ApiBaseSiteIdParam
-    public EccVehicleDetailsResponse  getResponseBody( @ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
-    {
-        EccVehicleDetailsResponse response=new EccVehicleDetailsResponse();
-
-        E_Vehicle_Info e_vehicle_info=new E_Vehicle_Info();
-        VehicleResults vehicleResults=new VehicleResults();
-        List<VehicleResults>  vehicleResultsList=new LinkedList<>();
-        vehicleResultsList.add(vehicleResults);
-        e_vehicle_info.setVehicleResultsList(vehicleResultsList);
-        response.setE_vehicle_info(e_vehicle_info);
-return response;
-    }
-
-
-    @RequestMapping(value = "/sendOTP/{id}",method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    @ResponseStatus(value = HttpStatus.CREATED)
-    @ResponseBody
-    @ApiOperation(value = "Send otp to customer's mobile no", notes = "OTP wil be sent on the number given by the user")
-    @ApiBaseSiteIdParam
-    public void sendOTP(@PathVariable("id") final String id,@ApiParam(value = "User's mobile no.", required = true) @RequestBody final String mobile,@ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
-    {
+    public void sendOTP(@PathVariable("id") final String id, @ApiParam(value = "User's mobile no.", required = true) @RequestBody final String mobile, @ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse) {
         customerFacade.sendOTP(id);
     }
 
-    @RequestMapping(value = "/getCustomerDetails/{id}",method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/getCustomerDetails/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
     @ApiOperation(value = "To get the customer details", notes = "Only registered users will get the information from ECC")
     public ECCCustomerWsDTO getCustomerDetails(@PathVariable("id") final String id,
-                                        @ApiFieldsParam(defaultValue = BASIC_FIELD_SET)
-                                        final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
-    {
+                                               @ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse) {
         ECCCustomerWsDTO eccCustomerWsDTO = customerFacade.getCustomerECCDetails(id);
         return eccCustomerWsDTO;
 
     }
 
 
-    @Secured({ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT" })
-    @RequestMapping(value = "/activateUser", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE })
+    @Secured({"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT"})
+    @RequestMapping(value = "/activateUser", method = RequestMethod.GET, consumes = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     @ApiOperation(nickname = "activateUser", value = "Activate the customer on clicking the activation link.", notes = "Activate the customer on clicking the activation link.", authorizations = {
-            @Authorization(value = "oauth2_client_credentials") })
+            @Authorization(value = "oauth2_client_credentials")})
     @ApiBaseSiteIdParam
     public CustomerRegistrationResultDTO activateUser(
             @ApiParam(value = "Request body parameter that contains details such as token and new password", required = true)
             @RequestParam(value = "token", required = false) final String token,
             @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
             throws TokenInvalidatedException, UnsupportedEncodingException {
-        LOG.info("Executing method doResetPassword");
-        //String token = URLDecoder.decode(code, "UTF-8");
+
         customerFacade.activateUser(token);
-
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
-
         customerRegistrationResultDTO.setReason("Token is valid");
         customerRegistrationResultDTO.setStatus("Success");
-
         return customerRegistrationResultDTO;
 
     }
 
 
-    @RequestMapping(value="/createUser",method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @RequestMapping(value = "/createUser", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
     @ApiOperation(nickname = "createUser", value = " Registers a customer", notes = "Registers a customer. Requires the following "
@@ -168,89 +135,68 @@ return response;
     @ApiBaseSiteIdParam
     public CustomerRegistrationResultDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final AlsayerUserSignUpWsDTO user,
                                                     @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
-                                                    final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
-    {
+                                                    final HttpServletRequest httpRequest, final HttpServletResponse httpResponse) {
         validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
                 .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, mobile,civilId,uid,oneTimePassword");
         boolean userExists = false;
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
-        try
-        {
-           boolean result =  customerFacade.validateOTP(registerData);
-            System.out.println(result);
-            if(result == false)
-            {
+        try {
+            boolean result = customerFacade.validateOTP(registerData);
+            if (result == false) {
                 customerRegistrationResultDTO.setReason("OTP is Invalid");
                 customerRegistrationResultDTO.setStatus("Failure");
-                return  customerRegistrationResultDTO;
+                return customerRegistrationResultDTO;
             }
             customerFacade.register(registerData);
-        }
-        catch (final DuplicateUidException | ParseException ex)
-        {
+        } catch (final DuplicateUidException | ParseException ex) {
             userExists = true;
             LOG.debug("Duplicated UID", ex);
         }
         //Sending record for Synchronisation
         //customerFacade.eccRecordSynchronization(registerData);
-        //Fetching All values regarding the customer and vehicles
-        //customerFacade.fetchECCCustomerRecord(registerData);
+
 
         final String userId = user.getUid().toLowerCase(Locale.ENGLISH);
-       httpResponse.setHeader(AlsayeroccConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
-        //final CustomerData customerData = getCustomerData(registerData, userExists, userId);
+        httpResponse.setHeader(AlsayeroccConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
         customerRegistrationResultDTO.setReason("OTP is valid");
         customerRegistrationResultDTO.setStatus("Success");
         return customerRegistrationResultDTO;
     }
 
-    protected CustomerData getCustomerData(final RegisterData registerData, final boolean userExists, final String userId)
-    {
+    protected CustomerData getCustomerData(final RegisterData registerData, final boolean userExists, final String userId) {
         final CustomerData customerData;
-        if (userExists)
-        {
+        if (userExists) {
             customerData = customerFacade.nextDummyCustomerData(registerData);
-        }
-        else
-        {
+        } else {
             customerData = customerFacade.getUserForUID(userId);
         }
         return customerData;
     }
 
-    protected String getAbsoluteLocationURL(final HttpServletRequest httpRequest, final String uid)
-    {
+    protected String getAbsoluteLocationURL(final HttpServletRequest httpRequest, final String uid) {
         final String requestURL = httpRequest.getRequestURL().toString();
         final String encodedUid = UriUtils.encodePathSegment(uid, StandardCharsets.UTF_8.name());
         return UriComponentsBuilder.fromHttpUrl(requestURL).pathSegment(encodedUid).build().toString();
     }
 
 
-    protected void validate(final Object object, final String objectName, final Validator validator)
-    {
+    protected void validate(final Object object, final String objectName, final Validator validator) {
         final Errors errors = new BeanPropertyBindingResult(object, objectName);
         validator.validate(object, errors);
-        if (errors.hasErrors())
-        {
+        if (errors.hasErrors()) {
             throw new WebserviceValidationException(errors);
         }
     }
 
 
-
-
-    protected DataMapper getDataMapper()
-    {
+    protected DataMapper getDataMapper() {
         return dataMapper;
     }
 
-    protected void setDataMapper(final DataMapper dataMapper)
-    {
+    protected void setDataMapper(final DataMapper dataMapper) {
         this.dataMapper = dataMapper;
     }
-
-
 
 
 }

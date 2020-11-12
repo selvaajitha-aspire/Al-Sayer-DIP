@@ -100,7 +100,7 @@
 		<property name="latitude" type="Double"/>
 		<property name="longitude" type="Double"/>
 		<property name="notes" type="String"/>
-		<property name="attachments" type="String"/>
+        <property name="attachments" type="java.util.List&lt;de.hybris.platform.cmsfacades.dto.MediaFileDto&gt;" />
 		<property name="driverDetails" type="com.alsayer.occ.dto.DriverDetailsWsDTO" />
 		<property name="type" type="java.lang.String" />
 		<property name="status" type="String" />
@@ -113,11 +113,10 @@
 	</bean>
 
 	<bean class="com.alsayer.occ.dto.VehicleWsDTO">
-		<property name="uid" type="String"/>
-		<property name="model" type="String"/>
-		<property name="chassisNumber" type="String"/>
-        <property name="warrantyType" type="String"/>
-        <property name="warrantyExpiryDate" type="java.util.Date"/>
+        <property name="chassisNumber" type="String"/>
+		<property name="modline" type="String"/>
+        <property name="modyear" type="String"/>
+		<property name="plateNumber" type="String"/>
 	</bean>
 
 	<bean class="com.alsayer.occ.dto.VehicleListWsDTO">
@@ -127,5 +126,6 @@
     <bean class="com.alsayer.occ.dto.RsaRequestListWsDTO">
         <property name="rsaRequestsList" type="java.util.List&lt;com.alsayer.occ.dto.RsaRequestWsDTO>"/>
     </bean>
+
 
 </beans>

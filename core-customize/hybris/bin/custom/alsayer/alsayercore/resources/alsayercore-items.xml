@@ -9,7 +9,6 @@
         <collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
                         type="set"/>
-        <collectiontype code="vehicleList" elementtype="Vehicle" autocreate="true" generate="true" type="list"/>
 
     </collectiontypes>
 
@@ -70,9 +69,31 @@
             <sourceElement type="Customer" qualifier="customer" cardinality="one" >
                 <modifiers read="true" write="true" optional="true" />
             </sourceElement>
-             <targetElement type="Vehicle" qualifier="vehicle" cardinality="many" collectiontype="list">
+             <targetElement type="Vehicle" qualifier="vehicles" cardinality="many" collectiontype="list">
                  <modifiers read="true" write="true"  optional="true" />
              </targetElement>
+        </relation>
+
+        <relation code="VehicleWarrantyRelation" localized="false" autocreate="true">
+            <sourceElement type="Vehicle" qualifier="vehicle" cardinality="one" >
+                <modifiers read="true" write="true" optional="true" />
+            </sourceElement>
+            <targetElement type="Warranty" qualifier="warranties" cardinality="many" collectiontype="list">
+                <modifiers read="true" write="true"  optional="true" />
+            </targetElement>
+        </relation>
+
+        <relation code="RsaRequest2Media" generate="true"
+                  localized="false" autocreate="true">
+            <sourceElement type="RsaRequest" qualifier="rsaRequest"
+                           cardinality="one">
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </sourceElement>
+            <targetElement type="Media" qualifier="attachments"
+                           cardinality="many" ordered="false">
+                <modifiers read="true" write="true" search="true" />
+            </targetElement>
         </relation>
 
         <!--Process Relations-->
@@ -180,12 +201,28 @@
             </itemtype>
 
 
+            <itemtype code="Warranty" autocreate="true" generate="true" >
+                <deployment table="Warranty" typecode="12009"/>
+                <attributes>
+                    <attribute qualifier="warrantyType" type="java.lang.String">
+                        <description>Model of car</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="warrantyExpiryDate" type="java.util.Date">
+                        <description>Model of car</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+
+                </attributes>
+            </itemtype>
             <itemtype code="Vehicle" autocreate="true" generate="true" >
                 <deployment table="Vehicle" typecode="12002"/>
                 <attributes>
                     <attribute qualifier="chassisNumber" type="java.lang.String">
                         <description>Chassis No of vehicle</description>
-                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <modifiers read="true" write="true" search="true" optional="false" initial="true" unique="true"/>
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="status" type="java.lang.String">
@@ -208,26 +245,10 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="warrantyType" type="java.lang.String">
-                        <description>Model of car</description>
-                        <modifiers read="true" write="true" search="true" optional="true"/>
-                        <persistence type="property"/>
-                    </attribute>
-                    <attribute qualifier="warrantyExpiryDate" type="java.util.Date">
-                        <description>Model of car</description>
-                        <modifiers read="true" write="true" search="true" optional="true"/>
-                        <persistence type="property"/>
-                    </attribute>
-
                 </attributes>
             </itemtype>
             <itemtype code="Customer" generate="false" autocreate="false">
                 <attributes>
-                    <attribute qualifier="vehicles" type="vehicleList">
-                        <description>Vehicle owned by Customer</description>
-                        <modifiers read="true" write="true"  optional="true"/>
-                        <persistence type="property"/>
-                    </attribute>
                     <attribute qualifier="civilId" type="java.lang.String">
                         <description>Driver Name</description>
                         <modifiers read="true" write="true" optional="true"/>
@@ -344,11 +365,6 @@
                         <description>Description of issue</description>
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
-                    </attribute>
-                    <attribute qualifier="attachments" type="java.lang.String">
-                        <persistence type="property" />
-                        <description>It is a media container with additional images of the issue.</description>
-                        <modifiers read="true" write="true" optional="true" />
                     </attribute>
 
                 </attributes>

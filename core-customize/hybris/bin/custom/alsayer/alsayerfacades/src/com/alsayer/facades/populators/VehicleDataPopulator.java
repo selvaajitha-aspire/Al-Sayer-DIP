@@ -14,8 +14,6 @@ public class VehicleDataPopulator implements Populator<VehicleModel, VehicleData
             target.setModyear(source.getModyear());
             target.setStatus(source.getStatus());
             target.setChassisNumber(source.getChassisNumber());
-            target.setWarrantyType(source.getWarrantyType());
-            target.setWarrantyExpiryDate(source.getWarrantyExpiryDate());
         }
     }
 }

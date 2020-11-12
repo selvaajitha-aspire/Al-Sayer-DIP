@@ -2,10 +2,12 @@ package com.alsayer.core.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class EccWarrantyResponse {
 
     @JsonProperty("E_wty_info")
-    E_wty_info eWtyInfo;
+    List<E_wty_info> eWtyInfo;
 
     @Override
     public String toString() {
@@ -14,11 +16,11 @@ public class EccWarrantyResponse {
                 '}';
     }
 
-    public E_wty_info geteWtyInfo() {
+    public List<E_wty_info> geteWtyInfo() {
         return eWtyInfo;
     }
 
-    public void seteWtyInfo(E_wty_info eWtyInfo) {
+    public void seteWtyInfo(List<E_wty_info> eWtyInfo) {
         this.eWtyInfo = eWtyInfo;
     }
 }
