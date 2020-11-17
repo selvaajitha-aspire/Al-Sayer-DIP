@@ -1,6 +1,5 @@
 <div class="container">
-    <div >
-        <!-- *ngIf="vehicleList | async as vehicles$" -->
+    <div *ngIf="vehicleList | async as vehicles$">
         <table class="table">
             <thead class="d-flex">
                 <th class="col-4">Chassis Number</th>
@@ -8,14 +7,10 @@
                 <th class="col-4">Warranty Expiry Date</th>
             </thead>
             <tbody>
-                <tr class="d-flex">
-                    <!--  *ngFor="let vehicle of vehicles$" -->
-                    <td class="col-4">test</td>
-                    <!-- {{vehicle.chassisNumber}} -->
-                    <td class="col-4"> test</td>
-                    <!-- {{vehicle.warrantyType}} -->
-                    <td class="col-4">test</td>
-                    <!-- {{vehicle.warrantyExpiryDate | date: 'yyyy-mm-dd'}} -->
+                <tr class="d-flex" *ngFor="let vehicle of vehicles$">
+                    <td class="col-4">{{vehicle.chassisNumber}}</td>
+                    <td class="col-4">{{vehicle.warrantyType}} </td>
+                    <td class="col-4">{{vehicle.warrantyExpiryDate | date: 'yyyy-mm-dd'}}</td>
                 </tr>
             </tbody>
         </table>
