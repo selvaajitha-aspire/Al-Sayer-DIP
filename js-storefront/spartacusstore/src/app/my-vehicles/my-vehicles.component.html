@@ -1,14 +1,18 @@
-<p>my-vehicles works!</p>
-
-<div class="form-group col-md-6">
-    <label>
-        <span for="name" class="label-content d-block">Vehicle</span>
-        <select formControlName="vehicle" class="form-control form-control-sm d-block w-100 box-to-line"  *ngIf="vehicleList | async as vehicles$" >
-        <option selected value="" disabled>Select Vehicle</option>
-        <option
-            *ngFor="let vehicle of vehicles$ "
-            [value]="vehicle.uid"
-            >{{vehicle.model}} ,{{vehicle.chassisNumber}},{{vehicle.warrantyType}},{{vehicle.warrantyExpiryDate}}</option>
-    </select>
-    </label>
+<div class="container">
+    <div *ngIf="vehicleList | async as vehicles$">
+        <table class="table">
+            <thead class="d-flex">
+                <th class="col-4">Chassis Number</th>
+                <th class="col-4">Warranty Type</th>
+                <th class="col-4">Warranty Expiry Date</th>
+            </thead>
+            <tbody>
+                <tr class="d-flex" *ngFor="let vehicle of vehicles$">
+                    <td class="col-4">{{vehicle.chassisNumber}}</td>
+                    <td class="col-4">{{vehicle.warrantyType}} </td>
+                    <td class="col-4">{{vehicle.warrantyExpiryDate | date: 'yyyy-mm-dd'}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
