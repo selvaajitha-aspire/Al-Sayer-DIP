@@ -1,137 +1,133 @@
- <div class="container mt-5">
-<section class="page-section container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="section">
-      <form (ngSubmit)="submitForm()" [formGroup]="rsaForm" novalidate>
-        <div class="form-group">
-            <label>
-              <span class="label-content">Roadside Assistance</span>
-            </label>
-          </div>
-          <div class="row mb-4">
-          <div class="form-group col-md-6">
-          <label>
-              <span for="name" class="label-content d-block">Vehicle</span>
-              <fieldset formGroupName="vehicle">
-              <select formControlName="chassisNumber" class="form-control form-control-sm d-block w-100 box-to-line"  *ngIf="vehicleList | async as vehicles$" >
-              <option selected value="" disabled>Select Vehicle</option>
-              <option
-                  *ngFor="let vehicle of vehicles$ "
-                  [value]="vehicle.chassisNumber"
-                  >{{vehicle.modline}} ,{{vehicle.chassisNumber}}</option>
-              </select>
-              </fieldset>
-              <cx-form-errors
-              [control]="rsaForm.get('vehicle')"
-            ></cx-form-errors>
-          </label>
-          </div>
-          <div class="form-group col-md-6 col-sm-12 mb-4">
-          <label>
-              <span for="problem" class="label-content d-block">Problem</span>
-              <select formControlName="issue" class="form-control form-control-sm d-block w-100 box-to-line mr-4" style="text-align:center"  *ngIf="vehicleList | async as vehicles$" >
-              <option selected value="" disabled>Select Here</option>
-              <option
-                 *ngFor="let issue of IssueTypes | keyvalue"
-                  [value]="issue.key"
-                  >{{issue.value}}</option>
-              </select>
-              <cx-form-errors
-              [control]="rsaForm.get('issue')"
-            ></cx-form-errors>
-          </label>
-          </div>
-        </div>
-        <div class="row mt-3 mb-4">
-          <div class="form-group col-md-6 mb-4">
-          <label>
-            <span class="label-content">Location</span>
-             <div class="form-group col-md-6 col-sm-12">
-              <input
-              class="form-control form-control-sm d-inline box-to-line"
-              type="text"
-              name="addressU"
-              formControlName="addressU"
-              placeholder="Area / City" disabled
-            /></div>
-          </label>
-          <div class="form-group">
-              <input
-                class="form-control"
-                type="hidden"
-                name="latitude"
-                formControlName="latitude"
-              />
-            </div>  
+<div class="container mt-5">
+  <section class="page-section container">
+    <div class="row justify-content-center">
+      <!-- <div class="col-md-6"> -->
+        <div class="section w-100">
+        <form (ngSubmit)="submitForm()" [formGroup]="rsaForm" novalidate>
+          <div class="form-group mb-5">
+              <label>
+                <span class="label-content">Roadside Assistance</span>
+              </label>
             </div>
-            <div class="form-group">
-              <input
-                class="form-control"
-                type="hidden"
-                name="longitude"
-                formControlName="longitude"
-              /></div>
-             <div class="col-md-6 col-sm-12 mt-4"><button type="button" class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal" (click)="getCurrentLocation()">
-              <i class="fa fa-map-marker text-danger mr-4" title="Current Location"
-              aria-hidden="true"></i>Get My Current Location</button></div>  
+            <div class="row mb-4">
+            <div class="form-group col-md-6">
+            <label>
+                <span for="name" class="label-content d-block">Vehicle</span></label>
+                <fieldset formGroupName="vehicle">
+                <select formControlName="chassisNumber" class="form-control form-control-sm d-block w-100 box-to-line"  *ngIf="vehicleList | async as vehicles$" >
+                <option selected value="" disabled>Select Vehicle</option>
+                <option
+                    *ngFor="let vehicle of vehicles$ "
+                    [value]="vehicle.chassisNumber"
+                    >{{vehicle.modline}} ,{{vehicle.chassisNumber}}</option>
+                </select>
+                </fieldset>
+                <cx-form-errors
+                [control]="rsaForm.get('vehicle')"
+              ></cx-form-errors>
+            
+            </div>
+            <div class="form-group col-md-6 col-sm-12 mb-4">
+            <label>
+                <span for="problem" class="label-content d-block">Problem</span></label>
+                <select formControlName="issue" class="form-control form-control-sm d-block w-100 box-to-line mr-4" style="text-align:center"  *ngIf="vehicleList | async as vehicles$" >
+                <option selected value="" disabled>Select Here</option>
+                <option
+                   *ngFor="let issue of IssueTypes | keyvalue"
+                    [value]="issue.key"
+                    >{{issue.value}}</option>
+                </select>
+                <cx-form-errors
+                [control]="rsaForm.get('issue')"
+              ></cx-form-errors>
+            
+            </div>
           </div>
-
           <div class="row mt-3 mb-4">
-          <div class="form-group col-md-6 mb-4">
+            <div class="form-group col-md-6 mb-4">
             <label>
-              <span for="notes d-block" class="label-content">Notes</span>
-              <input
-                class="form-control"
+              <span class="label-content">Location</span>
+               <div class="form-group col-md-12 col-sm-12 p-0">
+                <input
+                class="form-control form-control-sm d-inline box-to-line"
                 type="text"
-                name="notes"
-                formControlName="notes"
-              />
-              <cx-form-errors
-                  [control]="rsaForm.get('notes')"
-                ></cx-form-errors>
+                name="addressU"
+                formControlName="addressU"
+                placeholder="Area / City" disabled
+              /></div>
             </label>
-          </div>
-          <div class="form-group col-md-6 mb-4">
-            <label>
-              <span for="attachments d-block" class="label-content">Attachments</span>
-              <input
-                class="form-control mt-1"
-                type="file" id="myFile"
-                name="attachments"
-                
-                (change)="onFileSelect($event)"
-              />
-              <cx-form-errors
-                  [control]="rsaForm.get('attachments')"
-                ></cx-form-errors>
-            </label>
-          </div>
-        </div>
-          <div class="d-flex justify-content-center mt-5"><button type="submit"  class="btn btn-default btn-block round-primary-btn mb-4 w-50 mt-5">Submit</button></div>
-          <div><button type="button" (click)="getDriverDetails()"  class="btn btn-primary btn-block">Driver Details</button> </div> 
-        </form>
-      </div>
-    </div>
-   </div>
-  </section>
-      <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="modal-body">
-          <div #map style="width:100%;height:80vh" id="map"></div>
-        </div>
-      </div>
-    </div>
-    </div>
-</div> 
-
-
-    <p>Form value: {{ rsaForm.value | json }}</p>
-  <p>Form valid: {{ rsaForm.valid }}</p>  
+            <div class="form-group">
+                <input
+                  class="form-control"
+                  type="hidden"
+                  name="latitude"
+                  formControlName="latitude"
+                />
+              </div>  
+              </div>
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  type="hidden"
+                  name="longitude"
+                  formControlName="longitude"
+                /></div>
+               <div class="col-md-6 col-sm-12 mt-4"><button type="button" class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal" (click)="getCurrentLocation()">
+                <i class="fa fa-map-marker text-danger mr-4" title="Current Location"
+                aria-hidden="true"></i>Get My Current Location</button></div>  
+            </div>
   
- 
+            <div class="row mt-3 mb-4">
+            <div class="form-group col-md-6 mb-4">
+              <label>
+                <span for="notes d-block" class="label-content">Notes</span>
+                <input
+                  class="form-control box-to-line"
+                  type="text"
+                  name="notes"
+                  formControlName="notes"
+                />
+                <cx-form-errors
+                    [control]="rsaForm.get('notes')"
+                  ></cx-form-errors>
+              </label>
+            </div>
+            <div class="form-group col-md-6 mb-4">
+              <label>
+                <span for="attachments d-block" class="label-content">Attachments</span>
+                <input
+                  class="form-control mt-1 box-to-line"
+                  type="file" id="myFile"
+                  name="attachments"
+                  
+                  (change)="onFileSelect($event)"
+                />
+                <cx-form-errors
+                    [control]="rsaForm.get('attachments')"
+                  ></cx-form-errors>
+              </label>
+            </div>
+          </div>
+            <div class="d-flex justify-content-center mt-5"><button type="submit"  class="btn btn-default btn-block round-primary-btn mb-4 w-50 mt-5">Submit</button></div>
+            <div><button type="button" (click)="getDriverDetails()"  class="btn btn-primary btn-block">Driver Details</button> </div> 
+          </form>
+        </div>
+      <!-- </div> -->
+     </div>
+    </section>
+        <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="modal-body">
+            <div #map style="width:100%;height:80vh" id="map"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div> 
+    
+   
