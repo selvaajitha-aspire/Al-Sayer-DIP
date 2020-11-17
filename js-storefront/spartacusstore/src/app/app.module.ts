@@ -86,6 +86,7 @@ else {
     RoadsideAssistanceModule,
     RegisterModule,
     MyVehiclesModule,
+    MyTicketsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

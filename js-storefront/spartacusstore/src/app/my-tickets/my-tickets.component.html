@@ -1,15 +1,68 @@
-<p>my-tickets works!</p>
-
-
-<div class="form-group col-md-6">
-    <label>
-        <span for="name" class="label-content d-block">Rsa Requests</span>
-        <select formControlName="ticket" class="form-control form-control-sm d-block w-100 box-to-line"  *ngIf="ticketsList | async as ticket$" >
-        <option selected value="" disabled>Select Ticket</option>
-        <option
-            *ngFor="let ticket of ticket$ "
-            [value]="ticket"
-            >{{ticket.notes}}  |   {{ticket.type}}  |  {{ticket.status}}</option>
-    </select>
-    </label>
+<div class="container">
+    <div class="container">
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#openTickets">
+                        Open Tickets
+                    </a>
+                </div>
+                <div id="openTickets" class="collapse show container" data-parent="#accordion">
+                    <div *ngIf="ticketsList | async as ticket$" class="card-body">
+                        <table class="table">
+                            <thead class="d-flex">
+                                <th class="col-5">Notes</th>
+                                <th class="col-3">Type</th>
+                                <th class="col-2">Status</th>
+                                <th class="col-2">Driver Details</th>
+                            </thead>
+                            <tbody>
+                                <tr class="d-flex" *ngFor="let ticket of ticket$ ">
+                                    <td class="col-5">{{ticket.notes}}</td>
+                                    <td class="col-3">{{ticket.type}}</td>
+                                    <td class="col-2">{{ticket.status}}</td>
+                                    <td class="col-2">
+                                        <!-- <button class="btn btn-default">Get Driver Details</button> -->
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#completedTickets">
+                        Completed Tickets
+                    </a>
+                </div>
+                <div id="completedTickets" class="collapse container" data-parent="#accordion">
+                    <div *ngIf="ticketsList | async as ticket$" class="card-body">
+                        <table class="table">
+                            <thead class="d-flex">
+                                <th class="col-5">Notes</th>
+                                <th class="col-3">Type</th>
+                                <th class="col-2">Status</th>
+                                <th class="col-2">Action</th>
+                            </thead>
+                            <tbody>
+                                <tr class="d-flex" *ngFor="let ticket of ticket$ ">
+                                    <td class="col-5">{{ticket.notes}}</td>
+                                    <td class="col-3">{{ticket.type}}</td>
+                                    <td class="col-2">{{ticket.status}}</td>
+                                    <td class="col-2">
+                                        <i class="fa fa-pencil-square-o mr-4" aria-hidden="true"></i>
+                                        <i class="fa fa-trash ml-4" aria-hidden="true"></i>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+</div>
