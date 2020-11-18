@@ -89,6 +89,16 @@ cx-navigation-ui h5{
     margin-bottom: 20px;
 }
 
+.SideContent{
+    max-width: inherit !important;
+    padding: 0 !important;
+}
+.Footer{
+    display: inline !important;
+}
+.footer{
+    background: none !important;
+}
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,

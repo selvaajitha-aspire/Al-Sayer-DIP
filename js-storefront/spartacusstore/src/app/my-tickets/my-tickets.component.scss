@@ -1,0 +1,15 @@
+:root {
+    --fire-engine-red: #dd231b;
+    --white: #ffffff;
+}
+
+th{
+    text-align: left !important;
+}
+.card-header{
+    line-height: 30px !important;
+    background-color: var(--fire-engine-red) !important;
+}
+.card-link{
+    color: var(--white) !important;
+}
