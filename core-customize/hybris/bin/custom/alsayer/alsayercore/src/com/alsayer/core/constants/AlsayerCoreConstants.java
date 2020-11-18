@@ -13,6 +13,7 @@ public final class AlsayerCoreConstants extends GeneratedAlsayerCoreConstants
 	public static final String SCPI_CUSTDETAILS_URL="scpi.commerce.custdetails.url";
 	public static final String SCPI_VEHICLE_INFO_URL="scpi.commerce.vehicleinfo.url";
 	public static final String SCPI_WTY_INFO_URL= "scpi.commerce.wtyinfo.url";
+	public static final String SCPI_SMS_URL= "scpi.commerce.sms.url";
     public static final String OTP_TIME = "scpi.commerce.otp.time" ;
     public static final String CUST_DETAILS_RESPONSE="Customer Details Service response : ";
 	public static final String VEHICLE_RESPONSE="Vehicle Set Response: ";

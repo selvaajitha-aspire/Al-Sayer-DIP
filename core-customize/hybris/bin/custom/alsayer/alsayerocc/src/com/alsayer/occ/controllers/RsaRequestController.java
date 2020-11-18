@@ -100,9 +100,9 @@ public class RsaRequestController
     @ResponseBody
     @ApiOperation(value = "Get Service Requests by Customer PK and status", notes = "Can be used by customer himself or alsayer to get all services requests for a specific customer with specific status")
     public List<RsaRequestData> getRsaRequestsByCustomerStatus(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
-                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("status") String status)
+                                                          @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,@RequestParam("status") List<String> statuses)
     {
-        return rsaRequestService.getRsaRequestsByCustomerIdAndStatus(status);
+        return rsaRequestService.getRsaRequestsByCustomerIdAndStatus(statuses);
     }
 
     @Secured(

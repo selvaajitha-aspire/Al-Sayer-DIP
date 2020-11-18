@@ -11,7 +11,7 @@
 
 	<!-- RSA Process Actions -->
 
-<bean id="createServiceRequestAction" class="com.alsayer.core.actions.service.CreateServiceRequestAction"  parent="abstractAction"/>
-
-
+<bean id="createServiceRequestAction" class="com.alsayer.core.actions.service.CreateServiceRequestAction"  parent="abstractAction">
+    <property name="configurationService" ref="configurationService"/>
+</bean>
 </beans>

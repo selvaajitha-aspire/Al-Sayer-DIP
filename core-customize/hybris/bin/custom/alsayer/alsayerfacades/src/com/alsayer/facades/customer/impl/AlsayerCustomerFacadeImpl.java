@@ -76,9 +76,10 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
     }
 
     @Override
-    public void sendOTP(String code) {
-
-        getAlsayerCustomerAccountService().sendOTP(code);
+    public void sendOTP(String code, String mobile) {
+        Assert.hasText(code, "The field [civilId] cannot be empty");
+        Assert.hasText(mobile, "The field [mobile] cannot be empty");
+        getAlsayerCustomerAccountService().sendOTP(code,mobile);
 
 
     }
