@@ -166,7 +166,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     // );
     this.registerService.register(
       this.collectDataFromRegisterForm(this.registerForm.value)
-    );
+    ).then(status=>{
+      this.router.go('/');
+    });
   }
 
   titleSelected(title: Title): void {
@@ -241,7 +243,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   private onRegisterUserSuccess(success: boolean): void {
     if (success) {
-      this.router.go('login');
+      this.router.go('/');
       this.globalMessageService.add(
         { key: 'register.postRegisterMessage' },
         GlobalMessageType.MSG_TYPE_CONFIRMATION

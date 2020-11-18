@@ -38,11 +38,16 @@ export class RegisterService {
     });
   }
 
-  register(registerData){
-    this.http.post(this.url.getUrl('registerCustomer'), registerData).toPromise()
-    .then(data => {
+  register(registerData): Promise<any> {
+    return new Promise((resolve,reject)=>{
+    this.http.post(this.url.getUrl('registerCustomer'), registerData).toPromise().then((res:any)=>{
+      resolve({status:"success"})
+    },
+    err=>{
+      reject(err);
     });
-  }
+  });
+}
 }
 
 

@@ -2,8 +2,10 @@ package com.alsayer.occ.controllers;
 
 import com.alsayer.core.servicerequest.service.RsaRequestService;
 import com.alsayer.facades.data.RsaRequestData;
+import com.alsayer.occ.dto.DriverDetailsWsDTO;
 import com.alsayer.occ.dto.RsaRequestListWsDTO;
 import com.alsayer.occ.dto.RsaRequestWsDTO;
+import com.alsayer.occ.dto.VehicleWsDTO;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -88,9 +91,28 @@ public class RsaRequestController
         RsaRequestListWsDTO rsaRequestListWsDTO = new RsaRequestListWsDTO();
         if(CollectionUtils.isNotEmpty(dataList))
         {
-            rsaRequestListWsDTO.setRsaRequestsList(dataMapper.mapAsList(dataList, RsaRequestWsDTO.class, fields));
+
+            rsaRequestListWsDTO.setRsaRequestsList(getRSAWsDtoList(dataList));
         }
         return rsaRequestListWsDTO;
+    }
+
+    private  List<RsaRequestWsDTO> getRSAWsDtoList(List<RsaRequestData> dataList) {
+        List<RsaRequestWsDTO> rsaRequestWsDTOList=new LinkedList<>();
+        RsaRequestWsDTO rsaRequestWsDTO=new RsaRequestWsDTO();
+        for(RsaRequestData data:dataList) {
+           rsaRequestWsDTO.setVehicle( dataMapper.map(data.getVehicle(), VehicleWsDTO.class));
+           rsaRequestWsDTO.setDriverDetails(dataMapper.map(data.getDriverDetails(), DriverDetailsWsDTO.class));
+           rsaRequestWsDTO.setType(data.getType());
+           rsaRequestWsDTO.setStatus(data.getStatus());
+           rsaRequestWsDTO.setIssue(data.getIssue());
+           rsaRequestWsDTO.setLatitude(data.getLatitude());
+           rsaRequestWsDTO.setLongitude(data.getLongitude());
+           rsaRequestWsDTO.setNotes(data.getNotes());
+           rsaRequestWsDTO.setAttachments(data.getAttachments());
+           rsaRequestWsDTOList.add(rsaRequestWsDTO);
+        }
+        return rsaRequestWsDTOList;
     }
 
     @Secured(
