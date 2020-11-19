@@ -36,7 +36,6 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
     public void register(final RegisterData registerData) throws DuplicateUidException {
         validateParameterNotNullStandardMessage("registerData", registerData);
         Assert.hasText(registerData.getCivilId(), "The field [civilId] cannot be empty");
-        Assert.hasText(registerData.getEccCustId(), "The field [eccCustId] cannot be empty");
         Assert.hasText(registerData.getName(), "The field [name] cannot be empty");
         Assert.hasText(registerData.getArabicName(), "The field [arabicName] cannot be empty");
         Assert.hasText(registerData.getMobile(), "The field [mobile] cannot be empty");
@@ -76,9 +75,10 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
     }
 
     @Override
-    public void sendOTP(String code) {
-
-        getAlsayerCustomerAccountService().sendOTP(code);
+    public void sendOTP(String code, String mobile) {
+        Assert.hasText(code, "The field [civilId] cannot be empty");
+        Assert.hasText(mobile, "The field [mobile] cannot be empty");
+        getAlsayerCustomerAccountService().sendOTP(code,mobile);
 
 
     }

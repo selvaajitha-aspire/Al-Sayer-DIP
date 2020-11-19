@@ -7,8 +7,6 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import com.alsayer.core.model.RsaRequestModel;
 import de.hybris.platform.servicelayer.user.UserService;
-
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -56,9 +54,9 @@ public class DefaultRsaRequestService implements RsaRequestService
     }
 
     @Override
-    public List<RsaRequestData> getRsaRequestsByCustomerIdAndStatus(String status) {
+    public List<RsaRequestData> getRsaRequestsByCustomerIdAndStatus(List<String> statuses) {
         final CustomerModel currentCustomer = (CustomerModel) userService.getCurrentUser();
-        return convertAllModel(getRsaRequestDao().getRsaRequestsByCustomerIdAndStatus(currentCustomer,status));
+        return convertAllModel(getRsaRequestDao().getRsaRequestsByCustomerIdAndStatus(currentCustomer,statuses));
     }
 
     @Override

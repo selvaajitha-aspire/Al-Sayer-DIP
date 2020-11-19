@@ -1,5 +1,6 @@
 package com.alsayer.core.servicerequest.dao.impl;
 
+import com.alsayer.core.enums.ServiceStatus;
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.servicerequest.dao.RsaRequestDao;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -23,6 +24,8 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
     private ModelService modelService;
 
     private FlexibleSearchService flexibleSearchService;
+
+
 
     private static final String SERVICE_REQUEST_BASE_QUERY=
             "SELECT {A.pk} FROM {" + RsaRequestModel._TYPECODE + " as A }";
@@ -60,14 +63,14 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
         builder.append(" SELECT {A.pk} FROM {" + RsaRequestModel._TYPECODE + " as A ")
                 .append(" JOIN ServiceStatus as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
                 .append(" WHERE ")
-                .append(" {").append(RsaRequestModel.CUSTOMER).append("} = ?customerID")
-                .append(" AND {C.code} = ?status");
+                .append(" {A.").append(RsaRequestModel.CUSTOMER).append("} = ?customerID")
+                .append(" AND {C.code} IN (?statuses)");
         return builder.toString();
     }
 
     private String getServiceRequestsByVehicleIDQuery(){
         StringBuilder builder = new StringBuilder();
-        builder.append(" SELECT {A.pk} FROM {RsaRequest as A ")
+        builder.append("SELECT {A.pk} FROM {RsaRequest as A ")
                 .append(" JOIN Vehicle as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"}} ")
                 .append(" WHERE ")
                 .append(" {B.pk} = ?vehicleID");
@@ -132,10 +135,10 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
     }
 
     @Override
-    public List<RsaRequestModel> getRsaRequestsByCustomerIdAndStatus(CustomerModel customer, String status) {
+    public List<RsaRequestModel> getRsaRequestsByCustomerIdAndStatus(CustomerModel customer, List<String> statuses) {
         Map<String,Object> params = new HashMap<>();
         params.put("customerID",customer);
-        params.put("status",status);
+        params.put("statuses",statuses);
         return getRsaRequests(getServiceRequestsByCustomerIDAndStatusQuery()
                 ,params);
     }
@@ -163,11 +166,12 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
         }
         final FlexibleSearchQuery flexiQuery = new FlexibleSearchQuery(query);
         if( null != params && !params.isEmpty()){
-            for (Map.Entry<String, Object> entry : params.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
-                flexiQuery.addQueryParameter(key,value);
-            }
+//            for (Map.Entry<String, Object> entry : params.entrySet()) {
+//                String key = entry.getKey();
+//                Object value = entry.getValue();
+//                flexiQuery.addQueryParameter(key,value);
+//            }
+            flexiQuery.addQueryParameters(params);
         }
         return flexiQuery;
     }

@@ -12,7 +12,6 @@ import de.hybris.platform.servicelayer.event.events.AbstractEvent;
 
 public class RsaRequestStartEvent extends AbstractEvent
 {
-	private static final long serialVersionUID = -8586595518929550780L;
 
 	private final RsaRequestProcessModel process;
 	private final ServiceStatus serviceStatus;

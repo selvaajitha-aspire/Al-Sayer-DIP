@@ -1,9 +1,8 @@
 package com.alsayer.core.servicerequest.service;
 
-import java.util.List;
 import com.alsayer.facades.data.RsaRequestData;
 
-import com.alsayer.core.model.RsaRequestModel;
+import java.util.List;
 
 public interface RsaRequestService
 {
@@ -16,7 +15,7 @@ public interface RsaRequestService
 
     public List<RsaRequestData> getRsaRequestsByCustomerId();
 
-    public List<RsaRequestData> getRsaRequestsByCustomerIdAndStatus(String status);
+    public List<RsaRequestData> getRsaRequestsByCustomerIdAndStatus(List<String> statuses);
 
     public List<RsaRequestData> getRsaRequestsByVehicleId(String vehicleID);
 

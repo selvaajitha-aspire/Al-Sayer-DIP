@@ -2,13 +2,13 @@
     <div *ngIf="vehicleList | async as vehicles$">
         <table class="table">
             <thead class="d-flex">
-                <th class="col-4">Chassis Number</th>
+                <th class="col-4">Model</th>
                 <th class="col-4">Warranty Type</th>
                 <th class="col-4">Warranty Expiry Date</th>
             </thead>
             <tbody>
                 <tr class="d-flex" *ngFor="let vehicle of vehicles$">
-                    <td class="col-4">{{vehicle.chassisNumber}}</td>
+                    <td class="col-4">{{vehicle.modline}}</td>
                     <td class="col-4">{{vehicle.warrantyType}} </td>
                     <td class="col-4">{{vehicle.warrantyExpiryDate | date: 'yyyy-mm-dd'}}</td>
                 </tr>

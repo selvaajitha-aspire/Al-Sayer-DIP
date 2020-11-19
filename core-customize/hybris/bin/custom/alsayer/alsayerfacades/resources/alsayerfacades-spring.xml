@@ -250,6 +250,7 @@
 		<property name="i18nService" ref="i18nService"/>
 		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
 		<property name="driverDetailsConverter" ref="driverDetailsConverter"/>
+		<property name="mediaService" ref="mediaService"/>
 	</bean>
 
 	<bean id="rsaRequestConverter" parent="abstractPopulatingConverter">

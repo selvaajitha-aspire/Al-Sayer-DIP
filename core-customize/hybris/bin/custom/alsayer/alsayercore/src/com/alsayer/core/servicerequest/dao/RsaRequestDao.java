@@ -17,7 +17,7 @@ public interface RsaRequestDao
 
     public List<RsaRequestModel> getRsaRequestsByCustomerId(CustomerModel customerID);
 
-    public List<RsaRequestModel> getRsaRequestsByCustomerIdAndStatus(CustomerModel customerID,String status);
+    public List<RsaRequestModel> getRsaRequestsByCustomerIdAndStatus(CustomerModel customerID,List<String> statuses);
 
     public List<RsaRequestModel> getRsaRequestsByVehicleId(String vehicleID);
 

@@ -670,15 +670,34 @@
 
 	<import resource="/alsayercore/processes/process/service-process-spring.xml"/>
 
+	<bean id="sendOTPAction" class="com.alsayer.core.actions.service.SendOTPAction">
+		<property name="configurationService" ref="configurationService"/>
+
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
 	<!-- Process Definitions -->
 
 	<bean id="serviceProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/alsayercore/processes/process/service-process.xml"/>
 	</bean>
 
+	<bean id="smsGatewayProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/alsayercore/processes/smsGatewayProcess.xml"/>
+	</bean>
+
 	<!--Service Request Event Listener-->
 
 	<bean id="rsaRequestStartEventListener" class="com.alsayer.core.event.rsa.RsaRequestStartEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<!--SMS Gateway Event Listener-->
+
+	<bean id="smsGatewayEventListener"
+		  class="com.alsayer.core.event.sms.gateway.SMSGatewayEventListener" parent="abstractEventListener">
 		<property name="modelService" ref="modelService"/>
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
