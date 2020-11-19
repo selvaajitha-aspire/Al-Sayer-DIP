@@ -11,18 +11,19 @@
                     <div *ngIf="ticketsList | async as ticket$" class="card-body">
                         <table class="table">
                             <thead class="d-flex">
-                                <th class="col-5">Notes</th>
+                                <th class="col-4">Notes</th>
                                 <th class="col-3">Type</th>
                                 <th class="col-2">Status</th>
-                                <th class="col-2">Driver Details</th>
+                                <th class="col-3 btn-div">Driver Details</th>
                             </thead>
                             <tbody>
                                 <tr class="d-flex" *ngFor="let ticket of ticket$ ">
-                                    <td class="col-5">{{ticket.notes}}</td>
+                                    <td class="col-4">{{ticket.notes}}</td>
                                     <td class="col-3">{{ticket.type}}</td>
                                     <td class="col-2">{{ticket.status}}</td>
-                                    <td class="col-2">
-                                        <!-- <button class="btn btn-default">Get Driver Details</button> -->
+                                    <td class="col-3 btn-div">
+                                        <button type="button" class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal" (click)="getDriverLocation()">
+                                            Get Driver Location</button>
                                     </td>
                                     <td></td>
                                 </tr>
@@ -41,19 +42,19 @@
                     <div *ngIf="ticketsList | async as ticket$" class="card-body">
                         <table class="table">
                             <thead class="d-flex">
-                                <th class="col-5">Notes</th>
+                                <th class="col-4">Notes</th>
                                 <th class="col-3">Type</th>
                                 <th class="col-2">Status</th>
-                                <th class="col-2">Action</th>
+                                <th class="col-3 btn-div">Driver Details</th>
                             </thead>
                             <tbody>
                                 <tr class="d-flex" *ngFor="let ticket of ticket$ ">
-                                    <td class="col-5">{{ticket.notes}}</td>
+                                    <td class="col-4">{{ticket.notes}}</td>
                                     <td class="col-3">{{ticket.type}}</td>
                                     <td class="col-2">{{ticket.status}}</td>
-                                    <td class="col-2">
-                                        <i class="fa fa-pencil-square-o mr-4" aria-hidden="true"></i>
-                                        <i class="fa fa-trash ml-4" aria-hidden="true"></i>
+                                    <td class="col-3 btn-div">
+                                        <button type="button" class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal" (click)="getDriverLocation()">
+                                            Get Driver Location</button>
                                     </td>
                                     <td></td>
                                 </tr>
@@ -64,5 +65,17 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="modal-body">
+            <div #map style="width:100%;height:80vh" id="map"></div>
+          </div>
+        </div>
+      </div>
+      </div>
 </div>

@@ -19,6 +19,10 @@ export class SigninMenuComponent implements OnInit{
 
   ngOnInit(){
     this.isDropdownOpen = false;
+    $(".SiteLogo").unbind("click").click((event) => {
+      this.isDropdownOpen = !this.isDropdownOpen;
+      this.openMenu();
+    });
   }
 
   openMenu() {
@@ -34,7 +38,7 @@ export class SigninMenuComponent implements OnInit{
         
       } else {
         $('#myNav').height("0%");
-        $('.header').css("height", "30px");
+        $('.header').css("height", "50px");
         $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
         $('#bar-mobile').addClass("bar-icon-mobile-menu-close");
         $('body').css("overflow", "auto");

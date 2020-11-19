@@ -45,6 +45,7 @@ header .SiteLogo {
     right: 20px;
     padding: 0 !important;
     margin: 20px;
+    width: 105px !important;
 }
 
 header .SearchBox,
@@ -101,28 +102,44 @@ cx-navigation-ui h5{
 }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
-    header .MiniCart,
-    .Section1{
+    header .MiniCart{
         display: none;
     }
-
+    .LandingPage2Template{
+        position: relative !important;
+        top: -22px !important;
+    }
+    .LandingPage2Template cx-page-slot.Section1 img{
+        height: 750px;
+        border-radius: 0 0 5% 5%;
+    }
+    .Section1 cx-banner-carousel .inline-navigation .carousel-panel,
+    .Section1 cx-banner-carousel .inline-navigation .carousel-panel .item {
+        max-height: 750px !important;
+    }
+    .ServiceTileSection{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+    }
     header .header{
         justify-content: center;
-        height: 30px;
+        height: 50px;
     }
-    header .SiteLogo{
-        align-items: center;
-        position: fixed;
-        margin-top: 0;
-        width: 20%;
-        left: 40%;
-        width: 15%;
-        left: 37%;
-        background-color: var(--fire-engine-red);
-        border-radius: 50%;
-    }
+    // header .SiteLogo{
+    //     align-items: center;
+    //     position: fixed;
+    //     margin-top: 0;
+    //     width: 20%;
+    //     left: 40%;
+    //     width: 15%;
+    //     left: 37%;
+    //     background-color: var(--fire-engine-red);
+    //     border-radius: 50%;
+    // }
     header{
-        border-radius: 0 0 20px 20px;
+        border-radius: 0 0 90px 90px;
     }
     .header{
         transition: 0.5s;
@@ -133,9 +150,12 @@ cx-navigation-ui h5{
         line-height: 3;
     }
     header .SiteLogo {
-        top: 10px;
+        position: inherit;
+        background-color:var(--fire-engine-red);
+        padding: 20px!important;
+        border-radius: 50%;
     }
     .ServiceTileSection{
-        margin: 11% 10% 5% 10%;
+        margin: 23% 10% 5% 10%;
     }
 }
