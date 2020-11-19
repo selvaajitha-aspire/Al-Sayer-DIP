@@ -31,6 +31,10 @@ export class HeaderMenuComponent implements OnInit {
   }
   ngOnInit(){
     this.isDropdownOpen = false;
+    $(".SiteLogo img").unbind("click").click((event) => {
+      this.isDropdownOpen = !this.isDropdownOpen;
+      this.openMenu();
+    });
   }
   epicFunction() {
     this.isMobile = this.deviceService.isMobile();
@@ -41,7 +45,7 @@ export class HeaderMenuComponent implements OnInit {
       if(this.isMobile){
         $('#myNav1').css("height", "0");
         $('body').css("overflow", "auto");
-        $('.header').css("height", "30px");
+        $('.header').css("height", "50px");
         $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
         $('#bar-mobile').addClass("bar-icon-mobile-menu-close");
         this.isDropdownOpen = false;
@@ -51,7 +55,7 @@ export class HeaderMenuComponent implements OnInit {
 
   openMenu() {
     if (this.isMobile) {
-        if (!this.isDropdownOpen) {
+        if (this.isDropdownOpen) {
         $('.header').css("height", "90vh");
         $('#bar-mobile').removeClass("bar-icon-mobile-menu-close");
         $('#bar-mobile').addClass("bar-icon-mobile-menu-open");
@@ -60,7 +64,7 @@ export class HeaderMenuComponent implements OnInit {
         this.isDropdownOpen = true;
       } else {
         $('#myNav1').height("0%");
-        $('.header').css("height", "30px");
+        $('.header').css("height", "50px");
         $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
         $('#bar-mobile').addClass("bar-icon-mobile-menu-close");
         $('body').css("overflow", "auto");

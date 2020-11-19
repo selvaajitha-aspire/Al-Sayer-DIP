@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyTicketsService } from 'src/services/my-tickets/my-tickets.service';
+declare var $: any;
 
 @Component({
   selector: 'app-my-tickets',
@@ -14,6 +15,9 @@ export class MyTicketsComponent implements OnInit {
   ngOnInit(): void {
     this.ticketsList=this.service.getRsaRequests() || [];
    
+  }
+  getDriverLocation(){
+    $("#locationPopup").modal('show');
   }
 
 }

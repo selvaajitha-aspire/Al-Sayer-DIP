@@ -3,13 +3,36 @@
     --white: #ffffff;
 }
 
-th{
-    text-align: left !important;
-}
+$desktop: 960px;
+$mobile-large: 640px;
+
 .card-header{
     line-height: 30px !important;
     background-color: var(--fire-engine-red) !important;
 }
 .card-link{
     color: var(--white) !important;
+}
+
+th{
+    text-align: left !important;
+}
+@media only screen and (max-width: $desktop){
+    table{
+        table-layout: fixed;
+        width: 100%;
+    }
+    
+    th{
+        min-width: 200px;
+    }
+    td{
+        min-width: 200px;
+    }
+    .btn-div{
+        min-width: 210px;
+    }
+    .card-body{
+        overflow: scroll;
+    }
 }
