@@ -435,6 +435,19 @@
                     </attribute>
                 </attributes>
             </itemtype>
+            <itemtype code="HomepageBannerComponent" extends="SimpleBannerComponent"
+                      autocreate="true" generate="true"
+                      jaloclass="com.alsayer.core.jalo.HomepageBannerComponent">
+                <description>ALSAYER Homepage Information Component With header, detail, media and url
+                </description>
+                <attributes>
+                    <attribute qualifier="description" type="java.lang.String">
+                        <description>Banner Description</description>
+                        <persistence type="property" />
+                        <modifiers initial="false" optional="true" />
+                    </attribute>
+            </attributes>
+            </itemtype>
 
         </typegroup>
 
