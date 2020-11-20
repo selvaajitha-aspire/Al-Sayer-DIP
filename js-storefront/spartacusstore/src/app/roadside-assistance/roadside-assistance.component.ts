@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, NgZone } from '@angular/core';
 import {} from 'googlemaps';
@@ -8,6 +9,7 @@ import {
 } from '@angular/forms';
 import { RoadsideAssistanceService } from '../../services/roadside-assistance/roadside-assistance.service';
 import { IssueTypes } from '../models/issue-type.model';
+import { RoutingService } from '@spartacus/core';
 
 declare var $: any;
 
@@ -56,10 +58,9 @@ export class RoadsideAssistanceComponent implements OnInit {
       attachments: ['']
     }
   );
-  constructor(private assistanceService : RoadsideAssistanceService,protected fb: FormBuilder,  private ngZone: NgZone) { }
+  constructor(private assistanceService : RoadsideAssistanceService,protected fb: FormBuilder,  private ngZone: NgZone, protected router: RoutingService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
-  
     this.vehicleList=this.assistanceService.getVehicles() || [];
     const mapProperties = {
       center:this.latLng ,
@@ -321,7 +322,13 @@ onFileSelect(event) {
     this.ReqJson["notes"] = this.rsaForm.get('notes').value;
     formData.append( 'form', JSON.stringify( this.ReqJson ) );
     formData.append('attachments', this.rsaForm.get('attachments').value);
-    this.assistanceService.storeServiceRequest(formData);
+    this.assistanceService.storeServiceRequest(formData).then(data=>
+    {
+      
+       this.router.go("/my-account/my-tickets");
+       this.toastr.success('Your request has been recorded', 'We will soon assist you!Thank you!');
+       
+    });
   } else {
     this.rsaForm.markAllAsTouched();
   }

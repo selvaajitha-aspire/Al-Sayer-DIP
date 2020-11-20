@@ -38,15 +38,17 @@ export class RoadsideAssistanceService {
     
   
 
-  storeServiceRequest(postData:FormData){
+  storeServiceRequest(postData:FormData): Promise<any>{
    // const attachments=postData.get("attachments").valueOf();
+   return new Promise((resolve,reject)=>{
     let url = this.url.getUrl('saveItems');
-   
-    this.http.post(url,postData).toPromise()
-    .then(data => {
-    });
-  }
-  
+    this.http.post(url,postData).toPromise().then( data=>{resolve({success:"true"})
+    },
+    err => {
+      reject(err);
+    }); 
+  });
+}
 
   getDriverDetailsPro(): Promise<any> 
   {
