@@ -42,7 +42,22 @@
             <value code="FLAT_TYRE"/>
             <value code="OUT_OF_FUEL"/>
             <value code="DEAD_BATTERY"/>
+            <value code="OTHERS_MUSAADA"/>
             <value code="RSA"/>
+        </enumtype>
+
+        <enumtype code="ReqType" autocreate="true" generate="true" dynamic="true">
+            <description>Status of service request to the target system</description>
+            <value code="M"/>
+            <value code="T"/>
+        </enumtype>
+        <enumtype code="EccIssueType" autocreate="true" generate="true" dynamic="true">
+            <description>Status of service request to the target system</description>
+            <value code="M1"/>
+            <value code="M2"/>
+            <value code="M3"/>
+            <value code="M4"/>
+            <value code="MR"/>
         </enumtype>
         <enumtype generate="true" autocreate="true" code="InformationType" dynamic="true">
             <value code="ABOUT_US"/>
@@ -447,6 +462,30 @@
                         <modifiers initial="false" optional="true" />
                     </attribute>
             </attributes>
+            </itemtype>
+
+            <itemtype code="SMSGatewayProcess" autocreate="true"
+                      generate="true" jaloclass="com.alsayer.core.jalo.SMSGatewayProcess"
+                      extends="BusinessProcess">
+                <attributes>
+                    <attribute qualifier="done" type="boolean">
+                        <description>Mark process as done</description>
+                        <modifiers optional="false" initial="false"/>
+                        <persistence type="property" />
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="mobile" type="java.lang.String">
+                        <description>Mobile number for OTP</description>
+                        <modifiers optional="true" initial="false"/>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="message" type="java.lang.String">
+                        <description>Message</description>
+                        <modifiers optional="true" initial="false"/>
+                        <persistence type="property" />
+                    </attribute>
+
+                </attributes>
             </itemtype>
 
         </typegroup>

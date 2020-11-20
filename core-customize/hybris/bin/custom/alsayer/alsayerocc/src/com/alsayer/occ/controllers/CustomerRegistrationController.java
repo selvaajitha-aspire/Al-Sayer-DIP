@@ -89,7 +89,7 @@ public class CustomerRegistrationController {
     @ApiOperation(value = "Send otp to customer's mobile no", notes = "OTP wil be sent on the number given by the user")
     @ApiBaseSiteIdParam
     public void sendOTP(@PathVariable("id") final String id, @ApiParam(value = "User's mobile no.", required = true) @RequestBody final String mobile, @ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse) {
-        customerFacade.sendOTP(id);
+        customerFacade.sendOTP(id,mobile);
     }
 
     @RequestMapping(value = "/getCustomerDetails/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})

@@ -1,25 +1,36 @@
 package com.alsayer.facades.populators;
 
 import com.alsayer.core.constants.GeneratedAlsayerCoreConstants;
+import de.hybris.platform.cmsfacades.dto.MediaFileDto;
+import de.hybris.platform.cmsfacades.media.impl.DefaultMediaFacade;
 import de.hybris.platform.converters.Populator;
+import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.facades.data.RsaRequestData;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
 import java.util.UUID;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import com.alsayer.facades.data.VehicleData;
 import com.alsayer.core.model.VehicleModel;
 import com.alsayer.core.model.DriverDetailsModel;
 import com.alsayer.facades.data.DriverDetailsData;
+import de.hybris.platform.servicelayer.media.MediaService;
+import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
 
 public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequestData> {
+    private final Logger LOG = Logger.getLogger(DefaultMediaFacade.class);
 
     private I18NService i18nService;
+
+    private  MediaService mediaService;
 
     private Converter<VehicleModel,VehicleData> vehicleDataConverter;
 
@@ -55,7 +66,15 @@ public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequest
                 serviceRequestData.setNotes(serviceRequestModel.getNotes());
             }
             if(null != serviceRequestModel.getAttachments()){
-               // serviceRequestData.setAttachments(serviceRequestModel.getAttachments());
+             for( MediaModel media: serviceRequestModel.getAttachments()){
+                 MediaFileDto mediaFileDto =new MediaFileDto();
+                 InputStream data =getMediaService().getStreamFromMedia(media);
+                 mediaFileDto.setInputStream(data);
+                 mediaFileDto.setName(media.getRealFileName());
+                 mediaFileDto.setSize(media.getSize());
+                 mediaFileDto.setMime(media.getMime());
+                 serviceRequestData.setAttachments(Collections.singletonList(mediaFileDto));
+             }
             }
 
             if(null != serviceRequestModel.getVehicle()
@@ -78,11 +97,20 @@ public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequest
         }
     }
 
+
     public I18NService getI18nService() {
         return i18nService;
     }
 
     public void setI18nService(I18NService i18nService) {
         this.i18nService = i18nService;
+    }
+
+    public MediaService getMediaService() {
+        return mediaService;
+    }
+
+    public void setMediaService(MediaService mediaService) {
+        this.mediaService = mediaService;
     }
 }

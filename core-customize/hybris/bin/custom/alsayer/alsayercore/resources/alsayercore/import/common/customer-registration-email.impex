@@ -1,4 +1,4 @@
-$contentCatalog=electronicsContentCatalog
+$contentCatalog=alsayer-spaContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $lang=en
 

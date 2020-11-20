@@ -11,7 +11,7 @@ public interface AlsayerCustomerAccountService {
 
     ECCCustomerWsDTO getCustomerECCDetails(String code);
 
-    void sendOTP(String code);
+    void sendOTP(String code,String mobile);
 
     void eccRecordSynchronization(RegisterData registerData);
 

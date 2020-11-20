@@ -2,6 +2,8 @@ import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
@@ -45,6 +47,8 @@ else {
     HomePageModule,
     PageSlotModule,
     NavigationModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     B2cStorefrontModule.withConfig({
       backend: occConfig.backend,
       context: {

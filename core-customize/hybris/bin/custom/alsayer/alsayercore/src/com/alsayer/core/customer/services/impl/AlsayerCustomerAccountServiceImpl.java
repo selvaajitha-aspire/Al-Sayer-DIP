@@ -3,7 +3,9 @@ package com.alsayer.core.customer.services.impl;
 import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.core.customer.daos.impl.AlsayerCustomerServicesDaoImpl;
 import com.alsayer.core.customer.services.AlsayerCustomerAccountService;
+import com.alsayer.core.event.sms.gateway.SMSGatewayEvent;
 import com.alsayer.core.model.CustomerAuthenticationModel;
+import com.alsayer.core.model.SMSGatewayProcessModel;
 import com.alsayer.core.response.Results;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -123,13 +125,17 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
     }
 
     @Override
-    public void sendOTP(String code) {
+    public void sendOTP(String code,String mobile) {
         String otp = getOtp();
         CustomerAuthenticationModel customerAuthentication = getModelService().create(CustomerAuthenticationModel.class);
         customerAuthentication.setCivilId(code);
         customerAuthentication.setOneTimePassword(otp);
         customerAuthentication.setJsessionId(getSessionService().getCurrentSession().getSessionId());
         getModelService().save(customerAuthentication);
+        SMSGatewayProcessModel process=new SMSGatewayProcessModel();
+        process.setMobile(mobile);
+        process.setMessage("Your One Time Password :"+otp);
+        getEventService().publishEvent(new SMSGatewayEvent(process));
     }
 
     private String getOtp() {

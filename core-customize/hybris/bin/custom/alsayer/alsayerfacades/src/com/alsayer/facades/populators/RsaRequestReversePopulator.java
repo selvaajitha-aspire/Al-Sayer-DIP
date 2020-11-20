@@ -4,9 +4,12 @@ import com.alsayer.core.enums.IssueType;
 import com.alsayer.core.enums.ServiceStatus;
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.model.VehicleModel;
+import com.alsayer.core.model.WarrantyModel;
+import com.alsayer.core.utils.DateUtil;
 import com.alsayer.core.vehicles.services.MyVehiclesService;
 import com.alsayer.facades.data.RsaRequestData;
 import de.hybris.platform.catalog.CatalogVersionService;
+import de.hybris.platform.cmsfacades.data.MediaData;
 import de.hybris.platform.cmsfacades.dto.MediaFileDto;
 import de.hybris.platform.cmsfacades.media.impl.DefaultMediaFacade;
 import de.hybris.platform.converters.Populator;
@@ -23,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.UUID;
 
 public class RsaRequestReversePopulator implements Populator<RsaRequestData, RsaRequestModel> {
@@ -41,24 +45,38 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
 
 
 
+
     @Override
     public void populate(RsaRequestData serviceRequestData, RsaRequestModel serviceRequestModel) throws ConversionException {
 
+        Date currentDate=java.util.Calendar.getInstance().getTime();
         String chassisNumber=serviceRequestData.getVehicle().getChassisNumber();
         String issueType=serviceRequestData.getIssue();
         serviceRequestModel.setUid(UUID.randomUUID().toString());
         serviceRequestModel.setCustomer((CustomerModel) userService.getCurrentUser());
-        serviceRequestModel.setVehicle(getVehicleByChassis(chassisNumber));
+        VehicleModel vehicleModel=getVehicleByChassis(chassisNumber);
+        serviceRequestModel.setVehicle(vehicleModel);
         serviceRequestModel.setStatus(ServiceStatus.STARTED);
-        serviceRequestModel.setType(issueType.equalsIgnoreCase("RSA")?"RSA":"MUSAADA");
 
-        if(issueType.equalsIgnoreCase("FLAT_TYRE")){
-            serviceRequestModel.setIssue(IssueType.FLAT_TYRE);
+        for(WarrantyModel warrantyModel: vehicleModel.getWarranties()) {
+            if(warrantyModel.getWarrantyType().contains("14")&& warrantyModel.getWarrantyExpiryDate().after(currentDate)) {
 
-        }else if(issueType.equalsIgnoreCase("OUT_OF_FUEL")){
-            serviceRequestModel.setIssue((IssueType.OUT_OF_FUEL));
-        }else{
-            serviceRequestModel.setIssue((IssueType.DEAD_BATTERY));
+                serviceRequestModel.setType("MUSAADA");
+                if (issueType.equalsIgnoreCase("FLAT_TYRE")) {
+                    serviceRequestModel.setIssue(IssueType.FLAT_TYRE);
+
+                } else if (issueType.equalsIgnoreCase("OUT_OF_FUEL")) {
+                    serviceRequestModel.setIssue((IssueType.OUT_OF_FUEL));
+                } else if (issueType.equalsIgnoreCase("DEAD_BATTERY")) {
+                    serviceRequestModel.setIssue((IssueType.DEAD_BATTERY));
+                } else {
+                    serviceRequestModel.setIssue((IssueType.OTHERS_MUSAADA));
+                }
+                break;
+            }else {
+                serviceRequestModel.setType("RSA");
+                serviceRequestModel.setIssue(IssueType.RSA);
+            }
         }
         serviceRequestModel.setLatitude(serviceRequestData.getLatitude());
         serviceRequestModel.setLongitude(serviceRequestData.getLongitude());
