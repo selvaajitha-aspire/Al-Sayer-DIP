@@ -48,7 +48,7 @@ else {
     PageSlotModule,
     NavigationModule,
     BrowserAnimationsModule,
-    // ToastrModule.forRoot(),
+    ToastrModule.forRoot(),
     B2cStorefrontModule.withConfig({
       backend: occConfig.backend,
       context: {
