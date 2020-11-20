@@ -18,6 +18,7 @@ import de.hybris.platform.acceleratorcms.model.components.SimpleResponsiveBanner
 import de.hybris.platform.acceleratorcms.model.components.SubCategoryListComponentModel;
 import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 import de.hybris.platform.cms2lib.model.components.ProductCarouselComponentModel;
+import com.alsayer.core.model.HomepageBannerComponentModel;
 
 
 /**
@@ -60,6 +61,7 @@ public interface ControllerConstants
 
 			String ServiceTileBannerComponent = _Prefix + ServiceTileBannerComponentModel._TYPECODE + _Suffix;
 			String HomepageInformationComponent = _Prefix + HomepageInformationComponentModel._TYPECODE + _Suffix;
+			String HomepageBannerComponent = _Prefix + HomepageBannerComponentModel._TYPECODE + _Suffix;
 		}
 	}
 

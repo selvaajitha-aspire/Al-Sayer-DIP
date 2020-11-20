@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <classpath>
-                                                        
+                                                                                                                                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -14,7 +40,33 @@
     
     
     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-                                                        
+                                                                                                                                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -28,7 +80,33 @@
     
     
     <classpathentry kind="output" path="eclipsebin/notused"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -42,7 +120,33 @@
     
     
     <classpathentry exported="true" kind="src" path="/acceleratorstorefrontcommons"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -56,7 +160,33 @@
     
     
     <classpathentry exported="true" kind="src" path="/alsayerfacades"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -70,7 +200,33 @@
     
     
     <classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/json-taglib-0.4.1.jar"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -84,7 +240,33 @@
     
     
     <classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jsoup-1.11.3.jar"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -98,7 +280,33 @@
     
     
     <classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jstl-impl-1.2.jar"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -112,7 +320,33 @@
     
     
     <classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/rhino-1.7.7.jar"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -126,7 +360,33 @@
     
     
     <classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/wro4j-core-1.8.0.jar"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -140,7 +400,33 @@
     
     
     <classpathentry exported="true" kind="lib" path="resources"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -154,7 +440,33 @@
     
     
     <classpathentry exported="false" kind="src" output="eclipsebin/web/classes" path="web/src"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -168,7 +480,33 @@
     
     
     <classpathentry exported="false" kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
-                                                    	
+                                                                                                                                                            	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -182,7 +520,345 @@
     
     
     <classpathentry exported="false" kind="src" path="/platform"/>
-                                                    
+                                                                                                                                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                                                
     
     
     
@@ -273,7 +949,33 @@
         
     <classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
     <classpathentry combineaccessrules="false" kind="src" path="/stocknotificationaddon"/>
-                                                    				
+                                                                                                                                                            				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
