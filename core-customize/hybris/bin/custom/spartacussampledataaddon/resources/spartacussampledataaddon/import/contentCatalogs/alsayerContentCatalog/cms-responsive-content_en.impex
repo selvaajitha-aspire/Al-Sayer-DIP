@@ -33,12 +33,13 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 
 # Site Logo Media
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
-;;/images/theme/SAP_scrn_R.png;SAP_scrn_R.png;$siteResource/images/theme/alsayer.png;image/png;;"Alsayer"
-
+                   ;;/images/theme/SAP_scrn_R.png;SAP_scrn_R.png;$siteResource/images/theme/alsayer.png;image/png;;"Alsayer"
+                   ;;/images/theme/logo.png;logo.png;$siteResource/images/theme/logo.png;image/png;;"Alsayer"
 
 # Site Logo Component
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;SiteLogoComponent;/images/theme/SAP_scrn_R.png
+                            ;;SiteLogoComponent1;/images/theme/logo.png
+                            ;;SiteLogoComponent;/images/theme/SAP_scrn_R.png
 
 # CMSParagraphComponent
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
