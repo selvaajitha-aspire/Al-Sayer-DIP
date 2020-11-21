@@ -35,9 +35,10 @@ label{
 }
 /*Default Style - END*/
 header{
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 1000;
+    width: 100%;
     background-color: var(--fire-engine-red) !important;
 }
 header .SiteLogo {
@@ -46,6 +47,7 @@ header .SiteLogo {
     padding: 0 !important;
     margin: 20px;
     width: 105px !important;
+    z-index: 9999;
 }
 
 header .SearchBox,
@@ -100,14 +102,21 @@ cx-navigation-ui h5{
 .footer{
     background: none !important;
 }
+
+.SiteLogo cx-banner:last-child{
+    display:block;
+  }
+  .SiteLogo cx-banner:first-child{
+    display:none;
+  }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart{
         display: none;
     }
-    .LandingPage2Template{
+    .LandingPage2Template, .AccountPageTemplate{
         position: relative !important;
-        top: -22px !important;
+        top: 10px !important;
     }
     .LandingPage2Template cx-page-slot.Section1 img{
         height: 750px;
@@ -150,12 +159,47 @@ cx-navigation-ui h5{
         line-height: 3;
     }
     header .SiteLogo {
-        position: inherit;
-        background-color:var(--fire-engine-red);
-        padding: 20px!important;
-        border-radius: 50%;
+        position: absolute;
+        background-color: rgb(221, 35, 27) ;
+        padding: 15px !important;
+        border-radius: 80%;
+        top: 0px;
+        left: 37%;
+        border: 0;
+        margin: 0;
     }
     .ServiceTileSection{
         margin: 23% 10% 5% 10%;
     }
+    .SiteLogo cx-banner:first-child{
+        display:none;
+      }
+      .SiteLogo cx-banner:last-child{
+        display:block;
+      }
+      cx-navigation-ui nav {
+        padding: 5px !important;
+    }
+//     .SiteLogo:after,
+// .SiteLogo:before{
+//     content:'';
+//     width:40px;
+//     height:12px;
+//     border:1px solid red;
+//     position:absolute;
+//     bottom:-12px;
+//     border-top:0;
+// }
+// .SiteLogo:after{
+//     border-left:0;
+//     -moz-border-radius:0 0 15px 0;
+//     -webkit-border-radius:0 0 15px 0;
+//     left:-41px;
+// }
+// .SiteLogo:before{
+//     border-right:0;
+//     -moz-border-radius:0 0 0 15px;
+//     -webkit-border-radius:0 0 0 15px;
+//     right:-41px;
+// }
 }
