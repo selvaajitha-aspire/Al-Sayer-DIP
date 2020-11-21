@@ -132,38 +132,5 @@ $mobile-large: 640px;
       font-size: 30px;
     }
   }
-  .rounded{
-    border:1px solid red;
-    border-bottom:0;
-    width:80px;
-    height:40px;
-    margin:30px;
-    position:relative;
-    -moz-border-radius:45px 45px 0 0;
-    -webkit-border-radius:45px 45px 0 0;
-    transform: rotate(180deg);
-}
-.rounded:after,
-.rounded:before{
-    content:'';
-    width:40px;
-    height:12px;
-    border:1px solid red;
-    position:absolute;
-    bottom:-12px;
-    border-top:0;
-}
-.rounded:after{
-    border-left:0;
-    -moz-border-radius:0 0 15px 0;
-    -webkit-border-radius:0 0 15px 0;
-    left:-41px;
-}
-.rounded:before{
-    border-right:0;
-    -moz-border-radius:0 0 0 15px;
-    -webkit-border-radius:0 0 0 15px;
-    right:-41px;
-}
   
   }
