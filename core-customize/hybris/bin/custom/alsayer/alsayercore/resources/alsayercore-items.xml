@@ -9,7 +9,8 @@
         <collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
                         type="set"/>
-
+        <collectiontype code="BrandBannerList" elementtype="HomepageBannerComponent" autocreate="true" generate="true"
+                        type="list"/>
     </collectiontypes>
 
     <enumtypes>
@@ -492,7 +493,18 @@
 
                 </attributes>
             </itemtype>
-
+            <itemtype code="HomepageBannerCollectionComponent" extends="SimpleCMSComponent"
+                      autocreate="true" generate="true"
+                      jaloclass="com.alsayer.core.jalo.HomepageBannerCollectionComponent">
+                <description>ALSAYER Homepage Banner Collection Component</description>
+                <attributes>
+                    <attribute qualifier="components" type="BrandBannerList">
+                        <description>Banner Component List</description>
+                        <persistence type="property" />
+                        <modifiers initial="false" optional="true" />
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
 
 
