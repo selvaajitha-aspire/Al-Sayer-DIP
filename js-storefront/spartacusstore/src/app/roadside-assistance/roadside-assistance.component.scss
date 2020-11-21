@@ -5,19 +5,7 @@
 
 $desktop: 960px;
 $mobile-large: 640px;
-.banner{
-    background-image: url(../../assets/servicebanner.jpg);
-    height: 300px;
-    background-size: 100% 300px;
-    background-repeat: no-repeat;
-}
-.form-wrapper{
-    border: 1px solid;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.3);
-    margin: -70px 0 30px 0;
-}
+
 .box-to-line{
     border: none;
     border-bottom: solid black 1px;
@@ -36,5 +24,4 @@ $mobile-large: 640px;
     .location-btn{
         width: 100%;
     }
-
 }

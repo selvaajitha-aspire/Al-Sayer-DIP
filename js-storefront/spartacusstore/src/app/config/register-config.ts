@@ -5,7 +5,9 @@ export const registerOccConfig = {
                 getEccCustomer: 'register/getCustomerDetails/',
                 registerCustomer: 'register/createUser',
                 sendOTP: 'register/sendOTP/',
+                getComponents: 'cms/components'
             },
+            
         },
     },
 };

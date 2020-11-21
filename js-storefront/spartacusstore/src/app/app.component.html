@@ -1,13 +1,13 @@
 <cx-storefront></cx-storefront>
 
-<ng-container>
+<ng-container *ngIf="user$ | async as user; else login">
   <cx-page-slot position="HeaderLinks"></cx-page-slot>
 </ng-container>
-<!-- <ng-template #login>
+<ng-template #login>
   <app-signin-menu></app-signin-menu>
-</ng-template> -->
+</ng-template>
 <ng-template cxOutletRef="PreHeader">
-  <ng-container>
+  <ng-container *ngIf="user$ | async as user; else login">
     <cx-page-slot position="HeaderLinks"></cx-page-slot>
   </ng-container>
   
