@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~ngx-toastr/toastr';
 @import '~@spartacus/styles/index';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
 :root {
     --fire-engine-red: #dd231b;
@@ -109,6 +111,9 @@ cx-navigation-ui h5{
   .SiteLogo cx-banner:first-child{
     display:none;
   }
+  .Section1 > cx-banner{
+      display: none;
+  }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,
@@ -180,6 +185,9 @@ cx-navigation-ui h5{
       }
       cx-navigation-ui nav {
         padding: 5px !important;
+    }
+    .Section1 > cx-banner{
+        display: block;
     }
 //     .SiteLogo:after,
 // .SiteLogo:before{

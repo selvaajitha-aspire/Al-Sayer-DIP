@@ -48,6 +48,18 @@ export class RegisterService {
     });
   });
 }
+
+getComponentData(component) : Promise<any>{
+  return new Promise((resolve,reject)=>{
+    this.http.get(this.url.getUrl('getComponents')+"?componentIds="+component.replace(" ",",")).toPromise().then((res:any)=>{
+      resolve({data:res})
+    },
+    err=>{
+      reject(err);
+    });
+  });
+}
+
 }
 
 
