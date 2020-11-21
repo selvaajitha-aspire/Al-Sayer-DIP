@@ -111,7 +111,8 @@ cx-navigation-ui h5{
   }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
-    header .MiniCart{
+    header .MiniCart,
+    .Section1 cx-banner-carousel{
         display: none;
     }
     .LandingPage2Template, .AccountPageTemplate{
