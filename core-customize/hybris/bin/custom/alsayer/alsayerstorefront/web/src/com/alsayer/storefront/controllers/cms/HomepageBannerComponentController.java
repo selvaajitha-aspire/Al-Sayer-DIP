@@ -21,5 +21,6 @@ public class HomepageBannerComponentController extends AbstractAcceleratorCMSCom
         model.addAttribute("link",component.getUrlLink());
         model.addAttribute("media",component.getMedia());
         model.addAttribute("name",component.getName());
+        model.addAttribute("imagePosition",component.getImagePosition());
     }
 }

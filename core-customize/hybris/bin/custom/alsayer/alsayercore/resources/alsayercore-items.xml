@@ -461,6 +461,11 @@
                         <persistence type="property" />
                         <modifiers initial="false" optional="true" />
                     </attribute>
+                    <attribute qualifier="imagePosition" type="java.lang.String">
+                        <description>Image Alignment position </description>
+                        <persistence type="property" />
+                        <modifiers initial="false" optional="true" />
+                    </attribute>
             </attributes>
             </itemtype>
 
