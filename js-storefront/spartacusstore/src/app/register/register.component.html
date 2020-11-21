@@ -124,13 +124,6 @@
             </label>
           </div>
 
-          <!-- <div class="form-group">
-          <re-captcha
-            (resolved)="resolved($event)"
-            siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU"
-        ></re-captcha>
-        </div> -->
-
         <div class="form-group">
           <div class="form-check">
             <label *ngIf="anonymousConsent$ | async as anonymousConsent">
@@ -172,23 +165,6 @@
         <button type="button" (click)="sendOTP()" class="btn btn-block btn-primary">
          Register
         </button>
-        <!-- <div class="form-group">
-          <label>
-            <span class="label-content">Confirm OTP</span>
-            <input
-              class="form-control"
-              type="text"
-              name="oneTimePassword"
-              formControlName="oneTimePassword"
-            />
-            <cx-form-errors
-            [control]="registerForm.get('oneTimePassword')"
-          ></cx-form-errors>
-          </label>
-        </div>
-        <button type="submit" class="btn btn-block btn-primary">
-         Submit OTP
-         </button> -->
         <a
           class="login-link btn-link" [routerLink]="['/login']" routerLinkActive="router-link-active" 
           >Login</a>
