@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { AuthService, User, UserService } from '@spartacus/core';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header-menu',
@@ -22,15 +24,30 @@ export class HeaderMenuComponent implements OnInit {
   );
   isMobile: boolean;
   isDropdownOpen: boolean;
+  isLoggedIn = false;
+  user$: Observable<User>;
   constructor(
     protected componentData: CmsComponentData<CmsNavigationComponent>,
     protected service: NavigationService,
     private deviceService: DeviceDetectorService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService,
+    private userService: UserService
   ) {
+    this.user$ = this.userService.get();
+    this.user$.subscribe(user => {
+      console.log('userId', user);
+      if (Object.keys(user).length === 0 && user.constructor === Object) {
+        this.isLoggedIn = false;
+      } else {
+        this.isLoggedIn = true;
+      }
+      console.log('isLoggedIn',this.isLoggedIn)
+    });
+
     router.events.subscribe((val) => {
       if (val instanceof NavigationStart) {
-        this.isDropdownOpen = !this.isDropdownOpen;
+        this.isDropdownOpen = false;
         this.openMenu();
       }
   });
@@ -49,34 +66,40 @@ export class HeaderMenuComponent implements OnInit {
   }
 
   ngAfterContentChecked() {
-    if (event && event.target["tagName"] == "NAV") {
-      if(this.isMobile){
-        $('#myNav1').css("height", "0");
-        $('body').css("overflow", "auto");
-        $('.header').css("height", "50px");
-        $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
-        $('#bar-mobile').addClass("bar-icon-mobile-menu-close");
-        this.isDropdownOpen = false;
-      } 
-    }
+    // if (event && event.target["tagName"] == "NAV") {
+    //   if(this.isMobile){
+    //     $('#myNav1').css("height", "0");
+    //     $('body').css("overflow", "auto");
+    //     $('.header').css("height", "50px");
+    //     $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
+    //     $('#bar-mobile').addClass("bar-icon-mobile-menu-close");
+    //     this.isDropdownOpen = false;
+    //   } 
+    // }
   }
 
   openMenu() {
     if (this.isMobile) {
         if (this.isDropdownOpen) {
-        $('.header').css("height", "90vh");        
-        $('.SiteLogo').css("marginTop","550px");
+          if(this.isLoggedIn){
+            $('header').height("600px");
+            $('.SiteLogo').css("marginTop","530px");
+          } else {
+            $('header').height("300px");
+            $('.SiteLogo').css("marginTop","225px");
+          }
+        $('header').css("transition","0.3s"); 
+        $('.header').css("height", "80vh");        
         $('#bar-mobile').removeClass("bar-icon-mobile-menu-close");
         $('#bar-mobile').addClass("bar-icon-mobile-menu-open");
         $('#myNav1').height("80vh"); 
-        $('header').height("600px"); 
         $('body').css("overflow", "hidden");
         this.isDropdownOpen = true;
       } else {
         $('#myNav1').height("0%");
-        $('header').height("50px"); 
+        $('header').height("75px"); 
         $('header').css("transition","0.5s"); 
-        $('.header').css("height", "50px");        
+        $('.header').css("height", "75px");        
         $('.SiteLogo').css("marginTop","0");
         $('.SiteLogo').css("transition","0.3s");
         $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
