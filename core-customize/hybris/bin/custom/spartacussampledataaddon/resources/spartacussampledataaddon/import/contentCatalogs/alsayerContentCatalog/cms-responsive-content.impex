@@ -839,5 +839,15 @@ UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media
                                  ;;TyresComponent;Tile7.jpg;"Tyres";
                                  ;;ServiceAppointmentComponent;Tile8.jpg;"Service Appointment";
 
+##Logo Impex
+
+# Site Logo Component
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+                                   ;;SiteLogoComponent;Site Logo Component ;SiteLogoComponent;"/"
+                                   ;;SiteLogoComponent1;Site Logo Component 1;SiteLogoComponent1;"/"
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+                         ;;SiteLogoSlot;SiteLogoComponent,SiteLogoComponent1
 
 
