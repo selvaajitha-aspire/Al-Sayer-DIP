@@ -5,10 +5,12 @@ import { BannerComponent } from '@spartacus/storefront';
 import { ServiceTileComponent } from './service-tile/service-tile.component';
 import { HeaderMenuComponent } from './header/header-menu/header-menu.component';
 import { FooterComponent } from './footer/footer.component';
+import { BrandComponent } from './brand-component/brand.component';
 
 @NgModule({
   declarations: [
-    ServiceTileComponent
+    ServiceTileComponent,
+    BrandComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,9 @@ import { FooterComponent } from './footer/footer.component';
         },
         FooterComponent : {
           component: FooterComponent
+        },
+        HomepageBannerComponent :{
+          component: BrandComponent
         }
       }
     } as CmsConfig),
