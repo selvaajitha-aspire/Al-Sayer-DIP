@@ -83,10 +83,10 @@ export class HeaderMenuComponent implements OnInit {
         if (this.isDropdownOpen) {
           if(this.isLoggedIn){
             $('header').height("600px");
-            $('.SiteLogo').css("marginTop","550px");
+            $('.SiteLogo').css("marginTop","530px");
           } else {
             $('header').height("300px");
-            $('.SiteLogo').css("marginTop","250px");
+            $('.SiteLogo').css("marginTop","225px");
           }
         $('header').css("transition","0.3s"); 
         $('.header').css("height", "90vh");        
@@ -97,9 +97,9 @@ export class HeaderMenuComponent implements OnInit {
         this.isDropdownOpen = true;
       } else {
         $('#myNav1').height("0%");
-        $('header').height("50px"); 
+        $('header').height("75px"); 
         $('header').css("transition","0.5s"); 
-        $('.header').css("height", "50px");        
+        $('.header').css("height", "75px");        
         $('.SiteLogo').css("marginTop","0");
         $('.SiteLogo').css("transition","0.3s");
         $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
