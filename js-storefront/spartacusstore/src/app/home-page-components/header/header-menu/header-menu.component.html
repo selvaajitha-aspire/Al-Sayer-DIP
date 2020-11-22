@@ -24,18 +24,18 @@
     <div class="overlay-content home-link" *ngIf="isLoggedIn">
         <cx-navigation-ui [node]="node$ | async" [ngClass]="styleClass$ | async" [flyout]="false">
         </cx-navigation-ui>
-        <div class="social-icons">
+        <!-- <div class="social-icons">
             <i class="fab fa-facebook"></i>
             <i class="fab fa-twitter"></i>
             <i class="fab fa-linkedin"></i>
-        </div>
+        </div> -->
     </div>
     <div class="overlay-content guest-user" style="height:100px !important;text-align: center;" *ngIf="!isLoggedIn">
-        <a href="/login" class="dropdown-item top-dropdown bg-transparent">Sign In / Login</a>
-        <div class="social-icons">
+        <a href="/login" class="dropdown-item top-dropdown bg-transparent">Sign In / Register</a>
+        <!-- <div class="social-icons">
             <i class="fab fa-facebook"></i>
             <i class="fab fa-twitter"></i>
             <i class="fab fa-linkedin"></i>
-        </div>
+        </div> -->
     </div>
 </div>
