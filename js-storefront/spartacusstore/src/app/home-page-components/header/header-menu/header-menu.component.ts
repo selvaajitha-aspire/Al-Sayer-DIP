@@ -24,6 +24,7 @@ export class HeaderMenuComponent implements OnInit {
   );
   isMobile: boolean;
   isDropdownOpen: boolean;
+  forceClose: boolean;
   isLoggedIn = false;
   user$: Observable<User>;
   constructor(
@@ -48,6 +49,7 @@ export class HeaderMenuComponent implements OnInit {
     router.events.subscribe((val) => {
       if (val instanceof NavigationStart) {
         this.isDropdownOpen = false;
+        this.forceClose = true;
         this.openMenu();
       }
   });
@@ -57,7 +59,12 @@ export class HeaderMenuComponent implements OnInit {
   ngOnInit(){
     this.isDropdownOpen = false;
     $(".SiteLogo a").unbind("click").click((event) => {
-      this.isDropdownOpen = !this.isDropdownOpen;
+      if (this.forceClose) {
+        this.isDropdownOpen = false;
+      } else {
+        this.isDropdownOpen = !this.isDropdownOpen;
+      }
+      this.forceClose = false;
       this.openMenu();
     });
   }
@@ -83,10 +90,10 @@ export class HeaderMenuComponent implements OnInit {
         if (this.isDropdownOpen) {
           if(this.isLoggedIn){
             $('header').height("600px");
-            $('.SiteLogo').css("marginTop","530px");
+            $('.SiteLogo').css("marginTop","560px");
           } else {
             $('header').height("300px");
-            $('.SiteLogo').css("marginTop","225px");
+            $('.SiteLogo').css("marginTop","260px");
           }
         $('header').css("transition","0.3s"); 
         $('.header').css("height", "80vh");        
@@ -97,9 +104,9 @@ export class HeaderMenuComponent implements OnInit {
         this.isDropdownOpen = true;
       } else {
         $('#myNav1').height("0%");
-        $('header').height("75px"); 
+        $('header').height("40px"); 
         $('header').css("transition","0.5s"); 
-        $('.header').css("height", "75px");        
+        $('.header').css("height", "40px");        
         $('.SiteLogo').css("marginTop","0");
         $('.SiteLogo').css("transition","0.3s");
         $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");

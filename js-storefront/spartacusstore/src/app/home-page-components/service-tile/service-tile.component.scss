@@ -39,7 +39,9 @@ $mobile-large: 640px;
     font-weight: 600;
     text-decoration: none;
 }
-
+.image-width{
+    width: 230px;
+}
 @media only screen and (max-width: $desktop){
     .ServiceTileBannerComponent{
         width: 50%;
@@ -54,5 +56,9 @@ $mobile-large: 640px;
     .tile-item{
         height: 137px;
         max-height: 137px;
+    }
+    .image-width{
+        width: 130px !important;
+        margin: 0 -10px;
     }
 }
