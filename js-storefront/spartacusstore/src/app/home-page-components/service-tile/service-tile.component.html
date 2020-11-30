@@ -2,8 +2,8 @@
     <a [href]="data.urlLink">
         <div class="ServiceTileBannerComponent">
             <div class="tile-item text-center pt-4" [style.background]='getBackgroundColor(data.color)'>
-                <img class="tile-img" [src]="getUrl(data.media.url)" />
-                <span class="d-block tile-headline font-weight-bold tile-link">{{data.headline}}</span>
+                <img  [ngClass]="!data.headline ? 'image-width' : 'tile-img' " [src]="getUrl(data.media.url)" />
+                <span *ngIf="data.headline" class="d-block tile-headline font-weight-bold tile-link">{{data.headline}}</span>
             </div>
         </div>
     </a>

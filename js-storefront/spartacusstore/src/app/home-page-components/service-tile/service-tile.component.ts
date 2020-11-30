@@ -15,6 +15,8 @@ export class ServiceTileComponent implements OnInit {
 
   constructor(public component: CmsComponentData<ServiceTileBannerComponent>) { }
   ngOnInit(): void {
+    this.component.data$.subscribe(data => {
+    })
   }
   getUrl(url: string) {
     if(url && !url.startsWith("/")){

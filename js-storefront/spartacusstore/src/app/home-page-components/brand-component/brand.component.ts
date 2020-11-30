@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ChangeDetectorRef } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { throwError } from 'rxjs';
@@ -20,27 +20,12 @@ export interface PhotosApi {
   styleUrls: ['./brand.component.scss']
 })
 export class BrandComponent implements OnInit {
+  constructor(public component: CmsComponentData<HomepageBannerCollectionComponent>, 
+              private registerService: RegisterService,
+              private detect: ChangeDetectorRef) { }
   componentData : any[];
-  constructor(public component: CmsComponentData<HomepageBannerCollectionComponent>,private readonly http: HttpClient, private registerService: RegisterService) { }
-
-  ngOnInit(): void {
-    this.component.data$.subscribe(data=>{
-      this.registerService.getComponentData(data.components).then(res => {
-        console.log(res.data.component);
-        this.componentData = res.data.component;
-      })
-    })
-  }
-  getUrl(url: string) {
-    if(url && !url.startsWith("/")){
-      url = "/"+url;
-    }
-    return environment.occBaseUrl + url;
-  }
 
 
-  apiData: PhotosApi;
-  limit: number = 10; // <==== Edit this number to limit API results
   customOptions: OwlOptions = {
     loop: true,
     autoplay: true,
@@ -60,22 +45,20 @@ export class BrandComponent implements OnInit {
       }
     }
   }
-  
 
-
-  fetch() {
-    const api = `https://jsonplaceholder.typicode.com/albums/1/photos?_start=0&_limit=${this.limit}`;
-    const http$ = this.http.get<PhotosApi>(api);
-
-    http$.subscribe(
-      res => this.apiData = res,
-      err => throwError(err)
-    )
+  ngOnInit(): void {
+    this.component.data$.subscribe(data=>{
+      this.registerService.getComponentData(data.components).then(res => {
+        console.log(res.data.component);
+        this.componentData = res.data.component;
+        this.detect.detectChanges();
+      })
+    })
   }
-
-  
-
-
- 
-
+  getUrl(url: string) {
+    if(url && !url.startsWith("/")){
+      url = "/"+url;
+    }
+    return environment.occBaseUrl + url;
+  }
 }
