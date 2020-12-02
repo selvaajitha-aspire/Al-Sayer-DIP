@@ -505,6 +505,17 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+            <!--Thumbnails For Links-->
+            <itemtype code="SideMenuLinkComponent"  extends="CMSLinkComponent" generate="true" autocreate="true" jaloclass="com.alsayer.core.jalo.SideMenuLinkComponent">
+                <attributes>
+                    <attribute qualifier="media" type="Media">
+                        <persistence type="property" />
+                        <modifiers optional="true" initial="false"/>
+                        <description>image of the Component</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
 
 
