@@ -34,12 +34,12 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
 
   menuState:string = 'out';
 
-  styleClass$: Observable<string> = this.componentData.data$.pipe(
-    map((d) => d?.styleClass)
-  );
-  isMobile: boolean;
-  isDropdownOpen: boolean;
-  forceClose: boolean;
+  // styleClass$: Observable<string> = this.componentData.data$.pipe(
+  //   map((d) => d?.styleClass)
+  // );
+  // isMobile: boolean;
+  // isDropdownOpen: boolean;
+  // forceClose: boolean;
   isLoggedIn = false;
   user$: Observable<User>;
   navigationLinks: NavigationNode[];
@@ -62,27 +62,27 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
       console.log('isLoggedIn',this.isLoggedIn)
     });
 
-    router.events.subscribe((val) => {
-      if (val instanceof NavigationStart) {
-        this.isDropdownOpen = false;
-        this.forceClose = true;
-        this.openMenu();
-      }
-  });
-    this.isMobile = false;
-    this.epicFunction();
+  //   router.events.subscribe((val) => {
+  //     if (val instanceof NavigationStart) {
+  //       this.isDropdownOpen = false;
+  //       this.forceClose = true;
+  //       this.openMenu();
+  //     }
+  // });
+    // this.isMobile = false;
+    // this.epicFunction();
   }
   ngOnInit(){
-    this.isDropdownOpen = false;
-    $(".SiteLogo a").unbind("click").click((event) => {
-      if (this.forceClose) {
-        this.isDropdownOpen = false;
-      } else {
-        this.isDropdownOpen = !this.isDropdownOpen;
-      }
-      this.forceClose = false;
-      this.openMenu();
-    });
+    // this.isDropdownOpen = false;
+    // $(".SiteLogo a").unbind("click").click((event) => {
+    //   if (this.forceClose) {
+    //     this.isDropdownOpen = false;
+    //   } else {
+    //     this.isDropdownOpen = !this.isDropdownOpen;
+    //   }
+    //   this.forceClose = false;
+    //   this.openMenu();
+    // });
     this.node$.subscribe(data=> {
       if(data && data.title == 'My Account') {
         this.navigationLinks = data.children?.length > 0 ?  data.children[0].children : [];
@@ -93,11 +93,8 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     document.getElementsByClassName('header-wrapper ')[1] ? document.getElementsByClassName('header-wrapper ')[1]['style'].display = 'none' : '';
   }
-  epicFunction() {
-    this.isMobile = this.deviceService.isMobile();
-  }
 
-  ngAfterContentChecked() {
+  // ngAfterContentChecked() {
     // if (event && event.target["tagName"] == "NAV") {
     //   if(this.isMobile){
     //     $('#myNav1').css("height", "0");
@@ -108,43 +105,43 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
     //     this.isDropdownOpen = false;
     //   } 
     // }
-  }
+  // }
 
   openMenu() {
-    if (this.isMobile) {
-        if (this.isDropdownOpen) {
-          if(this.isLoggedIn){
-            $('header').height("600px");
-            $('.SiteLogo').css("marginTop","560px");
-          } else {
-            $('header').height("300px");
-            $('.SiteLogo').css("marginTop","260px");
-          }
-        $('header').css("transition","0.3s"); 
-        $('.header').css("height", "80vh");        
-        $('#bar-mobile').removeClass("bar-icon-mobile-menu-close");
-        $('#bar-mobile').addClass("bar-icon-mobile-menu-open");
-        $('#myNav1').height("80vh"); 
-        $('body').css("overflow", "hidden");
-        this.isDropdownOpen = true;
-      } else {
-        $('#myNav1').height("0%");
-        $('header').height("40px"); 
-        $('header').css("transition","0.5s"); 
-        $('.header').css("height", "40px");        
-        $('.SiteLogo').css("marginTop","0");
-        $('.SiteLogo').css("transition","0.3s");
-        $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
-        $('#bar-mobile').addClass("bar-icon-mobile-menu-close");
-        $('body').css("overflow", "auto");
-        this.isDropdownOpen = false;
-      }
-    } else {
-      $('#myNav1').css("height", "100vh"); 
-    }
+    // if (this.isMobile) {
+    //     if (this.isDropdownOpen) {
+    //       if(this.isLoggedIn){
+    //         $('header').height("600px");
+    //         $('.SiteLogo').css("marginTop","560px");
+    //       } else {
+    //         $('header').height("300px");
+    //         $('.SiteLogo').css("marginTop","260px");
+    //       }
+    //     $('header').css("transition","0.3s"); 
+    //     $('.header').css("height", "80vh");        
+    //     $('#bar-mobile').removeClass("bar-icon-mobile-menu-close");
+    //     $('#bar-mobile').addClass("bar-icon-mobile-menu-open");
+    //     $('#myNav1').height("80vh"); 
+    //     $('body').css("overflow", "hidden");
+    //     this.isDropdownOpen = true;
+    //   } else {
+    //     $('#myNav1').height("0%");
+    //     $('header').height("40px"); 
+    //     $('header').css("transition","0.5s"); 
+    //     $('.header').css("height", "40px");        
+    //     $('.SiteLogo').css("marginTop","0");
+    //     $('.SiteLogo').css("transition","0.3s");
+    //     $('#ar-mobile').removeClass("bar-icon-mobile-menu-open");
+    //     $('#bar-mobile').addClass("bar-icon-mobile-menu-close");
+    //     $('body').css("overflow", "auto");
+    //     this.isDropdownOpen = false;
+    //   }
+    // } else {
+    //   $('#myNav1').css("height", "100vh"); 
+    // }
   }
   closeMenu() {
-    $('#myNav1').css("height", "0");
+    // $('#myNav1').css("height", "0");
   }
 
   toggleMenu() {
