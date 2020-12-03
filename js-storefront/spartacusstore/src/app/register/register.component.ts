@@ -31,12 +31,14 @@ declare var $: any;
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   @ViewChild('registrationForm') registrationFormElement: NgForm;
   titles$: Observable<Title[]>;
   oneTimePassword:number;
   private subscription = new Subscription();
+  userCivilId = '';
 
   anonymousConsent$: Observable<{
     consent: AnonymousConsent;
@@ -84,6 +86,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    $('#civilIdPopup').modal('show');
+    
     // this.titles$ = this.userService.getTitles().pipe(
       
     //   tap((titles) => {
@@ -271,6 +275,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.onRegisterUserSuccess(success);
       })
     );
+  }
+
+  submitCivilId() {
+    console.log('civil id', this.userCivilId);
+    $('#userOTPModal').modal('show');
+  }
+
+  submitUserOTP() {
+    
+  }
+
+  onOtpChange(event) {
+    console.log('event ==>', event);
   }
 
   ngOnDestroy() {

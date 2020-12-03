@@ -4,10 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule } from '@spartacus/storefront';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule } from '@spartacus/storefront';
 import { OccConfig, ConfigModule } from '@spartacus/core';
 import { environment } from './../environments/environment';
 import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
@@ -47,7 +48,9 @@ else {
     HomePageModule,
     PageSlotModule,
     NavigationModule,
+    HamburgerMenuModule,
     BrowserAnimationsModule,
+    RouterModule,
     ToastrModule.forRoot(),
     B2cStorefrontModule.withConfig({
       backend: occConfig.backend,

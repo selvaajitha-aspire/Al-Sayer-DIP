@@ -1,4 +1,5 @@
-<div class="container">
+
+<!-- <div class="container">
     <div *ngIf="vehicleList | async as vehicles$">
         <table class="table">
             <thead class="d-flex">
@@ -14,5 +15,42 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+</div> -->
+
+<div>
+    <div class="container p-0">
+        <div *ngFor="let vehicle of vehicleList; let i=index" class="box vehicle-wrapper col-12 p-0">
+            <div class="d-flex justify-content-between col-11" *ngIf="!vehicleToggle[i]">
+                <span class="vehicle-collapse-text">{{vehicle.modline}}</span>
+                <span class="text-right vehicle-collapse-text">{{vehicle.warrantyType}}
+                    <!-- <span (click)="toggleVehicle(i)">icon</span> -->
+                </span>
+            </div>
+            <div class="col-11" *ngIf="vehicleToggle[i]">
+                <div class="d-flex justify-content-between">
+                    <span class='vehicle-open-text-header'>Model</span>
+                    <span class="text-right vehicle-open-text">{{vehicle.modline}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='vehicle-open-text-header'>Warrenty Type</span>
+                    <span class="text-right vehicle-open-text">{{vehicle.warrantyType}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='vehicle-open-text-header'>Warrenty Expiry Date</span>
+                    <span class="text-right vehicle-open-text">{{vehicle.warrantyExpiryDate}}</span>
+                </div>
+            </div>
+            <div class="col-1 p-0">
+                <span *ngIf="!vehicleToggle[i]" (click)="vehicleToggle[i] = !vehicleToggle[i]">
+                    <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
+                </span>
+                <span *ngIf="vehicleToggle[i]" (click)="vehicleToggle[i] = !vehicleToggle[i]">
+                    <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
+                </span>
+            </div>
+
+
+        </div>
     </div>
 </div>
