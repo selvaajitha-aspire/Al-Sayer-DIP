@@ -7,6 +7,7 @@ import { HeaderMenuComponent } from './header/header-menu/header-menu.component'
 import { FooterComponent } from './footer/footer.component';
 import { BrandComponent } from './brand-component/brand.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     ServiceTileComponent,
@@ -15,6 +16,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   imports: [
     CommonModule,
     CarouselModule ,
+    RouterModule,
     ConfigModule.withConfig({
       cmsComponents: {
         ServiceTileBannerComponent: {

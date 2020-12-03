@@ -44,6 +44,7 @@ header{
     background-color: var(--fire-engine-red) !important;
 }
 header .SiteLogo {
+    display: none;
     position: absolute;
     right: 20px;
     padding: 0 !important;
@@ -65,10 +66,16 @@ cx-breadcrumb  {
     display: none;
 }
 
-header .header {
-    height: 115px;
+// header .header {
+//     height: 115px;
+// }
+.PreHeader {
+    width: 100%;
+    padding: 0px !important;
 }
-
+.HeaderLinks {
+    padding: 0px !important;
+}
 .ServiceTileSection{
     display: block;
     margin: 5% 10% 5% 10%;
@@ -81,7 +88,8 @@ header .header {
 }
 
 header .SiteLogin{
-    margin-left: 85%;
+    // margin-left: 85%;
+    width: 100%;
 }
 
 cx-login a{
@@ -113,6 +121,20 @@ cx-navigation-ui h5{
   }
   .Section1 > cx-banner{
       display: none;
+  }
+
+  header{
+        border-radius: 0px !important;
+        height: 50px !important;
+        background-color: var(--white) !important;
+  }
+
+  .AccountPageTemplate cx-page-slot {
+      margin: unset !important;
+  }
+  .BodyContent {
+    background: #f5f5f5;
+    padding: 3rem 1.5rem 3rem 1.5rem;
   }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
@@ -158,6 +180,7 @@ cx-navigation-ui h5{
         line-height: 3;
     }
     header .SiteLogo {
+        display: none;
         position: absolute;
         background-color: rgb(221, 35, 27) ;
         border-radius: 80%;

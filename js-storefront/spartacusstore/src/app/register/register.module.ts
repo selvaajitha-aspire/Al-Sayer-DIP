@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { FormErrorsModule } from '@spartacus/storefront';
 import { registerOccConfig } from '../config/register-config';
+import { NgOtpInputModule } from  'ng-otp-input';
 
 
 
@@ -21,6 +22,7 @@ import { registerOccConfig } from '../config/register-config';
    RouterModule,
    FormErrorsModule,
    RecaptchaModule,
+   NgOtpInputModule,
    ConfigModule.withConfig(registerOccConfig),
   ],
   providers: [
