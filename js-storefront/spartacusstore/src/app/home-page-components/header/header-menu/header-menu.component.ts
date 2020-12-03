@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { trigger, state, style, transition, animate} from '@angular/animations';
 import { CmsNavigationComponent } from '@spartacus/core';
 import { CmsComponentData, NavigationNode, NavigationService } from '@spartacus/storefront';
 import * as $ from "jquery";
@@ -12,12 +13,26 @@ import { switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-header-menu',
   templateUrl: './header-menu.component.html',
-  styleUrls: ['./header-menu.component.scss']
+  styleUrls: ['./header-menu.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      state('in', style({
+        transform: 'translate3d(0, 0, 0)'
+      })),
+      state('out', style({
+        transform: 'translate3d(-100%, 0, 0)'
+      })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out'))
+    ]),
+  ]
 })
-export class HeaderMenuComponent implements OnInit {
+export class HeaderMenuComponent implements OnInit, AfterViewInit {
   node$: Observable<NavigationNode> = this.service.createNavigation(
     this.componentData.data$
   );
+
+  menuState:string = 'out';
 
   styleClass$: Observable<string> = this.componentData.data$.pipe(
     map((d) => d?.styleClass)
@@ -27,6 +42,7 @@ export class HeaderMenuComponent implements OnInit {
   forceClose: boolean;
   isLoggedIn = false;
   user$: Observable<User>;
+  navigationLinks: NavigationNode[];
   constructor(
     protected componentData: CmsComponentData<CmsNavigationComponent>,
     protected service: NavigationService,
@@ -67,6 +83,15 @@ export class HeaderMenuComponent implements OnInit {
       this.forceClose = false;
       this.openMenu();
     });
+    this.node$.subscribe(data=> {
+      if(data && data.title == 'My Account') {
+        this.navigationLinks = data.children?.length > 0 ?  data.children[0].children : [];
+      }
+    })
+  }
+
+  ngAfterViewInit() {
+    document.getElementsByClassName('header-wrapper ')[1] ? document.getElementsByClassName('header-wrapper ')[1]['style'].display = 'none' : '';
   }
   epicFunction() {
     this.isMobile = this.deviceService.isMobile();
@@ -120,5 +145,9 @@ export class HeaderMenuComponent implements OnInit {
   }
   closeMenu() {
     $('#myNav1').css("height", "0");
+  }
+
+  toggleMenu() {
+    this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 }

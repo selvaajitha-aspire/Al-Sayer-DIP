@@ -210,3 +210,72 @@
 
 <!-- <p>Form value: {{ registerForm.value | json }}</p>
   <p>Form valid: {{ registerForm.valid }}</p> -->
+
+
+  <div class="modal fade" id="civilIdPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+        <div class="modal-body">
+          <p class="civil-id-header">Civil ID</p>
+          <div class="form-group">
+          <label>
+            <span class="label-content">Civil ID</span>
+            <input
+              class=""
+              type="text" autocomplete="off"
+              name="userCivilId"
+             [(ngModel)]="userCivilId"
+            />
+          </label>
+        </div>
+        <div class="civil-id-btn-wrapper">
+          <button (click)="submitCivilId()" class="btn btn-primary civil-id-btn">
+            Continue
+           </button>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="userOTPModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <!-- <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+    <div class="modal-body">
+      <p class="otp-header">OTP</p>
+      <div>
+        <p class="otp-extra-text">You should have received an OTP</p>
+        <p class="otp-extra-text">Please enter the 6 digit number.</p>
+      </div>
+      <div class="form-group">
+      <label>
+        <span class="label-content">OTP</span>
+        <!-- <input
+          class=""
+          type="text" autocomplete="off"
+          name="userCivilId"
+         [(ngModel)]="userCivilId"
+        /> -->
+        <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6}"></ng-otp-input>
+      </label>
+    </div>
+    <div class="otp-btn-wrapper">
+      <button (click)="submitUserOTP()" class="btn btn-primary otp-btn">
+        Confirm
+       </button>
+       <div>Don't receive an OTP?</div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
