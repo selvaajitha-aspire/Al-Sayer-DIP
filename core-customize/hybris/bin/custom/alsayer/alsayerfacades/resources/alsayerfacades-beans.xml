@@ -32,6 +32,12 @@
 		<property name="modline" type="String"/>
 		<property name="modyear" type="String"/>
 		<property name="plateNumber" type="String"/>
+		<property name="warranties" type="java.util.List&lt;com.alsayer.facades.data.WarrantyData&gt;"/>
+	</bean>
+
+	<bean class="com.alsayer.facades.data.WarrantyData">
+		<property name="warrantyType" type="String"/>
+		<property name="warrantyExpiryDate" type="java.util.Date"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
