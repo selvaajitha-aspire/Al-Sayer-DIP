@@ -8,8 +8,8 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule } from '@spartacus/storefront';
-import { OccConfig, ConfigModule } from '@spartacus/core';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule } from '@spartacus/storefront';
+import { OccConfig, ConfigModule, I18nModule } from '@spartacus/core';
 import { environment } from './../environments/environment';
 import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
 
@@ -18,6 +18,7 @@ import { HeaderMenuComponent } from './home-page-components/header/header-menu/h
 import { SigninMenuComponent } from './home-page-components/header/signin-menu/signin-menu.component';
 import { MyTicketsModule } from './my-tickets/my-tickets.module';
 import { FooterComponent } from './home-page-components/footer/footer.component';
+import { AlsayerNavigationComponent } from './home-page-components/alsayer-navigation/alsayer-navigation.component';
 
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -42,6 +43,7 @@ else {
     SigninMenuComponent,
     HeaderMenuComponent,
     FooterComponent,
+    AlsayerNavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,9 @@ else {
     HamburgerMenuModule,
     BrowserAnimationsModule,
     RouterModule,
+    IconModule,
+    GenericLinkModule,
+    I18nModule,
     ToastrModule.forRoot(),
     B2cStorefrontModule.withConfig({
       backend: occConfig.backend,
