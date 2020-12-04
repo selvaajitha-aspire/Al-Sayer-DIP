@@ -91,7 +91,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    $('#civilIdPopup').modal('show');
+    // $('#civilIdPopup').modal('show');
     
     // this.titles$ = this.userService.getTitles().pipe(
       

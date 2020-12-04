@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { environment } from '../../../environments/environment';
 
-
 import { ServiceTileBannerComponent } from 'src/app/models/service-tile.model';
 
 @Component({
@@ -15,8 +14,6 @@ export class ServiceTileComponent implements OnInit {
 
   constructor(public component: CmsComponentData<ServiceTileBannerComponent>) { }
   ngOnInit(): void {
-    this.component.data$.subscribe(data => {
-    })
   }
   getUrl(url: string) {
     if(url && !url.startsWith("/")){

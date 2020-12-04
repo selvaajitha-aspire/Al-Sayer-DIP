@@ -1,48 +1,3 @@
-
-<!-- <div class="bar-icon" *ngIf="!isMobile">
-    <div class="logo-area">
-        <a data-toggle="dropdown" id="openNav1" (click)="openMenu()">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-        </a>
-    </div>
-</div> -->
-
-<!-- <div class="bar-icon-mobile" id="bar-mobile" *ngIf="isMobile">
-    <div class="logo-area">
-        <a data-toggle="dropdown" id="openNav1" (click)="openMenu()"  *ngIf="isDropdownOpen">
-            
-            <i class="fa fa-chevron-up menu-arrow-white" aria-hidden="true"></i>
-        </a>
-        <a data-toggle="dropdown" id="openNav1" (click)="openMenu()" *ngIf="!isDropdownOpen">
-            <i class="fa fa-chevron-down menu-arrow-red" aria-hidden="true" ></i>
-            
-        </a>
-    </div>
-</div> -->
-
-<!-- <div id="myNav1" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" id="closeNav1" (click)="closeMenu()">&times;</a>
-    <div class="overlay-content home-link" *ngIf="isLoggedIn">
-        <cx-navigation-ui [node]="node$ | async" [ngClass]="styleClass$ | async" [flyout]="false">
-        </cx-navigation-ui>
-        <div class="social-icons">
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-linkedin"></i>
-        </div>
-    </div>
-    <div class="overlay-content guest-user" style="height:100px !important;text-align: center;" *ngIf="!isLoggedIn">
-        <a href="/login" class="dropdown-item top-dropdown bg-transparent">Sign In / Register</a>
-        <div class="social-icons">
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-linkedin"></i>
-        </div>
-    </div>
-</div> -->
-
-
-
 <div class='header-wrapper'>
     <button (click)="toggleMenu()" class="hamburger">
         <img src='../../../../assets/icons/menuicon.png'/>
@@ -53,7 +8,6 @@
 </div>
 
 <div class="overlay-hamburger" (click)='toggleMenu()' [ngStyle]="{'display': menuState == 'in' ? 'block' : 'none' }"></div>
-<!-- [ngStyle]="{'display': menuState == 'in' ? 'block' : 'none' }" -->
 <div  [@slideInOut]="menuState" class="hamburger-menu" >
     <div class='hamburger-menu-wrapper'>
         <div class="profile-wrapper">
@@ -61,25 +15,12 @@
             <div class="phone-number">1803803</div>
         </div>
         <ul>
-            <li (click)="toggleMenu()" [routerLink]="[navigation.url]" *ngFor='let navigation of navigationLinks' >
-                <img src="../../../../assets/icons/alsayerlogo.png" width="16" height="16"> 
-                {{navigation.title}}
-            </li>
-            <!-- <li><img src="../../../../assets/icons/alsayerlogo.png" width="16" height="16"> MY ACCOUNT</li>
-            <li (click)="toggleMenu()" [routerLink]="['/my-account/my-vehicles']">MY VEHICLES</li>
-            <li>SAVED ADDRESSES</li>
-            <li>SAVED PAYMENT METHODS</li>
-            <li>STORE LOCATOR</li>
-            <li>ABOUT US</li>
-            <li>CONTACT US</li> -->
           </ul>
+          <app-alsayer-navigation [node]="node$ | async"   [flyout]="false"></app-alsayer-navigation>
           <div class="social-icons-wrapper">
               <img src="../../../../assets/icons/icn_fb.png" alt="facebook">
               <img src="../../../../assets/icons/icn_tw.png" alt="twitter">
               <img src="../../../../assets/icons/icn_in.png" alt="linkedin">
-            <!-- <i class="fab fa-facebook"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-linkedin"></i> -->
         </div>
     </div>
 </div>
