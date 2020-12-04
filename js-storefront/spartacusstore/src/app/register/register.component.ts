@@ -25,6 +25,7 @@ import {
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CustomFormValidators, sortTitles } from '@spartacus/storefront';
+import { CommonService } from 'src/services/common/common.services';
 
 
 declare var $: any;
@@ -39,6 +40,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   oneTimePassword:number;
   private subscription = new Subscription();
   userCivilId = '';
+  showConfPassword : boolean = false;
 
   anonymousConsent$: Observable<{
     consent: AnonymousConsent;
@@ -47,22 +49,24 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   registerForm: FormGroup = this.fb.group(
     {
-      civilId: ['',Validators.required],
-      eccCustId: [''],
+      // civilId: ['',Validators.required],
+      // eccCustId: [''],
       name: ['', Validators.required],
+      // lastName: ['', Validators.required],
       arabicName: ['', Validators.required],
+      // arabicLastName: ['', Validators.required],
       mobile: ['',Validators.required],
       email: ['', [Validators.required, CustomFormValidators.emailValidator]],
       password: [
         '',
         [Validators.required, CustomFormValidators.passwordValidator],
       ],
-      passwordconf: ['', Validators.required],
-      newsletter: new FormControl({
-        value: false,
-        disabled: this.isConsentRequired(),
-      }),
-      termsandconditions: [false, Validators.requiredTrue],
+      passwordconf: ['', Validators.required]
+      // newsletter: new FormControl({
+      //   value: false,
+      //   disabled: this.isConsentRequired(),
+      // }),
+      // termsandconditions: [false, Validators.requiredTrue],
     },
     {
       validators: CustomFormValidators.passwordsMustMatch(
@@ -82,7 +86,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     protected anonymousConsentsConfig: AnonymousConsentsConfig,
     protected recaptchaService: RecaptchaService,
     protected registerService: RegisterService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public commonService: CommonService
   ) {}
 
   ngOnInit() {
@@ -145,11 +150,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
       })
     );
 
-    this.subscription.add(
-      this.registerForm.get('newsletter').valueChanges.subscribe(() => {
-        this.toggleAnonymousConsent();
-      })
-    );
+    // this.subscription.add(
+    //   this.registerForm.get('newsletter').valueChanges.subscribe(() => {
+    //     this.toggleAnonymousConsent();
+    //   })
+    // );
     
   }
   resolved(captchaResponse: string) {
@@ -279,6 +284,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   submitCivilId() {
     console.log('civil id', this.userCivilId);
+    this.commonService.postRequest('sendOTP',null,this.userCivilId).then(
+      resp => console.log(resp)
+    );
     $('#userOTPModal').modal('show');
   }
 
@@ -288,6 +296,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   onOtpChange(event) {
     console.log('event ==>', event);
+  }
+
+  toggleShowConfPassword() {
+    this.showConfPassword = !this.showConfPassword;
   }
 
   ngOnDestroy() {
