@@ -111,3 +111,87 @@ $red : #e03931;
         }
     }
 }
+
+
+form {
+    .form-group-wrapper {
+        position: relative; 
+        padding: 5px 0px;
+        img {
+            position: absolute;
+            padding: 8px 11px;
+            // pointer-events: none;
+        }
+    }
+    .left-icon {
+        img {
+            left:  0px;
+        }
+        .form-control {
+            padding-left:  40px !important;
+            border-radius: 50px;
+            height: 40px;
+            box-shadow: 0px 1px 3px grey;
+        }
+    }
+    .left-and-right-icon {
+        .left-img {
+            left: 0px;
+        }
+        .right-img {
+            right: 0px;
+            top: 8px;
+        }
+        .form-control {
+            padding:  0px 40px !important;
+            border-radius: 50px;
+            height: 40px;
+            box-shadow: 0px 1px 3px grey;
+        }
+    }
+    button {
+        border-radius: 50px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $red;
+        margin: 20px 0px;
+    }
+    .signup-text {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 600;
+        padding-bottom: 5px;
+    }
+    .signup-extra-text {
+        text-align: center;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+}
+
+.have-an-account-wrapper {
+    font-size: 12px;
+    opacity: 0.7;
+    text-align: center;
+    padding: 30px 0;
+    a {
+        font-size: 14px;
+        color: red;
+        text-transform: uppercase;
+        text-decoration: none;
+        margin-left: 2px;
+        font-weight: 600;                                                                                                                                                                  
+    }
+}
+
+::ng-deep .control-invalid {
+    p {
+        color: red;
+        font-size: 12px;
+        &::before {
+            background: none !important;
+        }
+    }
+}
