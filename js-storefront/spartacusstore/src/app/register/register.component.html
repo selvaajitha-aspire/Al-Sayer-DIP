@@ -1,9 +1,8 @@
 
-<section class="page-section container">
+<!-- <section class="page-section container">
 <div class="row justify-content-center">
   <div class="col-md-6">
     <div class="section">
-      <!-- <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm > -->
         <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm" >
         <div class="form-group">
           <label>
@@ -172,7 +171,92 @@
     </div>
   </div>
 </div>
-</section>
+</section> -->
+
+
+<section class="page-section container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 p-0">
+      <div class="section">
+          <div class="text-right">
+            <a [routerLink]="['/login']" >
+              <img src="../../assets/icons/icn_close.png" alt="close">
+            </a>
+          </div>
+          <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm" >
+            <div class="pb-20">
+              <div class="signup-text">Signup</div>
+              <div class="signup-extra-text">Please enter your details to</div>
+              <div class="signup-extra-text">login to the account</div>
+            </div>
+          <div class="form-group-wrapper left-icon">
+            <img src="../../assets/icons/icn_myaccount.png" alt="Name">
+            <input type="text" class="form-control" placeholder="Name" formControlName="name" />
+            <cx-form-errors [control]="registerForm.get('name')" ></cx-form-errors>
+          </div>
+
+          <!-- <div class="form-group-wrapper left-icon">
+            <img src="../../assets/icons/icn_myaccount.png" alt="last name">
+            <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" />
+            <cx-form-errors [control]="registerForm.get('lastName')" ></cx-form-errors>
+          </div> -->
+
+          <div class="form-group-wrapper left-icon">
+            <img src="../../assets/icons/icn_myaccount.png" alt="Arabic Name">
+            <input type="text" class="form-control" placeholder="Arabic Name" formControlName="arabicName" />
+            <cx-form-errors [control]="registerForm.get('arabicName')" ></cx-form-errors>
+          </div>
+
+          <!-- <div class="form-group-wrapper left-icon">
+            <img src="../../assets/icons/icn_myaccount.png" alt="arabic last name">
+            <input type="text" class="form-control" placeholder="Last Name (arabic)" formControlName="arabicLastName" />
+            <cx-form-errors [control]="registerForm.get('arabicLastName')" ></cx-form-errors>
+          </div> -->
+           
+          <div class="form-group-wrapper left-icon">
+            <img src="../../assets/icons/icn_myaccount.png" alt="mobile no">
+            <input type="text" class="form-control" placeholder="Mobile Number" formControlName="mobile" />
+            <cx-form-errors [control]="registerForm.get('mobile')" ></cx-form-errors>
+          </div>
+
+          <div class="form-group-wrapper left-icon">
+            <img src="../../assets/icons/icn_myaccount.png" alt="email">
+            <input type="text" class="form-control" placeholder="Email id" formControlName="email" />
+            <cx-form-errors [control]="registerForm.get('email')" ></cx-form-errors>
+          </div>
+
+          <div class="form-group-wrapper left-icon">
+            <img src="../../assets/icons/icn_myaccount.png" alt="Password">
+            <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+            <cx-form-errors [control]="registerForm.get('password')" ></cx-form-errors>
+          </div>
+
+          <div class="form-group-wrapper left-and-right-icon">
+            <img class="left-img" src="../../assets/icons/icn_myaccount.png" alt="confirm password">
+            <input [type]="showConfPassword ? 'text' : 'password'" class="form-control" placeholder="Confirm Password" formControlName="passwordconf" />
+            <!-- <span (click)="alert('hi') && confpassword.type= (confpassword.type=='password' )?'text':'password'"> -->
+              <img class="right-img" (click)="toggleShowConfPassword()" *ngIf="!showConfPassword" src="../../assets/icons/icn_view.png" alt="view password">
+              <img class="right-img" (click)="toggleShowConfPassword()" *ngIf="showConfPassword" src="../../assets/icons/icn_hide.png" alt="Hide password">
+            <!-- </spa/=n> -->
+            
+            <cx-form-errors [control]="registerForm.get('passwordconf')" ></cx-form-errors>
+          </div>
+           
+          <button type="submit" [disabled]="!registerForm.valid" class="btn btn-block btn-primary mt-20 mb-20">
+           Signup
+          </button>
+          
+        </form>
+        <div class="have-an-account-wrapper">
+          Have an account? 
+          <a class="login-link btn-link" [routerLink]="['/login']" routerLinkActive="router-link-active" >
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
 
 
 <div class="modal fade" id="otpPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
