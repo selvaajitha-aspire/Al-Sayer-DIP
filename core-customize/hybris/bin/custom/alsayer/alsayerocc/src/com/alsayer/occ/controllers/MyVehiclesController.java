@@ -61,9 +61,10 @@ public class MyVehiclesController {
 
     private VehicleListWsDTO getVehicleWsDtoList(List<VehicleData> dataList) {
         VehicleListWsDTO vehicleList = new VehicleListWsDTO();
-        VehicleWsDTO vehicleWsDTO =new VehicleWsDTO();
+
         List<VehicleWsDTO> vehicleWsDTOList=new LinkedList<>();
         for(VehicleData data : dataList) {
+            VehicleWsDTO vehicleWsDTO =new VehicleWsDTO();
             vehicleWsDTO.setChassisNumber(data.getChassisNumber());
             vehicleWsDTO.setModline(data.getModline());
             vehicleWsDTO.setModyear(data.getModyear());

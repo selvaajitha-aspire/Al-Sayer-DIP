@@ -36,14 +36,7 @@ INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true
 ;;TyresComponent;Car Tyres Component;TyresComponent
 ;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent
 
-###  Home page slots  ####
 
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
-;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
 ###### Navigation for My Account Section #########################################################3
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
@@ -58,14 +51,12 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 # create cms link components for my account pages------------------------------------
 
 INSERT_UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;$picture;&linkRef;target(code)[default='sameWindow']
-;;MyProfileSideLink;MyProfileSideLink;/my-account/update-profile;icn_myaccount.png;MyProfileSideLink;;
-;;MyVehiclesSideLink;MyVehiclesSideLink;/my-account/my-vehicles;icn_myvehicles.png;MyVehiclesSideLink;;
-;;MyPurchasesSideLink;MyPurchasesSideLink;/my-account/my-purchases;icn_mypurchases.png;MyPurchasesSideLink;;
-;;MyTicketsSideLink;MyTicketsSideLink;/my-account/my-tickets;icn_mytickets.png;MyTicketsSideLink;;
-;;MyServicesSideLink;MyServicesSideLink;/my-account/my-services;icn_myservices.png;MyServicesSideLink;;
-;;SignOutSideLink;SignOutSideLink;/logout;icn_signout.png;SignOutSideLink;
-
-
+;;MyProfileLink;MyProfileLink;/my-account/update-profile;icn_myaccount.png;MyProfileLink;;
+;;MyVehiclesLink;MyVehiclesLink;/my-account/my-vehicles;icn_myvehicles.png;MyVehiclesLink;;
+;;MyPurchasesLink;MyPurchasesLink;/my-account/my-purchases;icn_mypurchases.png;MyPurchasesLink;;
+;;MyTicketsLink;MyTicketsLink;/my-account/my-tickets;icn_mytickets.png;MyTicketsLink;;
+;;MyServicesLink;MyServicesLink;/my-account/my-services;icn_myservices.png;MyServicesLink;;
+;;SignOutLink;SignOutLink;/logout;icn_signout.png;SignOutLink;
 
 # create navigation root node for my account & child nodes for the root node
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
@@ -78,15 +69,14 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;MyServicesNavNode;;My Services;MyAccountNavNode;;MyServicesNavNode
 ;SignOutNavNode;;Sign Out;MyAccountNavNode;;SignOutNavNode
 
-
 # create cms navigation entry for nvaigation child nodes
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
-;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileSideLink;
-;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesSideLink;
-;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesSideLink;
-;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsSideLink;
-;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesSideLink;
-;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutSideLink;
+;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileLink;
+;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesLink;
+;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesLink;
+;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsLink;
+;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesLink;
+;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutLink;
 
 
 # create navigation component for my account
@@ -99,13 +89,6 @@ UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 ;;MyAccountNavNode;""
 
-UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
-;;MyProfileSideLink;"My Profile"
-;;MyVehiclesSideLink;"My Vehicles"
-;;MyPurchasesSideLink;"My Purchases"
-;;MyTicketsSideLink;"My Tickets"
-;;MyServicesSideLink;"My Services"
-;;SignOutSideLink;"Sign Out"
 
 ##### Brand Banner Images Component
 
@@ -260,7 +243,7 @@ INSERT_UPDATE HomepageBannerCollectionComponent;$contentCV[unique=true];uid[uniq
 # Mapping with Section1Slot
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,HomePageMobileBannerComponent,AlsayerBrandBannerListComponent
+;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,HomePageMobileBannerComponent
 
 # Site Logo Component
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
@@ -279,3 +262,19 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 # Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;SiteLogoSlot;SiteLogoComponent,SiteLogoComponent1
+
+###  Service Tile Home page slots  ####
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
+
+# Mapping with Section1Slot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section3Slot-Homepage;true;AlsayerBrandBannerListComponent
+;;Section4Slot-Homepage;true;
+;;Section5Slot-Homepage;true;
