@@ -183,7 +183,7 @@
               <img src="../../assets/icons/icn_close.png" alt="close">
             </a>
           </div>
-          <form (ngSubmit)="this.commonService.submitForm('registerCustomer',this.registerForm)" [formGroup]="registerForm" #registrationForm="ngForm" >
+          <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm" >
             <!-- <input
               class=""
               type="hidden" autocomplete="off"

@@ -315,27 +315,14 @@ onFileSelect(event) {
 }
 
  submitForm(): void {
-  if (this.rsaForm.valid) {
-    console.log(this.rsaForm.value);
-    const formData = new FormData();
-    // this.ReqJson["vehicle"] = this.rsaForm.get('vehicle').value;
-    // this.ReqJson["issue"] = this.rsaForm.get('issue').value;
-    // this.ReqJson["latitude"] = this.rsaForm.get('latitude').value;
-    // this.ReqJson["longitude"] = this.rsaForm.get('longitude').value;
-    // this.ReqJson["notes"] = this.rsaForm.get('notes').value;
-    // formData.append( 'form', JSON.stringify( this.ReqJson ) );
-    formData.append( 'form', JSON.stringify( this.rsaForm.value ) );
-    formData.append('attachments', this.rsaForm.get('attachments').value);
-    this.assistanceService.storeServiceRequest(formData).then(data=>
-    {
-      
+  this.commonService.submitFormWithAttacment('saveItems',this.rsaForm,'attachments').then(data=>
+    { 
        this.router.go("/my-account/my-tickets");
        this.toastr.success('Your request has been recorded', 'We will soon assist you!Thank you!');
        
     });
-  } else {
-    this.rsaForm.markAllAsTouched();
-  }
+  
+  
 }
 
 

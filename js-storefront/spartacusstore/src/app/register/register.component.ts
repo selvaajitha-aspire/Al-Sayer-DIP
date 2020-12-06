@@ -165,7 +165,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   
   submitForm(): void {
     if (this.registerForm.valid) {
-      this.registerUser();
+      this.commonService.submitForm('registerCustomer',this.registerForm).then(status=>{
+        this.router.go('/');
+      this.toastr.success('Activation email is sent to your email address.', 'Registration is success!');
+      });
       $("#otpPopup").modal('hide');
     } else {
       this.registerForm.markAllAsTouched();
