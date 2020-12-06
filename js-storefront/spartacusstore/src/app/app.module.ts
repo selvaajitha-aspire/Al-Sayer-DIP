@@ -1,5 +1,6 @@
 import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
+import { LoginFormModule } from './login-form/login-form.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -97,6 +98,7 @@ else {
     } as LayoutConfig),
     RoadsideAssistanceModule,
     RegisterModule,
+    LoginFormModule,
     MyVehiclesModule,
     MyTicketsModule
   ],

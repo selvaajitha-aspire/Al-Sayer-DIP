@@ -1,12 +1,14 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 import { CmsNavigationComponent } from '@spartacus/core';
-import { CmsComponentData, NavigationNode } from '@spartacus/storefront';
+import { CmsComponentData, NavigationNode  } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, Event } from '@angular/router';
 import { AuthService, User, UserService } from '@spartacus/core';
 import { AlsayerNavigationService } from '../alsayer-navigation.service';
+import { DOCUMENT } from '@angular/common';
+import { HeaderTitleService } from '../../../../services/header-title/header-title.service';
 
 @Component({
   selector: 'app-header-menu',
@@ -34,10 +36,15 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
   isLoggedIn = false;
   user$: Observable<User>;
   navigationLinks: NavigationNode[];
+  hideHeaderForRouting: any[] = ["/login", "/login/forgot-password", "/login/register"];
+  title: String = '';
   constructor(
     public componentData: CmsComponentData<CmsNavigationComponent>,
     protected service: AlsayerNavigationService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document,
+    private headerTitle: HeaderTitleService
   ) {
     this.user$ = this.userService.get();
     this.user$.subscribe(user => {
@@ -49,9 +56,18 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
       }
       console.log('isLoggedIn',this.isLoggedIn)
     });
+    this.headerTitle.headerTitle.subscribe((data: String) => {
+      this.title = data;
+    });
   }
   ngOnInit(){
-
+    this.hideHeader(this.router.url);
+    this.router.events.subscribe((event: Event) => {
+      if(event instanceof NavigationEnd){
+        this.title = '';
+        this.hideHeader(event.url);
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -60,5 +76,18 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
 
   toggleMenu() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
+  }
+
+  hideHeader(url) {
+    let headerFlag = true;
+    this.hideHeaderForRouting.map(routerLink => {
+      routerLink === url ? headerFlag = false: "";
+    });
+    let display = headerFlag ? 'block' : 'none';
+    let elements = this.document.getElementsByTagName('header') && 
+    Array.from(this.document.getElementsByTagName('header') as HTMLCollectionOf<HTMLElement>);
+    elements.map(element => {
+      element.style.display = display;
+    })
   }
 }

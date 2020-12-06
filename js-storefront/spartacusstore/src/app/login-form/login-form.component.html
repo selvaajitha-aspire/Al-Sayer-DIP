@@ -1,0 +1,49 @@
+<form (ngSubmit)="submitForm()" [formGroup]="loginForm">
+    <!-- <div class="text-right">
+        <a [routerLink]="['/login']" >
+          <img src="../../assets/icons/icn_close.png" alt="close">
+        </a>
+      </div> -->
+    <div class="pb-20">
+        <div class="login-text">LOGIN</div>
+        <div class="login-extra-text">Please enter your details to</div>
+        <div class="login-extra-text">login to the account</div>
+    </div>
+    <div class="form-group-wrapper left-icon">
+        <img src="../../assets/svg/email_icon.svg" alt="email">
+        <input type="email" class="form-control" placeholder="Enter email" formControlName="userId" />
+        <cx-form-errors [control]="loginForm.get('userId')"></cx-form-errors>
+    </div>
+    <div class="form-group-wrapper left-and-right-icon">
+        <img class="left-img" src="../../assets/svg/password_icon.svg" alt="password">
+        <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password" />
+        <img class="right-img" (click)="showPassword = !showPassword" *ngIf="!showPassword" src="../../assets/icons/icn_view.png" alt="view password">
+        <img class="right-img" (click)="showPassword = !showPassword" *ngIf="showPassword" src="../../assets/icons/icn_hide.png" alt="Hide password">
+        
+        <cx-form-errors [control]="loginForm.get('password')"></cx-form-errors>
+      </div>
+    <p class="forget-password-text">
+      <a
+        [routerLink]="{ cxRoute: 'forgotPassword' } | cxUrl"
+        aria-controls="reset-password"
+        class="btn-link"
+        >{{ 'loginForm.forgotPassword' | cxTranslate }}</a
+      >
+    </p>
+  
+    <button type="submit" class="btn btn-block btn-primary" [disabled]="!loginForm.valid">
+      Login
+    </button>
+  </form>
+  
+  <div class="register">
+  
+    <ng-container>
+      <a
+        [routerLink]="{ cxRoute: 'register' } | cxUrl"
+        >NEW USER?</a
+      >
+    </ng-container>
+  
+  </div>
+  

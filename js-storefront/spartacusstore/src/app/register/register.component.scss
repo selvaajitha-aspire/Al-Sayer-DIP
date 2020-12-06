@@ -1,4 +1,4 @@
-$red : #e03931;
+$red : #DD231B;
 #civilIdPopup {
     top: calc(100% - 450px);
     .modal-dialog {
@@ -119,7 +119,7 @@ form {
         padding: 5px 0px;
         img {
             position: absolute;
-            padding: 8px 11px;
+            padding: 12px 12px;
             // pointer-events: none;
         }
     }
@@ -140,7 +140,7 @@ form {
         }
         .right-img {
             right: 0px;
-            top: 8px;
+            top: 4px;
         }
         .form-control {
             padding:  0px 40px !important;

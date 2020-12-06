@@ -111,6 +111,12 @@ $mobile-large: 640px;
   .logo-wrapper {
     margin-right: 10px;
   }
+  .header-title {
+    font-size :14px;
+    font-weight: 500;
+    color: #000000;
+    text-transform: uppercase;
+  }
  }
 
  .hamburger-menu {
@@ -136,6 +142,8 @@ $mobile-large: 640px;
       .phone-number {
         font-weight: bold;
         font-size: 22px !important;
+        color : #DD231B;
+        padding-top: 10px;
       }
     }
     ul {
@@ -157,7 +165,7 @@ $mobile-large: 640px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 75px;
+      margin-top: 15px;
       img {
         margin: 10px;
         width: 28px;

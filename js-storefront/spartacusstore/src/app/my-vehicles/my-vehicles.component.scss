@@ -36,23 +36,28 @@ thead{
     background-color: var(--fire-engine-red);
 }
 
-.vehicle-wrapper {
-    display: flex;
-    padding: 6px;
-    background: white;
-    border: 1px solid grey;
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px white;
-    margin: 10px 0;
-   .vehicle-collapse-text, .vehicle-open-text , .vehicle-open-text-header{
-    font-size: 14px;
-    font-weight: 600;
-    padding: 5px 0;
-   }
-   .vehicle-open-text-header {
-    opacity: 0.7;
-   }
+.my-vehicles-wrapper {
+    padding: 50px 0px;
+    .vehicle-wrapper {
+        display: flex;
+        padding: 6px;
+        background: white;
+        border: 1px solid grey;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px white;
+        margin: 10px 0;
+       .vehicle-collapse-text, .vehicle-open-text , .vehicle-open-text-header{
+        font-size: 14px;
+        font-weight: 600;
+        padding: 5px 0;
+       }
+       .vehicle-open-text-header {
+        opacity: 0.7;
+       }
+    }
 }
+
+
 
 @media only screen and (max-width: $desktop){
     .tileBannerComponent{

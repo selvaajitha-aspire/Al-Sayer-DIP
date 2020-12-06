@@ -2,8 +2,9 @@
     <button (click)="toggleMenu()" class="hamburger">
         <img src='../../../../assets/icons/menuicon.png'/>
     </button>
+    <div class="header-title">{{title}}</div>
     <div class='logo-wrapper'>
-        <img src="../../../../assets/icons/alsayerlogo.png" width="36" height="36">
+        <img src="../../../../assets/icons/alsayerlogo.png" width="36" height="36" [routerLink]='["/"]' >
     </div>
 </div>
 
@@ -12,7 +13,8 @@
     <div class='hamburger-menu-wrapper'>
         <div class="profile-wrapper">
             <img src="../../../../assets/icons/alsayerlogo.png" width="100">
-            <div class="phone-number">1803803</div>
+            <div class="phone-number">
+                <img src="../../../../assets/svg/contact_icon.svg" width="20" height="20"> 1803803</div>
         </div>
         <ul>
           </ul>
