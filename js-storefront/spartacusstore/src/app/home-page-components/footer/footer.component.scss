@@ -25,6 +25,9 @@ $mobile-large: 640px;
     margin: 0 20px 0 20px;
     white-space: nowrap;
 }
+.mble-view{
+    display: none;
+}
 
 @media only screen and (max-width: $desktop){
     .footer-container{
@@ -32,5 +35,13 @@ $mobile-large: 640px;
     }
     .footer-nav{
         display: flex;
+    }
+    .web-view{
+        display: none;
+    }
+    .mble-view{
+        display: block;
+        background-color: #DD231B;
+        height: 2vh;
     }
 }

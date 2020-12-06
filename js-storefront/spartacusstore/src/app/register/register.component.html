@@ -190,7 +190,7 @@
               name="userCivilId"
              [(ngModel)]="userCivilId"
             /> -->
-            <div class="pb-20">
+            <div class="pb-5">
               <div class="signup-text">Signup</div>
               <div class="signup-extra-text">Please enter your details to</div>
               <div class="signup-extra-text">login to the account</div>
@@ -248,14 +248,14 @@
             <cx-form-errors [control]="registerForm.get('passwordconf')" ></cx-form-errors>
           </div>
            
-          <button type="submit" [disabled]="!registerForm.valid" class="btn btn-block btn-primary mt-20 mb-20">
+          <button type="submit" [disabled]="!registerForm.valid" class="btn btn-block round-primary-btn mt-20 mb-20">
            Signup
           </button>
           
         </form>
         <div class="have-an-account-wrapper">
           Have an account? 
-          <a class="login-link btn-link" [routerLink]="['/login']" routerLinkActive="router-link-active" >
+          <a class="login-link a-red" [routerLink]="['/login']" routerLinkActive="router-link-active" >
             Login
           </a>
         </div>

@@ -23,13 +23,25 @@
         <div *ngFor="let vehicle of vehicles$; let i=index" class="box vehicle-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!vehicleToggle[i]">
                 <span class="vehicle-collapse-text">{{vehicle.modline}}</span>
-                <span class="text-right vehicle-collapse-text">{{vehicle.warrantyType}}
+                <span class="text-right vehicle-collapse-text">{{vehicle.modyear}}
                 </span>
             </div>
             <div class="col-11" *ngIf="vehicleToggle[i]">
                 <div class="d-flex justify-content-between">
                     <span class='vehicle-open-text-header'>Model</span>
                     <span class="text-right vehicle-open-text">{{vehicle.modline}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='vehicle-open-text-header'>Year</span>
+                    <span class="text-right vehicle-open-text">{{vehicle.modyear}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='vehicle-open-text-header'>Plate Number</span>
+                    <span class="text-right vehicle-open-text">{{vehicle.plateNumber}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='vehicle-open-text-header'>Chasis Number</span>
+                    <span class="text-right vehicle-open-text">{{vehicle.chassisNumber}}</span>
                 </div>
                 <div *ngFor="let warranty of vehicle.warranties" class="warranty-wrapper">
                     <div class="d-flex justify-content-between">
