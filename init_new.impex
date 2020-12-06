@@ -58,12 +58,14 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 # create cms link components for my account pages------------------------------------
 
 INSERT_UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;$picture;&linkRef;target(code)[default='sameWindow']
-;;MyProfileLink;MyProfileLink;/my-account/update-profile;icn_myaccount.png;MyProfileLink;;
-;;MyVehiclesLink;MyVehiclesLink;/my-account/my-vehicles;icn_myvehicles.png;MyVehiclesLink;;
-;;MyPurchasesLink;MyPurchasesLink;/my-account/my-purchases;icn_mypurchases.png;MyPurchasesLink;;
-;;MyTicketsLink;MyTicketsLink;/my-account/my-tickets;icn_mytickets.png;MyTicketsLink;;
-;;MyServicesLink;MyServicesLink;/my-account/my-services;icn_myservices.png;MyServicesLink;;
-;;SignOutLink;SignOutLink;/logout;icn_signout.png;SignOutLink;
+;;MyProfileSideLink;MyProfileSideLink;/my-account/update-profile;icn_myaccount.png;MyProfileSideLink;;
+;;MyVehiclesSideLink;MyVehiclesSideLink;/my-account/my-vehicles;icn_myvehicles.png;MyVehiclesSideLink;;
+;;MyPurchasesSideLink;MyPurchasesSideLink;/my-account/my-purchases;icn_mypurchases.png;MyPurchasesSideLink;;
+;;MyTicketsSideLink;MyTicketsSideLink;/my-account/my-tickets;icn_mytickets.png;MyTicketsSideLink;;
+;;MyServicesSideLink;MyServicesSideLink;/my-account/my-services;icn_myservices.png;MyServicesSideLink;;
+;;SignOutSideLink;SignOutSideLink;/logout;icn_signout.png;SignOutSideLink;
+
+
 
 # create navigation root node for my account & child nodes for the root node
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
@@ -76,14 +78,15 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;MyServicesNavNode;;My Services;MyAccountNavNode;;MyServicesNavNode
 ;SignOutNavNode;;Sign Out;MyAccountNavNode;;SignOutNavNode
 
+
 # create cms navigation entry for nvaigation child nodes
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
-;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileLink;
-;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesLink;
-;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesLink;
-;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsLink;
-;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesLink;
-;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutLink;
+;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileSideLink;
+;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesSideLink;
+;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesSideLink;
+;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsSideLink;
+;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesSideLink;
+;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutSideLink;
 
 
 # create navigation component for my account
@@ -96,6 +99,13 @@ UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 ;;MyAccountNavNode;""
 
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;MyProfileSideLink;"My Profile"
+;;MyVehiclesSideLink;"My Vehicles"
+;;MyPurchasesSideLink;"My Purchases"
+;;MyTicketsSideLink;"My Tickets"
+;;MyServicesSideLink;"My Services"
+;;SignOutSideLink;"Sign Out"
 
 ##### Brand Banner Images Component
 
