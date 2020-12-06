@@ -16,7 +16,7 @@
         </div>
         <ul>
           </ul>
-          <app-alsayer-navigation [node]="node$ | async"   [flyout]="false"></app-alsayer-navigation>
+          <app-alsayer-navigation [node]="node$ | async"   [flyout]="false" (toggleMenu)="toggleMenu()"></app-alsayer-navigation>
           <div class="social-icons-wrapper">
               <img src="../../../../assets/icons/icn_fb.png" alt="facebook">
               <img src="../../../../assets/icons/icn_tw.png" alt="twitter">
