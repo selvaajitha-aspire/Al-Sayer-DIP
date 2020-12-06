@@ -46,5 +46,7 @@ public interface AlsayerCustomerFacade extends CustomerFacade {
 
 
     boolean validateOTP(RegisterData registerData) throws ParseException;
+
+    public boolean validateOTP(String civilId,String otp) throws ParseException;
 }
 

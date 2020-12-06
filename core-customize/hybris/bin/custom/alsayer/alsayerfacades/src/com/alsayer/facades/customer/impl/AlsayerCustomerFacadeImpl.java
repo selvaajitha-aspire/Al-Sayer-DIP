@@ -98,6 +98,10 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
         return result;
     }
 
+    @Override
+    public boolean validateOTP(String civilId,String otp) throws ParseException {
+        return  getAlsayerCustomerAccountService().validateOtp(civilId,otp);
+    }
 
     @Override
     public CustomerData nextDummyCustomerData(final RegisterData registerData) {

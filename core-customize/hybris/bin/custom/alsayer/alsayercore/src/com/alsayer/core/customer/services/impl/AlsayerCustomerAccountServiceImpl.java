@@ -101,7 +101,12 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         finalObj.put(ECUSTDETAILSSET, jsonArray);
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(custDetailsUrl), entity, String.class);
+        ResponseEntity<String> response;
+        try {
+            response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(custDetailsUrl), entity, String.class);
+        }catch (Exception ex){
+            return null;
+        }
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         ECCCustomerWsDTO eccCustomerWsDTO = new ECCCustomerWsDTO();
@@ -176,6 +181,24 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         long difference_In_Days = TimeUnit.MILLISECONDS.toDays(difference_In_Time) % 365;
         if (difference_In_Days < 1 && difference_In_Hours < 1 && difference_In_Minutes < getConfigurationService().getConfiguration().getInt(OTP_VALIDATION)) {
             return true;
+        }
+
+        return false;
+    }
+
+    public boolean validateOtp(String civilId, String otp) throws ParseException {
+
+        CustomerAuthenticationModel custAuth = getAlsayerCustomerServicesDao().getSavedOtp(civilId);
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+
+        Date createdTime = format.parse(String.valueOf(custAuth.getCreationtime()));
+        Date currentTime = format.parse(String.valueOf(getTimeService().getCurrentTime()));
+        long difference_In_Time = currentTime.getTime() - createdTime.getTime();
+        long difference_In_Hours = TimeUnit.MILLISECONDS.toHours(difference_In_Time) % 60;
+        long difference_In_Minutes = TimeUnit.MILLISECONDS.toMinutes(difference_In_Time) % 60;
+        long difference_In_Days = TimeUnit.MILLISECONDS.toDays(difference_In_Time) % 365;
+        if (difference_In_Days < 1 && difference_In_Hours < 1 && difference_In_Minutes < getConfigurationService().getConfiguration().getInt(OTP_VALIDATION)) {
+            return custAuth.getOneTimePassword().equals(otp);
         }
 
         return false;

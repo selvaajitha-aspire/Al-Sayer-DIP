@@ -7,57 +7,57 @@ $lang=en
 ### My Tickets History Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-                         ;;MyTicketsPage;Service History Page;AccountPageTemplate;/my-account/my-tickets
+;;MyTicketsPage;Service History Page;AccountPageTemplate;/my-account/my-tickets
 
 INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
-                              ;;MyTicketsComponent;Service History Component;MyTicketsComponent;MyTicketsComponent
+;;MyTicketsComponent;Service History Component;MyTicketsComponent;MyTicketsComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
-                         ;;SideContent-MyTicketsPage;Side Content Slot for Services;true;;;;
-                         ;;BodyContent-MyTicketsPage;Body Content Slot for Services;true;MyTicketsComponent;;;
+;;SideContent-MyTicketsPage;Side Content Slot for Services;true;;;;
+;;BodyContent-MyTicketsPage;Body Content Slot for Services;true;MyTicketsComponent;;;
 
 
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='MyTicketsPage'];contentSlot(uid,$contentCV)[unique=true];;;
-                                ;;SideContent-MyTicketsPage-Slot;SideContent;;SideContent-MyTicketsPage;;;
-                                ;;BodyContent-MyTicketsPage-Slot;BodyContent;;BodyContent-MyTicketsPage;;;
+;;SideContent-MyTicketsPage-Slot;SideContent;;SideContent-MyTicketsPage;;;
+;;BodyContent-MyTicketsPage-Slot;BodyContent;;BodyContent-MyTicketsPage;;;
 ### Service History Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-                         ;;ServiceHistoryPage;Service History Page;AccountPageTemplate;/my-account/service-history
+;;ServiceHistoryPage;Service History Page;AccountPageTemplate;/my-account/service-history
 
 INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
-                              ;;MyServiceHistoryComponent;Service History Component;MyServiceHistoryComponent;MyServiceHistoryComponent
+;;MyServiceHistoryComponent;Service History Component;MyServiceHistoryComponent;MyServiceHistoryComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
-                         ;;SideContent-ServiceHistoryPage;Side Content Slot for Services;true;;;;
-                         ;;BodyContent-ServiceHistoryPage;Body Content Slot for Services;true;MyServiceHistoryComponent;;;
+;;SideContent-ServiceHistoryPage;Side Content Slot for Services;true;;;;
+;;BodyContent-ServiceHistoryPage;Body Content Slot for Services;true;MyServiceHistoryComponent;;;
 
 
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='ServiceHistoryPage'];contentSlot(uid,$contentCV)[unique=true];;;
-                                ;;SideContent-ServiceHistory-Slot;SideContent;;SideContent-ServiceHistoryPage;;;
-                                ;;BodyContent-ServiceHistory-Slot;BodyContent;;BodyContent-ServiceHistoryPage;;;
+;;SideContent-ServiceHistory-Slot;SideContent;;SideContent-ServiceHistoryPage;;;
+;;BodyContent-ServiceHistory-Slot;BodyContent;;BodyContent-ServiceHistoryPage;;;
 
 ### Vehicle History Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-                         ;;MyVehiclesPage;Service History Page;AccountPageTemplate;/my-account/my-vehicles
+;;MyVehiclesPage;Service History Page;AccountPageTemplate;/my-account/my-vehicles
 
 INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
-                              ;;MyVehiclesComponent;Service History Component;MyVehiclesComponent;MyVehiclesComponent
+;;MyVehiclesComponent;Service History Component;MyVehiclesComponent;MyVehiclesComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
-                         ;;SideContent-MyVehiclesPage;Side Content Slot for Services;true;;;;
-                         ;;BodyContent-MyVehiclesPage;Body Content Slot for Services;true;MyVehiclesComponent;;;
+;;SideContent-MyVehiclesPage;Side Content Slot for Services;true;;;;
+;;BodyContent-MyVehiclesPage;Body Content Slot for Services;true;MyVehiclesComponent;;;
 
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='MyVehiclesPage'];contentSlot(uid,$contentCV)[unique=true];;;
-                                ;;SideContent-MyVehicles-Slot;SideContent;;SideContent-MyVehiclesPage;;;
-                                ;;BodyContent-MyVehicles-Slot;BodyContent;;BodyContent-MyVehiclesPage;;;
+;;SideContent-MyVehicles-Slot;SideContent;;SideContent-MyVehiclesPage;;;
+;;BodyContent-MyVehicles-Slot;BodyContent;;BodyContent-MyVehiclesPage;;;
 
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
@@ -80,10 +80,10 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(uid,$contentCV)
-                         ;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
+;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
-                                ;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
+;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
 ;;Tile1.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile1.png;;;"Car Trade In"
@@ -98,7 +98,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 
 UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media(code,$contentCV)[lang=$lang];headline[lang=$lang];color
 ;;CarTradInComponent;Tile1.jpg;"Car Trade-in";
-;;RSAComponent;Tile2.jpg;"Roadside Assistance";
+;;RSAComponent;Tile2.jpg;;
 ;;ServiceHistoryComponent;Tile3.jpg;"Service History";
 ;;CarReplacementComponent;Tile4.jpg;"Car Replacement";
 ;;AccesoriesComponent;Tile5.jpg;"Accessories";
@@ -109,8 +109,8 @@ UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media
 
 INSERT_UPDATE Customer;groups(uid);uid[unique=true];name;customerId;password;vehicles(chassisNumber);rsaRequests(uid)
 ;customergroup;keenreviewer14@hybris.com;Stefan Reviewer;keenreviewer0@hybris.com;1234;KW1000001,KW1000002;f53d20ac-3ff4-4456-b32a-9d25788e57cf
-INSERT_UPDATE Vehicle;modline;modyear;chassisNumber[unique=true];warrantyType;warrantyExpiryDate
-;Toyota Camry;2017;KW1000001;"12-MNSS - TOY - Extended Warranty - SERVICE";Mar 22, 2018 5:06:07 AM
-;Toyota Corolla;2018;KW1000002;"08-MNSS - OEM Warranty";Aug 22, 2019 5:06:07 AM
+INSERT_UPDATE Vehicle;modline;modyear;chassisNumber[unique=true]
+;Toyota Camry;2017;KW1000001
+;Toyota Corolla;2018;KW1000002
 INSERT_UPDATE RsaRequest;uid[unique=true];vehicle(chassisNumber);status(code);type;issue(code);latitude;longitude;notes[lang=en]
 ;f53d20ac-3ff4-4456-b32a-9d25788e57cf;KW1000001;STARTED;MUSAADA;DEAD_BATTERY;73.9838868;18.5767007;"Two tyres got burst"

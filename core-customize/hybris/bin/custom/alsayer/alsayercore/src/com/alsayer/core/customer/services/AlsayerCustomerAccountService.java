@@ -17,6 +17,8 @@ public interface AlsayerCustomerAccountService {
 
     boolean getOTPForValidation(RegisterData registerData) throws ParseException;
 
+    boolean validateOtp(String civilId,String otp) throws ParseException;
+
     void activateUser(String token) throws TokenInvalidatedException;
 }
 

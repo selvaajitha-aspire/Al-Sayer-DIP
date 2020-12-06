@@ -6,6 +6,10 @@ import com.alsayer.occ.constants.AlsayeroccConstants;
 import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
 import com.alsayer.occ.dto.CustomerRegistrationResultDTO;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
+import com.alsayer.occ.dto.RsaRequestWsDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.hybris.platform.commercefacades.customergroups.CustomerGroupFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
@@ -88,8 +92,34 @@ public class CustomerRegistrationController {
     @ResponseBody
     @ApiOperation(value = "Send otp to customer's mobile no", notes = "OTP wil be sent on the number given by the user")
     @ApiBaseSiteIdParam
-    public void sendOTP(@PathVariable("id") final String id, @ApiParam(value = "User's mobile no.", required = true) @RequestBody final String mobile, @ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse) {
-        customerFacade.sendOTP(id,mobile);
+    public boolean sendOTP(@PathVariable("id") final String id,
+                        @ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse) {
+        ECCCustomerWsDTO eccCustomerWsDTO = customerFacade.getCustomerECCDetails(id);
+        if(null != eccCustomerWsDTO){
+            customerFacade.sendOTP(id,eccCustomerWsDTO.getMobile());
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @RequestMapping(value = "/validateOTP/{id}/{otp}", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @ResponseBody
+    @ApiOperation(value = "Validate otp", notes = "OTP wil be validated.")
+    @ApiBaseSiteIdParam
+    public ECCCustomerWsDTO validateOTP(@PathVariable("id") final String id,@PathVariable("otp") final String otp,
+                                    @ApiFieldsParam(defaultValue = BASIC_FIELD_SET) final HttpServletRequest httpRequest, final HttpServletResponse httpResponse) {
+        try{
+            if(customerFacade.validateOTP(id,otp)){
+                ECCCustomerWsDTO eccCustomerWsDTO = customerFacade.getCustomerECCDetails(id);
+                return eccCustomerWsDTO;
+            }else{
+                return null;
+            }
+        }catch (Exception ex){
+            return null;
+        }
     }
 
     @RequestMapping(value = "/getCustomerDetails/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -127,13 +157,13 @@ public class CustomerRegistrationController {
     }
 
 
-    @RequestMapping(value = "/createUser", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    /*@RequestMapping(value = "/createUser", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody
     @ApiOperation(nickname = "createUser", value = " Registers a customer", notes = "Registers a customer. Requires the following "
             + "parameters: password, name, arabicName, mobileNumber,otp,civilId.")
     @ApiBaseSiteIdParam
-    public CustomerRegistrationResultDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestBody final AlsayerUserSignUpWsDTO user,
+    public CustomerRegistrationResultDTO createUser(@ApiParam(value = "User's object.", required = true) @RequestParam('form') final AlsayerUserSignUpWsDTO user,
                                                     @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
                                                     final HttpServletRequest httpRequest, final HttpServletResponse httpResponse) {
         validate(user, "user", alsayerSignUpDTOValidator);
@@ -159,6 +189,45 @@ public class CustomerRegistrationController {
 
         final String userId = user.getUid().toLowerCase(Locale.ENGLISH);
         httpResponse.setHeader(AlsayeroccConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
+        customerRegistrationResultDTO.setReason("OTP is valid");
+        customerRegistrationResultDTO.setStatus("Success");
+        return customerRegistrationResultDTO;
+    }*/
+
+    @RequestMapping(value = "/createUser", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @ResponseBody
+    @ApiOperation(nickname = "createUser", value = " Registers a customer", notes = "Registers a customer. Requires the following "
+            + "parameters: password, name, arabicName, mobileNumber,otp,civilId.")
+    @ApiBaseSiteIdParam
+    public CustomerRegistrationResultDTO createUser(@RequestBody  AlsayerUserSignUpWsDTO user,
+                                                    @ApiFieldsParam @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields
+                                                    ) {
+
+
+        validate(user, "user", alsayerSignUpDTOValidator);
+        final RegisterData registerData = getDataMapper()
+                .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, mobile,civilId,uid,oneTimePassword");
+        boolean userExists = false;
+        CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
+        try {
+            /*boolean result = customerFacade.validateOTP(registerData);
+            if (result == false) {
+                customerRegistrationResultDTO.setReason("OTP is Invalid");
+                customerRegistrationResultDTO.setStatus("Failure");
+                return customerRegistrationResultDTO;
+            }*/
+            customerFacade.register(registerData);
+        } catch (final DuplicateUidException ex) {
+            userExists = true;
+            LOG.debug("Duplicated UID", ex);
+        }
+        //Sending record for Synchronisation
+        //customerFacade.eccRecordSynchronization(registerData);
+
+
+        final String userId = user.getUid().toLowerCase(Locale.ENGLISH);
+        //httpResponse.setHeader(AlsayeroccConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId));
         customerRegistrationResultDTO.setReason("OTP is valid");
         customerRegistrationResultDTO.setStatus("Success");
         return customerRegistrationResultDTO;
