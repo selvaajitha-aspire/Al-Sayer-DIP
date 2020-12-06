@@ -18,9 +18,9 @@
     </div>
 </div> -->
 
-<div>
-    <div class="container p-0">
-        <div *ngFor="let vehicle of vehicleList; let i=index" class="box vehicle-wrapper col-12 p-0">
+<div class="my-vehicles-wrapper">
+    <div class="container p-0" *ngIf="vehicleList | async as vehicles$">
+        <div *ngFor="let vehicle of vehicles$; let i=index" class="box vehicle-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!vehicleToggle[i]">
                 <span class="vehicle-collapse-text">{{vehicle.modline}}</span>
                 <span class="text-right vehicle-collapse-text">{{vehicle.warrantyType}}

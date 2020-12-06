@@ -327,6 +327,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    $('#civilIdPopup').modal('hide');
+    $('#userOTPModal').modal('hide');
     this.subscription.unsubscribe();
     this.userService.resetRegisterUserProcessState();
   }

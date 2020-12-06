@@ -132,6 +132,10 @@ cx-navigation-ui h5{
     background: #f5f5f5;
     padding: 3rem 1.5rem 3rem 1.5rem;
   }
+
+  .BottomHeaderSlot {
+      display: none;
+  }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart{
