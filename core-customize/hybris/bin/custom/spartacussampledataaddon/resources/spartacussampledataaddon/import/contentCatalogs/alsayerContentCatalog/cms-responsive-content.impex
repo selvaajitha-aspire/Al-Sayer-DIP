@@ -599,8 +599,6 @@ INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
                          ;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
-                                ;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
 ###### Navigation for My Account Section #########################################################3
 
 
@@ -655,58 +653,18 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 
 ## CMS Navigation Links
 
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
-;;AboutUsNavNodeLink;About Us Link;/AboutUs;AboutUsNavNodeLink;;
-;;OurBrandsNavNodeLink;Our Brands Link;/OurBrands;OurBrandsNavNodeLink;;
-;;OurBussinessNavNodeLink;Our Bussiness Link;/OurBussiness;OurBussinessNavNodeLink;;
-;;OverseasNavNodeLink;Overseas Link;/Overseas;OverseasNavNodeLink;;
-;;NewsNavNodeLink;News Link;/News;NewsNavNodeLink;;
-;;ContactUsNavNodeLink;Contact Us;/ContactUs;ContactUsNavNodeLink;;
-
-# Create CMS Navigation Entry 
-INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
-;AboutUsNavNodeEntry;;About Us Navigation Node Entry;AboutUsNavNode;AboutUsNavNodeLink;
-;OurBrandsNavNodeEntry;;Our Brands Navigation Node Entry;OurBrandsNavNode;OurBrandsNavNodeLink;
-;OurBussinessNavNodeEntry;;Our Bussiness Navigation Node Entry;OurBussinessNavNode;OurBussinessNavNodeLink;
-;OverseasNavNodeEntry;;Overseas Navigation Node Entry;OverseasNavNode;OverseasNavNodeLink;
-;NewsNavNodeEntry;;News Navigation Node Entry;NewsNavNode;NewsNavNodeLink;
-;ContactUsNavNodeEntry;;Contact Us Navigation Node Entry;ContactUsNavNode;ContactUsNavNodeLink;
-
-# Create Navigation Root node for My Account & child nodes for the root node
-INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
-;AlsayerInformationNavNode;;Information Nav Node;;;AlsayerInformationNavNode
-# children for AlsayerInformation Nav Node
-;AboutUsNavNode;;About Us;AlsayerInformationNavNode;;AboutUsNavNode
-;OurBrandsNavNode;;Our Brands;AlsayerInformationNavNode;;OurBrandsNavNode
-;OurBussinessNavNode;;Our Bussiness;AlsayerInformationNavNode;;OurBussinessNavNode
-;OverseasNavNode;;Overseas;AlsayerInformationNavNode;;OverseasNavNode
-;NewsNavNode;;News;AlsayerInformationNavNode;;NewsNavNode
-;ContactUsNavNode;;ContactUs;AlsayerInformationNavNode;;ContactUsNavNode
-
-# Create Navigation Component 
-INSERT_UPDATE NavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef)
-;;AlsayerInformationNavBarComponent;Information Navigation Component;;AlsayerInformationNavBarComponent;AlsayerInformationNavNode
-
-
-# ALSAYER Custom Information Component
-
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
-;;AboutUs.jpg;$siteResource/images/banners/alsayer/homepage/information/AboutUs.jpg;;;"About Us"
-
-INSERT_UPDATE HomepageInformationComponent;$contentCV[unique=true];uid[unique=true];header;detail;infoType(code);&componentRef
-;;AboutUsInfoComponent;"World-Class Service";"Long before oil was discovered in Kuwait in the 1930's ";"ABOUT_US";AboutUsInfoComponent
 
 # Assigning ContentSlot For Rotating Images Component and Service Tiles Component
 
 # Mapping with Section1Slot
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,HomepageLexusBrandBanner,HomepageToyotaBrandBanner,AboutUsInfoComponent
+;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,HomepageLexusBrandBanner,HomepageToyotaBrandBanner
 
 # Mapping NAV bar with HeaderLinksSlot
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
-;;HeaderLinksSlot;MyAccountComponent,AlsayerInformationNavBarComponent
+;;HeaderLinksSlot;MyAccountComponent
 
 ## ALSAYER FooterComponent
 
