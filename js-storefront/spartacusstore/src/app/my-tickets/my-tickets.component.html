@@ -81,8 +81,8 @@
 
 
 <div>
-    <div class="container p-0">
-        <div *ngFor="let ticket of ticketsList; let i=index" class="box ticket-wrapper col-12 p-0">
+    <div class="container p-0" *ngIf="ticketsList | async as ticket$" >
+        <div *ngFor="let ticket of ticket$; let i=index" class="box ticket-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!ticketToggle[i]">
                 <span class="ticket-collapse-text">{{ticket.notes}}</span>
                 <span class="text-right ticket-collapse-text status-text">{{ticket.status}}
