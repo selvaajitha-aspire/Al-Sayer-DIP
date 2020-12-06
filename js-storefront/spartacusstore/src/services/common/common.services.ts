@@ -66,8 +66,12 @@ export class CommonService {
     submitForm(strUrl,formObject,...attachments){
         debugger;
         if(formObject.valid){
-            this.postRequest(strUrl,formObject.value);      
+           return this.postRequest(strUrl,formObject.value);     
         }
+        else {
+          formObject.markAllAsTouched();
+        }
+        
     }
 
     submitFormWithAttacment(strUrl,formObject,...attachments){
@@ -81,7 +85,10 @@ export class CommonService {
 
           formData.append( 'form', new Blob([JSON.stringify(formObject.value)],{type:'application/json'})  );
 
-          this.postMultipartRequest(strUrl,formData);      
+          return this.postMultipartRequest(strUrl,formData);      
+      }
+      else {
+        formObject.markAllAsTouched();
       }
     }
 
