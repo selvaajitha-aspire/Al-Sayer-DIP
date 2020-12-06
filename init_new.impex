@@ -36,14 +36,7 @@ INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true
 ;;TyresComponent;Car Tyres Component;TyresComponent
 ;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent
 
-###  Home page slots  ####
 
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
-;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
 ###### Navigation for My Account Section #########################################################3
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
@@ -250,7 +243,7 @@ INSERT_UPDATE HomepageBannerCollectionComponent;$contentCV[unique=true];uid[uniq
 # Mapping with Section1Slot
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,HomePageMobileBannerComponent,AlsayerBrandBannerListComponent
+;;Section1Slot-Homepage;true;AlsayerHomepageCarouselComponent,HomePageMobileBannerComponent
 
 # Site Logo Component
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
@@ -269,3 +262,19 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 # Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;SiteLogoSlot;SiteLogoComponent,SiteLogoComponent1
+
+###  Service Tile Home page slots  ####
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
+
+# Mapping with Section1Slot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section3Slot-Homepage;true;AlsayerBrandBannerListComponent
+;;Section4Slot-Homepage;true;
+;;Section5Slot-Homepage;true;

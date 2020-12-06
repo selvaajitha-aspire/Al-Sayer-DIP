@@ -129,10 +129,14 @@ form {
         }
         .form-control {
             padding-left:  40px !important;
-            border-radius: 50px;
             height: 40px;
-            box-shadow: 0px 1px 3px grey;
         }
+    }
+    .form-control{
+        border: 1px solid #ECECEC;
+        box-sizing: border-box;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 35px;
     }
     .left-and-right-icon {
         .left-img {
@@ -144,23 +148,18 @@ form {
         }
         .form-control {
             padding:  0px 40px !important;
-            border-radius: 50px;
             height: 40px;
-            box-shadow: 0px 1px 3px grey;
         }
     }
     button {
-        border-radius: 50px;
-        height: 36px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: $red;
         margin: 20px 0px;
     }
     .signup-text {
         text-align: center;
-        font-size: 24px;
+        font-size: 35px;
         font-weight: 600;
         padding-bottom: 5px;
     }
@@ -178,7 +177,6 @@ form {
     padding: 30px 0;
     a {
         font-size: 14px;
-        color: red;
         text-transform: uppercase;
         text-decoration: none;
         margin-left: 2px;
@@ -188,7 +186,7 @@ form {
 
 ::ng-deep .control-invalid {
     p {
-        color: red;
+        color: $red;
         font-size: 12px;
         &::before {
             background: none !important;
