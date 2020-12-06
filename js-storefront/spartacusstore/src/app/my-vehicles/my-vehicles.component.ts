@@ -18,30 +18,6 @@ export class MyVehiclesComponent implements OnInit {
   ngOnInit(): void {
     this.headerTitle.headerTitle.next('my vehicles')
     this.vehicleList=this.service.getVehicles() || [];
-  //   this.vehicleList = [{
-  //     modline: 'Prod 150-v6',
-  //     warrantyType: 'MNSS-14 Extended Warrenty',
-  //     warrantyExpiryDate: '20-12-2020'
-  //   },{
-  //     modline: 'Prod 150-v6',
-  //     warrantyType: 'MNSS-14 Extended Warrenty',
-  //     warrantyExpiryDate: '20-12-2020'
-  //   },
-  //   {
-  //     modline: 'Prod 150-v6',
-  //     warrantyType: 'MNSS-14 Extended Warrenty',
-  //     warrantyExpiryDate: '20-12-2020'
-  //   },
-  //   {
-  //     modline: 'Prod 150-v6',
-  //     warrantyType: 'MNSS-14 Extended Warrenty',
-  //     warrantyExpiryDate: '20-12-2020'
-  //   }
-  // ]
-  }
-
-  toggleVehicle(){
-    
   }
 
 }

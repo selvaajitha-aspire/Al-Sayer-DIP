@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MyTicketsService } from 'src/services/my-tickets/my-tickets.service';
+import { HeaderTitleService } from './../../services/header-title/header-title.service';
 declare var $: any;
 
 @Component({
@@ -18,9 +19,10 @@ export class MyTicketsComponent implements OnInit {
   marker1:google.maps.Marker;
   marker2:google.maps.Marker;
   ticketToggle = {};
-  constructor(protected service:MyTicketsService) {}
+  constructor(protected service:MyTicketsService, private headerTitle : HeaderTitleService) {}
 
   ngOnInit(): void {
+    this.headerTitle.headerTitle.next('my tickets');
     this.ticketsList=this.service.getRsaRequests() || [];
   }
   

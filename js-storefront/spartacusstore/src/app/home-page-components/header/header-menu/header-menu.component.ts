@@ -27,7 +27,7 @@ import { HeaderTitleService } from '../../../../services/header-title/header-tit
     ]),
   ]
 })
-export class HeaderMenuComponent implements OnInit, AfterViewInit {
+export class HeaderMenuComponent implements OnInit {
   node$: Observable<NavigationNode> = this.service.createNavigation(
     this.componentData.data$
   );
@@ -61,33 +61,16 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
     });
   }
   ngOnInit(){
-    this.hideHeader(this.router.url);
     this.router.events.subscribe((event: Event) => {
       if(event instanceof NavigationEnd){
         this.title = '';
-        this.hideHeader(event.url);
+      
       }
     });
   }
 
-  ngAfterViewInit() {
-    document.getElementsByClassName('header-wrapper ')[1] ? document.getElementsByClassName('header-wrapper ')[1]['style'].display = 'none' : '';
-  }
-
+ 
   toggleMenu() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
-  }
-
-  hideHeader(url) {
-    let headerFlag = true;
-    this.hideHeaderForRouting.map(routerLink => {
-      routerLink === url ? headerFlag = false: "";
-    });
-    let display = headerFlag ? 'block' : 'none';
-    let elements = this.document.getElementsByTagName('header') && 
-    Array.from(this.document.getElementsByTagName('header') as HTMLCollectionOf<HTMLElement>);
-    elements.map(element => {
-      element.style.display = display;
-    })
   }
 }
