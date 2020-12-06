@@ -4,7 +4,8 @@ export const registerOccConfig = {
             endpoints: {
                 getEccCustomer: 'register/getCustomerDetails/',
                 registerCustomer: 'register/createUser',
-                sendOTP: 'register/sendOTP/',
+                sendOTP: 'register/sendOTP',
+                validateOTP: 'register/validateOTP',
                 getComponents: 'cms/components'
             },
             

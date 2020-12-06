@@ -28,17 +28,21 @@ export class CommonService {
     }
 
     getParamString(params){
+        var str ="";
         params.map(param=>{
-            var str = '/' + str + param 
+          str = str + '/' + param 
         });
+        return str;
     }
 
-    postRequest(strUrl,postData:FormData): Promise<any>{
+    postRequest(strUrl,postData:FormData,...params): Promise<any>{
         // const attachments=postData.get("attachments").valueOf();
         return new Promise((resolve,reject)=>{
-         let url = this.url.getUrl(strUrl);
-         this.http.post(url,postData).toPromise().then( data=>{resolve({success:"true"})
-         },
+         let url = this.url.getUrl(strUrl) + this.getParamString(params);
+         this.http.post(url,postData,this.httpOptions).toPromise().then( 
+           data=>{
+             resolve({success:"true",data:data})
+            },
          err => {
            reject(err);
          }); 
@@ -48,16 +52,23 @@ export class CommonService {
     submitForm(strUrl,formObject,...attachments){
         debugger;
         if(formObject.valid){
-            const formData = new FormData();
-            
-            if(null != attachments){
-                this.appendAttachmentsToFormData(formData,attachments,formObject);   
-            }   
-
-            formData.append( 'form', new Blob([JSON.stringify(formObject.value)],{type:'application/json'})  );
-
-            this.postRequest(strUrl,formData);      
+            this.postRequest(strUrl,formObject.value);      
         }
+    }
+
+    submitFormWithAttacment(strUrl,formObject,...attachments){
+      debugger;
+      if(formObject.valid){
+          const formData = new FormData();
+          
+          if(null != attachments && attachments.length>0){
+              this.appendAttachmentsToFormData(formData,attachments,formObject);   
+          }   
+
+          formData.append( 'form', new Blob([JSON.stringify(formObject.value)],{type:'application/json'})  );
+
+          this.postRequest(strUrl,formData);      
+      }
     }
 
     appendAttachmentsToFormData(formData,attachmentList,formObject){

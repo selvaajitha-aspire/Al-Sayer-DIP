@@ -23,7 +23,7 @@ import {
   UserService,
 } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, tap, isEmpty } from 'rxjs/operators';
 import { CustomFormValidators, sortTitles } from '@spartacus/storefront';
 import { CommonService } from 'src/services/common/common.services';
 
@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   oneTimePassword:number;
   private subscription = new Subscription();
   userCivilId = '';
+  userECCData = '';
   showConfPassword : boolean = false;
 
   anonymousConsent$: Observable<{
@@ -49,14 +50,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   registerForm: FormGroup = this.fb.group(
     {
-      // civilId: ['',Validators.required],
+      civilId: ['',Validators.required],
       // eccCustId: [''],
       name: ['', Validators.required],
       // lastName: ['', Validators.required],
-      arabicName: ['', Validators.required],
+      arabicName: [''],
       // arabicLastName: ['', Validators.required],
       mobile: ['',Validators.required],
-      email: ['', [Validators.required, CustomFormValidators.emailValidator]],
+      uid: ['', [Validators.required, CustomFormValidators.emailValidator]],
       password: [
         '',
         [Validators.required, CustomFormValidators.passwordValidator],
@@ -91,7 +92,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // $('#civilIdPopup').modal('show');
+    $('#civilIdPopup').modal('show');
     
     // this.titles$ = this.userService.getTitles().pipe(
       
@@ -283,19 +284,42 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   submitCivilId() {
-    console.log('civil id', this.userCivilId);
     this.commonService.postRequest('sendOTP',null,this.userCivilId).then(
-      resp => console.log(resp)
+      resp => {
+        this.registerForm.get('civilId').patchValue(this.userCivilId);
+        if(resp.data){
+          $('#userOTPModal').modal('show');
+          $('#civilIdPopup').modal('hide');
+        }else{
+          $('#civilIdPopup').modal('hide');
+        }
+      }
     );
-    $('#userOTPModal').modal('show');
-  }
-
-  submitUserOTP() {
     
   }
 
+  submitUserOTP() {
+    this.commonService.postRequest('validateOTP',null,this.userCivilId,this.oneTimePassword).then(
+      resp => {
+        if(null != resp.data){
+          $('#userOTPModal').modal('hide');
+          this.populateUserEccData(resp.data);
+        }else{
+          console.log("OTP is wrong");
+        }
+      }
+    );
+  }
+
+  populateUserEccData(userEccData){
+    this.registerForm.get("name").patchValue(userEccData.name);
+    this.registerForm.get("arabicName").patchValue(userEccData.arabicName);
+    this.registerForm.get("mobile").patchValue(userEccData.mobile);
+    this.registerForm.get("email").patchValue(userEccData.email);
+  }
+
   onOtpChange(event) {
-    console.log('event ==>', event);
+    this.oneTimePassword = event;
   }
 
   toggleShowConfPassword() {
