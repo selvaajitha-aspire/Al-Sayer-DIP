@@ -96,6 +96,42 @@ public class RoadsideAssistanceController {
     }
 
 
+    @Secured(
+            {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP"})
+    @RequestMapping(value = "/saveRSADetails", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = "", notes = "Services for logged in user")
+    @ApiBaseSiteIdAndUserIdParam
+    public ResponseWsDTO saveRSADetails(@RequestPart("form") final RsaRequestWsDTO data,
+                                        @RequestPart("attachments") final MultipartFile attachments) {
+        ResponseWsDTO response = new ResponseWsDTO();
+        try {
+            //LOG.debug(form + "" + SUCCESS_STATUS);
+            ObjectMapper mapper = new ObjectMapper();
+            //RsaRequestWsDTO data = mapper.readValue(form, RsaRequestWsDTO.class);
+            List<MediaFileDto> mediaFileDtoList = new ArrayList<>();
+            MediaFileDto media = null;
+            if (null != attachments && attachments.getSize() > 0) {
+
+                media = getFile(attachments, attachments.getInputStream());
+                mediaFileDtoList.add(media);
+                data.setAttachments(mediaFileDtoList);
+
+            }
+            response.setData(data.toString());
+            response.setStatus(SUCCESS_STATUS);
+            response.setMessage(SUCCESS_MSG);
+            roadsideAssistanceFacade.storeServiceRequest(storeServiceRequest(data));
+        } catch (IllegalArgumentException | IOException ex) {
+            LOG.error(AlsayeroccConstants.RSA_SAVE_ERROR, ex.getMessage());
+            response.setStatus(ERROR_STATUS);
+            response.setMessage(ERROR_MSG);
+            response.setErrors(ERROR_MSG);
+        }
+        return response;
+    }
+
     public MediaFileDto getFile(final MultipartFile file, final InputStream inputStream) {
         final MediaFileDto mediaFile = new MediaFileDto();
         mediaFile.setInputStream(inputStream);

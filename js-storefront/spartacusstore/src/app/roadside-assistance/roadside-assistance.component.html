@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
       <!-- <div class="col-md-6"> -->
         <div class="section w-100">
-        <form class="form-wrapper" style="background-image: url(../../assets/white_bg.jpg)" (ngSubmit)="commonService.submitForm('saveItems',this.rsaForm,'attachments');" [formGroup]="rsaForm" novalidate>
+        <form class="form-wrapper" style="background-image: url(../../assets/white_bg.jpg)" (ngSubmit)="commonService.submitFormWithAttacment('saveItems',this.rsaForm,'attachments');" [formGroup]="rsaForm" novalidate>
           <div class="form-group mb-5">
               <label>
                 <span class="label-content">Roadside Assistance</span>

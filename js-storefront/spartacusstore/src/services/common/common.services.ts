@@ -49,6 +49,20 @@ export class CommonService {
        });
      }
 
+     postMultipartRequest(strUrl,postData:FormData,...params): Promise<any>{
+      // const attachments=postData.get("attachments").valueOf();
+      return new Promise((resolve,reject)=>{
+       let url = this.url.getUrl(strUrl) + this.getParamString(params);
+       this.http.post(url,postData).toPromise().then( 
+         data=>{
+           resolve({success:"true",data:data})
+          },
+       err => {
+         reject(err);
+       }); 
+     });
+   }
+
     submitForm(strUrl,formObject,...attachments){
         debugger;
         if(formObject.valid){
@@ -67,7 +81,7 @@ export class CommonService {
 
           formData.append( 'form', new Blob([JSON.stringify(formObject.value)],{type:'application/json'})  );
 
-          this.postRequest(strUrl,formData);      
+          this.postMultipartRequest(strUrl,formData);      
       }
     }
 
