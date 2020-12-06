@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, User, UserService } from '@spartacus/core';
+import { AuthService, RoutingService, User, UserService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -9,12 +9,18 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'spartacusstore';
   user$: Observable<User>;
+  isLoggedIn: boolean;
   constructor(
-    private auth: AuthService, private userService: UserService
+    private auth: AuthService, private userService: UserService, protected router: RoutingService, private authService: AuthService
   ) { }
   ngOnInit() {
+    this.authService.isUserLoggedIn().subscribe((data) =>{
+      this.isLoggedIn = data;
+      if(!this.isLoggedIn){
+        this.router.go("/login");
+      }
+    })
     this.user$ = this.auth.isUserLoggedIn().pipe(
       switchMap((isUserLoggedIn) => {
         if (isUserLoggedIn) {

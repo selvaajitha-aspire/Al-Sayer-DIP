@@ -64,13 +64,31 @@ export class HeaderMenuComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if(event instanceof NavigationEnd){
         this.title = '';
-      
+        this.hideHeader(event.url);
       }
     });
+    this.hideHeader(this.router.url);
   }
 
  
   toggleMenu() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
+  hideHeader(url) {
+    let headerFlag = true;
+    this.hideHeaderForRouting.map(routerLink => {
+    routerLink === url ? headerFlag = false: "";
+    });
+    let display = headerFlag ? 'block' : 'none';
+    let headerElements = this.document.getElementsByTagName('header') &&
+    Array.from(this.document.getElementsByTagName('header') as HTMLCollectionOf<HTMLElement>);
+    let footerElements = this.document.getElementsByTagName('footer') &&
+    Array.from(this.document.getElementsByTagName('footer') as HTMLCollectionOf<HTMLElement>);
+    headerElements.map(element => {
+    element.style.display = display;
+    });
+    footerElements.map(element => {
+      element.style.display = display;
+    });
+    }
 }
