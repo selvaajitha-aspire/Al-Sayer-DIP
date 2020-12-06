@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="container">
         <div id="accordion">
             <div class="card">
@@ -53,8 +53,7 @@
                                     <td class="col-3">{{ticket.type}}</td>
                                     <td class="col-2">{{ticket.status}}</td>
                                     <td class="col-3 btn-div">
-                                        <!-- <button type="button" class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal" (click)="getDriverLocation()">
-                                            Get Driver Location</button> -->
+                                       
                                     </td>
                                     <td></td>
                                 </tr>
@@ -78,4 +77,63 @@
         </div>
       </div>
       </div>
+</div> -->
+
+
+<div>
+    <div class="container p-0">
+        <div *ngFor="let ticket of ticketsList; let i=index" class="box ticket-wrapper col-12 p-0">
+            <div class="d-flex justify-content-between col-11" *ngIf="!ticketToggle[i]">
+                <span class="ticket-collapse-text">{{ticket.notes}}</span>
+                <span class="text-right ticket-collapse-text status-text">{{ticket.status}}
+                </span>
+            </div>
+            <div class="col-11" *ngIf="ticketToggle[i]">
+                <div class="d-flex justify-content-between">
+                    <span class='ticket-open-text-header'>Notes</span>
+                    <span class="text-right ticket-open-text">{{ticket.notes}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='ticket-open-text-header'>Type</span>
+                    <span class="text-right ticket-open-text">{{ticket.type}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='ticket-open-text-header'>Status</span>
+                    <span class="text-right ticket-open-text status-text">{{ticket.status}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='ticket-open-text-header'>Driver Details</span>
+                    <span class="text-right ticket-open-text">
+                        <button type="button"
+                            class="btn btn-default form-control form-control-sm round-primary-btn location-btn"
+                            data-toggle="modal" (click)="getDriverLocation(ticket)">
+                            Get driver location</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-1 p-0">
+                <span *ngIf="!ticketToggle[i]" (click)="ticketToggle[i] = !ticketToggle[i]">
+                    <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
+                </span>
+                <span *ngIf="ticketToggle[i]" (click)="ticketToggle[i] = !ticketToggle[i]">
+                    <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body">
+                    <div #map style="width:100%;height:80vh" id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

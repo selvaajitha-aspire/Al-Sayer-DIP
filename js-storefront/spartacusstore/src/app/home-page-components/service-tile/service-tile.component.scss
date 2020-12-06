@@ -28,7 +28,7 @@ $mobile-large: 640px;
 .ServiceTileBannerComponent{
     display: inline-block;
     width: 25%;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .tile-link{
@@ -52,7 +52,7 @@ $mobile-large: 640px;
         width: 70px;
     }
     .tile-item{
-        height: 120px;
+        height: 110px;
         max-height: 120px;
     }
     .image-width{

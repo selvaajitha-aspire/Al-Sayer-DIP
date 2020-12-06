@@ -1,38 +1,76 @@
 :root {
-    --fire-engine-red: #dd231b;
+    --dark-gray : #b4b4b4;
     --white: #ffffff;
+    --silver: #c2c2c2;
+    --fire-engine-red: #dd231b;
+    --malachite : #06D540;
+
 }
 
 $desktop: 960px;
 $mobile-large: 640px;
 
-.card-header{
-    line-height: 30px !important;
-    background-color: var(--fire-engine-red) !important;
+
+.tile-item{
+    overflow: hidden !important;
+    border-radius: 19px;
+    background: linear-gradient(180deg, #b4b4b4, #ffffff, #c2c2c2);
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+    flex: 0 0 19%;
+    height: 197.97px;
+    max-height: 197.97px;
+    overflow: auto;
+    margin: 10px;
 }
-.card-link{
-    color: var(--white) !important;
+
+
+.tileBannerComponent{
+    display: inline-block;
+    width: 25%;
 }
 
 th{
     text-align: left !important;
+    color: var(--white) !important;
 }
+
+thead{
+    background-color: var(--fire-engine-red);
+}
+
+.ticket-wrapper {
+    display: flex;
+    padding: 6px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    margin: 10px 0;
+   .ticket-collapse-text, .ticket-open-text , .ticket-open-text-header{
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 0;
+   }
+   .ticket-open-text-header {
+    opacity: 0.7;
+   }
+}
+.status-text{
+    font-size: 14px !important;
+    line-height: 16px;
+    text-align: center;
+    color: #06D540;
+}
+
 @media only screen and (max-width: $desktop){
-    table{
-        table-layout: fixed;
-        width: 100%;
+    .tileBannerComponent{
+        width: 50%;
     }
-    
-    th{
-        min-width: 200px;
+    .tile-item{
+        height: 137px;
+        max-height: 137px;
     }
-    td{
-        min-width: 200px;
-    }
-    .btn-div{
-        min-width: 210px;
-    }
-    .card-body{
-        overflow: scroll;
+    .location-btn{
+        font-size: 14px !important;
     }
 }

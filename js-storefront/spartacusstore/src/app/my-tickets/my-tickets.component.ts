@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MyTicketsService } from 'src/services/my-tickets/my-tickets.service';
-import { tick } from '@angular/core/testing';
 declare var $: any;
 
 @Component({
@@ -18,6 +17,7 @@ export class MyTicketsComponent implements OnInit {
   driverLatLng;
   marker1:google.maps.Marker;
   marker2:google.maps.Marker;
+  ticketToggle = {};
   constructor(protected service:MyTicketsService) {}
 
   ngOnInit(): void {

@@ -117,7 +117,7 @@ $mobile-large: 640px;
   position: fixed;
   top: 0;
   background: white;
-  color: red;
+  color: #dd231b;
   height: 100%;
   z-index: 999;
   // z-index: 99999;
@@ -134,7 +134,8 @@ $mobile-large: 640px;
       justify-content: center;
       flex-direction: column;
       .phone-number {
-        font-weight: bold;;
+        font-weight: bold;
+        font-size: 22px !important;
       }
     }
     ul {
