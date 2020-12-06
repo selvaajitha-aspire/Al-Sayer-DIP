@@ -206,13 +206,13 @@ cx-navigation-ui h5{
 
     .ServiceTileSection app-service-tile:nth-child(odd){
         .ServiceTileBannerComponent{
-            border-right: 1px solid black;
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
         }
         
     }
     .ServiceTileSection app-service-tile:nth-child(even){
         .ServiceTileBannerComponent{
-            border-left: 1px solid black;
+            border-left: 1px solid rgba(0, 0, 0, 0.2)
         }
         
     }

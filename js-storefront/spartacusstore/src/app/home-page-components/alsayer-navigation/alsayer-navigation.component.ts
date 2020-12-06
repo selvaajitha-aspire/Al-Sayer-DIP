@@ -6,6 +6,7 @@ import {
   HostListener,
   Input,
   OnDestroy,
+  Output,
   Renderer2,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
@@ -22,6 +23,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AlsayerNavigationComponent implements OnDestroy {
 
+  @Output() toggleMenu = new EventEmitter<string>();
   /**
    * The navigation node to render.
    */
@@ -92,6 +94,7 @@ export class AlsayerNavigationComponent implements OnDestroy {
 
     event.stopImmediatePropagation();
     event.stopPropagation();
+    this.toggleMenu.emit();
   }
 
   back(): void {
