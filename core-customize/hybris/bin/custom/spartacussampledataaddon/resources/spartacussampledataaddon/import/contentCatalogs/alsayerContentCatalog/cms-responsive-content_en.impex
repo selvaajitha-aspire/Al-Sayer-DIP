@@ -133,7 +133,7 @@ UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media
 ;;ServiceAppointmentComponent;Tile8.jpg;"Service Appointment";
 
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
-;;MyAccountNavNode;"My Account"
+;;MyAccountNavNode;""
 
 
 
@@ -150,8 +150,6 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ;;HomepageToyotaBrandBanner;Toyota.jpg
 ;;HomepageLexusBrandBanner;Lexus.jpg
 
-UPDATE HomepageInformationComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;AboutUsInfoComponent;AboutUs.jpg
 
 # ALSAYER Footer Component
 
@@ -253,7 +251,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 
 UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media(code,$contentCV)[lang=$lang];headline[lang=$lang];color
                                  ;;CarTradInComponent;Tile1.jpg;"Car Trade-in";
-                                 ;;RSAComponent;Tile2.jpg;"Roadside Assistance";
+                                 ;;RSAComponent;Tile2.jpg;"";
                                  ;;ServiceHistoryComponent;Tile3.jpg;"Service History";
                                  ;;CarReplacementComponent;Tile4.jpg;"Car Replacement";
                                  ;;AccesoriesComponent;Tile5.jpg;"Accessories";
