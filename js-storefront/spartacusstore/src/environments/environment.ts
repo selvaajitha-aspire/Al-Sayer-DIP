@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   occBaseUrl:
     'https://localhost:9002',
+  backofficeUrl: 'https://localhost:9002',
   prefix: '/occ/v2/' 
 };
 
