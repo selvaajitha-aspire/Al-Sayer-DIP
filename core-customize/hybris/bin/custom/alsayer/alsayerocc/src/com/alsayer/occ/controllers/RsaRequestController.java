@@ -16,10 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.LinkedList;
@@ -88,6 +85,26 @@ public class RsaRequestController
                                                           @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
     {
         List<RsaRequestData> dataList = rsaRequestService.getRsaRequestsByCustomerId();
+        RsaRequestListWsDTO rsaRequestListWsDTO = new RsaRequestListWsDTO();
+        if(CollectionUtils.isNotEmpty(dataList))
+        {
+
+            rsaRequestListWsDTO.setRsaRequestsList(getRSAWsDtoList(dataList));
+        }
+        return rsaRequestListWsDTO;
+    }
+
+    @Secured(
+            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
+    @RequestMapping(value = "/getRsaRequestsByChassisNo/{chassisNo}", method = RequestMethod.GET,
+            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    @ApiOperation(value = "Get Service Requests by customer PK", notes = "Can be used by customer himself or alsayer to get all services requests for a specific customer")
+    public RsaRequestListWsDTO getRsaRequestsByChassisNo(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+                                                        @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,
+                                                         @PathVariable("chassisNo") final String chassisNo)
+    {
+        List<RsaRequestData> dataList = rsaRequestService.getRsaRequestsByChassisAndCustomer(chassisNo);
         RsaRequestListWsDTO rsaRequestListWsDTO = new RsaRequestListWsDTO();
         if(CollectionUtils.isNotEmpty(dataList))
         {

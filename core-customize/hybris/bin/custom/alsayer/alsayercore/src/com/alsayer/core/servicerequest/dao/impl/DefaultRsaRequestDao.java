@@ -2,6 +2,7 @@ package com.alsayer.core.servicerequest.dao.impl;
 
 import com.alsayer.core.enums.ServiceStatus;
 import com.alsayer.core.model.RsaRequestModel;
+import com.alsayer.core.model.VehicleModel;
 import com.alsayer.core.servicerequest.dao.RsaRequestDao;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
@@ -37,9 +38,9 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
     private String getServiceRequestsByStatusQuery(){
         StringBuilder builder = new StringBuilder();
         builder.append(" SELECT {A.pk} FROM {RsaRequest as A ")
-                .append(" JOIN ServiceStatus as B on {B.pk} = {A."+RsaRequestModel.STATUS+"}} ")
+                .append(" JOIN "+ ServiceStatus._TYPECODE +" as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
                 .append(" WHERE ")
-                .append(" {B.code} = ?status");
+                .append(" {C.code} = ?status");
         return builder.toString();
     }
 
@@ -61,7 +62,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
     private String getServiceRequestsByCustomerIDAndStatusQuery(){
         StringBuilder builder = new StringBuilder();
         builder.append(" SELECT {A.pk} FROM {" + RsaRequestModel._TYPECODE + " as A ")
-                .append(" JOIN ServiceStatus as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
+                .append(" JOIN "+ ServiceStatus._TYPECODE +" as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
                 .append(" WHERE ")
                 .append(" {A.").append(RsaRequestModel.CUSTOMER).append("} = ?customerID")
                 .append(" AND {C.code} IN (?statuses)");
@@ -71,7 +72,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
     private String getServiceRequestsByVehicleIDQuery(){
         StringBuilder builder = new StringBuilder();
         builder.append("SELECT {A.pk} FROM {RsaRequest as A ")
-                .append(" JOIN Vehicle as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"}} ")
+                .append(" JOIN "+ VehicleModel._TYPECODE +" as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"} ")
                 .append(" WHERE ")
                 .append(" {B.pk} = ?vehicleID");
         return builder.toString();
@@ -80,11 +81,21 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
     private String getServiceRequestsByVehicleIDAndStatusQuery(){
         StringBuilder builder = new StringBuilder();
         builder.append(" SELECT {A.pk} FROM {RsaRequest as A ")
-                .append(" JOIN Vehicle as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"} ")
-                .append(" JOIN ServiceStatus as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
+                .append(" JOIN "+ VehicleModel._TYPECODE +" as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"} ")
+                .append(" JOIN "+ ServiceStatus._TYPECODE +" as C on {C.pk} = {A."+RsaRequestModel.STATUS+"}} ")
                 .append(" WHERE ")
-                .append(" {B.pk} = ?vehicleID")
+                .append(" {B." + VehicleModel.PK + "} =?vehicleID")
                 .append(" AND {C.code} = ?status");
+        return builder.toString();
+    }
+
+    private String getServiceRequestsByChassisAndCustomerQuery(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(" SELECT {A.pk} FROM {RsaRequest as A ")
+                .append(" JOIN "+ VehicleModel._TYPECODE +" as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"} } ")
+                .append(" WHERE ")
+                .append(" {B." + VehicleModel.CHASSISNUMBER + "} = ?chassisNo")
+                .append(" AND {A.").append(RsaRequestModel.CUSTOMER).append("} = ?customerID");
         return builder.toString();
     }
 
@@ -157,6 +168,15 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
         params.put("vehicleID",vehicleID);
         params.put("status",status);
         return getRsaRequests(getServiceRequestsByVehicleIDAndStatusQuery()
+                ,params);
+    }
+
+    @Override
+    public List<RsaRequestModel> getRsaRequestsByChassisAndCustomer(String chassisNo, CustomerModel customer) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("chassisNo",chassisNo);
+        params.put("customerID",customer);
+        return getRsaRequests(getServiceRequestsByChassisAndCustomerQuery()
                 ,params);
     }
 
