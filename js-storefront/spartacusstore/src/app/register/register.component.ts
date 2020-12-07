@@ -2,7 +2,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RegisterService } from '../../services/register/register.service';
 import { UserRegister } from './../models/user-register.model';
 import { RecaptchaService } from '../../services/recaptcha/recaptcha.service';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -42,6 +42,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   userCivilId = '';
   userECCData = '';
   showConfPassword : boolean = false;
+  invalidOTPFlag : boolean = false;
 
   anonymousConsent$: Observable<{
     consent: AnonymousConsent;
@@ -88,7 +89,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     protected recaptchaService: RecaptchaService,
     protected registerService: RegisterService,
     private toastr: ToastrService,
-    public commonService: CommonService
+    public commonService: CommonService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -302,6 +304,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   submitUserOTP() {
+    this.invalidOTPFlag = false;
     this.commonService.postRequest('validateOTP',null,this.userCivilId,this.oneTimePassword).then(
       resp => {
         if(null != resp.data){
@@ -309,6 +312,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.populateUserEccData(resp.data);
         }else{
           console.log("OTP is wrong");
+          this.invalidOTPFlag = true;
+          this.cd.detectChanges();
         }
       }
     );

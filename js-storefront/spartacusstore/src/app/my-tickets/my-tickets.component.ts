@@ -22,7 +22,7 @@ export class MyTicketsComponent implements OnInit {
   constructor(protected service:MyTicketsService, private headerTitle : HeaderTitleService) {}
 
   ngOnInit(): void {
-    this.headerTitle.headerTitle.next('my tickets');
+    // this.headerTitle.headerTitle.next('my tickets');
     this.ticketsList=this.service.getRsaRequests() || [];
   }
   
