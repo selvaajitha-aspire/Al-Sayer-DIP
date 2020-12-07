@@ -8,6 +8,10 @@
 
 
 	<action id="getCustomerDetails" bean="getCustomerDetails">
+		<transition name="OK" to="getServiceHistory"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="getServiceHistory" bean="getServiceHistory">
 		<transition name="OK" to="generateCustomerRegistrationEmail"/>
 		<transition name="NOK" to="error"/>
 	</action>

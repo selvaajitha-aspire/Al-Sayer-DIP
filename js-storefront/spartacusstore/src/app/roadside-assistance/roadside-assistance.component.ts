@@ -64,7 +64,6 @@ export class RoadsideAssistanceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
     this.vehicleList=this.assistanceService.getVehicles() || [];
     const mapProperties = {
       center:this.latLng ,
