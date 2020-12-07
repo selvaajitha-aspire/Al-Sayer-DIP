@@ -1,6 +1,5 @@
 package com.alsayer.core.utils;
 
-import com.alsayer.core.customer.services.GetCustomerDetails;
 import org.apache.log4j.Logger;
 
 import java.text.ParseException;

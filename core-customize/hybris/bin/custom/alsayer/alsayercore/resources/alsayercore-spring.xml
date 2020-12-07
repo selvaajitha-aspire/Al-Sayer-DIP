@@ -328,7 +328,12 @@
 		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
 	</bean>
 
-	<bean id="getCustomerDetails" class="com.alsayer.core.customer.services.GetCustomerDetails">
+	<bean id="getCustomerDetails" class="com.alsayer.core.actions.service.GetCustomerDetailsAction">
+		<property name="configurationService" ref="configurationService"/>
+
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	<bean id="getServiceHistory" class="com.alsayer.core.actions.service.GetServiceHistoryAction">
 		<property name="configurationService" ref="configurationService"/>
 
 		<property name="modelService" ref="modelService"/>
