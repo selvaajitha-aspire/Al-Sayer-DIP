@@ -187,8 +187,15 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
     }
 
     public boolean validateOtp(String civilId, String otp) throws ParseException {
+        if(null == civilId || "".equals(civilId) || null == otp || "".equals(otp)){
+            return false;
+        }
 
         CustomerAuthenticationModel custAuth = getAlsayerCustomerServicesDao().getSavedOtp(civilId);
+
+        if(null == custAuth){
+            return false;
+        }
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
 
         Date createdTime = format.parse(String.valueOf(custAuth.getCreationtime()));
@@ -197,11 +204,12 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         long difference_In_Hours = TimeUnit.MILLISECONDS.toHours(difference_In_Time) % 60;
         long difference_In_Minutes = TimeUnit.MILLISECONDS.toMinutes(difference_In_Time) % 60;
         long difference_In_Days = TimeUnit.MILLISECONDS.toDays(difference_In_Time) % 365;
-        if (difference_In_Days < 1 && difference_In_Hours < 1 && difference_In_Minutes < getConfigurationService().getConfiguration().getInt(OTP_VALIDATION)) {
-            return custAuth.getOneTimePassword().equals(otp);
-        }
 
-        return false;
+        if(difference_In_Days < 1 && difference_In_Hours < 1 && difference_In_Minutes < getConfigurationService().getConfiguration().getInt(OTP_VALIDATION)){
+            return otp.equals(custAuth.getOneTimePassword());
+        }else{
+            return false;
+        }
     }
 
 
