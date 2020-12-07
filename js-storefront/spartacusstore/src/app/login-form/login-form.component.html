@@ -4,17 +4,17 @@
           <img src="../../assets/icons/icn_close.png" alt="close">
         </a>
       </div> -->
-    <div class="pb-20">
-        <div class="login-text">LOGIN</div>
+    <div class="pb-5">
+        <div class="login-text">Login</div>
         <div class="login-extra-text">Please enter your details to</div>
         <div class="login-extra-text">login to the account</div>
     </div>
-    <div class="form-group-wrapper left-icon">
+    <div class="form-group-wrapper left-icon mb-3">
         <img src="../../assets/svg/email_icon.svg" alt="email">
-        <input type="email" class="form-control" placeholder="Enter email" formControlName="userId" />
+        <input type="email" class="form-control" placeholder="Username" formControlName="userId" />
         <cx-form-errors [control]="loginForm.get('userId')"></cx-form-errors>
     </div>
-    <div class="form-group-wrapper left-and-right-icon">
+    <div class="form-group-wrapper left-and-right-icon mb-3">
         <img class="left-img" src="../../assets/svg/password_icon.svg" alt="password">
         <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password" />
         <img class="right-img" (click)="showPassword = !showPassword" *ngIf="!showPassword" src="../../assets/icons/icn_view.png" alt="view password">
@@ -31,7 +31,7 @@
       >
     </p>
   
-    <button type="submit" class="btn btn-block btn-primary" [disabled]="!loginForm.valid">
+    <button type="submit" class="btn btn-block round-primary-btn mt-5" [disabled]="!loginForm.valid">
       Login
     </button>
   </form>
@@ -39,7 +39,7 @@
   <div class="register">
   
     <ng-container>
-      <a
+      <a class="a-red"
         [routerLink]="{ cxRoute: 'register' } | cxUrl"
         >NEW USER?</a
       >
