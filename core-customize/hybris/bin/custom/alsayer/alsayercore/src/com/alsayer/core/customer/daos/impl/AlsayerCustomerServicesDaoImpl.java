@@ -23,11 +23,10 @@ public class AlsayerCustomerServicesDaoImpl extends AbstractItemDao implements A
 
     private static final String CUSTOMER_REQUEST_QUERY = "SELECT {p.pk}"
             + " FROM {" + CustomerAuthenticationModel._TYPECODE + " as p}"
-            + " WHERE {p."+ CustomerAuthenticationModel.CIVILID + "} = ?id";
+            + " WHERE {p."+ CustomerAuthenticationModel.CIVILID + "} = ?id"
+            + " ORDER BY { p."+ CustomerAuthenticationModel.CREATIONTIME +" } DESC ";;
 
     final StringBuilder builder = new StringBuilder(CUSTOMER_REQUEST_QUERY);
-
-
 
     @Override
     public CustomerAuthenticationModel getSavedOtp(String civilId) {
