@@ -64,7 +64,6 @@ export class CommonService {
    }
 
     submitForm(strUrl,formObject,...attachments){
-        debugger;
         if(formObject.valid){
            return this.postRequest(strUrl,formObject.value);     
         }
@@ -75,7 +74,6 @@ export class CommonService {
     }
 
     submitFormWithAttacment(strUrl,formObject,...attachments){
-      debugger;
       if(formObject.valid){
           const formData = new FormData();
           

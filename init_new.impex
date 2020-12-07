@@ -26,15 +26,16 @@ INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];n
 
 # Creating Tiles for Homepage
 
-INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;CarTradInComponent;Car Trade In Component;CarTradInComponent
-;;RSAComponent;Road Side Assistance Component;RSAComponent
-;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent
-;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent
-;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent
-;;InsuranceComponent;Car Insurance Component;InsuranceComponent
-;;TyresComponent;Car Tyres Component;TyresComponent
-;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent
+INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;CarTradInComponent;Car Trade In Component;CarTradInComponent;/my-services/car-tradein
+;;RSAComponent;Road Side Assistance Component;RSAComponent;/my-services/roadside-assistance
+;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent;/my-services/service-history
+;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent;/my-services/car-replacement
+;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent;/my-services/accessories
+;;InsuranceComponent;Car Insurance Component;InsuranceComponent;/my-services/insurance
+;;TyresComponent;Car Tyres Component;TyresComponent;/my-services/tyres
+;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent;/my-services/service-appointment
+
 
 ###  Home page slots  ####
 
@@ -149,7 +150,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ### Roadside Assistance Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;roadsideassistancepage;Roadside Assistance Page;AccountPageTemplate;/my-services/roadsideassistance
+;;roadsideassistancepage;Roadside Assistance Page;AccountPageTemplate;/my-services/roadside-assistance
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
