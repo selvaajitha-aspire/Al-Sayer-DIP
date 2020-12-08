@@ -89,16 +89,6 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
         return builder.toString();
     }
 
-    private String getServiceRequestsByChassisAndCustomerQuery(){
-        StringBuilder builder = new StringBuilder();
-        builder.append(" SELECT {A.pk} FROM {RsaRequest as A ")
-                .append(" JOIN "+ VehicleModel._TYPECODE +" as B on {B.pk} = {A."+RsaRequestModel.VEHICLE+"} } ")
-                .append(" WHERE ")
-                .append(" {B." + VehicleModel.CHASSISNUMBER + "} = ?chassisNo")
-                .append(" AND {A.").append(RsaRequestModel.CUSTOMER).append("} = ?customerID");
-        return builder.toString();
-    }
-
     @Override
     public ModelService getModelService() {
         return modelService;
@@ -171,15 +161,6 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
                 ,params);
     }
 
-    @Override
-    public List<RsaRequestModel> getRsaRequestsByChassisAndCustomer(String chassisNo, CustomerModel customer) {
-        Map<String,Object> params = new HashMap<>();
-        params.put("chassisNo",chassisNo);
-        params.put("customerID",customer);
-        return getRsaRequests(getServiceRequestsByChassisAndCustomerQuery()
-                ,params);
-    }
-
     private FlexibleSearchQuery getFlexiQueryInstance(String query, Map<String,Object> params){
         if(null == query || "".equals(query)){
             return null;
@@ -202,7 +183,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
             final SearchResult<RsaRequestModel> result = getFlexibleSearchService().search(query);
             return (result.getResult()!=null && !result.getResult().isEmpty())?result.getResult():null;
         }catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.debug(ex.getMessage());
             return null;
         }
     }
@@ -213,7 +194,7 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
             final SearchResult<RsaRequestModel> result = getFlexibleSearchService().search(query);
             return (result.getResult() != null && !result.getResult().isEmpty()) ? result.getResult().get(0) : null;
         }catch (Exception ex){
-            ex.printStackTrace();
+            LOG.debug(ex.getMessage());
             return null;
         }
     }

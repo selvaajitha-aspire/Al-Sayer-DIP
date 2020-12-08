@@ -60,12 +60,6 @@ public class DefaultRsaRequestService implements RsaRequestService
     }
 
     @Override
-    public List<RsaRequestData> getRsaRequestsByChassisAndCustomer(String chassisNo) {
-        final CustomerModel currentCustomer = (CustomerModel) userService.getCurrentUser();
-        return convertAllModel(getRsaRequestDao().getRsaRequestsByChassisAndCustomer(chassisNo,currentCustomer));
-    }
-
-    @Override
     public List<RsaRequestData> getRsaRequestsByVehicleId(String vehicleID) {
         return convertAllModel(getRsaRequestDao().getRsaRequestsByVehicleId(vehicleID));
     }

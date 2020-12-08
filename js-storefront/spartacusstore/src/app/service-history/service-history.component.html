@@ -1,0 +1,50 @@
+
+<div class="my-serviceHistorys-wrapper">
+    <div class="container p-0" *ngIf="serviceHistoryList | async as serviceHistorys$">
+        <div *ngFor="let serviceHistory of serviceHistorys$; let i=index" class="box serviceHistory-wrapper col-12 p-0">
+            <div class="d-flex justify-content-between col-11" *ngIf="!serviceHistoryToggle[i]">
+                <span class="serviceHistory-collapse-text">{{serviceHistory.modline}}</span>
+                <span class="text-right serviceHistory-collapse-text">{{serviceHistory.modyear}}
+                </span>
+            </div>
+            <div class="col-11" *ngIf="serviceHistoryToggle[i]">
+                <div class="d-flex justify-content-between">
+                    <span class='serviceHistory-open-text-header'>Model</span>
+                    <span class="text-right serviceHistory-open-text">{{serviceHistory.modline}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='serviceHistory-open-text-header'>Year</span>
+                    <span class="text-right serviceHistory-open-text">{{serviceHistory.modyear}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='serviceHistory-open-text-header'>Plate Number</span>
+                    <span class="text-right serviceHistory-open-text">{{serviceHistory.plateNumber}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='serviceHistory-open-text-header'>Chasis Number</span>
+                    <span class="text-right serviceHistory-open-text">{{serviceHistory.chassisNumber}}</span>
+                </div>
+                <div *ngFor="let warranty of serviceHistory.warranties" class="warranty-wrapper">
+                    <div class="d-flex justify-content-between">
+                        <span class='serviceHistory-open-text-header'>Warrenty Type</span>
+                        <span class="text-right serviceHistory-open-text">{{warranty.warrantyType}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class='serviceHistory-open-text-header'>Warrenty Expiry Date</span>
+                        <span class="text-right serviceHistory-open-text">{{warranty.warrantyExpiryDate | date: 'mediumDate'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 p-0">
+                <span *ngIf="!serviceHistoryToggle[i]" (click)="serviceHistoryToggle[i] = !serviceHistoryToggle[i]">
+                    <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
+                </span>
+                <span *ngIf="serviceHistoryToggle[i]" (click)="serviceHistoryToggle[i] = !serviceHistoryToggle[i]">
+                    <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+</div>
