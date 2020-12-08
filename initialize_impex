@@ -7,10 +7,10 @@ $lang=en
 ### My Tickets History Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;MyTicketsPage;Service History Page;AccountPageTemplate;/my-account/my-tickets
+;;MyTicketsPage;My Tickets Page;AccountPageTemplate;/my-account/my-tickets
 
 INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
-;;MyTicketsComponent;Service History Component;MyTicketsComponent;MyTicketsComponent
+;;MyTicketsComponent;My Tickets Component;MyTicketsComponent;MyTicketsComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
@@ -22,32 +22,38 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='MyTicketsPage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;SideContent-MyTicketsPage-Slot;SideContent;;SideContent-MyTicketsPage;;;
 ;;BodyContent-MyTicketsPage-Slot;BodyContent;;BodyContent-MyTicketsPage;;;
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;MyTicketsPage;My Tickets
+
 ### Service History Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;ServiceHistoryPage;Service History Page;AccountPageTemplate;/my-account/service-history
+;;ServiceHistoryPage;Service History Page;AccountPageTemplate;/my-account/my-services
 
 INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
-;;MyServiceHistoryComponent;Service History Component;MyServiceHistoryComponent;MyServiceHistoryComponent
+;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent;ServiceHistoryComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;SideContent-ServiceHistoryPage;Side Content Slot for Services;true;;;;
-;;BodyContent-ServiceHistoryPage;Body Content Slot for Services;true;MyServiceHistoryComponent;;;
-
+;;BodyContent-ServiceHistoryPage;Body Content Slot for Services;true;ServiceHistoryComponent;;;
 
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='ServiceHistoryPage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;SideContent-ServiceHistory-Slot;SideContent;;SideContent-ServiceHistoryPage;;;
 ;;BodyContent-ServiceHistory-Slot;BodyContent;;BodyContent-ServiceHistoryPage;;;
 
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;ServiceHistoryPage;Service History
+
 ### Vehicle History Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;MyVehiclesPage;Service History Page;AccountPageTemplate;/my-account/my-vehicles
+;;MyVehiclesPage;My Vehicles Page;AccountPageTemplate;/my-account/my-vehicles
 
 INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
-;;MyVehiclesComponent;Service History Component;MyVehiclesComponent;MyVehiclesComponent
+;;MyVehiclesComponent;My Vehicles Component;MyVehiclesComponent;MyVehiclesComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
@@ -58,6 +64,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='MyVehiclesPage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;SideContent-MyVehicles-Slot;SideContent;;SideContent-MyVehiclesPage;;;
 ;;BodyContent-MyVehicles-Slot;BodyContent;;BodyContent-MyVehiclesPage;;;
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;MyVehiclesPage;My Vehicles
+
 
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
