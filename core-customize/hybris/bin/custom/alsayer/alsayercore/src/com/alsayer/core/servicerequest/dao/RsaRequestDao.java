@@ -22,6 +22,4 @@ public interface RsaRequestDao
     public List<RsaRequestModel> getRsaRequestsByVehicleId(String vehicleID);
 
     public List<RsaRequestModel> getRsaRequestsByVehicleIdAndStatus(String vehicleID,String status);
-
-    public List<RsaRequestModel> getRsaRequestsByChassisAndCustomer(String chassisNo, CustomerModel customer);
 }
