@@ -31,6 +31,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class GetServiceHistoryAction  extends AbstractSimpleDecisionAction<StoreFrontCustomerProcessModel> {
 
@@ -72,11 +73,11 @@ public class GetServiceHistoryAction  extends AbstractSimpleDecisionAction<Store
                 try {
 
                     EccServiceHistoryResponse responseBody = objectMapper.readValue(response.getBody(), EccServiceHistoryResponse.class);
-                    //LOG.debug(AlsayerCoreConstants.VEHICLE_RESPONSE+ responseBody.toString());
                     List<E_ser_info> e_ser_infos = responseBody.getE_ser_infos();
                     List<ServiceHistoryModel> serviceHistoryModels = new ArrayList<>();
                     for (E_ser_info ser_info : e_ser_infos) {
                         ServiceHistoryModel serviceHistoryModel = new ServiceHistoryModel();
+                        serviceHistoryModel.setUid(UUID.randomUUID().toString());
                         serviceHistoryModel.setMileage(Double.parseDouble(ser_info.getMileage()));
                         serviceHistoryModel.setInvAmt(Double.parseDouble(ser_info.getInv_Amt()));
                         serviceHistoryModel.setServiceType(ser_info.getService_Type());
@@ -88,7 +89,7 @@ public class GetServiceHistoryAction  extends AbstractSimpleDecisionAction<Store
                     getModelService().save(vehicle);
 
                 } catch (JsonProcessingException ex) {
-                    ex.printStackTrace();
+                    LOG.error(ex+AlsayerCoreConstants.SER_ERR_MSG);
                 }
             }
         }

@@ -23,6 +23,7 @@ public final class AlsayerCoreConstants extends GeneratedAlsayerCoreConstants
 	public static final String CUST_REG_PROCESS="customerRegistrationEmailProcess started";
 	public static final String TOKEN_ERR_MSG="User for token not found";
 	public static final String EXPRED_TOKEN_ERR_MSG="Token Expired";
+	public static final String SER_ERR_MSG="History not found";
 
 
     private AlsayerCoreConstants()

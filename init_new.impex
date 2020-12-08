@@ -29,7 +29,7 @@ INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];n
 INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
 ;;CarTradInComponent;Car Trade In Component;CarTradInComponent;/my-services/car-tradein
 ;;RSAComponent;Roadside Assistance Component;RSAComponent;/my-services/roadside-assistance
-;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent;/my-services/my-services
+;;MyServiceHistoryComponent;My Service History Component;MyServiceHistoryComponent;/my-account/my-services
 ;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent;/my-services/car-replacement
 ;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent;/my-services/accessories
 ;;InsuranceComponent;Car Insurance Component;InsuranceComponent;/my-services/insurance
@@ -222,7 +222,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;ServiceTileSection;;;
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(uid,$contentCV)
-;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
+;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,MyServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
@@ -286,7 +286,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
+;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,MyServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
