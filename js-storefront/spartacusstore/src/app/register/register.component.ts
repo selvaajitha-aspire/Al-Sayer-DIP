@@ -168,7 +168,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if (this.registerForm.valid) {
       this.commonService.submitForm('registerCustomer',this.registerForm).then(status=>{
-        this.router.go('/');
+        this.router.go('/login');
       this.toastr.success('Activation email is sent to your email address.', 'Registration is success!');
       });
       $("#otpPopup").modal('hide');
@@ -184,7 +184,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.registerService.register(
       this.collectDataFromRegisterForm(this.registerForm.value)
     ).then(status=>{
-      this.router.go('/');
+      this.router.go('/login');
 	  this.toastr.success('Activation email is sent to your email address.', 'Registration is success!');
     });
   }
