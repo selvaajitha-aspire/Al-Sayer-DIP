@@ -17,8 +17,9 @@ export class ServiceHistoryService {
 
   constructor(public http:HttpClient, public url:OccEndpointsService) { }
 
-  getServiceHistory(): Observable<any> {
-    return this.http.get<any>(this.url.getUrl('getServiceHistory'), this.httpOptions).pipe(map(res => res['serviceHistoryList']));
+  getServiceHistory(chassisNumber): Observable<any> {
+    const api = this.url.getUrl('getServiceHistory') + chassisNumber;
+    return this.http.get<any>(api, this.httpOptions).pipe(map(res => res));
   }
 
 }

@@ -61,7 +61,7 @@ export class HeaderMenuComponent implements OnInit {
     //   this.title = data;
     // });
     cmsService.getCurrentPage().subscribe(data => {
-      this.title = data ? data.name: '';
+      this.title = data ? data.title: '';
     })
   }
   ngOnInit(){
