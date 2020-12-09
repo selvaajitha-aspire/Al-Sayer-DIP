@@ -33,8 +33,6 @@ public class SendOTPAction extends AbstractSimpleDecisionAction<SMSGatewayProces
 
     @Override
     public Transition executeAction(SMSGatewayProcessModel process) throws RetryLaterException, Exception {
-
-
         final String mobile  = process.getMobile();
         final String message  = process.getMessage();
         if (mobile != null && message!=null)
