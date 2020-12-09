@@ -99,6 +99,15 @@
             </targetElement>
         </relation>
 
+        <relation code="VehicleServiceHistoryRelation" localized="false" autocreate="true">
+            <sourceElement type="Vehicle" qualifier="vehicle" cardinality="one" >
+                <modifiers read="true" write="true" optional="true" />
+            </sourceElement>
+            <targetElement type="ServiceHistory" qualifier="serviceHistory" cardinality="many" collectiontype="list">
+                <modifiers read="true" write="true"  optional="true" />
+            </targetElement>
+        </relation>
+
         <relation code="RsaRequest2Media" generate="true"
                   localized="false" autocreate="true">
             <sourceElement type="RsaRequest" qualifier="rsaRequest"
@@ -233,6 +242,44 @@
 
                 </attributes>
             </itemtype>
+
+            <itemtype code="ServiceHistory" autocreate="true" generate="true" >
+                <deployment table="ServiceHistory" typecode="12012"/>
+                <attributes>
+                    <attribute qualifier="uid" type="java.lang.String">
+                        <description>Service History unique ID</description>
+                        <modifiers read="true" write="false" optional="false" initial="true" unique="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="mileage" type="java.lang.Double">
+                        <description>Mileage of car</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="serviceType" type="java.lang.String">
+                        <description>Service Type</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="serviceDesc" type="java.lang.String">
+                        <description>Service Description</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="invAmt" type="java.lang.Double">
+                        <description>Invested Amount</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="location" type="java.lang.String">
+                        <description>Location</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+
+                </attributes>
+            </itemtype>
+
             <itemtype code="Vehicle" autocreate="true" generate="true" >
                 <deployment table="Vehicle" typecode="12002"/>
                 <attributes>

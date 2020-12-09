@@ -262,4 +262,17 @@
 		</property>
 	</bean>
 
+	<bean id="serviceHistoryPopulator" class="com.alsayer.facades.populators.ServiceHistoryPopulator">
+		<property name="vehicleDataConverter" ref="vehicleDataConverter"/>
+	</bean>
+
+	<bean id="serviceHistoryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.ServiceHistoryData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="serviceHistoryPopulator" />
+			</list>
+		</property>
+	</bean>
+
 </beans>

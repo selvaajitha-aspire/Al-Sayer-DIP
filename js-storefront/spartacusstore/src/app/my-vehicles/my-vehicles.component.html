@@ -45,11 +45,11 @@
                 </div>
                 <div *ngFor="let warranty of vehicle.warranties" class="warranty-wrapper">
                     <div class="d-flex justify-content-between">
-                        <span class='vehicle-open-text-header'>Warrenty Type</span>
+                        <span class='vehicle-open-text-header'>Warranty Type</span>
                         <span class="text-right vehicle-open-text">{{warranty.warrantyType}}</span>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <span class='vehicle-open-text-header'>Warrenty Expiry Date</span>
+                        <span class='vehicle-open-text-header'>Warranty Expiry Date</span>
                         <span class="text-right vehicle-open-text">{{warranty.warrantyExpiryDate | date: 'mediumDate'}}</span>
                     </div>
                 </div>

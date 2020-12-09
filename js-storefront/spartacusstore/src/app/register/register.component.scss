@@ -1,10 +1,10 @@
 $red : #DD231B;
 #civilIdPopup {
-    top: calc(100% - 450px);
+    top: calc(100% - 500px);
     .modal-dialog {
         // top: calc(100% - 392px) !important;
         .modal-content {
-            border-radius: 25px 25px 0px 0px;
+            border-radius: 25px 25px 25px 25px;
             .modal-body {
                 .civil-id-header {
                     text-align: center;
@@ -43,7 +43,7 @@ $red : #DD231B;
 }
 
 #userOTPModal {
-    top: calc(100% - 450px);
+    top: calc(100% - 500px);
     .modal-dialog {
         // top: calc(100% - 392px) !important;
         .modal-content {
@@ -76,6 +76,11 @@ $red : #DD231B;
                         border-bottom: 1px solid black;
                         padding-bottom: 1px;
                     }
+                }
+                .invalid-otp {
+                    text-align: center;
+                    color: #DD231B;
+                    font-size: 14px;
                 }
                 .otp-btn-wrapper {
                     text-align: center;

@@ -16,7 +16,7 @@ export class MyVehiclesComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.headerTitle.headerTitle.next('my vehicles')
+    // this.headerTitle.headerTitle.next('my vehicles')
     this.vehicleList=this.service.getVehicles() || [];
   }
 

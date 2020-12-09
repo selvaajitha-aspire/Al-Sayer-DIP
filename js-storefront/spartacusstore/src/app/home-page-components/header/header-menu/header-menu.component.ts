@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
-import { CmsNavigationComponent } from '@spartacus/core';
+import { CmsNavigationComponent, CmsService } from '@spartacus/core';
 import { CmsComponentData, NavigationNode  } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -44,7 +44,8 @@ export class HeaderMenuComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     @Inject(DOCUMENT) private document: Document,
-    private headerTitle: HeaderTitleService
+    private headerTitle: HeaderTitleService,
+    cmsService: CmsService
   ) {
     this.user$ = this.userService.get();
     this.user$.subscribe(user => {
@@ -56,14 +57,17 @@ export class HeaderMenuComponent implements OnInit {
       }
       console.log('isLoggedIn',this.isLoggedIn)
     });
-    this.headerTitle.headerTitle.subscribe((data: String) => {
-      this.title = data;
-    });
+    // this.headerTitle.headerTitle.subscribe((data: String) => {
+    //   this.title = data;
+    // });
+    cmsService.getCurrentPage().subscribe(data => {
+      this.title = data ? data.title: '';
+    })
   }
   ngOnInit(){
     this.router.events.subscribe((event: Event) => {
       if(event instanceof NavigationEnd){
-        this.title = '';
+        // this.title = '';
         this.hideHeader(event.url);
       }
     });

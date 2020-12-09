@@ -12,6 +12,15 @@ $icon=icon(code, $contentCV);
 $color=color(code, $contentCV);
 $lang=en
 
+##Remove Components
+
+REMOVE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent
+
+REMOVE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
+;;MyServiceHistoryComponent;Service History Component;MyServiceHistoryComponent;MyServiceHistoryComponent
+
+
 # Creating Banner Components
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
 ;;HomePageBannerComponent1;Home Page Banner Component 1;HomePageBannerComponent1;
@@ -26,15 +35,16 @@ INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];n
 
 # Creating Tiles for Homepage
 
-INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;CarTradInComponent;Car Trade In Component;CarTradInComponent
-;;RSAComponent;Road Side Assistance Component;RSAComponent
-;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent
-;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent
-;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent
-;;InsuranceComponent;Car Insurance Component;InsuranceComponent
-;;TyresComponent;Car Tyres Component;TyresComponent
-;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent
+INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;CarTradInComponent;Car Trade In Component;CarTradInComponent;/my-services/car-tradein
+;;RSAComponent;Roadside Assistance Component;RSAComponent;/my-services/roadside-assistance
+;;MyServiceHistoryComponent;My Service History Component;MyServiceHistoryComponent;/my-account/my-services
+;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent;/my-services/car-replacement
+;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent;/my-services/accessories
+;;InsuranceComponent;Car Insurance Component;InsuranceComponent;/my-services/insurance
+;;TyresComponent;Car Tyres Component;TyresComponent;/my-services/tyres
+;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent;/my-services/service-appointment
+
 
 
 ###### Navigation for My Account Section #########################################################3
@@ -51,12 +61,12 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 # create cms link components for my account pages------------------------------------
 
 INSERT_UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;$picture;&linkRef;target(code)[default='sameWindow']
-;;MyProfileLink;MyProfileLink;/my-account/update-profile;icn_myaccount.png;MyProfileLink;;
-;;MyVehiclesLink;MyVehiclesLink;/my-account/my-vehicles;icn_myvehicles.png;MyVehiclesLink;;
-;;MyPurchasesLink;MyPurchasesLink;/my-account/my-purchases;icn_mypurchases.png;MyPurchasesLink;;
-;;MyTicketsLink;MyTicketsLink;/my-account/my-tickets;icn_mytickets.png;MyTicketsLink;;
-;;MyServicesLink;MyServicesLink;/my-account/my-services;icn_myservices.png;MyServicesLink;;
-;;SignOutLink;SignOutLink;/logout;icn_signout.png;SignOutLink;
+;;MyProfileSideLink;MyProfileSideLink;/my-account/update-profile;icn_myaccount.png;MyProfileSideLink;;
+;;MyVehiclesSideLink;MyVehiclesSideLink;/my-account/my-vehicles;icn_myvehicles.png;MyVehiclesSideLink;;
+;;MyPurchasesSideLink;MyPurchasesSideLink;/my-account/my-purchases;icn_mypurchases.png;MyPurchasesSideLink;;
+;;MyTicketsSideLink;MyTicketsSideLink;/my-account/my-tickets;icn_mytickets.png;MyTicketsSideLink;;
+;;MyServicesSideLink;MyServicesSideLink;/my-account/my-services;icn_myservices.png;MyServicesSideLink;;
+;;SignOutSideLink;SignOutSideLink;/logout;icn_signout.png;SignOutSideLink;
 
 # create navigation root node for my account & child nodes for the root node
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
@@ -71,13 +81,20 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 
 # create cms navigation entry for nvaigation child nodes
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
-;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileLink;
-;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesLink;
-;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesLink;
-;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsLink;
-;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesLink;
-;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutLink;
+;MyProfileNavNodeEntry;;MyProfileNavNodeEntry;MyProfileNavNode;MyProfileSideLink;
+;MyVehiclesNavNodeEntry;;MyVehiclesNavNodeEntry;MyVehiclesNavNode;MyVehiclesSideLink;
+;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesSideLink;
+;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsSideLink;
+;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesSideLink;
+;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutSideLink;
 
+UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;MyProfileSideLink;"My Profile"
+;;MyVehiclesSideLink;"My Vehicles"
+;;MyPurchasesSideLink;"My Purchases"
+;;MyTicketsSideLink;"My Tickets"
+;;MyServicesSideLink;"My Services"
+;;SignOutSideLink;"Sign Out"
 
 # create navigation component for my account
 
@@ -132,7 +149,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ### Roadside Assistance Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;roadsideassistancepage;Roadside Assistance Page;AccountPageTemplate;/my-services/roadsideassistance
+;;roadsideassistancepage;Roadside Assistance Page;AccountPageTemplate;/my-services/roadside-assistance
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
@@ -147,32 +164,38 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;SideContent-roadside-assistance;SideContent;;SideContent-roadside-assistance;;;
 ;;BodyContent-roadside-assistance;BodyContent;;BodyContent-roadside-assistance;;;
 
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;roadsideassistancepage;Roadside Assistance 
+
 ### Service History Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;ServiceHistoryPage;Service History Page;AccountPageTemplate;/my-account/service-history
+;;ServiceHistoryPage;Service History Page;AccountPageTemplate;/my-account/my-services
 
 INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
-;;MyServiceHistoryComponent;Service History Component;MyServiceHistoryComponent;MyServiceHistoryComponent
+;;ServiceHistoryComponent;Service History Component;ServiceHistoryComponent;ServiceHistoryComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;SideContent-ServiceHistoryPage;Side Content Slot for Services;true;;;;
-;;BodyContent-ServiceHistoryPage;Body Content Slot for Services;true;MyServiceHistoryComponent;;;
-
+;;BodyContent-ServiceHistoryPage;Body Content Slot for Services;true;ServiceHistoryComponent;;;
 
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='ServiceHistoryPage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;SideContent-ServiceHistory-Slot;SideContent;;SideContent-ServiceHistoryPage;;;
 ;;BodyContent-ServiceHistory-Slot;BodyContent;;BodyContent-ServiceHistoryPage;;;
 
-### Vehicle History Page ####
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;ServiceHistoryPage;Service History
+
+### Vehicles Page ####
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;MyVehiclesPage;Service History Page;AccountPageTemplate;/my-account/my-vehicles
+;;MyVehiclesPage;My Vehicles Page;AccountPageTemplate;/my-account/my-vehicles
 
 INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
-;;MyVehiclesComponent;Service History Component;MyVehiclesComponent;MyVehiclesComponent
+;;MyVehiclesComponent;My Vehicles Component;MyVehiclesComponent;MyVehiclesComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
@@ -183,6 +206,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='MyVehiclesPage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;SideContent-MyVehicles-Slot;SideContent;;SideContent-MyVehiclesPage;;;
 ;;BodyContent-MyVehicles-Slot;BodyContent;;BodyContent-MyVehiclesPage;;;
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;MyVehiclesPage;My Vehicles
+
 
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
@@ -204,7 +231,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;ServiceTileSection;;;
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(uid,$contentCV)
-;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
+;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,MyServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;
@@ -220,6 +247,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 ;;Tile8.jpg;$siteResource/images/banners/alsayer/homepage/tiles/tile8.png;;;"Service Appointment"
 
 UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media(code,$contentCV)[lang=$lang];headline[lang=$lang];color
+
 
 INSERT_UPDATE Media;mediaFormat(qualifier);$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
 ;widescreen;;MobileBanner.jpg;$siteResource/images/banners/alsayer/homepage/MobileBanner.jpg;;;"Mobile Banner"
@@ -267,7 +295,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,ServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
+;;ServiceTileSectionSlot-Homepage;true;CarTradInComponent,RSAComponent,MyServiceHistoryComponent,CarReplacementComponent,AccesoriesComponent,InsuranceComponent,TyresComponent,ServiceAppointmentComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;ServiceTileSection-Homepage;ServiceTileSection;;ServiceTileSectionSlot-Homepage;;;

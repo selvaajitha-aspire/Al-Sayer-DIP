@@ -1,4 +1,4 @@
-package com.alsayer.core.customer.services;
+package com.alsayer.core.actions.service;
 
 import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.core.model.VehicleModel;
@@ -29,9 +29,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
-public class GetCustomerDetails extends AbstractSimpleDecisionAction<StoreFrontCustomerProcessModel> {
+public class GetCustomerDetailsAction extends AbstractSimpleDecisionAction<StoreFrontCustomerProcessModel> {
 
-    private static final Logger LOG = Logger.getLogger(GetCustomerDetails.class);
+    private static final Logger LOG = Logger.getLogger(GetCustomerDetailsAction.class);
     protected static final String HEADER_AUTH_KEY = "Authorization";
     protected static final String HEDER_AUTH_VALUE = "Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=";
     protected static final String EVEHICLESET = "E_Vehicle_Info";
