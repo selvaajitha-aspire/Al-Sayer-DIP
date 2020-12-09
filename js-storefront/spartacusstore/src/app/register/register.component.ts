@@ -152,17 +152,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         };
       })
     );
+  }
 
-    // this.subscription.add(
-    //   this.registerForm.get('newsletter').valueChanges.subscribe(() => {
-    //     this.toggleAnonymousConsent();
-    //   })
-    // );
-    
-  }
-  resolved(captchaResponse: string) {
-    
-  }
 
   
   submitForm(): void {

@@ -40,15 +40,13 @@ export class MyTicketsComponent implements OnInit {
    };
    this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
    
-    var marker1=new google.maps.Marker({
+    this.marker1=new google.maps.Marker({
     position:this.currentLatLng,
     map: this.map,
     title: "Your location!"
   }); 
-  var infowindow = new google.maps.InfoWindow();
-  infowindow.setContent("You are currently here");
-  infowindow.open(this.map,marker1)
-      console.log(`Driver Positon:`+driverLat+driverLng);
+  
+  
       const driverLatLng=new google.maps.LatLng(driverLat,driverLng);
       this.driverLatLng=driverLatLng;
       this.marker2=new google.maps.Marker({
@@ -61,8 +59,6 @@ export class MyTicketsComponent implements OnInit {
    }
     
    calculateAndDisplayRoute() {
-    
-    console.log(` Positons: ${this.currentLatLng} dest: ${this.driverLatLng}`);
     var directionsService = new google.maps.DirectionsService();
     var directionsRenderer= new google.maps.DirectionsRenderer();
    directionsRenderer.setMap(this.map);
@@ -107,15 +103,12 @@ export class MyTicketsComponent implements OnInit {
         } else {
           const originList = response.originAddresses;
           const destinationList = response.destinationAddresses;
-          const results = response.rows[0].elements;           
-            alert(
-              // originList[0] +
-              // " to " +
-              // destinationList[0] +
-              // ": " +
-              results[0].distance.text +
-              "Your driver will reach in" +
-              results[0].duration.text );                
+          const results = response.rows[0].elements;   
+          var infowindow = new google.maps.InfoWindow();
+          infowindow.setContent("You are currently here.Your driver is "+results[0].distance.text +
+          " away. ETA: " +
+          results[0].duration.text);
+          infowindow.open(this.map,this.marker1)                   
                 
         }
       }

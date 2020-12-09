@@ -91,7 +91,6 @@ export class RoadsideAssistanceComponent implements OnInit {
    
    this.assistanceService.getPosition().then(pos=>
      {
-       
        const currentLatLng=new google.maps.LatLng(pos.lat, pos.lng);
        const mapProperties = {
          center: currentLatLng,
@@ -129,9 +128,6 @@ export class RoadsideAssistanceComponent implements OnInit {
             var address=results[0].formatted_address;
            this.addressU=address;
            this.rsaForm.get('addressU').patchValue(this.addressU);
-           
-             
-            
           } else {
             console.log(('Location not found'));
           }
@@ -144,7 +140,6 @@ export class RoadsideAssistanceComponent implements OnInit {
  getDriverDetails(){
   this.driverDetails=this.assistanceService.getDriverDetailsPro().then(pos=>
     {
-      
       const driverLatLng=new google.maps.LatLng(pos.lng, pos.lat);
       this.driverLatLng=driverLatLng;
       this.marker2=new google.maps.Marker({
@@ -158,7 +153,6 @@ export class RoadsideAssistanceComponent implements OnInit {
  }
   
  calculateAndDisplayRoute() {
-  
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer= new google.maps.DirectionsRenderer();
  directionsRenderer.setMap(this.map);

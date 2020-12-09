@@ -54,7 +54,6 @@ export class HeaderMenuComponent implements OnInit {
       } else {
         this.isLoggedIn = true;
       }
-      
     });
     // this.headerTitle.headerTitle.subscribe((data: String) => {
     //   this.title = data;
