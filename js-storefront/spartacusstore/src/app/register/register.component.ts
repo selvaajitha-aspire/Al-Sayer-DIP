@@ -152,17 +152,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         };
       })
     );
+  }
 
-    // this.subscription.add(
-    //   this.registerForm.get('newsletter').valueChanges.subscribe(() => {
-    //     this.toggleAnonymousConsent();
-    //   })
-    // );
-    
-  }
-  resolved(captchaResponse: string) {
-    //console.log(`Resolved captcha with response: ${captchaResponse}`);
-  }
 
   
   submitForm(): void {
@@ -214,7 +205,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if(civilId!=null){
       this.customer=this.registerService.getECCCustomerDetails(civilId).then(pos=>
         {
-          console.log(`Customer : ${pos.civilId} ${pos.arabicName} ${pos.eccCustId}`);
           var email=`${pos.email}`;
           this.registerForm.get('civilId').patchValue(`${pos.civilId}`);
           this.registerForm.get('eccCustId').patchValue(`${pos.eccCustId}`);
@@ -311,7 +301,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
           $('#userOTPModal').modal('hide');
           this.populateUserEccData(resp.data);
         }else{
-          console.log("OTP is wrong");
           this.invalidOTPFlag = true;
           this.cd.detectChanges();
         }
