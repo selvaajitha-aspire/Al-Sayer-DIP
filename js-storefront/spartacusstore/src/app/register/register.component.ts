@@ -161,7 +161,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     
   }
   resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    //console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
 
   
