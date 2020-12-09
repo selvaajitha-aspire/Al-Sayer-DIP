@@ -35,12 +35,12 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
 
 
     @Override
-    public boolean saveServiceRequestinDB(RsaRequestModel serviceRequest) {
+    public boolean saveServiceRequestinDB(final RsaRequestModel serviceRequest) {
         Boolean saved=true;
         try {
             lastServiceRequestUid=serviceRequest.getUid();
            getModelService().save(serviceRequest);
-            RsaRequestProcessModel process= new RsaRequestProcessModel();
+            final RsaRequestProcessModel process= new RsaRequestProcessModel();
             process.setRsaRequest(serviceRequest);
             process.setServiceState(serviceRequest.getStatus());
             getEventService().publishEvent(new RsaRequestStartEvent(process));

@@ -55,7 +55,8 @@ public class DefaultRsaRequestDao extends AbstractItemDao implements RsaRequestD
         StringBuilder builder = new StringBuilder();
         builder.append(" SELECT {A.pk} FROM {" + RsaRequestModel._TYPECODE + " as A} ")
                 .append(" WHERE ")
-                .append(" {").append(RsaRequestModel.CUSTOMER).append("} = ?customerID");
+                .append(" {").append(RsaRequestModel.CUSTOMER).append("} = ?customerID")
+                .append(" ORDER BY {").append(RsaRequestModel.CREATIONTIME).append("} DESC");
         return builder.toString();
     }
 

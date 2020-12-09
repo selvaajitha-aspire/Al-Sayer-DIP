@@ -105,20 +105,18 @@ public class RoadsideAssistanceController {
     @ApiBaseSiteIdAndUserIdParam
     public ResponseWsDTO saveRSADetails(@RequestPart("form") final RsaRequestWsDTO data,
                                         @RequestPart(name = "attachments", required = false) final MultipartFile attachments) {
-        ResponseWsDTO response = new ResponseWsDTO();
+        final ResponseWsDTO response = new ResponseWsDTO();
         try {
             //LOG.debug(form + "" + SUCCESS_STATUS);
-            ObjectMapper mapper = new ObjectMapper();
             //RsaRequestWsDTO data = mapper.readValue(form, RsaRequestWsDTO.class);
-            List<MediaFileDto> mediaFileDtoList = new ArrayList<>();
-            MediaFileDto media = null;
-            if (null != attachments && attachments.getSize() > 0) {
+            final List<MediaFileDto> mediaFileDtoList = new ArrayList<>();
 
-                media = getFile(attachments, attachments.getInputStream());
+            if (null != attachments && attachments.getSize() > 0)
+            {
+                final MediaFileDto media = getFile(attachments, attachments.getInputStream());
                 mediaFileDtoList.add(media);
-                data.setAttachments(mediaFileDtoList);
-
             }
+            data.setAttachments(mediaFileDtoList);
             response.setData(data.toString());
             response.setStatus(SUCCESS_STATUS);
             response.setMessage(SUCCESS_MSG);
@@ -141,13 +139,15 @@ public class RoadsideAssistanceController {
         return mediaFile;
     }
 
-    private RsaRequestData storeServiceRequest(RsaRequestWsDTO serviceWsDTO) {
-        RsaRequestData serviceRequestData = new RsaRequestData();
+    private RsaRequestData storeServiceRequest(RsaRequestWsDTO serviceWsDTO)
+    {
+        final RsaRequestData serviceRequestData = new RsaRequestData();
         BeanUtils.copyProperties(serviceWsDTO, serviceRequestData);
-        VehicleData vehicleData = new VehicleData();
-        List<MediaFileDto> list = new ArrayList<>();
-        for (MediaFileDto mediaFileDto : serviceWsDTO.getAttachments()) {
-            MediaFileDto fileDto = new MediaFileDto();
+        final VehicleData vehicleData = new VehicleData();
+        final List<MediaFileDto> list = new ArrayList<>();
+        for (final MediaFileDto mediaFileDto : serviceWsDTO.getAttachments())
+        {
+            final MediaFileDto fileDto = new MediaFileDto();
             BeanUtils.copyProperties(mediaFileDto, fileDto);
             list.add(fileDto);
         }
