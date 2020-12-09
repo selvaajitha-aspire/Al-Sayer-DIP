@@ -101,7 +101,7 @@
                     <span class='ticket-open-text-header'>Status</span>
                     <span class="text-right ticket-open-text status-text">{{ticket.status}}</span>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between" *ngIf="ticket.status === 'IN_PROGRESS'">
                     <span class='ticket-open-text-header'>Driver Details</span>
                     <span class="text-right ticket-open-text">
                         <button type="button"
