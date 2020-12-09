@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule, SpinnerModule, FormErrorsModule } from '@spartacus/storefront';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule } from '@spartacus/storefront';
 import { OccConfig, ConfigModule, I18nModule } from '@spartacus/core';
 import { environment } from './../environments/environment';
 import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
@@ -22,7 +22,6 @@ import { MyTicketsModule } from './my-tickets/my-tickets.module';
 import { FooterComponent } from './home-page-components/footer/footer.component';
 import { AlsayerNavigationComponent } from './home-page-components/alsayer-navigation/alsayer-navigation.component';
 import { ServiceHistoryModule } from './service-history/service-history.module';
-import { UpdatePasswordModule } from './update-password';
 
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -106,9 +105,6 @@ else {
     MyTicketsModule,
     UpdateProfileModule,
     ServiceHistoryModule,
-    UpdatePasswordModule,
-    SpinnerModule,
-    FormErrorsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
