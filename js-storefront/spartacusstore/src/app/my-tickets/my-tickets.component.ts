@@ -39,19 +39,23 @@ export class MyTicketsComponent implements OnInit {
       mapTypeId: google.maps.MapTypeId.ROADMAP
    };
    this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
+   
     var marker1=new google.maps.Marker({
     position:this.currentLatLng,
     map: this.map,
-    title: "Your current location!",
+    title: "Your location!"
   }); 
+  var infowindow = new google.maps.InfoWindow();
+  infowindow.setContent("You are currently here");
+  infowindow.open(this.map,marker1)
       console.log(`Driver Positon:`+driverLat+driverLng);
-        const driverLatLng=new google.maps.LatLng(driverLat,driverLng);
-        this.driverLatLng=driverLatLng;
-        this.marker2=new google.maps.Marker({
-          position:driverLatLng,
-          map: this.map,
-          title: this.driverName+` is here`
-        });
+      const driverLatLng=new google.maps.LatLng(driverLat,driverLng);
+      this.driverLatLng=driverLatLng;
+      this.marker2=new google.maps.Marker({
+      position:driverLatLng,
+      map: this.map,
+      
+      });
       this.calculateAndDisplayRoute();
       $("#locationPopup").modal('show');
    }
@@ -74,42 +78,14 @@ export class MyTicketsComponent implements OnInit {
       (response, status) => {
         if (status === "OK") {
           directionsRenderer.setDirections(response);
-          this.showSteps(response, markerArray, stepDisplay, this.map);
+          const myRoute = response.routes[0].legs[0];
+          const n =myRoute.steps.length;
           this.getDuration();
         } else {
           window.alert("Directions request failed due to " + status);
         }
       }
     );
-  }
-  showSteps(directionResult, markerArray, stepDisplay, map) {
-    // For each step, place a marker, and add the text to the marker's infowindow.
-    // Also attach the marker to an array so we can keep track of it and remove it
-    // when calculating new routes.
-    const myRoute = directionResult.routes[0].legs[0];
-    
-    for (let i = 0; i < myRoute.steps.length; i++) {
-      const marker = (markerArray[i] =
-        markerArray[i] || new google.maps.Marker());
-      marker.setMap(this.map);
-      marker.setPosition(myRoute.steps[i].start_location);
-      this.attachInstructionText(
-        stepDisplay,
-        marker,
-        myRoute.steps[i].instructions,
-        this.map
-      );
-    }
-    
-  }
-  
-   attachInstructionText(stepDisplay, marker, text, map) {
-    google.maps.event.addListener(marker, "click", () => {
-      // Open an info window when the marker is clicked on, containing the text
-      // of the step.
-      stepDisplay.setContent(text);
-      stepDisplay.open(map, marker);
-    });
   }
   
   getDuration(){

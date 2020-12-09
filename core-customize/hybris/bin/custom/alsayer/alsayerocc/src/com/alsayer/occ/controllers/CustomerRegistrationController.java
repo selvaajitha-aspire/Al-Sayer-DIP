@@ -97,6 +97,7 @@ public class CustomerRegistrationController {
         ECCCustomerWsDTO eccCustomerWsDTO = customerFacade.getCustomerECCDetails(id);
         if(null != eccCustomerWsDTO){
             customerFacade.sendOTP(id,eccCustomerWsDTO.getMobile());
+            LOG.info(AlsayeroccConstants.OTPSENTMSG);
             return true;
         }else{
             return false;
