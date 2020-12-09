@@ -19,15 +19,38 @@ export class CommonService {
   };
 
 
-    get(strUrl): Observable<any> {
-      return this.http.get<any>(this.url.getUrl(strUrl), this.httpOptions);
+
+    private get(strUrl): Observable<any> {
+      return this.http.get<any>(strUrl, this.httpOptions);
     }
     
-    getWithRestParam(strUrl,...params): Observable<any> {
-        return this.http.get<any>(this.url.getUrl(strUrl), this.httpOptions);
+    getWithParam(component,responseHandler,strUrl,...params){
+        let str = this.url.getUrl(strUrl) + this.getParamString(params);
+        this.get(str).subscribe(resp=>{
+            component[responseHandler](resp);
+        });
     }
 
-    getParamString(params){
+    getObservableWithParam(component,responseHandler,strUrl,respParam,...params){
+      let str = this.url.getUrl(strUrl) + this.getParamString(params);
+      var resp = this.get(str).pipe(map(res=>res[respParam]));
+      component[responseHandler](resp);
+    }
+
+    postWithParam(component,responseHandler,strUrl,postData,...params){
+      let str = this.url.getUrl(strUrl) + this.getParamString(params);
+      this.http.post(str,postData).subscribe(resp=>{
+          component[responseHandler](resp);
+      });
+    }
+
+    postObservableWithParam(component,responseHandler,respParam,strUrl,postData,...params){
+      let str = this.url.getUrl(strUrl) + this.getParamString(params);
+      var resp = this.http.post(str,postData).pipe(map(res=>res[respParam]));
+      component[responseHandler](resp);
+    }
+    
+    private getParamString(params){
         var str ="";
         params.map(param=>{
           str = str + '/' + param 
@@ -63,7 +86,7 @@ export class CommonService {
      });
    }
 
-    submitForm(strUrl,formObject,...attachments){
+    submitForm(strUrl,formObject){
         if(formObject.valid){
            return this.postRequest(strUrl,formObject.value);     
         }
@@ -73,7 +96,7 @@ export class CommonService {
         
     }
 
-    submitFormWithAttacment(strUrl,formObject,...attachments){
+    submitFormWithAttachment(strUrl,formObject,...attachments){
       if(formObject.valid){
           const formData = new FormData();
           

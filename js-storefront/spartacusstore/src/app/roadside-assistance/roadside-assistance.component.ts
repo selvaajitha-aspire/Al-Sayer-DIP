@@ -65,6 +65,7 @@ export class RoadsideAssistanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.vehicleList=this.assistanceService.getVehicles() || [];
+    //this.commonService.getObservableWithParam(this,"populateVehicles","getItems","vehicleList");
     const mapProperties = {
       center:this.latLng ,
       zoom: 15,
@@ -81,12 +82,16 @@ export class RoadsideAssistanceComponent implements OnInit {
     
  }
 
- 
+ populateVehicles(vehicles){
+    this.vehicleList = vehicles;
+    
+ }
+
  getCurrentLocation(){
    
    this.assistanceService.getPosition().then(pos=>
      {
-       console.log(`Positon: ${pos.lng} ${pos.lat}`);
+       
        const currentLatLng=new google.maps.LatLng(pos.lat, pos.lng);
        const mapProperties = {
          center: currentLatLng,
@@ -124,7 +129,7 @@ export class RoadsideAssistanceComponent implements OnInit {
             var address=results[0].formatted_address;
            this.addressU=address;
            this.rsaForm.get('addressU').patchValue(this.addressU);
-           console.log(this.addressU);
+           
              
             
           } else {
@@ -139,7 +144,7 @@ export class RoadsideAssistanceComponent implements OnInit {
  getDriverDetails(){
   this.driverDetails=this.assistanceService.getDriverDetailsPro().then(pos=>
     {
-      console.log(`Driver Positon: ${pos.lat} ${pos.lng}`);
+      
       const driverLatLng=new google.maps.LatLng(pos.lng, pos.lat);
       this.driverLatLng=driverLatLng;
       this.marker2=new google.maps.Marker({
@@ -153,7 +158,7 @@ export class RoadsideAssistanceComponent implements OnInit {
  }
   
  calculateAndDisplayRoute() {
-  console.log(` Positons: ${this.currentLatLng} dest: ${this.driverLatLng}`);
+  
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer= new google.maps.DirectionsRenderer();
  directionsRenderer.setMap(this.map);
@@ -314,7 +319,7 @@ onFileSelect(event) {
 }
 
  submitForm(): void {
-  this.commonService.submitFormWithAttacment('saveItems',this.rsaForm,'attachments').then(data=>
+  this.commonService.submitFormWithAttachment('saveItems',this.rsaForm,'attachments').then(data=>
     { 
        this.router.go("/my-account/my-tickets");
        this.toastr.success('Your request has been recorded', 'We will soon assist you!Thank you!');
