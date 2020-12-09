@@ -104,7 +104,7 @@ else {
     MyVehiclesModule,
     MyTicketsModule,
     UpdateProfileModule,
-    ServiceHistoryModule
+    ServiceHistoryModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

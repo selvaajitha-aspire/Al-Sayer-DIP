@@ -39,10 +39,19 @@
           [control]="updateProfileForm.get('lastName')"
         ></cx-form-errors>
       </label>
-    </div>
+    </div>    
   </div>
 
   <div class="form-group row">
+    <div class="col-lg-6 col-md-12">
+      <button
+        class="btn btn-block btn-tertiary"
+        type="button"
+        onclick="location.href = '/my-account/update-password';"
+      >
+        Update password
+      </button>
+    </div>
     <div class="col-lg-6 col-md-12">
       <button
         class="btn btn-block btn-secondary"
@@ -58,8 +67,5 @@
       </button>
     </div>
   </div>
-  <div class="update-profile">
-    <a href="/my-account/update-password" class="dropdown-item top-dropdown bg-transparent">Update Password</a>
-</div>
   
 </form>

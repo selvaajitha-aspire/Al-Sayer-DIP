@@ -20,6 +20,7 @@ import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -49,16 +50,16 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
     @Override
     public void populate(RsaRequestData serviceRequestData, RsaRequestModel serviceRequestModel) throws ConversionException {
 
-        Date currentDate=java.util.Calendar.getInstance().getTime();
-        String chassisNumber=serviceRequestData.getVehicle().getChassisNumber();
-        String issueType=serviceRequestData.getIssue();
+        final Date currentDate=java.util.Calendar.getInstance().getTime();
+        final String chassisNumber=serviceRequestData.getVehicle().getChassisNumber();
+        final String issueType=serviceRequestData.getIssue();
         serviceRequestModel.setUid(UUID.randomUUID().toString());
         serviceRequestModel.setCustomer((CustomerModel) userService.getCurrentUser());
-        VehicleModel vehicleModel=getVehicleByChassis(chassisNumber);
+        final VehicleModel vehicleModel=getVehicleByChassis(chassisNumber);
         serviceRequestModel.setVehicle(vehicleModel);
         serviceRequestModel.setStatus(ServiceStatus.STARTED);
 
-        for(WarrantyModel warrantyModel: vehicleModel.getWarranties()) {
+        for(final WarrantyModel warrantyModel: vehicleModel.getWarranties()) {
             if(warrantyModel.getWarrantyType().contains("14")&& warrantyModel.getWarrantyExpiryDate().after(currentDate)) {
 
                 serviceRequestModel.setType("MUSAADA");
@@ -82,15 +83,14 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
         serviceRequestModel.setLongitude(serviceRequestData.getLongitude());
         serviceRequestModel.setNotes(serviceRequestData.getNotes(), getI18nService().getCurrentLocale());
 
-        final MediaModel mediaModel = getModelService().create(MediaModel.class);
-
-        final Collection<MediaFileDto> attachments = serviceRequestData.getAttachments();
-        if (attachments != null) {
-            for (final MediaFileDto media : attachments) {
+        if (CollectionUtils.isNotEmpty(serviceRequestData.getAttachments()))
+        {
+            for (final MediaFileDto media : serviceRequestData.getAttachments())
+            {
+                final MediaModel mediaModel = getModelService().create(MediaModel.class);
                 createMediaFilePopulator(media, mediaModel);
-
+                serviceRequestModel.setAttachments(Collections.singletonList(mediaModel));
             }
-            serviceRequestModel.setAttachments(Collections.singletonList(mediaModel));
         }
 
     }

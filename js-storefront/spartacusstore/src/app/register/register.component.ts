@@ -301,6 +301,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           $('#userOTPModal').modal('hide');
           this.populateUserEccData(resp.data);
         }else{
+          
           this.invalidOTPFlag = true;
           this.cd.detectChanges();
         }

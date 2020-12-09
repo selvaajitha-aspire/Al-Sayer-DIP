@@ -65,6 +65,7 @@ export class RoadsideAssistanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.vehicleList=this.assistanceService.getVehicles() || [];
+    //this.commonService.getObservableWithParam(this,"populateVehicles","getItems","vehicleList");
     const mapProperties = {
       center:this.latLng ,
       zoom: 15,
@@ -81,11 +82,19 @@ export class RoadsideAssistanceComponent implements OnInit {
     
  }
 
- 
+ populateVehicles(vehicles){
+    this.vehicleList = vehicles;
+    
+ }
+
  getCurrentLocation(){
    
    this.assistanceService.getPosition().then(pos=>
      {
+<<<<<<< HEAD
+=======
+       
+>>>>>>> develop
        const currentLatLng=new google.maps.LatLng(pos.lat, pos.lng);
        const mapProperties = {
          center: currentLatLng,
@@ -308,7 +317,7 @@ onFileSelect(event) {
 }
 
  submitForm(): void {
-  this.commonService.submitFormWithAttacment('saveItems',this.rsaForm,'attachments').then(data=>
+  this.commonService.submitFormWithAttachment('saveItems',this.rsaForm,'attachments').then(data=>
     { 
        this.router.go("/my-account/my-tickets");
        this.toastr.success('Your request has been recorded', 'We will soon assist you!Thank you!');
