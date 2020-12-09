@@ -1,3 +1,4 @@
+import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
 import { LoginFormModule } from './login-form/login-form.module';
@@ -9,7 +10,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule } from '@spartacus/storefront';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule, SpinnerModule, FormErrorsModule } from '@spartacus/storefront';
 import { OccConfig, ConfigModule, I18nModule } from '@spartacus/core';
 import { environment } from './../environments/environment';
 import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
@@ -103,8 +104,11 @@ else {
     LoginFormModule,
     MyVehiclesModule,
     MyTicketsModule,
+    UpdateProfileModule,
     ServiceHistoryModule,
     UpdatePasswordModule,
+    SpinnerModule,
+    FormErrorsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

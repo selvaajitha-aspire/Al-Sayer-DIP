@@ -44,8 +44,7 @@ export class MyTicketsComponent implements OnInit {
     map: this.map,
     title: "Your current location!",
   }); 
-      console.log(`Driver Positon:`+driverLat+driverLng);
-        const driverLatLng=new google.maps.LatLng(driverLat,driverLng);
+      const driverLatLng=new google.maps.LatLng(driverLat,driverLng);
         this.driverLatLng=driverLatLng;
         this.marker2=new google.maps.Marker({
           position:driverLatLng,
@@ -58,7 +57,6 @@ export class MyTicketsComponent implements OnInit {
     
    calculateAndDisplayRoute() {
     
-    console.log(` Positons: ${this.currentLatLng} dest: ${this.driverLatLng}`);
     var directionsService = new google.maps.DirectionsService();
     var directionsRenderer= new google.maps.DirectionsRenderer();
    directionsRenderer.setMap(this.map);
