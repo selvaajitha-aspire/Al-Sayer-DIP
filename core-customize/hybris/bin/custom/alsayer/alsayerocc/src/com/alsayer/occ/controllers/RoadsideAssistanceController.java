@@ -104,7 +104,7 @@ public class RoadsideAssistanceController {
     @ApiOperation(value = "", notes = "Services for logged in user")
     @ApiBaseSiteIdAndUserIdParam
     public ResponseWsDTO saveRSADetails(@RequestPart("form") final RsaRequestWsDTO data,
-                                        @RequestPart("attachments") final MultipartFile attachments) {
+                                        @RequestPart(name = "attachments", required = false) final MultipartFile attachments) {
         ResponseWsDTO response = new ResponseWsDTO();
         try {
             //LOG.debug(form + "" + SUCCESS_STATUS);
