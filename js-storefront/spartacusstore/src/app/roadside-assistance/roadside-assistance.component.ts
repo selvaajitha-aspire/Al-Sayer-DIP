@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, NgZone, ChangeDetectorRef } from '@angular/core';
 import {} from 'googlemaps';
 import {
   FormBuilder,
@@ -33,6 +33,8 @@ export class RoadsideAssistanceComponent implements OnInit {
   user: any;
   vehicleList;
   driverDetails;
+  warrantyFlag: boolean = true;
+  fileName: String = "Choose file";
   addressU='';
   marker1:google.maps.Marker;
   marker2:google.maps.Marker;
@@ -59,12 +61,16 @@ export class RoadsideAssistanceComponent implements OnInit {
       attachments: ['']
     }
   );
-  constructor(private assistanceService : RoadsideAssistanceService,public commonService:CommonService,protected fb: FormBuilder,  private ngZone: NgZone, protected router: RoutingService,private toastr: ToastrService) {
+  constructor(private assistanceService : RoadsideAssistanceService,
+    public commonService:CommonService,protected fb: FormBuilder, 
+     private ngZone: NgZone, protected router: RoutingService,
+     private toastr: ToastrService, private cd: ChangeDetectorRef) {
     
   }
 
   ngOnInit(): void {
     this.vehicleList=this.assistanceService.getVehicles() || [];
+    //this.commonService.getObservableWithParam(this,"populateVehicles","getItems","vehicleList");
     const mapProperties = {
       center:this.latLng ,
       zoom: 15,
@@ -81,12 +87,15 @@ export class RoadsideAssistanceComponent implements OnInit {
     
  }
 
- 
+ populateVehicles(vehicles){
+    this.vehicleList = vehicles;
+    
+ }
+
  getCurrentLocation(){
    
    this.assistanceService.getPosition().then(pos=>
      {
-       console.log(`Positon: ${pos.lng} ${pos.lat}`);
        const currentLatLng=new google.maps.LatLng(pos.lat, pos.lng);
        const mapProperties = {
          center: currentLatLng,
@@ -124,9 +133,6 @@ export class RoadsideAssistanceComponent implements OnInit {
             var address=results[0].formatted_address;
            this.addressU=address;
            this.rsaForm.get('addressU').patchValue(this.addressU);
-           console.log(this.addressU);
-             
-            
           } else {
             console.log(('Location not found'));
           }
@@ -139,7 +145,6 @@ export class RoadsideAssistanceComponent implements OnInit {
  getDriverDetails(){
   this.driverDetails=this.assistanceService.getDriverDetailsPro().then(pos=>
     {
-      console.log(`Driver Positon: ${pos.lat} ${pos.lng}`);
       const driverLatLng=new google.maps.LatLng(pos.lng, pos.lat);
       this.driverLatLng=driverLatLng;
       this.marker2=new google.maps.Marker({
@@ -153,7 +158,6 @@ export class RoadsideAssistanceComponent implements OnInit {
  }
   
  calculateAndDisplayRoute() {
-  console.log(` Positons: ${this.currentLatLng} dest: ${this.driverLatLng}`);
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer= new google.maps.DirectionsRenderer();
  directionsRenderer.setMap(this.map);
@@ -243,6 +247,30 @@ getDuration(){
   );
 }
 
+getSelectedVehicle(chassisNumber) {
+  this.vehicleList.subscribe(vehicles => {
+    vehicles.map(vehicle => {
+      if(vehicle.chassisNumber === chassisNumber) {
+        if(vehicle.warranties) {
+          this.warrantyFlag = false;
+          vehicle.warranties.map(warranty => {
+            const warrantyTypeFlag = warranty.warrantyType && warranty.warrantyType.includes('14');
+            const warrantyDate = warranty.warrantyExpiryDate;
+            const warrantyDateFlag = new Date() < new Date(warrantyDate) ? true : false;
+            if(warrantyTypeFlag && warrantyDateFlag) {
+              this.warrantyFlag = true;
+            }
+          })
+        } else {
+          this.warrantyFlag = false;
+        }
+      }
+    });
+    this.cd.detectChanges();
+  })
+}
+
+
 // autocompleteFocus() {
 //   alert("Hello Auto")
 //  this.autocomplete_init = true;
@@ -305,6 +333,7 @@ getDuration(){
 
 onFileSelect(event) {
   if (event.target.files.length > 0) {
+    this.fileName = event.target.files[0]['name'];
     const attachments = event.target.files[0];
     this.rsaForm.patchValue({
       attachments: attachments
@@ -314,7 +343,7 @@ onFileSelect(event) {
 }
 
  submitForm(): void {
-  this.commonService.submitFormWithAttacment('saveItems',this.rsaForm,'attachments').then(data=>
+  this.commonService.submitFormWithAttachment('saveItems',this.rsaForm,'attachments').then(data=>
     { 
        this.router.go("/my-account/my-tickets");
        this.toastr.success('Your request has been recorded', 'We will soon assist you!Thank you!');

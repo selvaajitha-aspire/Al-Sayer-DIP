@@ -49,13 +49,11 @@ export class HeaderMenuComponent implements OnInit {
   ) {
     this.user$ = this.userService.get();
     this.user$.subscribe(user => {
-      console.log('userId', user);
       if (Object.keys(user).length === 0 && user.constructor === Object) {
         this.isLoggedIn = false;
       } else {
         this.isLoggedIn = true;
       }
-      console.log('isLoggedIn',this.isLoggedIn)
     });
     // this.headerTitle.headerTitle.subscribe((data: String) => {
     //   this.title = data;

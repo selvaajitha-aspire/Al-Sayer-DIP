@@ -25,7 +25,7 @@ public class DefaultRoadSideAssistanceFacade implements RoadSideAssistanceFacade
 
     @Override
     public void  storeServiceRequest(RsaRequestData data){
-        RsaRequestModel serviceRequestModel=getRsaRequestReverseConverter().convert(data);
+        final RsaRequestModel serviceRequestModel = getRsaRequestReverseConverter().convert(data);
        getRoadSideAssistanceService().saveServiceRequest(serviceRequestModel);
     }
 

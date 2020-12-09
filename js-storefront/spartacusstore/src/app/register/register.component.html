@@ -1,187 +1,9 @@
-
-<!-- <section class="page-section container">
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <div class="section">
-        <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm" >
-        <div class="form-group">
-          <label>
-            <span class="label-content">Register</span>
-          </label>
-        </div>
-
-        <div class="form-group">
-          <label>
-            <span class="label-content">Enter Civil ID</span>
-            <input
-              class="form-control"
-              type="text"
-              name="civilId"
-              placeholder="Civil ID"
-              formControlName="civilId"
-            />
-            <cx-form-errors
-                [control]="registerForm.get('civilId')"
-              ></cx-form-errors>
-          </label>
-        </div>
-        <div class="form-group">
-        <input
-              class="form-control"
-              type="hidden"
-              name="eccCustId"
-              formControlName="eccCustId"
-            />
-        <button type="button"(click)="getECCCustomer()"class="btn btn-block btn-primary">
-            Fetch Details
-          </button>
-        </div>
-        <div class="form-group">
-          <label>
-            <span class="label-content">Name</span>
-            <input
-              class="form-control"
-              type="text"
-              name="name"
-              formControlName="name"
-            />
-            <cx-form-errors
-                [control]="registerForm.get('name')"
-              ></cx-form-errors>
-          </label>
-        </div>
-        <div class="form-group">
-            <label>
-              <span class="label-content">Arabic Name</span>
-              <input
-                class="form-control"
-                type="text"
-                name="arabicName"
-                formControlName="arabicName"
-              />
-              <cx-form-errors
-              [control]="registerForm.get('arabicName')"
-            ></cx-form-errors>
-            </label>
-          </div>
-          <div class="form-group">
-            <label>
-              <span class="label-content">Mobile No</span>
-              <input
-                class="form-control"
-                type="text"
-                name="mobile"
-                formControlName="mobile"
-              />
-              <cx-form-errors
-              [control]="registerForm.get('mobile')"
-            ></cx-form-errors>
-            </label>
-          </div>
-         
-        <div class="form-group">
-          <label>
-            <span class="label-content">Email</span>
-            <input
-              class="form-control"
-              type="email"
-              name="email"
-              formControlName="email"
-            />
-            <cx-form-errors
-            [control]="registerForm.get('email')"
-          ></cx-form-errors>
-
-          </label>
-        </div>
-        <div class="form-group">
-            <label>
-              <span class="label-content">Password</span>
-              <input
-                class="form-control"
-                type="password"
-                name="password"
-                formControlName="password"
-              />
-              <cx-form-errors
-              [control]="registerForm.get('password')"
-            ></cx-form-errors>
-            </label>
-          </div>
-
-          <div class="form-group">
-            <label>
-              <span class="label-content">Confirm Password</span>
-              <input
-                class="form-control"
-                type="password"
-                name="confirmpassword"
-                formControlName="passwordconf"
-              /> <cx-form-errors
-              [control]="registerForm.get('passwordconf')"
-            ></cx-form-errors>
-            </label>
-          </div>
-
-        <div class="form-group">
-          <div class="form-check">
-            <label *ngIf="anonymousConsent$ | async as anonymousConsent">
-              <input
-                type="checkbox"
-                name="newsletter"
-                class="form-check-input"
-                formControlName="newsletter"
-                [checked]="isConsentGiven(anonymousConsent.consent)"
-              />
-              <span class="form-check-label">
-                Sign Up to NewsLetter
-              </span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="form-check">
-            <label>
-              <input
-                type="checkbox"
-                name="termsandconditions"
-                formControlName="termsandconditions"
-              />
-              <span class="form-check-label">
-                <a
-                  target="_blank"
-                >
-                T&C*
-                </a>
-              </span>
-              <cx-form-errors
-              [control]="registerForm.get('termsandconditions')"
-            ></cx-form-errors>
-            </label>
-          </div>
-        </div>
-        <button type="button" (click)="sendOTP()" class="btn btn-block btn-primary">
-         Register
-        </button>
-        <a
-          class="login-link btn-link" [routerLink]="['/login']" routerLinkActive="router-link-active" 
-          >Login</a>
-      </form>
-    </div>
-  </div>
-</div>
-</section> -->
-
-
 <section class="page-section container">
   <div class="row justify-content-center">
     <div class="col-md-6 p-0">
       <div class="section">
-          <div class="text-right">
-            <a [routerLink]="['/login']" >
-              <img src="../../assets/icons/icn_close.png" alt="close">
-            </a>
+          <div class="text-center mb-2">
+            <img src="../../../../assets/icons/alsayerlogo.png" width="36" height="36" [routerLink]='["/"]' >
           </div>
           <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm" >
             <!-- <input
@@ -190,7 +12,7 @@
               name="userCivilId"
              [(ngModel)]="userCivilId"
             /> -->
-            <div class="pb-5">
+            <div class="pb-5 pt-3">
               <div class="signup-text">Signup</div>
               <div class="signup-extra-text">Please enter your details to</div>
               <div class="signup-extra-text">login to the account</div>
@@ -273,12 +95,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <div class="modal-body">
-          <div class="form-group">
-            <re-captcha
-              (resolved)="resolved($event)"
-              siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU"
-          ></re-captcha>
-          </div>
+          
           <div class="form-group">
           <label>
             <span class="label-content">Confirm OTP</span>

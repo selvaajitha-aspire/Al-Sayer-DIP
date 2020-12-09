@@ -16,7 +16,7 @@
     <div class="container p-0" *ngIf="serviceHistoryList | async as serviceHistorys$">
         <div *ngFor="let serviceHistory of serviceHistorys$; let i=index" class="box serviceHistory-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!serviceHistoryToggle[i]">
-                <span class="serviceHistory-collapse-text">{{serviceHistory.serviceDesc}}</span>
+                <span class="serviceHistory-collapse-text">{{serviceHistory.serviceType}}</span>
                 <span class="text-right serviceHistory-collapse-text">{{serviceHistory.invAmt}}
                 </span>
             </div>

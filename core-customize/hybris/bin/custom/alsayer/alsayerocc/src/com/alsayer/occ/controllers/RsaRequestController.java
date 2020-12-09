@@ -84,20 +84,20 @@ public class RsaRequestController
     public RsaRequestListWsDTO getRsaRequestsByCustomer(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                           @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields)
     {
-        List<RsaRequestData> dataList = rsaRequestService.getRsaRequestsByCustomerId();
-        RsaRequestListWsDTO rsaRequestListWsDTO = new RsaRequestListWsDTO();
+        final List<RsaRequestData> dataList = rsaRequestService.getRsaRequestsByCustomerId();
+        final RsaRequestListWsDTO rsaRequestListWsDTO = new RsaRequestListWsDTO();
         if(CollectionUtils.isNotEmpty(dataList))
         {
-
             rsaRequestListWsDTO.setRsaRequestsList(getRSAWsDtoList(dataList));
         }
         return rsaRequestListWsDTO;
     }
 
     private  List<RsaRequestWsDTO> getRSAWsDtoList(List<RsaRequestData> dataList) {
-        List<RsaRequestWsDTO> rsaRequestWsDTOList=new LinkedList<>();
-        RsaRequestWsDTO rsaRequestWsDTO=new RsaRequestWsDTO();
-        for(RsaRequestData data:dataList) {
+        final List<RsaRequestWsDTO> rsaRequestWsDTOList = new LinkedList<>();
+        for(RsaRequestData data:dataList)
+        {
+           final RsaRequestWsDTO rsaRequestWsDTO = new RsaRequestWsDTO();
            rsaRequestWsDTO.setVehicle( dataMapper.map(data.getVehicle(), VehicleWsDTO.class));
            rsaRequestWsDTO.setDriverDetails(dataMapper.map(data.getDriverDetails(), DriverDetailsWsDTO.class));
            rsaRequestWsDTO.setType(data.getType());

@@ -49,7 +49,6 @@ export class BrandComponent implements OnInit {
   ngOnInit(): void {
     this.component.data$.subscribe(data=>{
       this.registerService.getComponentData(data.components).then(res => {
-        console.log(res.data.component);
         this.componentData = res.data.component;
         this.detect.detectChanges();
       })
