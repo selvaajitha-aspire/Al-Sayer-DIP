@@ -132,6 +132,12 @@
     <bean class="com.alsayer.occ.dto.RsaRequestListWsDTO">
         <property name="rsaRequestsList" type="java.util.List&lt;com.alsayer.occ.dto.RsaRequestWsDTO>"/>
     </bean>
-
-
+    <bean class="com.alsayer.occ.dto.ServiceHistoryWSDTO">
+        <property name="invAmt" type="Double"/>
+        <property name="location" type="String"/>
+        <property name="mileage" type="Double"/>
+        <property name="serviceDesc" type="String" />
+        <property name="serviceType" type="String"/>
+        <property name="vehicle" type="VehicleWsDTO"/>
+    </bean>
 </beans>

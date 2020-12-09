@@ -94,26 +94,6 @@ public class RsaRequestController
         return rsaRequestListWsDTO;
     }
 
-    @Secured(
-            { "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP" })
-    @RequestMapping(value = "/getRsaRequestsByChassisNo/{chassisNo}", method = RequestMethod.GET,
-            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    @ResponseBody
-    @ApiOperation(value = "Get Service Requests by customer PK", notes = "Can be used by customer himself or alsayer to get all services requests for a specific customer")
-    public RsaRequestListWsDTO getRsaRequestsByChassisNo(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
-                                                        @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,
-                                                         @PathVariable("chassisNo") final String chassisNo)
-    {
-        List<RsaRequestData> dataList = rsaRequestService.getRsaRequestsByChassisAndCustomer(chassisNo);
-        RsaRequestListWsDTO rsaRequestListWsDTO = new RsaRequestListWsDTO();
-        if(CollectionUtils.isNotEmpty(dataList))
-        {
-
-            rsaRequestListWsDTO.setRsaRequestsList(getRSAWsDtoList(dataList));
-        }
-        return rsaRequestListWsDTO;
-    }
-
     private  List<RsaRequestWsDTO> getRSAWsDtoList(List<RsaRequestData> dataList) {
         List<RsaRequestWsDTO> rsaRequestWsDTOList=new LinkedList<>();
         RsaRequestWsDTO rsaRequestWsDTO=new RsaRequestWsDTO();

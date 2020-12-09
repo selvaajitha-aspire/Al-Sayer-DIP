@@ -707,4 +707,16 @@
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
 
+	<!--Service Request-->
+	<bean id="serviceHistoryService" class="com.alsayer.core.servicehistory.service.impl.DefaultServiceHistoryService">
+		<property name="serviceHistoryDao" ref="serviceHistoryDao"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+
+	<bean id="serviceHistoryDao" class="com.alsayer.core.servicehistory.dao.impl.DefaultServiceHistoryDaoImpl">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<!--Service Request-->
+
 </beans>

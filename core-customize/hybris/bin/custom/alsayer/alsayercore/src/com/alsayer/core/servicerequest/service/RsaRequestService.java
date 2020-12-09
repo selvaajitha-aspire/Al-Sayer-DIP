@@ -20,6 +20,4 @@ public interface RsaRequestService
     public List<RsaRequestData> getRsaRequestsByVehicleId(String vehicleID);
 
     public List<RsaRequestData> getRsaRequestsByVehicleIdAndStatus(String vehicleID,String status);
-
-    public List<RsaRequestData> getRsaRequestsByChassisAndCustomer(String chassisNo);
 }
