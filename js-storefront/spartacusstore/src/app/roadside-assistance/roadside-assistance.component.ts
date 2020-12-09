@@ -91,10 +91,6 @@ export class RoadsideAssistanceComponent implements OnInit {
    
    this.assistanceService.getPosition().then(pos=>
      {
-<<<<<<< HEAD
-=======
-       
->>>>>>> develop
        const currentLatLng=new google.maps.LatLng(pos.lat, pos.lng);
        const mapProperties = {
          center: currentLatLng,
