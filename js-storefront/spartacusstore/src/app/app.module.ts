@@ -21,6 +21,7 @@ import { MyTicketsModule } from './my-tickets/my-tickets.module';
 import { FooterComponent } from './home-page-components/footer/footer.component';
 import { AlsayerNavigationComponent } from './home-page-components/alsayer-navigation/alsayer-navigation.component';
 import { ServiceHistoryModule } from './service-history/service-history.module';
+import { UpdatePasswordModule } from './update-password';
 
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -102,7 +103,8 @@ else {
     LoginFormModule,
     MyVehiclesModule,
     MyTicketsModule,
-    ServiceHistoryModule
+    ServiceHistoryModule,
+    UpdatePasswordModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

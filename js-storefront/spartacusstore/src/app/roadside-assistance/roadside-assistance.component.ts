@@ -65,6 +65,7 @@ export class RoadsideAssistanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.vehicleList=this.assistanceService.getVehicles() || [];
+    //this.commonService.getObservableWithParam(this,"populateVehicles","getItems","vehicleList");
     const mapProperties = {
       center:this.latLng ,
       zoom: 15,
@@ -81,7 +82,11 @@ export class RoadsideAssistanceComponent implements OnInit {
     
  }
 
- 
+ populateVehicles(vehicles){
+    this.vehicleList = vehicles;
+    console.log(this.vehicleList);
+ }
+
  getCurrentLocation(){
    
    this.assistanceService.getPosition().then(pos=>
