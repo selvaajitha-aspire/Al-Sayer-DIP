@@ -1,9 +1,7 @@
-<form (ngSubmit)="submitForm()" [formGroup]="loginForm">
-    <!-- <div class="text-right">
-        <a [routerLink]="['/login']" >
-          <img src="../../assets/icons/icn_close.png" alt="close">
-        </a>
-      </div> -->
+<div class="logo-section mt-5">
+  <img src="../../../../assets/icons/alsayerlogo.png" width="36" height="36" [routerLink]='["/"]' >
+</div>
+<form class="pt-4" (ngSubmit)="submitForm()" [formGroup]="loginForm">
     <div class="pb-5">
         <div class="login-text">Login</div>
         <div class="login-extra-text">Please enter your details to</div>
