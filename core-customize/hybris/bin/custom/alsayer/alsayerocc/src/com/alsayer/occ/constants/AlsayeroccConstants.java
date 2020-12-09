@@ -6,6 +6,7 @@ public class AlsayeroccConstants extends GeneratedAlsayeroccConstants
 	public static final String EXTENSIONNAME = "alsayerocc";
 	public static final String LOCATION = "Location";
 	public static final String RSA_SAVE_ERROR="failed to save details: ";
+	public static final String OTPSENTMSG="OTP Sent";
 
 	private AlsayeroccConstants()
 	{

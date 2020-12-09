@@ -1,3 +1,4 @@
+import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
 import { LoginFormModule } from './login-form/login-form.module';
@@ -102,6 +103,7 @@ else {
     LoginFormModule,
     MyVehiclesModule,
     MyTicketsModule,
+    UpdateProfileModule,
     ServiceHistoryModule
   ],
   providers: [],
