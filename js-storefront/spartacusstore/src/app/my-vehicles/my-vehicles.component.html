@@ -23,7 +23,7 @@
         <div *ngFor="let vehicle of vehicles$; let i=index" class="box vehicle-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!vehicleToggle[i]">
                 <span class="vehicle-collapse-text">{{vehicle.modline}}</span>
-                <span class="text-right vehicle-collapse-text">{{vehicle.modyear}}
+                <span class="text-right vehicle-collapse-text">{{vehicle.plateNumber}}
                 </span>
             </div>
             <div class="col-11" *ngIf="vehicleToggle[i]">

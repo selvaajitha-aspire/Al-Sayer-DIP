@@ -145,7 +145,6 @@ cx-navigation-ui h5{
     header .SearchBox,
     header .MiniCart,
     .Section1,
-    .Section3,
     .Section4,
     .Section5{
         display: none;
@@ -244,6 +243,10 @@ cx-navigation-ui h5{
     .Footer{
         display: block !important;
         padding: 0 !important;
+    }
+
+    cx-update-profile-form,cx-update-password-form {
+        margin-top: 25px;
     }
 
 }
