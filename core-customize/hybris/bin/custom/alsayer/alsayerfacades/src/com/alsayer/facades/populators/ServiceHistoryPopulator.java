@@ -16,6 +16,8 @@ public class ServiceHistoryPopulator implements Populator<ServiceHistoryModel, S
     public void populate(ServiceHistoryModel serviceHistoryModel, ServiceHistoryData serviceHistoryData) throws ConversionException {
         serviceHistoryData.setInvAmt(serviceHistoryModel.getInvAmt());
         serviceHistoryData.setLocation(serviceHistoryModel.getLocation());
+        serviceHistoryData.setServiceDate(serviceHistoryModel.getServiceDate());
+        serviceHistoryData.setLocationCode(serviceHistoryModel.getLocationCode());
         serviceHistoryData.setMileage(serviceHistoryModel.getMileage());
         serviceHistoryData.setServiceDesc(serviceHistoryModel.getServiceDesc());
         serviceHistoryData.setServiceType(serviceHistoryModel.getServiceType());

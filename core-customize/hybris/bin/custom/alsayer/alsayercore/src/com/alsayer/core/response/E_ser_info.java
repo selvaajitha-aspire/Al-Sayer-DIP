@@ -21,8 +21,11 @@ public class E_ser_info {
     @JsonProperty("ServiceDesc")
     String ServiceDesc;
 
-    @JsonProperty("DBM_LICEXT")
-    String DBM_LICEXT;
+    @JsonProperty("Audat")
+    String Audat;
+
+    @JsonProperty("Werks_n")
+    String Werks_n;
 
     @JsonProperty("Inv_Amt")
     String Inv_Amt;
@@ -38,7 +41,8 @@ public class E_ser_info {
                 ", Mileage='" + Mileage + '\'' +
                 ", Service_Type='" + Service_Type + '\'' +
                 ", ServiceDesc='" + ServiceDesc + '\'' +
-                ", DBM_LICEXT='" + DBM_LICEXT + '\'' +
+                ", Audat='" + Audat + '\'' +
+                ", Werks_n='" + Werks_n + '\'' +
                 ", Inv_Amt='" + Inv_Amt + '\'' +
                 ", Location='" + Location + '\'' +
                 '}';
@@ -84,12 +88,20 @@ public class E_ser_info {
         ServiceDesc = serviceDesc;
     }
 
-    public String getDBM_LICEXT() {
-        return DBM_LICEXT;
+    public String getAudat() {
+        return Audat;
     }
 
-    public void setDBM_LICEXT(String DBM_LICEXT) {
-        this.DBM_LICEXT = DBM_LICEXT;
+    public void setAudat(String audat) {
+        Audat = audat;
+    }
+
+    public String getWerks_n() {
+        return Werks_n;
+    }
+
+    public void setWerks_n(String werks_n) {
+        Werks_n = werks_n;
     }
 
     public String getInv_Amt() {

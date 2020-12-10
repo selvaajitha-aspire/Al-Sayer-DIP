@@ -139,5 +139,7 @@
         <property name="serviceDesc" type="String" />
         <property name="serviceType" type="String"/>
         <property name="vehicle" type="VehicleWsDTO"/>
+        <property name="serviceDate" type="java.util.Date"/>
+        <property name="locationCode" type="String"/>
     </bean>
 </beans>
