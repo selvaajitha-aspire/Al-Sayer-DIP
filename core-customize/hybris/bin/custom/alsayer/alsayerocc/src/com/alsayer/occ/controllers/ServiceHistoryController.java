@@ -5,6 +5,8 @@ import com.alsayer.core.servicehistory.service.ServiceHistoryService;
 import com.alsayer.core.servicerequest.service.RsaRequestService;
 import com.alsayer.facades.data.RsaRequestData;
 import com.alsayer.facades.data.ServiceHistoryData;
+import com.alsayer.occ.dto.ServiceHistoryWSDTO;
+import com.alsayer.occ.dto.WarrantyWsDTO;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -41,11 +44,13 @@ public class ServiceHistoryController {
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     @ApiOperation(value = "Get Service History of Logged-in Customer by Vehicle Chassis No", notes = "Can be used by customer only to get his own service history")
-    public List<ServiceHistoryData> getMyServiceHistoryByChassisNo(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
+    public List<ServiceHistoryWSDTO> getMyServiceHistoryByChassisNo(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
                                                               @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,
-                                                                   @ApiParam(value = "Vehicle chassis number") @PathVariable("chassisNo") String chassisNo)
+                                                                    @ApiParam(value = "Vehicle chassis number") @PathVariable("chassisNo") String chassisNo)
     {
-        return serviceHistoryService.getMyServiceHistoryByChassisNo(chassisNo);
+        List<ServiceHistoryData> serviceHistoryDataList =serviceHistoryService.getMyServiceHistoryByChassisNo(chassisNo);
+        List<ServiceHistoryWSDTO> serviceHistoryWSDTOList= dataMapper.mapAsList(serviceHistoryDataList, ServiceHistoryWSDTO.class, fields);
+        return serviceHistoryWSDTOList;
     }
 
 }
