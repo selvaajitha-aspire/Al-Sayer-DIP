@@ -266,12 +266,22 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="location" type="java.lang.String">
+                        <description>Service Description</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="serviceDate" type="java.util.Date">
+                        <description>Service Description</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
                     <attribute qualifier="invAmt" type="java.lang.Double">
                         <description>Invested Amount</description>
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="location" type="java.lang.String">
+                    <attribute qualifier="locationCode" type="java.lang.String">
                         <description>Location</description>
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
