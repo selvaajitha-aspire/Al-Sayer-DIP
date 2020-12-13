@@ -70,8 +70,10 @@
 		<property name="invAmt" type="Double"/>
 		<property name="location" type="String"/>
 		<property name="mileage" type="Double"/>
+		<property name="serviceDate" type="java.util.Date"/>
 		<property name="serviceDesc" type="String" />
 		<property name="serviceType" type="String"/>
 		<property name="vehicle" type="VehicleData"/>
+		<property name="locationCode" type="String"/>
 	</bean>
 </beans>

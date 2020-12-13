@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer2, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { setFormField } from '../utility';
 
 declare var $: any;
 @Component({
@@ -17,8 +19,12 @@ declare var $: any;
     retakeFlag : boolean = false;
     videoStream : MediaStream;
 
+    @Input() formGrp: FormGroup;
+    @Input() attachmentId: String;
+
     @ViewChild('video', { static: true }) videoElement: ElementRef;
     @ViewChild('canvas', { static: true }) canvas: ElementRef;
+
     constraints = {
       video: {
           facingMode: "environment",
@@ -76,6 +82,22 @@ declare var $: any;
       }
 
       useImage(){
+        var formObj = this.formGrp; 
+        var att = this.attachmentId;
+        this.canvas.nativeElement.toBlob(function(blob){
+          console.log(blob);
+          
+          setFormField(formObj,att,blob);
+        },'image/png');
+
+        this.retakeFlag = false;
+        this.captureFlag = true;
+        this.videoStream.getTracks()[0].stop();
+
+        $("#cameraModal").modal('hide');
+      }
+
+      downloadImage(){
         this.canvas.nativeElement.toBlob(function(blob){
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
@@ -90,8 +112,6 @@ declare var $: any;
 
         this.retakeFlag = false;
         this.captureFlag = true;
-
-        console.log(this.videoStream);
         this.videoStream.getTracks()[0].stop();
 
         $("#cameraModal").modal('hide');
