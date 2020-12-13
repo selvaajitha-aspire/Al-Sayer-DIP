@@ -1,0 +1,27 @@
+<div (click)="openCamera();"> <i class="fa fa-camera fa-3x" style="color: black;" aria-hidden="true"></i> </div>
+            
+<div class="modal fade p-0" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+  <div class="modal-dialog p-0" role="document">
+    <div class="modal-content p-0">
+        <div class="modal-body p-0">
+            <div class="vh-100">
+                <div class="d-flex flex-column align-items-center">
+                    <div class="" style="position: relative;">
+                        <video #video class="vid" autoplay></video>
+                        <canvas #canvas class="vid" style="display: none;"></canvas>
+                        <div style="position: absolute;z-index: 1100;bottom: 10%;width: 100%;text-align: center;">
+                            <button class="btn mr-2" (click)="capture()" *ngIf="captureFlag"><i class="fa fa-circle fa-3x" style="color: white;" aria-hidden="true"></i></button>
+                            <button class="btn mr-2" (click)="retake()" *ngIf="retakeFlag"><i class="fa fa-refresh fa-3x" style="color: white;" aria-hidden="true"></i></button>
+                            <button class="btn mr-2" (click)="useImage()" *ngIf="retakeFlag"><i class="fa fa-save fa-3x" style="color: white;" aria-hidden="true"></i></button>
+                            <button class="btn mr-2" (click)="stopCamera()" ><i class="fa fa-close fa-3x" style="color: white;" aria-hidden="true"></i></button>
+                            
+                        </div>
+                   </div>
+             </div>
+        </div>
+    </div>
+  </div>
+  </div>
+
+  
