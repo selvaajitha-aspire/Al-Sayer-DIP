@@ -8,6 +8,7 @@ import com.alsayer.core.response.E_Vehicle_Info;
 import com.alsayer.core.response.E_ser_info;
 import com.alsayer.core.response.EccServiceHistoryResponse;
 import com.alsayer.core.response.Results;
+import com.alsayer.core.utils.DateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,10 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class GetServiceHistoryAction  extends AbstractSimpleDecisionAction<StoreFrontCustomerProcessModel> {
 
@@ -79,10 +77,13 @@ public class GetServiceHistoryAction  extends AbstractSimpleDecisionAction<Store
                         ServiceHistoryModel serviceHistoryModel = new ServiceHistoryModel();
                         serviceHistoryModel.setUid(UUID.randomUUID().toString());
                         serviceHistoryModel.setMileage(Double.parseDouble(ser_info.getMileage()));
+                        serviceHistoryModel.setLocation(ser_info.getWerks_n());
+                        Date date = DateUtil.convertStringToDate(ser_info.getAudat());
+                        serviceHistoryModel.setServiceDate(date);
                         serviceHistoryModel.setInvAmt(Double.parseDouble(ser_info.getInv_Amt()));
                         serviceHistoryModel.setServiceType(ser_info.getService_Type());
                         serviceHistoryModel.setServiceDesc(ser_info.getServiceDesc());
-                        serviceHistoryModel.setLocation(ser_info.getLocation());
+                        serviceHistoryModel.setLocationCode(ser_info.getLocation());
                         serviceHistoryModels.add(serviceHistoryModel);
                     }
                     vehicle.setServiceHistory(serviceHistoryModels);
