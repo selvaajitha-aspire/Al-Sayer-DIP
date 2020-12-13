@@ -9,6 +9,7 @@ import { FormErrorsModule } from '@spartacus/storefront';
 
 import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuard } from '@spartacus/storefront';
+import { CameraComponent } from '../common/CameraComponent/camera.component';
 const staticRoutes: Routes = [{
   path: 'my-services', children: [
     {
@@ -22,7 +23,7 @@ const staticRoutes: Routes = [{
 
 
 @NgModule({
-  declarations: [RoadsideAssistanceComponent],
+  declarations: [RoadsideAssistanceComponent,CameraComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -38,5 +39,7 @@ const staticRoutes: Routes = [{
     }),
     RouterModule.forChild(staticRoutes)
   ],
+  exports : [CameraComponent],
+  entryComponents : [CameraComponent],
 })
 export class RoadsideAssistanceModule { }

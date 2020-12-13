@@ -7,7 +7,7 @@
                 *ngIf="vehicleList | async as vehicles$">
                 <option selected value="" disabled>Select Vehicle</option>
                 <option *ngFor="let vehicle of vehicles$ " [value]="vehicle.chassisNumber">{{vehicle.modline}}
-                    ,{{vehicle.chassisNumber}}</option>
+                    ,{{vehicle.plateNumber}}</option>
             </select>
         </fieldset>
 
@@ -17,7 +17,7 @@
         <div *ngFor="let serviceHistory of serviceHistorys$; let i=index" class="box serviceHistory-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!serviceHistoryToggle[i]">
                 <span class="serviceHistory-collapse-text">{{serviceHistory.serviceType}}</span>
-                <span class="text-right serviceHistory-collapse-text">{{serviceHistory.invAmt}}
+                <span class="text-right serviceHistory-collapse-text">{{serviceHistory.serviceDate | date: 'mediumDate'}}
                 </span>
             </div>
             <div class="col-11" *ngIf="serviceHistoryToggle[i]">
@@ -30,6 +30,14 @@
                     <span class="text-right serviceHistory-open-text">{{serviceHistory.serviceDesc}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
+                    <span class='serviceHistory-open-text-header'>Service Date</span>
+                    <span class="text-right serviceHistory-open-text">{{serviceHistory.serviceDate | date: 'mediumDate'}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='serviceHistory-open-text-header'>Service Location</span>
+                    <span class="text-right serviceHistory-open-text">{{serviceHistory.location}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
                     <span class='serviceHistory-open-text-header'>Invested Amount</span>
                     <span class="text-right serviceHistory-open-text">{{serviceHistory.invAmt}}</span>
                 </div>
@@ -38,8 +46,8 @@
                     <span class="text-right serviceHistory-open-text">{{serviceHistory.mileage}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span class='serviceHistory-open-text-header'>Location</span>
-                    <span class="text-right serviceHistory-open-text">{{serviceHistory.location}}</span>
+                    <span class='serviceHistory-open-text-header'>Location Code</span>
+                    <span class="text-right serviceHistory-open-text">{{serviceHistory.locationCode}}</span>
                 </div>
             </div>
             <div class="col-1 p-0">
