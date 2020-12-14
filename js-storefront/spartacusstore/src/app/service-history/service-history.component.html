@@ -7,7 +7,7 @@
                 *ngIf="vehicleList | async as vehicles$">
                 <option selected value="" disabled>Select Vehicle</option>
                 <option *ngFor="let vehicle of vehicles$ " [value]="vehicle.chassisNumber">{{vehicle.modline}}
-                    ,{{vehicle.chassisNumber}}</option>
+                    ,{{vehicle.plateNumber}}</option>
             </select>
         </fieldset>
 
