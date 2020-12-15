@@ -56,7 +56,7 @@ export class RoadsideAssistanceComponent implements OnInit {
       issue: ['',Validators.required],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
-      addressU: [''],
+      //addressU: [''],
       notes: ['',Validators.required],
       attachments: ['']
     }
@@ -132,7 +132,8 @@ export class RoadsideAssistanceComponent implements OnInit {
           if (results[0]) {
             var address=results[0].formatted_address;
            this.addressU=address;
-           this.rsaForm.get('addressU').patchValue(this.addressU);
+           this.cd.detectChanges();
+           //this.rsaForm.get('addressU').patchValue(this.addressU);
           } else {
             console.log(('Location not found'));
           }

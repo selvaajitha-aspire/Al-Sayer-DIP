@@ -1,0 +1,26 @@
+<ng-container
+  *ngIf="
+    !(isLoading$ | async) && (locations$ | async) as centres;
+    else loading
+  "
+>
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-sm-4 col-md-4 col-lg-3 item"
+        *ngFor="let location of centres?.stores"
+      >
+        <cx-store-finder-list-item
+          [location]="location"
+        ></cx-store-finder-list-item>
+      </div>
+    </div>
+    
+  </div>
+</ng-container>
+<div class="map-body">
+  <div #map style="width:100%;height:80vh" id="map"></div>
+</div>
+<ng-template #loading>
+  <div class="cx-spinner"><cx-spinner></cx-spinner></div>
+</ng-template>

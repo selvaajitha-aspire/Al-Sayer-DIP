@@ -96,7 +96,6 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         jsonObject.put(CIVILID, code);
         JSONArray jsonArray = new JSONArray();
         jsonArray.add(jsonObject);
-
         JSONObject finalObj = new JSONObject();
         finalObj.put(ECUSTDETAILSSET, jsonArray);
 
