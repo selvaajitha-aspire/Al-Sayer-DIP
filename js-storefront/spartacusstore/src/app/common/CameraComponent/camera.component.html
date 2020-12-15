@@ -1,4 +1,4 @@
-<div (click)="openCamera();"> <i class="fa fa-camera fa-3x" style="color: black;" aria-hidden="true"></i> </div>
+<label (click)="openCamera($event);" class="custom-file-upload" style="color:#DD231B;"> Open <i class="fa fa-camera fa-1x" style="color:#DD231B;" aria-hidden="true"></i> </label>
             
 <div class="modal fade p-0" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -14,7 +14,7 @@
                             <button class="btn mr-2" (click)="capture()" *ngIf="captureFlag"><i class="fa fa-circle fa-3x" style="color: white;" aria-hidden="true"></i></button>
                             <button class="btn mr-2" (click)="retake()" *ngIf="retakeFlag"><i class="fa fa-refresh fa-3x" style="color: white;" aria-hidden="true"></i></button>
                             <button class="btn mr-2" (click)="useImage()" *ngIf="retakeFlag"><i class="fa fa-save fa-3x" style="color: white;" aria-hidden="true"></i></button>
-                            <button class="btn mr-2" (click)="stopCamera()" ><i class="fa fa-close fa-3x" style="color: white;" aria-hidden="true"></i></button>
+                            <button class="btn mr-2" (click)="stopCamera($event)" ><i class="fa fa-close fa-3x" style="color: white;" aria-hidden="true"></i></button>
                             
                         </div>
                    </div>
