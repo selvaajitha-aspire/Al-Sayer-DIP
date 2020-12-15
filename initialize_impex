@@ -56,6 +56,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 ;;icn_myservices.png;icn_myservices.png;$siteResource/images/banners/alsayer/homepage/links/icn_myservices.png;image/png;;"My Services"
 ;;icn_mytickets.png;icn_mytickets.png;$siteResource/images/banners/alsayer/homepage/links/icn_mytickets.png;image/png;;"My Tickets"
 ;;icn_signout.png;icn_signout.png;$siteResource/images/banners/alsayer/homepage/links/icn_signout.png;image/png;;"My Tickets"
+;;icn_storelocator.png;icn_storelocator.png;$siteResource/images/banners/alsayer/homepage/links/icn_storelocator.png;image/png;;"Store Locator"
 
 
 # create cms link components for my account pages------------------------------------
@@ -66,6 +67,7 @@ INSERT_UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;MyPurchasesSideLink;MyPurchasesSideLink;/my-account/my-purchases;icn_mypurchases.png;MyPurchasesSideLink;;
 ;;MyTicketsSideLink;MyTicketsSideLink;/my-account/my-tickets;icn_mytickets.png;MyTicketsSideLink;;
 ;;MyServicesSideLink;MyServicesSideLink;/my-account/my-services;icn_myservices.png;MyServicesSideLink;;
+;;StoreLocatorSideLink;StoreLocatorSideLink;/store-finder;icn_storelocator.png;StoreLocatorSideLink;;
 ;;SignOutSideLink;SignOutSideLink;/logout;icn_signout.png;SignOutSideLink;
 
 # create navigation root node for my account & child nodes for the root node
@@ -77,6 +79,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;MyPurchasesNavNode;;My Purchases;MyAccountNavNode;;MyPurchasesNavNode
 ;MyTicketsNavNode;;My Tickets;MyAccountNavNode;;MyTicketsNavNode
 ;MyServicesNavNode;;My Services;MyAccountNavNode;;MyServicesNavNode
+;StoreLocatorNavNode;;Store Locator;MyAccountNavNode;;StoreLocatorNavNode
 ;SignOutNavNode;;Sign Out;MyAccountNavNode;;SignOutNavNode
 
 # create cms navigation entry for nvaigation child nodes
@@ -86,6 +89,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;MyPurchasesNavNodeEntry;;MyPurchasesNavNodeEntry;MyPurchasesNavNode;MyPurchasesSideLink;
 ;MyTicketsNavNodeEntry;;MyTicketsNavNodeEntry;MyTicketsNavNode;MyTicketsSideLink;
 ;MyServicesNavNodeEntry;;MyServicesNavNodeEntry;MyServicesNavNode;MyServicesSideLink;
+;StoreLocatorNavNodeEntry;;StoreLocatorNavNodeEntry;StoreLocatorNavNode;StoreLocatorSideLink;
 ;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutSideLink;
 
 UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
@@ -94,12 +98,13 @@ UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[l
 ;;MyPurchasesSideLink;"My Purchases"
 ;;MyTicketsSideLink;"My Tickets"
 ;;MyServicesSideLink;"My Services"
+;;StoreLocatorSideLink;"Store Locator"
 ;;SignOutSideLink;"Sign Out"
 
 # create navigation component for my account
 
 UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$contentCV)
-;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,SignOutNavNode
+;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,StoreLocatorNavNode,SignOutNavNode
 
 #en
 # CMS Navigation Node
@@ -234,7 +239,6 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$l
 ;;MyTicketsPage;My Tickets
 
 
-
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
@@ -299,6 +303,9 @@ INSERT_UPDATE HomepageBannerComponent;$contentCV[unique=true];uid[unique=true];n
 
 INSERT_UPDATE HomepageBannerCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(&componentRef);&componentRef
 ;;AlsayerBrandBannerListComponent;Alsayer Brand Banner List;ToyotaBrandBanner,LexusBrandBanner;AlsayerBrandBannerListComponent
+
+
+
 
 # Mapping with Section1Slot
 

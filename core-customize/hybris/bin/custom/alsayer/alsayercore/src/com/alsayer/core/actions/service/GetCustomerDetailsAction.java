@@ -11,6 +11,7 @@ import com.alsayer.core.utils.DateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.hybris.platform.commerceservices.enums.CustomerType;
 import de.hybris.platform.commerceservices.model.process.StoreFrontCustomerProcessModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
@@ -50,7 +51,6 @@ public class GetCustomerDetailsAction extends AbstractSimpleDecisionAction<Store
 
     @Override
     public Transition executeAction(StoreFrontCustomerProcessModel businessProcessModel) throws RetryLaterException, Exception {
-
         CustomerModel customer = businessProcessModel.getCustomer();
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         RestTemplate restTemplate = new RestTemplate(requestFactory);
