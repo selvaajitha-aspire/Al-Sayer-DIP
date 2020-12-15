@@ -105,23 +105,31 @@
               </label>
             </div>
             <div class="form-group col-md-6 mb-4">
-              <label>
-                <span for="attachments d-block" class="label-content attachments">Attachments</span>
-                <label for="myFile" class="custom-file-upload">
-                  {{fileName}}  <i class="fa fa-file-text" aria-hidden="true"></i>
-               </label>
-              <!-- <input id="file-upload" type="file"/> -->
-                <input
-                  class="form-control"
-                  type="file" id="myFile"
-                  name="attachments"
+              <div>
+                <label>
+                  <span for="attachments d-block" class="label-content attachments">Attachments</span>
+                  <label for="myFile" class="custom-file-upload">
+                    {{fileName}}  <i class="fa fa-file-text" aria-hidden="true"></i>
+                 </label>
+                <!-- <input id="file-upload" type="file"/> -->
+                  <input
+                    class="form-control"
+                    type="file" id="myFile"
+                    name="attachments"
+                    
+                    (change)="onFileSelect($event)"
+                  />
                   
-                  (change)="onFileSelect($event)"
-                />
-                <cx-form-errors
-                    [control]="rsaForm.get('attachments')"
-                  ></cx-form-errors>
-              </label>
+                  <cx-form-errors
+                      [control]="rsaForm.get('attachments')"
+                    ></cx-form-errors>
+                </label>
+              </div>
+              <div style="float: right;padding: 5px;"> / </div>
+              <div style="float: right;padding-top: 5px;">
+                <app-camera-component [formGrp]="this.rsaForm" attachmentId='attachments'></app-camera-component>
+              </div>
+              
             </div>
           </div>
             <div class="d-flex justify-content-center"><button type="submit"  class="btn btn-default btn-block round-primary-btn mb-4 w-50 mt-5">Submit</button></div>
@@ -146,4 +154,4 @@
       </div>
   </div> 
     
-  <!-- <app-camera-component [formGrp]="this.rsaForm" attachmentId='attachments'></app-camera-component> -->
+  

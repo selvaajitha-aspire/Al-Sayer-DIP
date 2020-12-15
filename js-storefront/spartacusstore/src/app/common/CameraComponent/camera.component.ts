@@ -36,7 +36,8 @@ declare var $: any;
     videoHeight = 0;
     currentImage = '';
   
-    openCamera(){
+    openCamera(event){
+        event.preventDefault();
         $("#cameraModal").modal('show');
         this.startCamera();
     }
@@ -117,8 +118,8 @@ declare var $: any;
         $("#cameraModal").modal('hide');
       }
 
-      stopCamera(){
-        
+      stopCamera(event){
+        event.preventDefault();
         this.retakeFlag = false;
         this.captureFlag = true;
 
