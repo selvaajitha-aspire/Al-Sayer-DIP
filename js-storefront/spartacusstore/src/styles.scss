@@ -141,6 +141,9 @@ cx-navigation-ui h5{
   .BottomHeaderSlot {
       display: none;
   }
+  .StoreFinderPageTemplate {
+      padding: 70px 0px;
+  }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,

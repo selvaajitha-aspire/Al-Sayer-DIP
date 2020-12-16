@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'cx-store-finder-grid',
   templateUrl: './store-finder-grid.component.html',
+  styleUrls: ['./store-finder-grid.component.scss']
 })
 export class StoreFinderGridComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('map', { static: true }) mapElement:ElementRef;
@@ -16,6 +17,9 @@ export class StoreFinderGridComponent implements OnInit, AfterViewInit, OnDestro
   country: string;
   region: string;
   locations:[];
+  activeLocationName = '';
+  markers=Array();
+  infoWindows=Array();
 
   constructor(
     private storeFinderService: StoreFinderService,
@@ -64,26 +68,41 @@ export class StoreFinderGridComponent implements OnInit, AfterViewInit, OnDestro
     
   }
   setMarkers(map: google.maps.Map) {
-let markers=Array();
-let infoWindows=Array();
-  console.log(this.locations)
     for (let i = 0; i < this.locations.length; i++) {
       const latitude = this.storeDataService.getStoreLatitude(this.locations[i]);
     const longitude = this.storeDataService.getStoreLongitude(this.locations[i]);
-      console.log("LATLONG"+latitude+longitude);
     const marker=  new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
         map,
         title: this.locations[i]['name'],
         
       });
-      markers.push(marker);
+      this.markers.push(marker);
+      let closedDays = "";
+      let openingDays = Array();
+      let openingTime = "";
+      let closingTime = "";
+      let weekDayOpeningListNew : [] = this.locations[i]['openingHours']['weekDayOpeningList'];
+      for (let j=0; j < weekDayOpeningListNew.length; j++) {
+        if(weekDayOpeningListNew[j]['closed']) {
+          closedDays += weekDayOpeningListNew[j]['weekDay'] + ' ';
+        } else {
+          openingDays.push(weekDayOpeningListNew[j]['weekDay']);
+          openingTime = weekDayOpeningListNew[j]['openingTime']['formattedHour'] ;
+          closingTime = weekDayOpeningListNew[j]['closingTime']['formattedHour'];
+        }
+      }
+      let contentString = '<p class="location-name">'+ this.locations[i]['name'] + '</p>'+
+      '<div class="timing-wrapper"><div class="timing-text">Timing</div>' + 
+      '<div class="timings">' + openingDays[0] + '- '+ openingDays[openingDays.length -1] + ' : ' + openingTime +' - '+ closingTime +'</div>' +
+      '<div class="timings">'+ closedDays  +': Closed</div></div>'+
+      '<div class="telephone-wrapper"><div class="telephone-text">Telephone</div><div class="telephone">1803803</div></div>';
      const infoWindow= new google.maps.InfoWindow({
-        content : this.locations[i]['name']
+        content : contentString
         
     });
-    infoWindows.push(infoWindow);
-    this.onClickEvent(markers,map,infoWindows);
+    this.infoWindows.push(infoWindow);
+    this.onClickEvent(this.markers,map,this.infoWindows);
     
     }
   }
@@ -95,6 +114,12 @@ let infoWindows=Array();
         infoWindows[i].open(map,markers[i] );
       });
     }
+  }
+
+  loadActiveLocation(location) {
+    let index = location &&  location.locationIndex;
+    this.activeLocationName = location && location.location.displayName;
+    this.infoWindows[index].open(this.map, this.markers[index] );
   }
 
   ngOnDestroy() {}
