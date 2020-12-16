@@ -3,5 +3,7 @@ export function isEmpty(val){
 }
 
 export function setFormField(formObject,formField,value){
-    formObject.get(formField).patchValue(value);
+    if(!isEmpty(formObject) && !isEmpty(formField) && !isEmpty(value)){
+        formObject.get(formField).patchValue(value);
+    }
 }
