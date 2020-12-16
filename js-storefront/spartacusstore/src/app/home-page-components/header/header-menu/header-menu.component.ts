@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 import { CmsNavigationComponent, CmsService } from '@spartacus/core';
 import { CmsComponentData, NavigationNode  } from '@spartacus/storefront';
@@ -27,7 +27,20 @@ import { HeaderTitleService } from '../../../../services/header-title/header-tit
     ]),
   ]
 })
-export class HeaderMenuComponent implements OnInit {
+export class HeaderMenuComponent implements OnInit, AfterViewInit {
+  @ViewChild('stickyMenu') menuElement: ElementRef;
+  menuPosition = 50;
+  @HostListener('window:scroll', ['$event'])
+    handleScroll(){
+        const windowScroll = window.pageYOffset;
+        let el = this.menuElement.nativeElement;
+        if(windowScroll > this.menuPosition){
+            el.style.background = 'rgba(255,255,255,0.5)';
+        } else {
+          el.style.background = 'rgba(0,0,0,0)';
+        }
+    }
+
   node$: Observable<NavigationNode> = this.service.createNavigation(
     this.componentData.data$
   );
@@ -61,6 +74,10 @@ export class HeaderMenuComponent implements OnInit {
     cmsService.getCurrentPage().subscribe(data => {
       this.title = data ? data.title: '';
     })
+  }
+  
+  ngAfterViewInit(){
+    this.menuPosition = this.menuElement.nativeElement.offsetTop
   }
   ngOnInit(){
     this.router.events.subscribe((event: Event) => {
