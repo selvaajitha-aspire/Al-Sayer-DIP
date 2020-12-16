@@ -46,7 +46,7 @@ header{
     top: 0;
     z-index: 1000;
     width: 100%;
-    background-color: var(--fire-engine-red) !important;
+    // background-color: var(--fire-engine-red) !important;
 }
 header .SiteLogo {
     display: none;
@@ -79,7 +79,7 @@ cx-breadcrumb  {
 }
 .ServiceTileSection{
     display: block;
-    margin: 15% 2% 5% 2%;
+    padding: 20% 5% 5% 2%;
 }
 .accNavComponent{
     justify-content: left;
@@ -127,7 +127,7 @@ cx-navigation-ui h5{
   header{
         border-radius: 0px !important;
         height: 50px !important;
-        background-color: var(--white) !important;
+        // background-color: var(--white) !important;
   }
 
   .AccountPageTemplate cx-page-slot {
@@ -140,6 +140,9 @@ cx-navigation-ui h5{
 
   .BottomHeaderSlot {
       display: none;
+  }
+  .StoreFinderPageTemplate {
+      padding: 70px 0px;
   }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
@@ -163,6 +166,10 @@ cx-navigation-ui h5{
     }
     .ServiceTileSection{
         line-height: 0;
+        
+        background-image: url('./assets/background.jpg');
+        border-radius: 0 0 6% 6%;
+        
     }
     .ServiceTileSection app-service-tile{
         line-height: 1 !important;
@@ -176,6 +183,7 @@ cx-navigation-ui h5{
     }
     header{
         border-radius: 0 0 50px 50px;
+        background-color: rgba(255,255,255,0) !important;
     }
     .header{
         transition: 0.5s;
@@ -188,7 +196,7 @@ cx-navigation-ui h5{
     header .SiteLogo {
         display: none;
         position: absolute;
-        background-color: rgb(221, 35, 27) ;
+        // background-color: rgb(221, 35, 27) ;
         border-radius: 80%;
         top: 0px;
         left: 37%;
@@ -210,35 +218,32 @@ cx-navigation-ui h5{
       cx-navigation-ui nav {
         padding: 5px !important;
     }
-    .Section1 > cx-banner{
-        display: none;
-    }
+    // .Section1 > cx-banner{
+    //     display: none;
+    // }
 
 
-    .ServiceTileSection app-service-tile:nth-child(odd){
-        .ServiceTileBannerComponent{
-            border-right: 1px solid rgba(0, 0, 0, 0.2);
-        }
+    // .ServiceTileSection app-service-tile:nth-child(odd){
+    //     .ServiceTileBannerComponent{
+    //         border-right: 1px solid rgba(0, 0, 0, 0.2);
+    //     }
         
-    }
-    .ServiceTileSection app-service-tile:nth-child(even){
-        .ServiceTileBannerComponent{
-            border-left: 1px solid rgba(0, 0, 0, 0.2)
-        }
+    // }
+    // .ServiceTileSection app-service-tile:nth-child(even){
+    //     .ServiceTileBannerComponent{
+    //         border-left: 1px solid rgba(0, 0, 0, 0.2)
+    //     }
         
-    }
-    .ServiceTileSection app-service-tile:nth-last-of-type(-n+2){
-        .ServiceTileBannerComponent{
-            border-bottom: none;
-        }
+    // }
+    // .ServiceTileSection app-service-tile:nth-last-of-type(-n+2){
+    //     .ServiceTileBannerComponent{
+    //         border-bottom: none;
+    //     }
         
-    }
+    // }
     .LoginPageTemplate {
         height: 100vh !important;
         margin-top: 0 !important;
-    }
-    cx-page-slot{
-        background-color: var(--white) !important;
     }
     .Footer{
         display: block !important;
