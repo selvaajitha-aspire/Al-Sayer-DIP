@@ -79,7 +79,7 @@ cx-breadcrumb  {
 }
 .ServiceTileSection{
     display: block;
-    margin: 15% 2% 5% 2%;
+    margin: 20% 5% 5% 2%;
 }
 .accNavComponent{
     justify-content: left;
@@ -210,29 +210,29 @@ cx-navigation-ui h5{
       cx-navigation-ui nav {
         padding: 5px !important;
     }
-    .Section1 > cx-banner{
-        display: none;
-    }
+    // .Section1 > cx-banner{
+    //     display: none;
+    // }
 
 
-    .ServiceTileSection app-service-tile:nth-child(odd){
-        .ServiceTileBannerComponent{
-            border-right: 1px solid rgba(0, 0, 0, 0.2);
-        }
+    // .ServiceTileSection app-service-tile:nth-child(odd){
+    //     .ServiceTileBannerComponent{
+    //         border-right: 1px solid rgba(0, 0, 0, 0.2);
+    //     }
         
-    }
-    .ServiceTileSection app-service-tile:nth-child(even){
-        .ServiceTileBannerComponent{
-            border-left: 1px solid rgba(0, 0, 0, 0.2)
-        }
+    // }
+    // .ServiceTileSection app-service-tile:nth-child(even){
+    //     .ServiceTileBannerComponent{
+    //         border-left: 1px solid rgba(0, 0, 0, 0.2)
+    //     }
         
-    }
-    .ServiceTileSection app-service-tile:nth-last-of-type(-n+2){
-        .ServiceTileBannerComponent{
-            border-bottom: none;
-        }
+    // }
+    // .ServiceTileSection app-service-tile:nth-last-of-type(-n+2){
+    //     .ServiceTileBannerComponent{
+    //         border-bottom: none;
+    //     }
         
-    }
+    // }
     .LoginPageTemplate {
         height: 100vh !important;
         margin-top: 0 !important;
