@@ -1,4 +1,4 @@
-<ng-container>
+<div class="store-finder-list-wrapper">
   <div>
     <div class="cx-store-list-order">
       {{ listOrderLabel }}
@@ -11,11 +11,20 @@
       >
         {{ location.displayName || location.name }}
       </button>
-      <a *ngIf="!useClickEvent" [routerLink]="[location.name]">{{
+      <a *ngIf="!useClickEvent" (click)="locationName()">{{
         location.displayName || location.name
       }}</a>
+      <a
+      href="{{ getDirections(location) }}"
+      target="_blank"
+      (click)="$event.stopPropagation()"
+      >
+      <i class="fas fa-directions"></i>
+      <!-- {{ 'storeFinder.getDirections' | cxTranslate }} -->
+      </a
+      >
     </div>
-    <div class="cx-store-address" *ngIf="location.address">
+    <!-- <div class="cx-store-address" *ngIf="location.address">
       <div class="cx-store-address-street">
         {{ location.address.line1 }} {{ location.address.line2 }}
       </div>
@@ -32,13 +41,7 @@
       >
         {{ location.formattedDistance }}
       </div>
-    </div>
-    <a
-      href="{{ getDirections(location) }}"
-      target="_blank"
-      class="btn btn-sm btn-action btn-block cx-button"
-      (click)="$event.stopPropagation()"
-      >{{ 'storeFinder.getDirections' | cxTranslate }}</a
-    >
+    </div> -->
+    
   </div>
-</ng-container>
+</div>

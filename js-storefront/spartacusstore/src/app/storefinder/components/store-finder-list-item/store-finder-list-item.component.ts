@@ -5,10 +5,13 @@ import { AbstractStoreItemComponent } from '../abstract-store-item/abstract-stor
 @Component({
   selector: 'cx-store-finder-list-item',
   templateUrl: './store-finder-list-item.component.html',
+  styleUrls: ['./store-finder-list-item.component.scss']
 })
 export class StoreFinderListItemComponent extends AbstractStoreItemComponent {
   @Input()
-  locationIndex: number = null;
+  locationIndex;
+  @Input('location')
+  location;
   @Input()
   listOrderLabel: any;
   @Input()
@@ -17,6 +20,8 @@ export class StoreFinderListItemComponent extends AbstractStoreItemComponent {
   useClickEvent: boolean;
   @Output()
   storeItemClick: EventEmitter<number> = new EventEmitter();
+  @Output()
+  loadActiveLocation: EventEmitter<any> = new EventEmitter();
 
   constructor(protected storeDataService: StoreDataService) {
     super(storeDataService);
@@ -32,5 +37,9 @@ export class StoreFinderListItemComponent extends AbstractStoreItemComponent {
     if (event.key === 'Enter') {
       this.handleStoreItemClick();
     }
+  }
+
+  locationName() {
+    this.loadActiveLocation.emit({location: this.location, locationIndex: this.locationIndex});
   }
 }
