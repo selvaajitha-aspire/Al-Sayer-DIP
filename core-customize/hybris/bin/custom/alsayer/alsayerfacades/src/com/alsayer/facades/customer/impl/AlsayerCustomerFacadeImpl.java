@@ -8,6 +8,7 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
+import de.hybris.platform.commerceservices.enums.CustomerType;
 import de.hybris.platform.core.model.user.CustomerModel;
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
@@ -60,6 +61,7 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
         customerModel.setSessionLanguage(getCommonI18NService().getCurrentLanguage());
         customerModel.setSessionCurrency(getCommonI18NService().getCurrentCurrency());
         customerModel.setEccCustId(registerData.getEccCustId());
+        customerModel.setType(CustomerType.valueOf(registerData.getCustomerType()));
     }
 
     protected void setUidForRegister(final RegisterData registerData, final CustomerModel customer)

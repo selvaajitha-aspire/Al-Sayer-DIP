@@ -48,6 +48,7 @@
 		<property name="mobile" type="String"/>
 		<property name="uid" type="String"/>
 		<property name="oneTimePassword" type="String"/>
+		<property name="customerType" type="String"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
