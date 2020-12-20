@@ -1,19 +1,24 @@
 <div class="header-style" #stickyMenu>
     <div class='header-wrapper'>
-        <button (click)="toggleMenu()" class="hamburger">
-            <!-- <img src='../../../../assets/icons/menuicon.png'/> -->
-            <i class="fa fa-bars menu-icon" aria-hidden="true"></i>
-        </button>
+        <div>
+            <button (click)="toggleMenu()" class="hamburger">
+                <!-- <img src='../../../../assets/icons/menuicon.png'/> -->
+                <i class="fa fa-bars menu-icon" aria-hidden="true"></i>
+            </button>
+            <cx-site-context-selector context="language"></cx-site-context-selector>
+        </div>
+        
+        
         <!-- <div class="header-title">{{title}}</div> -->
         <div class='logo-wrapper'>
             <img src="../../../../assets/icons/alsayerlogo.png" width="55" height="55" [routerLink]='["/"]' >
         </div>
     </div>
-    
 </div>
+<!-- <cx-language-currency-selector></cx-language-currency-selector> -->
 
-<div class="overlay-hamburger" (click)='toggleMenu()' [ngStyle]="{'display': menuState == 'in' ? 'block' : 'none' }"></div>
-<div  [@slideInOut]="menuState" class="hamburger-menu" >
+<div class="overlay-hamburger" (click)='toggleMenu()' [ngStyle]="{'display': menuState == 'in' ? 'block' : 'none' }" ></div>
+<div  [@slideInOut]="menuState" class="hamburger-menu">
     <div class='hamburger-menu-wrapper'>
         <div class="profile-wrapper">
             <img src="../../../../assets/icons/alsayerlogo.png" width="100">
