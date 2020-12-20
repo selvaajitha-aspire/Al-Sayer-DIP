@@ -12,6 +12,16 @@ $icon=icon(code, $contentCV);
 $color=color(code, $contentCV);
 $lang=en
 
+$storeUid=alsayer
+$productCatalog=alsayerProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$storeImage=storeImage(qualifier, $catalogVersion)
+
+
+$standardHours=alsayer-standard-hours
+$alahmadi-bs-hours=alahamdi-bs-hours
+$standard-gr-hours=alsayer-standard-gr-hours
+
 ##Remove Components
 
 REMOVE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef

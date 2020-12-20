@@ -25,7 +25,11 @@ declare var $: any;
 
     @Output()
     getImage = new EventEmitter<any>();
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> refs/remotes/origin/develop
     @ViewChild('video', { static: true }) videoElement: ElementRef;
     @ViewChild('canvas', { static: true }) canvas: ElementRef;
 

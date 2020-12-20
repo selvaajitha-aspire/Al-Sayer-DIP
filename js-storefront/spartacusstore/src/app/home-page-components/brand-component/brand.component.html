@@ -42,7 +42,7 @@
       <ng-container *ngFor="let component of componentData">
         <ng-template class="slide" carouselSlide >
             <div class="col-md-5 col-sm-12 pl-0 brand-img-container-right">
-                <img class="brand-img" [src]="getUrl(component.media.url)" />
+                <img class="brand-img" [src]="getUrl(component?.media?.url)" />
                 <button class="btn round-default-btn">Visit {{component.name}} Kuwait <i class="fas fa-external-link-alt ml-2"></i></button>
             </div>
             

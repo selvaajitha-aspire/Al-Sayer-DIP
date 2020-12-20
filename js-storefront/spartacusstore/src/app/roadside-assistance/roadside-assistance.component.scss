@@ -24,9 +24,9 @@ $mobile-large: 640px;
     border-radius: 0;
 }
 
-.form-control[type=text]:focus{
-    background-color: var(--white);
-}
+// .form-control[type=text]:focus{
+//     background-color: var(--white);
+// }
 
 .location-btn{
     width: 75%;
@@ -46,6 +46,7 @@ $mobile-large: 640px;
         color: black;
         font-size: 14px;
         line-height: 16px;
+        background: inherit;
     }
     textarea.form-control{
         border: 1px solid #000000;
@@ -53,6 +54,7 @@ $mobile-large: 640px;
         border-radius: inherit;
         color: #000000;
         padding: 2px;
+        background: inherit;
     }
     .no-warranty-message {
         color: $red;
@@ -117,6 +119,9 @@ $mobile-large: 640px;
         font-weight: normal !important;
         background: #DD231B;
         box-shadow: 0px 4px 4px rgba(221, 35, 27, 0.39);
+    }
+    .location-input-wrapper{
+        padding-left: 30px;
     }
 }
 

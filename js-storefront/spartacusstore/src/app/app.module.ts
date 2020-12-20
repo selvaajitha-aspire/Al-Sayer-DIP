@@ -1,4 +1,3 @@
-import { StoreFinderModule } from './storefinder/store-finder.module';
 import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
@@ -11,8 +10,8 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { translations, translationChunksConfig } from '@spartacus/assets';
-import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule } from '@spartacus/storefront';
-import { OccConfig, ConfigModule, I18nModule } from '@spartacus/core';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule, SiteContextSelectorModule } from '@spartacus/storefront';
+import { OccConfig, ConfigModule, I18nModule, StoreFinderConfig } from '@spartacus/core';
 import { environment } from './../environments/environment';
 import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
 
@@ -23,6 +22,7 @@ import { MyTicketsModule } from './my-tickets/my-tickets.module';
 import { FooterComponent } from './home-page-components/footer/footer.component';
 import { AlsayerNavigationComponent } from './home-page-components/alsayer-navigation/alsayer-navigation.component';
 import { ServiceHistoryModule } from './service-history/service-history.module';
+import { defaultStoreFinderConfig } from '@spartacus/core/src/store-finder/config/default-store-finder-config';
 
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -60,13 +60,15 @@ else {
     IconModule,
     GenericLinkModule,
     I18nModule,
+    SiteContextSelectorModule,
     ToastrModule.forRoot(),
     B2cStorefrontModule.withConfig({
       backend: occConfig.backend,
       context: {
         currency: ['KWD'],
-        language: ['en'],
-        baseSite: ['alsayer-spa']
+        language: ['en','ar'],
+        baseSite: ['alsayer-spa'],
+        urlParameters: ['language']
       },
       i18n: {
         resources: translations,
@@ -81,6 +83,7 @@ else {
       direction: {
         default: DirectionMode.LTR,
         ltrLanguages: [],
+        rtlLanguages: ['ar']
       },
     } as DirectionConfig),
     ConfigModule.withConfig({
@@ -99,6 +102,15 @@ else {
         }
       }
     } as LayoutConfig),
+    ConfigModule.withConfig({
+      googleMaps: {
+        apiUrl: 'https://maps.googleapis.com/maps/api/js',
+        apiKey: 'AIzaSyDQzDMu8IB2-gRYDpq8cA4GAqsIF3q0d_o',
+        scale: 15,
+        selectedMarkerScale: 17,
+        radius: 50000,
+     }
+    } as StoreFinderConfig),
     RoadsideAssistanceModule,
     RegisterModule,
     LoginFormModule,
@@ -106,7 +118,6 @@ else {
     MyTicketsModule,
     UpdateProfileModule,
     ServiceHistoryModule,
-    StoreFinderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
