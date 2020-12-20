@@ -36,7 +36,8 @@ declare var $: any;
     videoHeight = 0;
     currentImage = '';
   
-    openCamera(){
+    openCamera(event){
+        event.preventDefault();
         $("#cameraModal").modal('show');
         this.startCamera();
     }
@@ -61,7 +62,8 @@ declare var $: any;
         });
       }
     
-    capture() {
+    capture(event) {
+        event.preventDefault();
         this.videoElement.nativeElement.style.display='none';
         this.canvas.nativeElement.style.display='block';
 
@@ -73,7 +75,8 @@ declare var $: any;
         this.captureFlag = false;
       }
     
-      retake(){
+      retake(event){
+        event.preventDefault();
         this.videoElement.nativeElement.style.display='block';
         this.canvas.nativeElement.style.display='none';
 
@@ -81,7 +84,8 @@ declare var $: any;
         this.captureFlag = true;
       }
 
-      useImage(){
+      useImage(event){
+        event.preventDefault();
         var formObj = this.formGrp; 
         var att = this.attachmentId;
         this.canvas.nativeElement.toBlob(function(blob){
@@ -97,7 +101,8 @@ declare var $: any;
         $("#cameraModal").modal('hide');
       }
 
-      downloadImage(){
+      downloadImage(event){
+        event.preventDefault();
         this.canvas.nativeElement.toBlob(function(blob){
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
@@ -117,8 +122,8 @@ declare var $: any;
         $("#cameraModal").modal('hide');
       }
 
-      stopCamera(){
-        
+      stopCamera(event){
+        event.preventDefault();
         this.retakeFlag = false;
         this.captureFlag = true;
 

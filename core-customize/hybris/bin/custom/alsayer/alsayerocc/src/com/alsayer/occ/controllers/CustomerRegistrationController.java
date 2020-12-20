@@ -15,6 +15,7 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
+import de.hybris.platform.commerceservices.enums.CustomerType;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.webservicescommons.cache.CacheControl;
 import de.hybris.platform.webservicescommons.cache.CacheControlDirective;
@@ -114,6 +115,7 @@ public class CustomerRegistrationController {
         try{
             if(customerFacade.validateOTP(id,otp)){
                 ECCCustomerWsDTO eccCustomerWsDTO = customerFacade.getCustomerECCDetails(id);
+                eccCustomerWsDTO.setCustomerType(String.valueOf(CustomerType.REGISTERED));
                 return eccCustomerWsDTO;
             }else{
                 return null;
@@ -208,7 +210,7 @@ public class CustomerRegistrationController {
 
         validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
-                .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, mobile,civilId,uid,oneTimePassword");
+                .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, mobile,civilId,uid,oneTimePassword,customerType");
         boolean userExists = false;
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try {

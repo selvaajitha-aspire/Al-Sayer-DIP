@@ -1,0 +1,63 @@
+.store-finder-wrapper {
+    .heading-wrapper{
+        text-align: center;
+        .heading-text{
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .sub-heading-text{
+            color: #eb0a1e;
+        }
+    }
+    .list-header-text{
+        text-align: center;
+        width: 100%;
+        font-size: 22px;
+        font-weight: bold;
+    }
+    .location{
+        border-bottom: 1px solid #dee2e6!important;
+    }
+}
+
+::ng-deep{
+    .active{
+        a{
+            color:  #eb0a1e !important;
+        }
+    }
+}
+
+::ng-deep {
+    .location-name {
+        color: #eb0a1e;
+        font-size: 20px;
+        font-weight: bold;
+        border-bottom: 1px solid grey;
+        margin-bottom: 0px;
+        padding-bottom: 10px;
+    }
+    .timing-wrapper{
+        border-bottom: 1px solid grey;
+        padding: 10px 0px;
+        .timing-text{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .timings{
+            font-size: 16px;
+            padding: 5px 0px;
+        }
+    }
+    .telephone-wrapper{
+        padding: 10px 0px;
+        .telephone-text{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .telephone{
+            font-size: 16px;
+            padding: 5px 0px;
+        }
+    }
+}

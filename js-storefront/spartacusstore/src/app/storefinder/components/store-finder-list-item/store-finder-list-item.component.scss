@@ -1,0 +1,12 @@
+
+::ng-deep .cx-store-name {
+    min-height: auto !important;
+    display: flex;
+    justify-content: space-around;
+    a{
+        color: black;
+        &:hover{
+            color: #dd231b !important;
+        }
+    }
+}

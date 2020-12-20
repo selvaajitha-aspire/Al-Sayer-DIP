@@ -1,12 +1,8 @@
 package com.alsayer.occ.controllers;
 
-import com.alsayer.core.jalo.ServiceHistory;
 import com.alsayer.core.servicehistory.service.ServiceHistoryService;
-import com.alsayer.core.servicerequest.service.RsaRequestService;
-import com.alsayer.facades.data.RsaRequestData;
 import com.alsayer.facades.data.ServiceHistoryData;
 import com.alsayer.occ.dto.ServiceHistoryWSDTO;
-import com.alsayer.occ.dto.WarrantyWsDTO;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller

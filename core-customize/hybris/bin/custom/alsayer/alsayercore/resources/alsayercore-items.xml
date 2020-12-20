@@ -13,6 +13,8 @@
                         type="list"/>
     </collectiontypes>
 
+
+
     <enumtypes>
         <enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
             <value code="BLACK"/>
@@ -68,8 +70,21 @@
             <value code="OVERSEAS"/>
             <value code="CONTACT_US"/>
         </enumtype>
+
+        <enumtype code="ServiceJob" autocreate="true" generate="true" dynamic="true">
+            <description>Service Jobs By Service Center</description>
+            <value code="GENERAL_REPAIRS"/>
+            <value code="BODY_PAINT_SHOP"/>
+            <value code="EXPRESS_MAINTENANCE"/>
+            <value code="QUICK_SERVICE"/>
+            <value code="QUICK_LUBE"/>
+        </enumtype>
     </enumtypes>
 
+    <maptypes>
+        <maptype code="ServiceJobTimingMap" argumenttype="ServiceJob" returntype="OpeningSchedule" autocreate="true"
+                 generate="false" />
+    </maptypes>
     <relations>
         <relation code="CustomerToRsaRequests" localized="false" autocreate="true">
             <sourceElement type="Customer" qualifier="customer" cardinality="one" >
@@ -345,6 +360,14 @@
                 </attributes>
             </itemtype>
 
+            <itemtype code="PointOfService" generate="false" autocreate="false">
+                <attributes>
+                    <attribute qualifier="serviceJobTimingMap" type="ServiceJobTimingMap">
+                        <description>Service Jobs working slots</description>
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
             <itemtype code="CustomerAuthentication" generate="true" autocreate="true"  jaloclass="com.alsayer.core.jalo.CustomerAuthentication">
                 <deployment table="CustomerAuthentication" typecode="12004"/>
                 <attributes>
