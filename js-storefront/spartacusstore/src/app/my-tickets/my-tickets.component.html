@@ -80,8 +80,8 @@
 </div> -->
 
 
-<div class="my-tickets-wrapper">
-    <div class="container p-0" *ngIf="ticketsList | async as ticket$" >
+<div class="my-tickets-wrapper" [ngStyle]="{'height': innerHeight ? innerHeight : 'auto' }">
+    <div class="container p-0" *ngIf="ticketsList | async as ticket$;else no_data" >
         <div *ngFor="let ticket of ticket$; let i=index" class="box ticket-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!ticketToggle[i]">
                 <span class="ticket-collapse-text">{{ticket.notes}}</span>
@@ -123,6 +123,11 @@
 
         </div>
     </div>
+    <ng-template #no_data>
+        <div class="text-center">
+            No data available
+        </div>
+    </ng-template>
     <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
