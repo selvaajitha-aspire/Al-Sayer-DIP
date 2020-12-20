@@ -3,13 +3,16 @@ package com.alsayer.facades.customer.impl;
 import com.alsayer.core.customer.services.AlsayerCustomerAccountService;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
+import de.hybris.platform.cmsfacades.dto.MediaFileDto;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
+import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.enums.CustomerType;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
@@ -44,7 +47,7 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
 
 
         final CustomerModel newCustomer = getModelService().create(CustomerModel.class);
-        newCustomer.setLoginDisabled(true);
+        newCustomer.setLoginDisabled(false);
         setCommonPropertiesForRegister(registerData, newCustomer);
         getCustomerAccountService().register(newCustomer, registerData.getPassword());
     }
@@ -103,6 +106,12 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
     @Override
     public boolean validateOTP(String civilId,String otp) throws ParseException {
         return  getAlsayerCustomerAccountService().validateOtp(civilId,otp);
+    }
+
+    @Override
+    public boolean updateProfilePhoto(MediaFileDto profilePhoto) throws ParseException {
+        CustomerModel customer = getCurrentSessionCustomer();
+        return getAlsayerCustomerAccountService().updateProfilePhoto(customer,profilePhoto);
     }
 
     @Override
