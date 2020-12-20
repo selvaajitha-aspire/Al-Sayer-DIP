@@ -108,7 +108,7 @@ UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[l
 ;;MyPurchasesSideLink;"My Purchases"
 ;;MyTicketsSideLink;"My Tickets"
 ;;MyServicesSideLink;"My Services"
-;;StoreLocatorSideLink;"Locators"
+;;StoreLocatorSideLink;"Locate Us"
 ;;SignOutSideLink;"Sign Out"
 
 # create navigation component for my account
