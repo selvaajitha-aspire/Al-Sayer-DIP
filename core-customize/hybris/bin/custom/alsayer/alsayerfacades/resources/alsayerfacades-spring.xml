@@ -274,14 +274,6 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean id="rsaRequestCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
-		<property name="key" value="${keygen.rsaRequest.code.name}"/>
-		<property name="digits" value="${keygen.rsaRequest.code.digits}"/>
-		<property name="start" value="${keygen.rsaRequest.code.start}"/>
-		<property name="type" value="${keygen.rsaRequest.code.type}"/>
-		<property name="template" value="${keygen.rsaRequest.code.template}"/>
-	</bean>
 
 	<alias name="defaultCusomerProfilePhotoPopulator" alias="cusomerProfilePhotoPopulator"/>
 	<bean id="defaultCusomerProfilePhotoPopulator" class="com.alsayer.facades.populators.CusomerProfilePhotoPopulator">
