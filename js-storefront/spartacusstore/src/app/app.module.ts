@@ -1,4 +1,3 @@
-import { StoreFinderModule } from './storefinder/store-finder.module';
 import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
@@ -106,7 +105,6 @@ else {
     MyTicketsModule,
     UpdateProfileModule,
     ServiceHistoryModule,
-    StoreFinderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

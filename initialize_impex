@@ -12,6 +12,16 @@ $icon=icon(code, $contentCV);
 $color=color(code, $contentCV);
 $lang=en
 
+$storeUid=alsayer
+$productCatalog=alsayerProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$storeImage=storeImage(qualifier, $catalogVersion)
+
+
+$standardHours=alsayer-standard-hours
+$alahmadi-bs-hours=alahamdi-bs-hours
+$standard-gr-hours=alsayer-standard-gr-hours
+
 ##Remove Components
 
 REMOVE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
@@ -67,7 +77,7 @@ INSERT_UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;MyPurchasesSideLink;MyPurchasesSideLink;/my-account/my-purchases;icn_mypurchases.png;MyPurchasesSideLink;;
 ;;MyTicketsSideLink;MyTicketsSideLink;/my-account/my-tickets;icn_mytickets.png;MyTicketsSideLink;;
 ;;MyServicesSideLink;MyServicesSideLink;/my-account/my-services;icn_myservices.png;MyServicesSideLink;;
-;;StoreLocatorSideLink;StoreLocatorSideLink;/store-finder;icn_storelocator.png;StoreLocatorSideLink;;
+;;StoreLocatorSideLink;StoreLocatorSideLink;/store-finder/country/KW;icn_storelocator.png;StoreLocatorSideLink;;
 ;;SignOutSideLink;SignOutSideLink;/logout;icn_signout.png;SignOutSideLink;
 
 # create navigation root node for my account & child nodes for the root node
@@ -98,7 +108,7 @@ UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[l
 ;;MyPurchasesSideLink;"My Purchases"
 ;;MyTicketsSideLink;"My Tickets"
 ;;MyServicesSideLink;"My Services"
-;;StoreLocatorSideLink;"Store Locator"
+;;StoreLocatorSideLink;"Locators"
 ;;SignOutSideLink;"Sign Out"
 
 # create navigation component for my account
@@ -363,4 +373,97 @@ INSERT_UPDATE ServiceHistory;uid[unique=true];mileage;serviceType;serviceDesc;in
 INSERT_UPDATE RsaRequest;uid[unique=true];vehicle(chassisNumber);status(code);type;issue(code);latitude;longitude;notes[lang=en]
 ;f53d20ac-3ff4-4456-b32a-9d25788e57cf;KW1000001;STARTED;MUSAADA;DEAD_BATTERY;73.9838868;18.5767007;"Two tyres got burst"
 
+## Showroom Locator ####
 
+INSERT_UPDATE OpeningSchedule;code[unique=true];
+;$standardHours;
+;$alahmadi-bs-hours;
+;$standard-gr-hours;
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;$standardHours;MONDAY   ; 07:00; 22:30
+;$standardHours;TUESDAY  ; 07:00; 22:30
+;$standardHours;WEDNESDAY; 07:00; 22:30
+;$standardHours;THURSDAY ; 07:00; 22:30
+;$standardHours;SATURDAY ; 07:00; 22:30
+;$standardHours;SUNDAY   ; 07:00; 22:30
+
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;$alahmadi-bs-hours;MONDAY   ; 07:00; 22:00
+;$alahmadi-bs-hours;TUESDAY  ; 07:00; 22:00
+;$alahmadi-bs-hours;WEDNESDAY; 07:00; 22:00
+;$alahmadi-bs-hours;THURSDAY ; 07:00; 22:00
+;$alahmadi-bs-hours;SATURDAY ; 07:00; 22:00
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;$standard-gr-hours;MONDAY   ; 07:30; 17:00
+;$standard-gr-hours;TUESDAY  ; 07:30; 17:00
+;$standard-gr-hours;WEDNESDAY; 07:30; 17:00
+;$standard-gr-hours;THURSDAY ; 07:30; 17:00
+;$standard-gr-hours;SATURDAY ; 07:30; 17:00
+
+
+INSERT_UPDATE PointOfService;name[unique=true];displayName;type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];$storeImage;openingSchedule(code);basestore(uid)[default=$storeUid];serviceJobTimingMap(key(code),value(code))[map-delimiter= | ]
+;Al Ahmadi - Service Center;Al Ahmadi - Service Center;STORE;addr1;29.083715;48.089963;;;$standardHours;;BODY_PAINT_SHOP->$alahmadi-bs-hours | GENERAL_REPAIRS->$standard-gr-hours
+;Ahmadi - Parts;Ahmadi - Parts;STORE;addr01;29.084021;48.0896128;;;$standardHours;;
+;Al Ahmadi - Certified Car Showroom;Al Ahmadi - Certified Car Showroom;STORE;addr02;29.0847465;48.085132;;;$standardHours;;
+;Al Ahmadi - New Cars Showroom;Al Ahmadi - New Cars Showroom;STORE;addr03;29.085954;48.084753;;;$standardHours;;
+;Al Jahra - Service Center;Al Jahra - Service Center;STORE;addr2;29.312925;47.658575;;;$standardHours;;
+;Al Jahra - New Cars Showroom;Al Jahra - New Cars Showroom;STORE;addr201;29.312854;47.657908;;;$standardHours;;
+;Al Rai - New Cars Showroom;Al Rai - New Cars Showroom;STORE;addr301;29.313211;47.931519;;;$standardHours;;
+;Al Rai - Parts;Al Rai - Parts;STORE;addr302;29.3131813;47.9302493;;;$standardHours;;
+;Al Rai -1 - Service Center;Al Rai -1 - Service Center;STORE;addr3;29.313138;47.930976;;;$standard-gr-hours;;
+;Al Rai -2 - Service Center;Al Rai -2 - Service Center;STORE;addr4;29.311747;47.930939;;;$standardHours;;GENERAL_REPAIRS->$standard-gr-hours
+;Al Tilal Mall - New Cars Showroom;Al Tilal Mall - New Cars Showroom;STORE;addr5;29.338965;47.941390;;;$standardHours;;
+;Ardiya - Parts;Ardiya - Parts;STORE;addr6;29.2931649;47.9106574;;;$standardHours;;
+;Aswaq al Qurain  (Autozone) - New Cars Showroom;Aswaq al Qurain  (Autozone) - New Cars Showroom;STORE;addr7;29.194322;48.052885;;;$standardHours;;
+;Aswaq al Qurain (Autozone) - Certified Car Showroom;Aswaq al Qurain (Autozone) - Certified Car Showroom;STORE;addr8;29.194322;48.052885;;;$standardHours;;
+;Canada Dry - Parts;Canada Dry - Parts;STORE;addr9;29.325548;47.938621;;;$standardHours;;
+;Fahaheel  - Service Center;Fahaheel  - Service Center;STORE;addr10;29.073427;48.116312;;;$standardHours;;
+;Fahaheel - Parts;Fahaheel - Parts;STORE;addr11;29.0734103;48.1167771;;;$standardHours;;
+;Farwaniya - Parts;Farwaniya - Parts;STORE;addr12;29.2762323;47.9505536;;;$standardHours;;
+;Ghazali - Central Body & Paint Shop;Ghazali - Central Body & Paint Shop;STORE;addr13;29.309346;47.944994;;;$standardHours;;
+;Ghazali - Service Center;Ghazali - Service Center;STORE;addr14;29.306831;47.943382;;;$standardHours;;
+;Industrial Ardiya - New Car Delivery Center;Industrial Ardiya - New Car Delivery Center;STORE;addr15;29.295926;47.920492;;;$standardHours;;
+;Industrial Ardiya - Tender & Fleet;Industrial Ardiya - Tender & Fleet;STORE;addr16;29.295591;47.920562;;;$standardHours;;
+;Jahra - Parts;Jahra - Parts;STORE;addr17;29.3128027;47.6585301;;;$standardHours;;
+;Sharq - Parts;Sharq - Parts;STORE;addr18;29.3745354;47.9904691;;;$standardHours;;
+;Sulaibiya - Parts;Sulaibiya - Parts;STORE;addr19;29.271874;47.843256;;;$standardHours;;
+
+
+INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+;addr1;Al Ahmadi;;;Al Ahmadi Industrial;KW;;+81 1988 3600;Al Ahmadi - Service Center
+;addr01;Al Ahmadi;;;Al Ahmadi Industrial;KW;;+3571 1803803;Ahmadi - Parts
+;addr02;Al Ahmadi;;;Al Ahmadi Industrial;KW;;+81 1988 3600;Al Ahmadi - Certified Car Showroom
+;addr03;Al Ahmadi;;;Al Ahmadi Industrial;KW;;+81 1988 3600;Al Ahmadi - New Cars Showroom
+;addr2;Al Jahra;;;Al Jahra;KW;;+81 4649 8891;Al Jahra - Service Center
+;addr201;Al Jahra;;;Aljahra;KW;;+81 4649 8891;Al Jahra - New Cars Showroom
+;addr3;Al Rai;10;;Alrai;KW;;+81 6176 3426;Al Rai -1 - Service Center
+;addr301;Al Rai;;;Alrai;KW;;+81 6176 3426;Al Rai - New Cars Showroom
+;addr302;Al Rai;;;Alrai;KW;;+4100 1803803;Al Rai - Parts
+;addr4;Al Rai;;;Alrai2;KW;;+81 4376 5760;Al Rai -2 - Service Center
+;addr5;Al Tilal;;;AlTilal;KW;;+81 4376 5760;Al Tilal Mall - New Cars Showroom
+;addr6;Ardiya;;;Ardiya;KW;;+81 4376 5760;Ardiya - Parts
+;addr7;Aswaq al Qurain;;;Aswaq al Qurain;KW;;+81 4376 5760;Aswaq al Qurain  (Autozone) - New Cars Showroom
+;addr8;Aswaq al Qurain;;;Aswaq al Qurain;KW;;+81 4376 5760;Aswaq al Qurain (Autozone) - Certified Car Showroom
+;addr9;Canada Dry St.;;;Shuwaikh Industrial;KW;;+81 4376 5760;Canada Dry - Parts;Canada Dry - Parts
+;addr10;Fahaheel;;;Fahaheel;KW;;+81 3519 4163;Fahaheel  - Service Center
+;addr11;Fahaheel;;;Fahaheel;KW;;+81 3519 4163;Fahaheel - Parts
+;addr12;Al Farwaniyah;;;Farwaniyah;KW;;+4951 1803803;Farwaniya - Parts
+;addr13;Ghazali;;;Ghazali;KW;;+81 3519 4163;Ghazali - Central Body & Paint Shop
+;addr14;Ghazali;;;Ghazali;KW;;+81 666 563;Ghazali - Service Center
+;addr15;Ardiya;;;Ardiya Industrial;KW;;+81 3519 4163;Industrial Ardiya - New Car Delivery Center
+;addr16;Ardiya;;;Ardiya Industrial;KW;;+81 3519 4163;Industrial Ardiya - Tender & Fleet
+;addr17;Al Jahra;;;Al Jahra;KW;;+81 3519 4163;Jahra - Parts
+;addr18;Omar Ben Al Khattab St;;;Al Kuwayt;KW;;+81 3519 4163;Sharq - Parts
+;addr19;Al Shaibi St.;;;Al Kuwayt;KW;;+81 3519 4163;Sulaibiya - Parts
+
+
+### CORS##
+INSERT_UPDATE CorsConfigurationProperty;key[unique=true];value;context[default=commercewebservices,unique=true]
+;allowedOrigins;*
+;allowedMethods;GET HEAD OPTIONS PATCH PUT POST DELETE
+;allowedHeaders;origin content-type accept authorization cache-control x-anonymous-consents x-profile-tag-debug x-consent-reference occ-personalization-id occ-personalization-time
+;allowCredentials;true
+;exposedHeaders;x-anonymous-consents occ-personalization-id occ-personalization-time

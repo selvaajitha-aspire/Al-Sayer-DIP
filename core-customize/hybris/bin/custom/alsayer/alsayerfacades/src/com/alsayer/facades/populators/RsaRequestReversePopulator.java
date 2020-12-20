@@ -17,6 +17,7 @@ import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.i18n.I18NService;
+import de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -34,6 +35,8 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
 
     private final Logger LOG = Logger.getLogger(DefaultMediaFacade.class);
     private UserService userService;
+
+    private PersistentKeyGenerator rsaRequestCodeGenerator;
 
     private ModelService modelService;
     private MyVehiclesService myVehiclesService;
@@ -53,7 +56,7 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
         final Date currentDate=java.util.Calendar.getInstance().getTime();
         final String chassisNumber=serviceRequestData.getVehicle().getChassisNumber();
         final String issueType=serviceRequestData.getIssue();
-        serviceRequestModel.setUid(UUID.randomUUID().toString());
+        serviceRequestModel.setUid(getRsaRequestCodeGenerator().generate().toString());
         serviceRequestModel.setCustomer((CustomerModel) userService.getCurrentUser());
         final VehicleModel vehicleModel=getVehicleByChassis(chassisNumber);
         serviceRequestModel.setVehicle(vehicleModel);
@@ -171,6 +174,14 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
 
     public void setMediaService(MediaService mediaService) {
         this.mediaService = mediaService;
+    }
+
+    public PersistentKeyGenerator getRsaRequestCodeGenerator() {
+        return rsaRequestCodeGenerator;
+    }
+
+    public void setRsaRequestCodeGenerator(PersistentKeyGenerator rsaRequestCodeGenerator) {
+        this.rsaRequestCodeGenerator = rsaRequestCodeGenerator;
     }
 }
 
