@@ -11,7 +11,10 @@
 
 	<!-- RSA Process Actions -->
 
-<bean id="createServiceRequestAction" class="com.alsayer.core.actions.service.CreateServiceRequestAction"  parent="abstractAction">
-    <property name="configurationService" ref="configurationService"/>
-</bean>
+    <bean id="createServiceRequestAction" class="com.alsayer.core.actions.service.CreateServiceRequestAction"  parent="abstractAction">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+    <bean id="getTechnicianLocationAction" class="com.alsayer.core.actions.service.GetTechnicianLocationAction"  parent="abstractAction">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
 </beans>

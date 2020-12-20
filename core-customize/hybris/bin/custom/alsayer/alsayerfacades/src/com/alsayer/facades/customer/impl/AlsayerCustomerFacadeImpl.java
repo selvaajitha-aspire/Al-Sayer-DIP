@@ -44,7 +44,7 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
 
 
         final CustomerModel newCustomer = getModelService().create(CustomerModel.class);
-        newCustomer.setLoginDisabled(true);
+        newCustomer.setLoginDisabled(false);
         setCommonPropertiesForRegister(registerData, newCustomer);
         getCustomerAccountService().register(newCustomer, registerData.getPassword());
     }

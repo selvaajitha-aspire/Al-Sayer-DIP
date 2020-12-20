@@ -214,12 +214,6 @@ public class CustomerRegistrationController {
         boolean userExists = false;
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try {
-            /*boolean result = customerFacade.validateOTP(registerData);
-            if (result == false) {
-                customerRegistrationResultDTO.setReason("OTP is Invalid");
-                customerRegistrationResultDTO.setStatus("Failure");
-                return customerRegistrationResultDTO;
-            }*/
             customerFacade.register(registerData);
         } catch (final DuplicateUidException ex) {
             userExists = true;
