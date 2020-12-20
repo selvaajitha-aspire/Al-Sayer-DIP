@@ -14,6 +14,8 @@ import {
   AnonymousConsent,
   AnonymousConsentsConfig,
   AnonymousConsentsService,
+  AuthRedirectService,
+  AuthService,
   ConsentTemplate,
   GlobalMessageEntities,
   GlobalMessageService,
@@ -36,6 +38,7 @@ declare var $: any;
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
+  sub: Subscription;
   @ViewChild('registrationForm') registrationFormElement: NgForm;
   titles$: Observable<Title[]>;
   oneTimePassword:number;
@@ -59,7 +62,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       arabicName: [''],
       // arabicLastName: ['', Validators.required],
       mobile: ['',Validators.required],
-      uid: ['', [Validators.required, CustomFormValidators.emailValidator]],
+      uid: ['', [CustomFormValidators.emailValidator]],
       password: [
         '',
         [Validators.required, CustomFormValidators.passwordValidator],
@@ -82,6 +85,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   customer: Promise<void>;
 
   constructor(
+    protected auth: AuthService,
+    protected authRedirectService: AuthRedirectService,
     protected userService: UserService,
     protected globalMessageService: GlobalMessageService,
     protected fb: FormBuilder,
@@ -161,13 +166,27 @@ export class RegisterComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if (this.registerForm.valid) {
       this.commonService.submitForm('registerCustomer',this.registerForm).then(status=>{
-        this.router.go('/login');
-      this.toastr.success('Activation email is sent to your email address.', 'Registration is success!');
+        const { uid, password } = this.registerForm.controls;
+    this.auth.authorize(
+      uid.value.toLowerCase(), // backend accepts lowercase emails only
+      password.value
+    );
+
+    if (!this.sub) {
+      this.sub = this.auth.getUserToken().subscribe((data) => {
+        if (data && data.access_token) {
+          this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+          this.authRedirectService.redirect();
+        }
       });
+    }
+      this.toastr.success('Thank you for registering');
+      });
+    
       $("#otpPopup").modal('hide');
     } else {
       this.registerForm.markAllAsTouched();
-    }
+    }    
   }
 
   registerUser(): void {
@@ -176,10 +195,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     // );
     this.registerService.register(
       this.collectDataFromRegisterForm(this.registerForm.value)
-    ).then(status=>{
-      this.router.go('/login');
-	  this.toastr.success('Activation email is sent to your email address.', 'Registration is success!');
-    });
+    );
   }
 
   titleSelected(title: Title): void {
