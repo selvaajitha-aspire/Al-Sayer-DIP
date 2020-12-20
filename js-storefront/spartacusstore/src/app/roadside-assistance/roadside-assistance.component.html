@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <!-- <div class="col-md-6"> -->
         <div class="section w-100">
-        <form class="form-wrapper" style="background-image: url(../../assets/white_bg.jpg)" (ngSubmit)="submitForm()" [formGroup]="rsaForm" novalidate>
+        <form class="form-wrapper" (ngSubmit)="submitForm()" [formGroup]="rsaForm" novalidate>
           <!-- <div class="form-group mb-5">
               <label>
                 <span class="label-content">Roadside Assistance</span>
@@ -138,7 +138,7 @@
           <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <label>
+          <label class="location-input-wrapper">
             <span class="label-content">Location</span>
              <div class="form-group col-md-12 col-sm-12 p-0">
               <input

@@ -6,7 +6,7 @@ declare var $: any;
 @Component({
     selector: 'app-camera-component',
     templateUrl: './camera.component.html',
-    //styleUrls: ['./camera.component.scss'],
+    styleUrls: ['./camera.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
   export class CameraComponent {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { MyTicketsService } from 'src/services/my-tickets/my-tickets.service';
 import { HeaderTitleService } from './../../services/header-title/header-title.service';
 declare var $: any;
@@ -19,11 +19,19 @@ export class MyTicketsComponent implements OnInit {
   marker1:google.maps.Marker;
   marker2:google.maps.Marker;
   ticketToggle = {};
+  innerHeight: any = 'auto';
   constructor(protected service:MyTicketsService, private headerTitle : HeaderTitleService) {}
 
   ngOnInit(): void {
-    // this.headerTitle.headerTitle.next('my tickets');
+    this.innerHeight = window && window.innerHeight;
+    this.innerHeight = this.innerHeight ? this.innerHeight-120 + 'px': 'auto';
     this.ticketsList=this.service.getRsaRequests() || [];
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerHeight = window && window.innerHeight;
+    this.innerHeight = this.innerHeight ? this.innerHeight-120 + 'px': 'auto';
   }
   
   getDriverLocation(ticket:any){
