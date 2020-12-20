@@ -8,6 +8,7 @@ export const registerOccConfig = {
                 validateOTP: 'register/validateOTP',
                 getComponents: 'cms/components',
                 getServiceHistory: 'service-history/getMyServiceHistoryByChassisNo/'
+                
             },
             
         },

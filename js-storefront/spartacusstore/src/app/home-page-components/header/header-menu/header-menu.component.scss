@@ -225,3 +225,10 @@ $mobile-large: 640px;
   }
   
   }
+
+  .cropped1 {
+    width: 150px; /* width of container */
+    height: 150px; /* height of container */
+    object-fit: cover;
+    border: 2px solid #dd231b;
+  }
