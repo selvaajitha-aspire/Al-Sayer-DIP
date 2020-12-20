@@ -11,9 +11,9 @@
                         <video #video class="vid" autoplay></video>
                         <canvas #canvas class="vid" style="display: none;"></canvas>
                         <div style="position: absolute;z-index: 1100;bottom: 10%;width: 100%;text-align: center;">
-                            <button class="btn mr-2" (click)="capture()" *ngIf="captureFlag"><i class="fa fa-circle fa-3x" style="color: white;" aria-hidden="true"></i></button>
-                            <button class="btn mr-2" (click)="retake()" *ngIf="retakeFlag"><i class="fa fa-refresh fa-3x" style="color: white;" aria-hidden="true"></i></button>
-                            <button class="btn mr-2" (click)="useImage()" *ngIf="retakeFlag"><i class="fa fa-save fa-3x" style="color: white;" aria-hidden="true"></i></button>
+                            <button class="btn mr-2" (click)="capture($event)" *ngIf="captureFlag"><i class="fa fa-circle fa-3x" style="color: white;" aria-hidden="true"></i></button>
+                            <button class="btn mr-2" (click)="retake($event)" *ngIf="retakeFlag"><i class="fa fa-refresh fa-3x" style="color: white;" aria-hidden="true"></i></button>
+                            <button class="btn mr-2" (click)="useImage($event)" *ngIf="retakeFlag"><i class="fa fa-save fa-3x" style="color: white;" aria-hidden="true"></i></button>
                             <button class="btn mr-2" (click)="stopCamera($event)" ><i class="fa fa-close fa-3x" style="color: white;" aria-hidden="true"></i></button>
                             
                         </div>

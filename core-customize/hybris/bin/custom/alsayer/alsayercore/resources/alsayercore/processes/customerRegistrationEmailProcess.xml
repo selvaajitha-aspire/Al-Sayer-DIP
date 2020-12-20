@@ -12,6 +12,10 @@
 		<transition name="NOK" to="error"/>
 	</action>
 	<action id="getServiceHistory" bean="getServiceHistory">
+		<transition name="OK" to="createCustomerInECC"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="createCustomerInECC" bean="createCustomerInECC">
 		<transition name="OK" to="generateCustomerRegistrationEmail"/>
 		<transition name="NOK" to="error"/>
 	</action>

@@ -719,4 +719,7 @@
 	</bean>
 	<!--Service Request-->
 
+	<bean id="createCustomerInECC" class="com.alsayer.core.actions.service.CreateCustomerInECC">
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
 </beans>

@@ -23,9 +23,10 @@ import {
   UserService,
 } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, tap, isEmpty } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { CustomFormValidators, sortTitles } from '@spartacus/storefront';
 import { CommonService } from 'src/services/common/common.services';
+import { setFormField, isEmpty } from '../common/utility';
 
 
 declare var $: any;
@@ -63,12 +64,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
         '',
         [Validators.required, CustomFormValidators.passwordValidator],
       ],
-      passwordconf: ['', Validators.required]
+      passwordconf: ['', Validators.required],
       // newsletter: new FormControl({
       //   value: false,
       //   disabled: this.isConsentRequired(),
       // }),
       // termsandconditions: [false, Validators.requiredTrue],
+      customerType : ['']
     },
     {
       validators: CustomFormValidators.passwordsMustMatch(
@@ -310,10 +312,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   populateUserEccData(userEccData){
-    this.registerForm.get("name").patchValue(userEccData.name);
-    this.registerForm.get("arabicName").patchValue(userEccData.arabicName);
-    this.registerForm.get("mobile").patchValue(userEccData.mobile);
-    this.registerForm.get("email").patchValue(userEccData.email);
+    if(!isEmpty(userEccData)){
+      this.registerForm.get("name").patchValue(userEccData.name);
+      this.registerForm.get("arabicName").patchValue(userEccData.arabicName);
+      this.registerForm.get("mobile").patchValue(userEccData.mobile);
+      setFormField(this.registerForm,"email",userEccData.email);
+      setFormField(this.registerForm,"customerType",userEccData.customerType);
+    }else{
+      setFormField(this.registerForm,"customerType","GUEST");
+    }
+    
   }
 
   onOtpChange(event) {
