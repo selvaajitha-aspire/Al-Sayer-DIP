@@ -106,7 +106,6 @@
                     class="form-control"
                     type="file" id="myFile"
                     name="attachments"
-                    
                     (change)="onFileSelect($event)"
                   />
                   
@@ -117,9 +116,12 @@
               </div>
               <div style="float: right;padding: 5px;"> / </div>
               <div style="float: right;padding-top: 5px;">
-                <app-camera-component [formGrp]="this.rsaForm" attachmentId='attachments'></app-camera-component>
+                <app-camera-component (getImage)="getImage($event)" [formGrp]="this.rsaForm" attachmentId='attachments'></app-camera-component>
               </div>
               
+            </div>
+            <div  style="width: 100%;text-align: right;margin-right: 25px;">
+              <img *ngIf="imagePath" width="50" [src]="imagePath" [alt]="fileName"> 
             </div>
           </div>
             <div class="d-flex justify-content-center"><button type="submit"  class="btn btn-default btn-block round-primary-btn mb-4 w-50 mt-5">Submit</button></div>
