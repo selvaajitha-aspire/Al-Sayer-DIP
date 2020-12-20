@@ -16,6 +16,7 @@ public final class AlsayerCoreConstants extends GeneratedAlsayerCoreConstants
 	public static final String SCPI_SER_INFO_URL="scpi.commerce.serinfo.url";
 	public static final String SCPI_SMS_URL= "scpi.commerce.sms.url";
 	public static final String SCPT_RSA_POST_URL="scpi.commerce.post.rsa.url";
+	public static final String ECOM_FSM_URL="scpi.commerce.fsm.rsa.url";
     public static final String OTP_TIME = "scpi.commerce.otp.time" ;
     public static final String CUST_DETAILS_RESPONSE="Customer Details Service response : ";
 	public static final String VEHICLE_RESPONSE="Vehicle Set Response: ";
@@ -24,6 +25,7 @@ public final class AlsayerCoreConstants extends GeneratedAlsayerCoreConstants
 	public static final String TOKEN_ERR_MSG="User for token not found";
 	public static final String EXPRED_TOKEN_ERR_MSG="Token Expired";
 	public static final String SER_ERR_MSG="History not found";
+	public static final String RSA_FSM_PROCESS="In GetTechnicianLocationAction:RSA Request Process";
 
 
     private AlsayerCoreConstants()

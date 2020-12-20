@@ -192,7 +192,7 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="mediaService" ref="mediaService"/>
 		<property name="catalogVersionService" ref="catalogVersionService"/>
-
+		<property name="rsaRequestCodeGenerator" ref="rsaRequestCodeGenerator"/>
 	</bean>
 
 	<bean id="rsaRequestReverseConverter" parent="abstractPopulatingConverter">
@@ -273,6 +273,14 @@
 				<ref bean="serviceHistoryPopulator" />
 			</list>
 		</property>
+	</bean>
+
+	<bean id="rsaRequestCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="${keygen.rsaRequest.code.name}"/>
+		<property name="digits" value="${keygen.rsaRequest.code.digits}"/>
+		<property name="start" value="${keygen.rsaRequest.code.start}"/>
+		<property name="type" value="${keygen.rsaRequest.code.type}"/>
+		<property name="template" value="${keygen.rsaRequest.code.template}"/>
 	</bean>
 
 </beans>
