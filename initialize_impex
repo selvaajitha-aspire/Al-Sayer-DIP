@@ -364,3 +364,12 @@ INSERT_UPDATE RsaRequest;uid[unique=true];vehicle(chassisNumber);status(code);ty
 ;f53d20ac-3ff4-4456-b32a-9d25788e57cf;KW1000001;STARTED;MUSAADA;DEAD_BATTERY;73.9838868;18.5767007;"Two tyres got burst"
 
 
+UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true];media(code,$contentCV)[lang=$lang];headline[lang=ar];color
+;;CarTradInComponent;Tile1.jpg;"تجارة السيارات";
+;;RSAComponent;Tile2.jpg;;
+;;MyServiceHistoryComponent;Tile3.jpg;"سجل الخدمة";
+;;CarReplacementComponent;Tile4.jpg;"استبدال السيارة";
+;;AccesoriesComponent;Tile5.jpg;"مستلزمات";
+;;InsuranceComponent;Tile6.jpg;"تأمين";
+;;TyresComponent;Tile7.jpg;"الإطارات";
+;;ServiceAppointmentComponent;Tile8.jpg;"موعد الخدمة";
