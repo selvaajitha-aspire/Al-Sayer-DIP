@@ -1,12 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer2, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Renderer2, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { setFormField } from '../utility';
+import { setFormField, isEmpty } from '../utility';
 
 declare var $: any;
 @Component({
     selector: 'app-camera-component',
     templateUrl: './camera.component.html',
-    //styleUrls: ['./camera.component.scss'],
+    styleUrls: ['./camera.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
   export class CameraComponent {
@@ -23,6 +23,9 @@ declare var $: any;
     @Input() attachmentId: String;
     @Input() cameraFacing: string;
 
+    @Output()
+    getImage = new EventEmitter<any>();
+    
     @ViewChild('video', { static: true }) videoElement: ElementRef;
     @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
@@ -39,11 +42,15 @@ declare var $: any;
   
     openCamera(event){
         event.preventDefault();
-        $("#cameraModal").modal('show');
-        this.startCamera();
+        
+        this.videoElement.nativeElement.style.display='block';
+        this.canvas.nativeElement.style.display='none';
+         this.retakeFlag = false;
+        this.captureFlag = true;
+        this.startCamera(event);
     }
 
-    startCamera() {
+    startCamera(event) {
         if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { 
           navigator.mediaDevices.getUserMedia(this.constraints).then(this.attachVideo.bind(this)).catch(this.handleError);
         } else {
@@ -51,7 +58,7 @@ declare var $: any;
         }
       }
     handleError(error) {
-        console.log('Error: ', error);
+      alert(error);
       }
     
     attachVideo(stream) {
@@ -61,6 +68,7 @@ declare var $: any;
             this.videoHeight = this.videoElement.nativeElement.videoHeight;
             this.videoWidth = this.videoElement.nativeElement.videoWidth;
         });
+        $("#cameraModal").modal('show');
       }
     
     capture(event) {
@@ -89,6 +97,7 @@ declare var $: any;
         event.preventDefault();
         var formObj = this.formGrp; 
         var att = this.attachmentId;
+        this.getImage.emit(this.canvas.nativeElement.toDataURL());
         this.canvas.nativeElement.toBlob(function(blob){
           console.log(blob);
           
@@ -127,8 +136,10 @@ declare var $: any;
         event.preventDefault();
         this.retakeFlag = false;
         this.captureFlag = true;
-
-        this.videoStream.getTracks()[0].stop();
+        if(!isEmpty(this.videoStream)) {
+          this.videoStream.getTracks()[0].stop();
+        }
+        
 
         $("#cameraModal").modal('hide');
       }

@@ -35,6 +35,7 @@ export class RoadsideAssistanceComponent implements OnInit {
   driverDetails;
   warrantyFlag: boolean = true;
   fileName: String = "Choose file";
+  imagePath = '';
   addressU='';
   marker1:google.maps.Marker;
   marker2:google.maps.Marker;
@@ -335,6 +336,7 @@ getSelectedVehicle(chassisNumber) {
 onFileSelect(event) {
   if (event.target.files.length > 0) {
     this.fileName = event.target.files[0]['name'];
+    this.imagePath = '';
     const attachments = event.target.files[0];
     this.rsaForm.patchValue({
       attachments: attachments
@@ -352,6 +354,11 @@ onFileSelect(event) {
     });
   
   
+}
+
+getImage(image) {
+  this.imagePath = image;
+  this.fileName = 'Captured.png';
 }
 
 

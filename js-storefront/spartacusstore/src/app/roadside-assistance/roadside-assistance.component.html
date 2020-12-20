@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <!-- <div class="col-md-6"> -->
         <div class="section w-100">
-        <form class="form-wrapper" style="background-image: url(../../assets/white_bg.jpg)" (ngSubmit)="submitForm()" [formGroup]="rsaForm" novalidate>
+        <form class="form-wrapper" (ngSubmit)="submitForm()" [formGroup]="rsaForm" novalidate>
           <!-- <div class="form-group mb-5">
               <label>
                 <span class="label-content">Roadside Assistance</span>
@@ -106,7 +106,6 @@
                     class="form-control"
                     type="file" id="myFile"
                     name="attachments"
-                    
                     (change)="onFileSelect($event)"
                   />
                   
@@ -117,9 +116,12 @@
               </div>
               <div style="float: right;padding: 5px;"> / </div>
               <div style="float: right;padding-top: 5px;">
-                <app-camera-component [formGrp]="this.rsaForm" attachmentId='attachments'></app-camera-component>
+                <app-camera-component (getImage)="getImage($event)" [formGrp]="this.rsaForm" attachmentId='attachments' cameraFacing="environment"></app-camera-component>
               </div>
               
+            </div>
+            <div  style="width: 100%;text-align: right;margin-right: 25px;">
+              <img *ngIf="imagePath" width="50" [src]="imagePath" [alt]="fileName"> 
             </div>
           </div>
             <div class="d-flex justify-content-center"><button type="submit"  class="btn btn-default btn-block round-primary-btn mb-4 w-50 mt-5">Submit</button></div>
@@ -136,7 +138,7 @@
           <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <label>
+          <label class="location-input-wrapper">
             <span class="label-content">Location</span>
              <div class="form-group col-md-12 col-sm-12 p-0">
               <input
