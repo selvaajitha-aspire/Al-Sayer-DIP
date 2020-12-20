@@ -21,13 +21,14 @@ declare var $: any;
 
     @Input() formGrp: FormGroup;
     @Input() attachmentId: String;
+    @Input() cameraFacing: string;
 
     @ViewChild('video', { static: true }) videoElement: ElementRef;
     @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
     constraints = {
       video: {
-          facingMode: "environment",
+          facingMode: this.cameraFacing,
           width: { ideal:  window.innerWidth },
           height: { ideal: window.innerHeight }
       }
