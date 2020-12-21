@@ -10,6 +10,7 @@ import { FormErrorsModule } from '@spartacus/storefront';
 import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuard } from '@spartacus/storefront';
 import { CameraComponent } from '../common/CameraComponent/camera.component';
+import { MarkAsteriskDirectiveModule } from '../directives/mark-asterisk.directive';
 const staticRoutes: Routes = [{
   path: 'my-services', children: [
     {
@@ -29,6 +30,7 @@ const staticRoutes: Routes = [{
     FormsModule,
     FormErrorsModule,
     ReactiveFormsModule,
+    MarkAsteriskDirectiveModule,
     ConfigModule.withConfig(rsaOccConfig),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
