@@ -17,4 +17,19 @@
         <property name="maxInMemorySize" value="1048576" />
     </bean>
 
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="profilePhotoUrl"/>
+                <entry key="DEFAULT"
+                       value="profilePhotoUrl"/>
+                <entry key="FULL"
+                       value="profilePhotoUrl"/>
+            </map>
+        </property>
+    </bean>
+
 </beans>

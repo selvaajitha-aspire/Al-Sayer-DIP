@@ -275,6 +275,16 @@
 		</property>
 	</bean>
 
+	<alias name="defaultCusomerProfilePhotoPopulator" alias="cusomerProfilePhotoPopulator"/>
+	<bean id="defaultCusomerProfilePhotoPopulator" class="com.alsayer.facades.populators.CusomerProfilePhotoPopulator">
+		<property name="mediaService" ref="mediaService" />
+		<property name="imageConverter" ref="imageConverter" />
+	</bean>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="customerConverter" />
+		<property name="add" ref="cusomerProfilePhotoPopulator" />
+	</bean>
+
 	<bean id="rsaRequestCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
 		<property name="key" value="${keygen.rsaRequest.code.name}"/>
 		<property name="digits" value="${keygen.rsaRequest.code.digits}"/>

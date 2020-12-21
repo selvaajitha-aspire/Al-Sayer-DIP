@@ -12,6 +12,7 @@
         <!-- <div class="header-title">{{title}}</div> -->
         <div class='logo-wrapper'>
             <img src="../../../../assets/icons/alsayerlogo.png" width="55" height="55" [routerLink]='["/"]' >
+            
         </div>
     </div>
 </div>
@@ -21,7 +22,35 @@
 <div  [@slideInOut]="menuState" class="hamburger-menu">
     <div class='hamburger-menu-wrapper'>
         <div class="profile-wrapper">
-            <img src="../../../../assets/icons/alsayerlogo.png" width="100">
+            <img [src]="profilePhotoUrl" class="cropped1" >
+            <form class="form-wrapper" novalidate>
+                <div class="form-group col-md-6 mb-4">
+                <div *ngIf="!profilePhotoChanged">
+                  <label>
+                    <!-- <span for="attachments d-block" class="label-content attachments">Profile Photo</span>
+                    <label for="profilePhoto" class="custom-file-upload">
+                      {{fileName}}  
+                   </label> -->
+                  <!-- <input id="file-upload" type="file"/> -->
+                    <i class="fa fa-edit" aria-hidden="true">
+                        <div style="display: none;"> 
+                            <input
+                            class="form-control"
+                            type="file" id="profilePhoto"
+                            name="profilePhoto"
+                            accept="image/*"
+                            (change)="onProfileSelect($event)"
+                            /> 
+                        </div> 
+                    </i>
+                  </label>
+                </div>
+            <div *ngIf="profilePhotoChanged">
+                <a (click)="uploadPhoto($event)" style="padding: 5px;"><i class="fa fa-save" aria-hidden="true"></i></a>
+                <a (click)="cancelUploadPhoto($event)" style="padding: 5px;"><i class="fa fa-close" aria-hidden="true"></i></a>
+            </div>
+              </div>
+              </form>
             <div class="phone-number">
                 <img src="../../../../assets/svg/contact_icon.svg" width="20" height="20"> 1803803</div>
         </div>
@@ -34,4 +63,21 @@
               <img src="../../../../assets/icons/icn_in.png" alt="linkedin">
         </div>
     </div>
+</div>
+
+<div class="modal fade p-0" id="updateProfilePhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+  <div class="modal-dialog p-0" role="document">
+    <div class="modal-content p-0">
+        <div class="modal-body p-0">
+            <div class="vh-100">
+                <div class="d-flex flex-column align-items-center">
+                    <div class="" >
+                        
+                   </div>
+             </div>
+        </div>
+    </div>
+  </div>
+  </div>
 </div>

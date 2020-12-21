@@ -353,10 +353,11 @@
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="mobile" type="java.lang.String">
-                    <description>Driver Name</description>
-                    <modifiers read="true" write="true" optional="true"/>
-                    <persistence type="property"/>
-                </attribute>
+                        <description>Driver Name</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+
                 </attributes>
             </itemtype>
 

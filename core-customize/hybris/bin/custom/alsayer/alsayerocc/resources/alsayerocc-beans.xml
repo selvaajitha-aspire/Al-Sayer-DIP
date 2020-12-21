@@ -144,4 +144,9 @@
         <property name="serviceDate" type="java.util.Date"/>
         <property name="locationCode" type="String"/>
     </bean>
+
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO">
+        <property name="profilePhotoUrl" type="String"/>
+        <property name="profilePhoto" type="de.hybris.platform.commercefacades.product.data.ImageData"/>
+    </bean>
 </beans>
