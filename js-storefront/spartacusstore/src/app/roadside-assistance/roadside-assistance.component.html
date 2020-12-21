@@ -14,8 +14,8 @@
             <div class="row mb-4">
             <div class="form-group col-md-6">
             <label>
-                <span for="name" class="label-content d-block">Vehicle</span></label>
-                <fieldset formGroupName="vehicle">
+                <span for="name" class="label-content d-block" style="float: left;">Vehicle</span></label>
+                <fieldset formGroupName="vehicle" required>
                 <select #chassisNumber formControlName="chassisNumber" (change)="getSelectedVehicle(chassisNumber.value)" class="form-control form-control-sm d-block w-100 box-to-line"  *ngIf="vehicleList | async as vehicles$" >
                 <option selected value="" disabled>Select Vehicle</option>
                 <option
@@ -32,8 +32,8 @@
             <div *ngIf="!warrantyFlag" class="no-warranty-message">This Vehicle is not covered under warranty</div>
            <div class="form-group col-md-6 col-sm-12 mb-4">
             <label>
-                <span for="problem" class="label-content d-block">Problem</span></label>
-                <select formControlName="issue" class="form-control form-control-sm d-block w-100 box-to-line mr-4" style="text-align:center"  *ngIf="vehicleList | async as vehicles$" >
+                <span for="problem" class="label-content d-block" style="float: left;">Problem</span></label>
+                <select required formControlName="issue" class="form-control form-control-sm d-block w-100 box-to-line mr-4" style="text-align:center"  *ngIf="vehicleList | async as vehicles$" >
                 <option selected value="" disabled>Select Here</option>
                 <option
                    *ngFor="let issue of IssueTypes | keyvalue"
@@ -47,7 +47,7 @@
             </div>
             </div>
           <div class="row mt-3 mb-4">
-            <div class="form-group col-md-6 mb-4">
+            <div class="form-group">
            
             <div class="form-group">
                 <input
@@ -66,13 +66,21 @@
                   formControlName="longitude"
                 /></div>
                <div class="col-md-6 col-sm-12 current-location-wrapper">
-                <label> <span class="label-content d-block">Current Location</span></label>
-                 <button type="button" class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal" (click)="getCurrentLocation()">
+                <label> <span class="label-content d-block" style="float: left;padding-top: 8px;" >Location</span></label>
+                 <button required type="button" class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal" (click)="getCurrentLocation()">
                     <!-- <i class="fa fa-map-marker text-danger mr-4" title="Current Location" aria-hidden="true"></i> -->
                     Get My Current Location
                     <img src="../../assets/svg/location_icon.svg" alt="location">
                   </button>
-              </div>  
+              </div>
+              <div class="form-group col-md-12 col-sm-12 p-3">
+                <input
+                class="form-control form-control-sm d-inline box-to-line"
+                type="text"
+                name="addressU"
+                [value]="addressU"
+                placeholder="Area / City" disabled
+              /></div>  
             </div>
   
             <div class="row mt-3 mb-4">
@@ -124,7 +132,7 @@
               <img *ngIf="imagePath" width="50" [src]="imagePath" [alt]="fileName"> 
             </div>
           </div>
-            <div class="d-flex justify-content-center"><button type="submit"  class="btn btn-default btn-block round-primary-btn mb-4 w-50 mt-5">Submit</button></div>
+            <div class="d-flex justify-content-center"><button type="submit"  class="btn btn-default btn-block round-primary-btn w-50 ">Submit</button></div>
             <!-- <div><button type="button" (click)="getDriverDetails()"  class="btn btn-primary btn-block">Driver Details</button> </div>  -->
           </form>
         </div>

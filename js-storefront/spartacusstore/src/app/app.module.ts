@@ -23,6 +23,7 @@ import { FooterComponent } from './home-page-components/footer/footer.component'
 import { AlsayerNavigationComponent } from './home-page-components/alsayer-navigation/alsayer-navigation.component';
 import { ServiceHistoryModule } from './service-history/service-history.module';
 import { defaultStoreFinderConfig } from '@spartacus/core/src/store-finder/config/default-store-finder-config';
+import { MarkAsteriskDirectiveModule } from './directives/mark-asterisk.directive';
 
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -47,7 +48,7 @@ else {
     SigninMenuComponent,
     HeaderMenuComponent,
     FooterComponent,
-    AlsayerNavigationComponent
+    AlsayerNavigationComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,6 +119,7 @@ else {
     MyTicketsModule,
     UpdateProfileModule,
     ServiceHistoryModule,
+    MarkAsteriskDirectiveModule
   ],
   providers: [],
   bootstrap: [AppComponent]
