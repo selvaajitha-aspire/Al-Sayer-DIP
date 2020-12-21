@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.processengine.action.AbstractAction;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -30,11 +31,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class GetTechnicianLocationAction extends AbstractSimpleDecisionAction<RsaRequestProcessModel> {
+public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProcessModel> {
     private static final Logger LOG = Logger.getLogger(GetTechnicianLocationAction.class);
 
     public final String url = AlsayerCoreConstants.ECOM_FSM_URL;
@@ -48,56 +47,84 @@ public class GetTechnicianLocationAction extends AbstractSimpleDecisionAction<Rs
     private ConfigurationService configurationService;
     private ModelService modelService;
 
+    public enum Transition
+    {
+        WAIT, SUCCESS, CANCEL, ERROR ,;
 
-    @Override
-    public Transition executeAction(RsaRequestProcessModel process) throws RetryLaterException, Exception {
+        public static Set<String> getStringValues()
+        {
+            final Set<String> res = new HashSet<String>();
+
+            for (final Transition transition : Transition.values())
+            {
+                res.add(transition.toString());
+            }
+            return res;
+        }
+    }
+
+
+
+
+    public String execute(RsaRequestProcessModel process) throws RetryLaterException, Exception {
         final RsaRequestModel serviceRequest = process.getRsaRequest();
         final CustomerModel customer=serviceRequest.getCustomer();
+        boolean completedFlag=false;
         if (serviceRequest != null)
         {
             try {
-                if (ServiceStatus.CANCELLED.equals(serviceRequest.getStatus()) || ServiceStatus.FAILED.equals(serviceRequest.getStatus())) {
-                    return Transition.NOK;
-                } else {
-                    SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-                    RestTemplate restTemplate = new RestTemplate(requestFactory);
-                    HttpHeaders headers = new HttpHeaders();
-                    headers.add(HEADER_AUTH_KEY, HEDER_AUTH_VALUE);
-                    headers.setContentType(MediaType.APPLICATION_JSON);
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put(EXT_ID_KEY, serviceRequest.getUid());
-                    JSONArray jsonArray = new JSONArray();
-                    jsonArray.add(jsonObject);
-                    JSONObject finalObj = new JSONObject();
-                    finalObj.put(DATA, jsonArray);
+                if (ServiceStatus.CANCELLED.equals(serviceRequest.getStatus())) {
+                    return Transition.CANCEL.toString();
+                }
+                if(ServiceStatus.FAILED.equals(serviceRequest.getStatus())){
+                    return Transition.ERROR.toString();
+                }
+                    else {
 
-                    HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
-                    ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
-                    LOG.debug(AlsayerCoreConstants.RSA_FSM_PROCESS);
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-                    try {
-                        FSMTechnicianResponse responseBody = objectMapper.readValue(response.getBody(), FSMTechnicianResponse.class);
-                        List<Data> data = responseBody.getData();
-                        if(CollectionUtils.isNotEmpty(data)){
-                            DriverDetailsModel driverDetailsModel = getModelService().create(DriverDetailsModel.class);
-                            driverDetailsModel.setLatitude(data.get(0).getP().getLocation().getLatitude());
-                            driverDetailsModel.setLongitude(data.get(0).getP().getLocation().getLongitude());
-                            serviceRequest.setDriverDetails(driverDetailsModel);
-                           if( data.get(0).getSas().getName().equalsIgnoreCase(CLOSED)) {
-                               serviceRequest.setStatus(ServiceStatus.COMPLETED);
-                            }else{
-                                serviceRequest.setStatus(ServiceStatus.IN_PROGRESS);
+                        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+                        RestTemplate restTemplate = new RestTemplate(requestFactory);
+                        HttpHeaders headers = new HttpHeaders();
+                        headers.add(HEADER_AUTH_KEY, HEDER_AUTH_VALUE);
+                        headers.setContentType(MediaType.APPLICATION_JSON);
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put(EXT_ID_KEY, serviceRequest.getUid());
+                        JSONArray jsonArray = new JSONArray();
+                        jsonArray.add(jsonObject);
+                        JSONObject finalObj = new JSONObject();
+                        finalObj.put(DATA, jsonArray);
+
+                        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
+                        ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
+                        LOG.debug(AlsayerCoreConstants.RSA_FSM_PROCESS);
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                        try {
+                            FSMTechnicianResponse responseBody = objectMapper.readValue(response.getBody(), FSMTechnicianResponse.class);
+                            List<Data> data = responseBody.getData();
+                            if (CollectionUtils.isNotEmpty(data)) {
+                                DriverDetailsModel driverDetailsModel = getModelService().create(DriverDetailsModel.class);
+                                driverDetailsModel.setLatitude(data.get(0).getP().getLocation().getLatitude());
+                                driverDetailsModel.setLongitude(data.get(0).getP().getLocation().getLongitude());
+                                serviceRequest.setDriverDetails(driverDetailsModel);
+                                if (data.get(0).getSas().getName().equalsIgnoreCase(CLOSED)) {
+                                    serviceRequest.setStatus(ServiceStatus.COMPLETED);
+                                    completedFlag=true;
+                                    return Transition.SUCCESS.toString();
+                                } else {
+                                    serviceRequest.setStatus(ServiceStatus.IN_PROGRESS);
+                                    getModelService().save(serviceRequest);
+                                    return Transition.WAIT.toString();
+                                }
+
                             }
-                            getModelService().save(serviceRequest);
+
+                        } catch (JsonProcessingException ex) {
+                            ex.printStackTrace();
                         }
 
-                } catch(JsonProcessingException ex){
-                    ex.printStackTrace();
-                }
 
-                return Transition.OK;
-            }
+                    }
+
             }
             catch (final Exception e)
             {
@@ -105,10 +132,11 @@ public class GetTechnicianLocationAction extends AbstractSimpleDecisionAction<Rs
                 {
                     LOG.debug(e);
                 }
-                return Transition.NOK;
+                return Transition.ERROR.toString();
             }
         }
-        return Transition.NOK;
+        return Transition.CANCEL.toString();
+
 
     }
 
@@ -128,5 +156,10 @@ public class GetTechnicianLocationAction extends AbstractSimpleDecisionAction<Rs
 
     public void setConfigurationService(ConfigurationService configurationService) {
         this.configurationService = configurationService;
+    }
+    @Override
+    public Set<String> getTransitions()
+    {
+        return Transition.getStringValues();
     }
 }

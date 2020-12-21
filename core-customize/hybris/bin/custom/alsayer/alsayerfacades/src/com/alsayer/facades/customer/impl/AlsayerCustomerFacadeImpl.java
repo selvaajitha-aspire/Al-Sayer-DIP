@@ -42,10 +42,7 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
         Assert.hasText(registerData.getCivilId(), "The field [civilId] cannot be empty");
         Assert.hasText(registerData.getName(), "The field [name] cannot be empty");
         Assert.hasText(registerData.getArabicName(), "The field [arabicName] cannot be empty");
-        Assert.hasText(registerData.getMobile(), "The field [mobile] cannot be empty");
         Assert.hasText(registerData.getUid(), "The field [uid] cannot be empty");
-
-
         final CustomerModel newCustomer = getModelService().create(CustomerModel.class);
         newCustomer.setLoginDisabled(false);
         setCommonPropertiesForRegister(registerData, newCustomer);
@@ -60,7 +57,7 @@ public class AlsayerCustomerFacadeImpl extends DefaultCustomerFacade implements 
         customerModel.setCivilId(registerData.getCivilId());
         customerModel.setUid(registerData.getUid());
         customerModel.setArabicName(registerData.getArabicName());
-        customerModel.setMobile(registerData.getMobile());
+        customerModel.setEmail(registerData.getEmail());
         customerModel.setSessionLanguage(getCommonI18NService().getCurrentLanguage());
         customerModel.setSessionCurrency(getCommonI18NService().getCurrentCurrency());
         customerModel.setEccCustId(registerData.getEccCustId());

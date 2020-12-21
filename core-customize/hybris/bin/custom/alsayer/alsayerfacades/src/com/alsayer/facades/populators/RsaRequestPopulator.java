@@ -56,9 +56,11 @@ public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequest
     public void populate(RsaRequestModel serviceRequestModel, RsaRequestData serviceRequestData) throws ConversionException {
         if(null != serviceRequestModel && null != serviceRequestData
                 && serviceRequestModel instanceof RsaRequestModel && serviceRequestData instanceof RsaRequestData){
+            serviceRequestData.setUid(serviceRequestModel.getUid());
             if(null != serviceRequestModel.getLatitude()){
                 serviceRequestData.setLatitude(serviceRequestModel.getLatitude());
             }
+
             if(null != serviceRequestModel.getLongitude()){
                 serviceRequestData.setLongitude(serviceRequestModel.getLongitude());
             }

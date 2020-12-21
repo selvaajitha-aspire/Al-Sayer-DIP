@@ -620,9 +620,9 @@
 				<bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
 					<property name="fieldPath" value="password"/>
 				</bean>
-				<bean class="de.hybris.platform.webservicescommons.validators.EmailValidator">
-					<property name="fieldPath" value="uid"/>
-				</bean>
+<!--				<bean class="de.hybris.platform.webservicescommons.validators.EmailValidator">-->
+<!--					<property name="fieldPath" value="uid"/>-->
+<!--				</bean>-->
 			</list>
 		</property>
 	</bean>

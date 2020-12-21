@@ -6,10 +6,17 @@
 		<transition name="NOK" to="failed"/>
 		<transition name="OK" to="getTechnicianLocation"/>
 	</action>
+	<wait id="waitForLocationChange" then="getTechnicianLocation" prependProcessCode="true">
+		<event>waitForTechnician</event>
+		<timeout delay='PT30S' then='getTechnicianLocation'/>
+	</wait>
 	<action id="getTechnicianLocation" bean="getTechnicianLocationAction">
-		<transition name="NOK" to="failed"/>
-		<transition name="OK" to="success"/>
+		<transition name="WAIT" to="waitForLocationChange"/>
+		<transition name="CANCEL" to="failed"/>
+		<transition name="SUCCESS" to="success"/>
+		<transition name="ERROR" to="error"/>
 	</action>
+
 
 	<end id="error" state="ERROR">All went wrong.</end>
 	<end id="failed" state="FAILED">Service request cancelled.</end>
