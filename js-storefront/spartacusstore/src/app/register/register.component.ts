@@ -61,8 +61,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       // lastName: ['', Validators.required],
       arabicName: [''],
       // arabicLastName: ['', Validators.required],
-      mobile: ['',Validators.required],
-      uid: ['', [CustomFormValidators.emailValidator]],
+      uid: ['',Validators.required],
+      email: ['', [CustomFormValidators.emailValidator]],
       password: [
         '',
         [Validators.required, CustomFormValidators.passwordValidator],
@@ -329,9 +329,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   populateUserEccData(userEccData){
     if(!isEmpty(userEccData)){
-      this.registerForm.get("name").patchValue(userEccData.name);
-      this.registerForm.get("arabicName").patchValue(userEccData.arabicName);
-      this.registerForm.get("mobile").patchValue(userEccData.mobile);
+      setFormField(this.registerForm,"name",userEccData.name);
+      setFormField(this.registerForm,"arabicName",userEccData.arabicName);
+      setFormField(this.registerForm,"uid",userEccData.mobile);
       setFormField(this.registerForm,"email",userEccData.email);
       setFormField(this.registerForm,"customerType",userEccData.customerType);
     }else{

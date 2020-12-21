@@ -98,6 +98,7 @@ public class RsaRequestController
         for(RsaRequestData data:dataList)
         {
            final RsaRequestWsDTO rsaRequestWsDTO = new RsaRequestWsDTO();
+           rsaRequestWsDTO.setUid(data.getUid());
            rsaRequestWsDTO.setVehicle( dataMapper.map(data.getVehicle(), VehicleWsDTO.class));
            rsaRequestWsDTO.setDriverDetails(dataMapper.map(data.getDriverDetails(), DriverDetailsWsDTO.class));
            rsaRequestWsDTO.setType(data.getType());

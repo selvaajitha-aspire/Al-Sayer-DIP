@@ -214,7 +214,7 @@ public class CustomerRegistrationController {
 
         validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
-                .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, mobile,civilId,uid,oneTimePassword,customerType");
+                .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, email,civilId,uid,oneTimePassword,customerType");
         boolean userExists = false;
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try {

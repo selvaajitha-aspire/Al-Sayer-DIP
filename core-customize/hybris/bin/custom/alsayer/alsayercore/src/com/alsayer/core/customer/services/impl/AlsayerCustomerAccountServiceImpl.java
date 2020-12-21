@@ -204,8 +204,8 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         Map<String, Object> map = new HashMap<>();
         map.put(NAME, registerData.getName());
         map.put(ARABICNAME, registerData.getArabicName());
-        map.put(MOBILE, registerData.getMobile());
-        map.put(EMAIL, registerData.getUid());
+        map.put(MOBILE, registerData.getUid());
+        map.put(EMAIL, registerData.getEmail());
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
 
