@@ -30,7 +30,6 @@ import { CustomFormValidators, sortTitles } from '@spartacus/storefront';
 import { CommonService } from 'src/services/common/common.services';
 import { setFormField, isEmpty } from '../common/utility';
 
-
 declare var $: any;
 @Component({
   selector: 'app-register',
@@ -353,6 +352,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
     $('#userOTPModal').modal('hide');
     this.subscription.unsubscribe();
     this.userService.resetRegisterUserProcessState();
+  }
+
+  resendOTP(){
+    this.submitCivilId();
+    this.toastr.success("OTP resent.")
   }
   
 }
