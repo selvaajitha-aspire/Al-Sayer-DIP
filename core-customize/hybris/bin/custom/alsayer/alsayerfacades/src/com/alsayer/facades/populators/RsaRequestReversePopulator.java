@@ -62,25 +62,30 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
         serviceRequestModel.setVehicle(vehicleModel);
         serviceRequestModel.setStatus(ServiceStatus.STARTED);
 
-        for(final WarrantyModel warrantyModel: vehicleModel.getWarranties()) {
-            if(warrantyModel.getWarrantyType().contains("14")&& warrantyModel.getWarrantyExpiryDate().after(currentDate)) {
+        if(CollectionUtils.isNotEmpty(vehicleModel.getWarranties())){
+            for(final WarrantyModel warrantyModel: vehicleModel.getWarranties()) {
+                if(warrantyModel.getWarrantyType().contains("14")&& warrantyModel.getWarrantyExpiryDate().after(currentDate)) {
 
-                serviceRequestModel.setType("MUSAADA");
-                if (issueType.equalsIgnoreCase("FLAT_TYRE")) {
-                    serviceRequestModel.setIssue(IssueType.FLAT_TYRE);
+                    serviceRequestModel.setType("MUSAADA");
+                    if (issueType.equalsIgnoreCase("FLAT_TYRE")) {
+                        serviceRequestModel.setIssue(IssueType.FLAT_TYRE);
 
-                } else if (issueType.equalsIgnoreCase("OUT_OF_FUEL")) {
-                    serviceRequestModel.setIssue((IssueType.OUT_OF_FUEL));
-                } else if (issueType.equalsIgnoreCase("DEAD_BATTERY")) {
-                    serviceRequestModel.setIssue((IssueType.DEAD_BATTERY));
-                } else {
-                    serviceRequestModel.setIssue((IssueType.OTHERS_MUSAADA));
+                    } else if (issueType.equalsIgnoreCase("OUT_OF_FUEL")) {
+                        serviceRequestModel.setIssue((IssueType.OUT_OF_FUEL));
+                    } else if (issueType.equalsIgnoreCase("DEAD_BATTERY")) {
+                        serviceRequestModel.setIssue((IssueType.DEAD_BATTERY));
+                    } else {
+                        serviceRequestModel.setIssue((IssueType.OTHERS_MUSAADA));
+                    }
+                    break;
+                }else {
+                    serviceRequestModel.setType("RSA");
+                    serviceRequestModel.setIssue(IssueType.RSA);
                 }
-                break;
-            }else {
-                serviceRequestModel.setType("RSA");
-                serviceRequestModel.setIssue(IssueType.RSA);
             }
+        }else {
+            serviceRequestModel.setType("RSA");
+            serviceRequestModel.setIssue(IssueType.RSA);
         }
         serviceRequestModel.setLatitude(serviceRequestData.getLatitude());
         serviceRequestModel.setLongitude(serviceRequestData.getLongitude());

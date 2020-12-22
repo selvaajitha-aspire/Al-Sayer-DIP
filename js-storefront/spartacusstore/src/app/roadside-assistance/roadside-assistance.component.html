@@ -85,22 +85,16 @@
   
             <div class="row mt-3 mb-4">
             <div class="form-group col-md-6 mb-4">
-              <label>
-                <span for="notes d-block" class="label-content">Notes</span>
-                <!-- <input
-                  class="form-control box-to-line"
-                  type="text"
-                  name="notes"
-                  formControlName="notes"
-                /> -->
-                <textarea 
+              
+              <label><span for="notes d-block" style="float: left;padding-top: 8px;"class="label-content">Notes</span></label>
+                <textarea required
                 class="form-control"
                 name="notes" rows="3" placeholder="Enter text here"
                 formControlName="notes"></textarea>
                 <cx-form-errors
                     [control]="rsaForm.get('notes')"
                   ></cx-form-errors>
-              </label>
+             
             </div>
             <div class="form-group col-md-6 mb-4">
               <div>
