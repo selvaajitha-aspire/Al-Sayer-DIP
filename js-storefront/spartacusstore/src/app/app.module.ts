@@ -9,7 +9,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { translations, translationChunksConfig } from '@spartacus/assets';
 import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule, SiteContextSelectorModule } from '@spartacus/storefront';
 import { OccConfig, ConfigModule, I18nModule, StoreFinderConfig } from '@spartacus/core';
 import { environment } from './../environments/environment';
@@ -22,7 +21,10 @@ import { MyTicketsModule } from './my-tickets/my-tickets.module';
 import { FooterComponent } from './home-page-components/footer/footer.component';
 import { AlsayerNavigationComponent } from './home-page-components/alsayer-navigation/alsayer-navigation.component';
 import { ServiceHistoryModule } from './service-history/service-history.module';
-import { defaultStoreFinderConfig } from '@spartacus/core/src/store-finder/config/default-store-finder-config';
+import { customTranslationResources } from './internationalization/custom-translation-resources';
+import { customTranslationConfig } from './internationalization/translation-config/custom-translation-config';
+
+
 
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -71,8 +73,8 @@ else {
         urlParameters: ['language']
       },
       i18n: {
-        resources: translations,
-        chunks: translationChunksConfig,
+        resources: customTranslationResources,
+        chunks: customTranslationConfig,
         fallbackLang: 'en'
       },
       features: {
