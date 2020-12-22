@@ -49,7 +49,7 @@ public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProces
 
     public enum Transition
     {
-        WAIT, SUCCESS, CANCEL, ERROR ,;
+        WAIT, SUCCESS, CANCEL, ERROR;
 
         public static Set<String> getStringValues()
         {
@@ -68,7 +68,6 @@ public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProces
 
     public String execute(RsaRequestProcessModel process) throws RetryLaterException, Exception {
         final RsaRequestModel serviceRequest = process.getRsaRequest();
-        final CustomerModel customer=serviceRequest.getCustomer();
         boolean completedFlag=false;
         if (serviceRequest != null)
         {
@@ -83,11 +82,12 @@ public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProces
 
                         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
                         RestTemplate restTemplate = new RestTemplate(requestFactory);
+
                         HttpHeaders headers = new HttpHeaders();
                         headers.add(HEADER_AUTH_KEY, HEDER_AUTH_VALUE);
                         headers.setContentType(MediaType.APPLICATION_JSON);
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put(EXT_ID_KEY, serviceRequest.getUid());
+                        jsonObject.put(EXT_ID_KEY, "PM100");
                         JSONArray jsonArray = new JSONArray();
                         jsonArray.add(jsonObject);
                         JSONObject finalObj = new JSONObject();
@@ -112,11 +112,11 @@ public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProces
                                     return Transition.SUCCESS.toString();
                                 } else {
                                     serviceRequest.setStatus(ServiceStatus.IN_PROGRESS);
-                                    getModelService().save(serviceRequest);
                                     return Transition.WAIT.toString();
                                 }
 
                             }
+                            getModelService().save(serviceRequest);
 
                         } catch (JsonProcessingException ex) {
                             ex.printStackTrace();
