@@ -107,14 +107,16 @@ public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProces
                                 serviceRequest.setDriverDetails(driverDetailsModel);
                                 if (data.get(0).getSas().getName().equalsIgnoreCase(CLOSED)) {
                                     serviceRequest.setStatus(ServiceStatus.COMPLETED);
+                                    getModelService().save(serviceRequest);
                                     return Transition.SUCCESS.toString();
                                 } else {
                                     serviceRequest.setStatus(ServiceStatus.IN_PROGRESS);
+                                    getModelService().save(serviceRequest);
                                     return Transition.WAIT.toString();
                                 }
 
                             }
-                            getModelService().save(serviceRequest);
+
 
                         } catch (JsonProcessingException ex) {
                             ex.printStackTrace();
