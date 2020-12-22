@@ -87,7 +87,7 @@ public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProces
                         headers.add(HEADER_AUTH_KEY, HEDER_AUTH_VALUE);
                         headers.setContentType(MediaType.APPLICATION_JSON);
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put(EXT_ID_KEY, "PM100");
+                        jsonObject.put(EXT_ID_KEY, serviceRequest.getUid());
                         JSONArray jsonArray = new JSONArray();
                         jsonArray.add(jsonObject);
                         JSONObject finalObj = new JSONObject();
