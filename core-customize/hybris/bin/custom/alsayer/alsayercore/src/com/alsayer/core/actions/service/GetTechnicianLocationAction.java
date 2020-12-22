@@ -68,7 +68,6 @@ public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProces
 
     public String execute(RsaRequestProcessModel process) throws RetryLaterException, Exception {
         final RsaRequestModel serviceRequest = process.getRsaRequest();
-        boolean completedFlag=false;
         if (serviceRequest != null)
         {
             try {
@@ -108,7 +107,6 @@ public class GetTechnicianLocationAction extends AbstractAction<RsaRequestProces
                                 serviceRequest.setDriverDetails(driverDetailsModel);
                                 if (data.get(0).getSas().getName().equalsIgnoreCase(CLOSED)) {
                                     serviceRequest.setStatus(ServiceStatus.COMPLETED);
-                                    completedFlag=true;
                                     return Transition.SUCCESS.toString();
                                 } else {
                                     serviceRequest.setStatus(ServiceStatus.IN_PROGRESS);
