@@ -254,4 +254,19 @@ cx-navigation-ui h5{
         margin-top: 25px;
     }
 
+    cx-site-context-selector select {
+        background-color: rgba(255,255,255,0);
+    }
+
+}
+
+.required-asterisk{
+    color: #de2d25;
+    //font-weight: bold;
+    margin-left: 1px;
+    font-size: 1.5em;
+}
+
+cx-site-context-selector {
+    color: #dd231b;
 }

@@ -11,11 +11,16 @@ import com.alsayer.occ.dto.ECCCustomerWsDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.hybris.platform.catalog.CatalogVersionService;
+import de.hybris.platform.cmsfacades.dto.MediaFileDto;
+import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.security.SecureToken;
+import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.time.TimeService;
@@ -30,6 +35,9 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,6 +71,12 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
 
     private AlsayerCustomerServicesDaoImpl alsayerCustomerServicesDao;
 
+    @Resource
+    private CatalogVersionService catalogVersionService;
+    public static final String CONTENT_CATALOG="alsayer-spaContentCatalog";
+    public static final String ONLINE = "Online";
+    @Resource
+    public MediaService mediaService;
 
     public void activateUser(@RequestParam(name = "token") String token) throws TokenInvalidatedException {
         final SecureToken data = getSecureTokenService().decryptData(token);
@@ -83,6 +97,38 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         customer.setToken(null);
         customer.setLoginDisabled(false);
         getModelService().save(customer);
+    }
+
+    @Override
+    public boolean updateProfilePhoto(CustomerModel customer, MediaFileDto profilePhoto) throws ParseException {
+        MediaModel media = new MediaModel();
+        getMediaModel(profilePhoto,media);
+        customer.setProfilePicture(media);
+        getModelService().save(customer);
+        return true;
+    }
+
+    private void getMediaModel(MediaFileDto media, MediaModel mediaModel) {
+        mediaModel.setCode(UUID.randomUUID().toString());
+        mediaModel.setRealFileName(media.getName());
+        mediaModel.setSize(media.getSize());
+        mediaModel.setMime(media.getMime());
+        mediaModel.setCatalogVersion(getCatalogVersionService().getCatalogVersion(CONTENT_CATALOG, ONLINE));
+        getModelService().save(mediaModel);
+        populateStream(media, mediaModel);
+
+    }
+
+    private void populateStream(MediaFileDto mediaFile, MediaModel mediaModel) {
+        try (InputStream inputStream = mediaFile.getInputStream())
+        {
+            getMediaService().setStreamForMedia(mediaModel, inputStream);
+            getModelService().save(mediaModel);
+        }
+        catch (final IOException e)
+        {
+            LOG.error(e);
+        }
     }
 
     public ECCCustomerWsDTO getCustomerECCDetails(String code) {
@@ -158,8 +204,8 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
         Map<String, Object> map = new HashMap<>();
         map.put(NAME, registerData.getName());
         map.put(ARABICNAME, registerData.getArabicName());
-        map.put(MOBILE, registerData.getMobile());
-        map.put(EMAIL, registerData.getUid());
+        map.put(MOBILE, registerData.getUid());
+        map.put(EMAIL, registerData.getEmail());
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
 
@@ -252,4 +298,19 @@ public class AlsayerCustomerAccountServiceImpl extends DefaultCustomerAccountSer
     }
 
 
+    public CatalogVersionService getCatalogVersionService() {
+        return catalogVersionService;
+    }
+
+    public void setCatalogVersionService(CatalogVersionService catalogVersionService) {
+        this.catalogVersionService = catalogVersionService;
+    }
+
+    public MediaService getMediaService() {
+        return mediaService;
+    }
+
+    public void setMediaService(MediaService mediaService) {
+        this.mediaService = mediaService;
+    }
 }

@@ -254,7 +254,11 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
-
+                    <attribute qualifier="description" type="java.lang.String">
+                        <description>Waranty Description</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 
@@ -338,7 +342,7 @@
             <itemtype code="Customer" generate="false" autocreate="false">
                 <attributes>
                     <attribute qualifier="civilId" type="java.lang.String">
-                        <description>Driver Name</description>
+                        <description>civilId</description>
                         <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
@@ -348,15 +352,20 @@
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="arabicName" type="java.lang.String">
-                        <description>Driver Name</description>
+                        <description>Arabic Name</description>
                         <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="mobile" type="java.lang.String">
-                    <description>Driver Name</description>
-                    <modifiers read="true" write="true" optional="true"/>
-                    <persistence type="property"/>
-                </attribute>
+                        <description>mobile</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="email" type="java.lang.String">
+                        <description> Email</description>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 

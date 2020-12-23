@@ -44,14 +44,14 @@
            
           <div class="form-group-wrapper left-icon">
             <img src="../../assets/svg/mobile_icon.svg" alt="mobile no">
-            <input type="text" class="form-control" placeholder="Mobile Number" formControlName="mobile" />
-            <cx-form-errors [control]="registerForm.get('mobile')" ></cx-form-errors>
+            <input type="text" class="form-control" placeholder="Mobile Number" formControlName="uid" />
+            <cx-form-errors [control]="registerForm.get('uid')" ></cx-form-errors>
           </div>
 
           <div class="form-group-wrapper left-icon">
             <img src="../../assets/svg/email_icon.svg" alt="email">
-            <input type="text" class="form-control" placeholder="Email id" formControlName="uid" />
-            <cx-form-errors [control]="registerForm.get('uid')" ></cx-form-errors>
+            <input type="text" class="form-control" placeholder="Email id" formControlName="email" />
+            <cx-form-errors [control]="registerForm.get('email')" ></cx-form-errors>
           </div>
 
           <div class="form-group-wrapper left-icon">
@@ -185,7 +185,7 @@ aria-hidden="true">
        
        <div>Didn't receive an OTP?</div>
 
-       <a (click)="submitCivilId()" >
+       <a (click)="resendOTP()" >
         Resend
        </a>
     </div>

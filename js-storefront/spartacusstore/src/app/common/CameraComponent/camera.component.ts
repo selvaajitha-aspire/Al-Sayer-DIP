@@ -21,27 +21,29 @@ declare var $: any;
 
     @Input() formGrp: FormGroup;
     @Input() attachmentId: String;
+    @Input() cameraFacing: string;
 
     @Output()
     getImage = new EventEmitter<any>();
-
+    
     @ViewChild('video', { static: true }) videoElement: ElementRef;
     @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
-    constraints = {
-      video: {
-          facingMode: "environment",
-          width: { ideal:  window.innerWidth },
-          height: { ideal: window.innerHeight }
-      }
-    };
+    constraints : any;
     videoWidth = 0;
     videoHeight = 0;
     currentImage = '';
-  
+
+
     openCamera(event){
         event.preventDefault();
-        
+        this.constraints = {
+          video: {
+              facingMode: isEmpty(this.cameraFacing)?"environment":this.cameraFacing,
+              width: { ideal:  window.innerWidth },
+              height: { ideal: window.innerHeight }
+          }
+        };
         this.videoElement.nativeElement.style.display='block';
         this.canvas.nativeElement.style.display='none';
          this.retakeFlag = false;

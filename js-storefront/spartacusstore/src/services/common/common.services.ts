@@ -120,6 +120,19 @@ export class CommonService {
         return formData;
     }
 
-  
+    submitAttachment(strUrl,formObject,...attachments){
+      if(formObject.valid){
+          const formData = new FormData();
+          
+          if(null != attachments && attachments.length>0){
+              this.appendAttachmentsToFormData(formData,attachments,formObject);   
+          }   
+          
+          return this.postMultipartRequest(strUrl,formData);      
+      }
+      else {
+        formObject.markAllAsTouched();
+      }
+    }
 
 }

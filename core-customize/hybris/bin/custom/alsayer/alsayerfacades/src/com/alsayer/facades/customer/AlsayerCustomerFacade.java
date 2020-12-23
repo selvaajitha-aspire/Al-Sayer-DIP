@@ -1,7 +1,9 @@
 package com.alsayer.facades.customer;
 
 import com.alsayer.occ.dto.ECCCustomerWsDTO;
+import de.hybris.platform.cmsfacades.dto.MediaFileDto;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
@@ -48,5 +50,7 @@ public interface AlsayerCustomerFacade extends CustomerFacade {
     boolean validateOTP(RegisterData registerData) throws ParseException;
 
     public boolean validateOTP(String civilId,String otp) throws ParseException;
+
+    public boolean updateProfilePhoto(MediaFileDto profilePhoto) throws ParseException;
 }
 

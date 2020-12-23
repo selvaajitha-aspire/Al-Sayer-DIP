@@ -21,9 +21,11 @@ import { MyTicketsModule } from './my-tickets/my-tickets.module';
 import { FooterComponent } from './home-page-components/footer/footer.component';
 import { AlsayerNavigationComponent } from './home-page-components/alsayer-navigation/alsayer-navigation.component';
 import { ServiceHistoryModule } from './service-history/service-history.module';
+
 import { customTranslationResources } from './internationalization/custom-translation-resources';
 import { customTranslationConfig } from './internationalization/translation-config/custom-translation-config';
 
+import { MarkAsteriskDirectiveModule } from './directives/mark-asterisk.directive';
 
 
 
@@ -49,7 +51,7 @@ else {
     SigninMenuComponent,
     HeaderMenuComponent,
     FooterComponent,
-    AlsayerNavigationComponent
+    AlsayerNavigationComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,6 +122,7 @@ else {
     MyTicketsModule,
     UpdateProfileModule,
     ServiceHistoryModule,
+    MarkAsteriskDirectiveModule
   ],
   providers: [],
   bootstrap: [AppComponent]

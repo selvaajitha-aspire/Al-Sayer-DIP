@@ -3,13 +3,11 @@ package com.alsayer.occ.controllers;
 
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
 import com.alsayer.occ.constants.AlsayeroccConstants;
-import com.alsayer.occ.dto.AlsayerUserSignUpWsDTO;
-import com.alsayer.occ.dto.CustomerRegistrationResultDTO;
-import com.alsayer.occ.dto.ECCCustomerWsDTO;
-import com.alsayer.occ.dto.RsaRequestWsDTO;
+import com.alsayer.occ.dto.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.hybris.platform.cmsfacades.dto.MediaFileDto;
 import de.hybris.platform.commercefacades.customergroups.CustomerGroupFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
@@ -22,6 +20,7 @@ import de.hybris.platform.webservicescommons.cache.CacheControlDirective;
 import de.hybris.platform.webservicescommons.errors.exceptions.WebserviceValidationException;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import de.hybris.platform.webservicescommons.mapping.FieldSetLevelHelper;
+import de.hybris.platform.webservicescommons.swagger.ApiBaseSiteIdAndUserIdParam;
 import de.hybris.platform.webservicescommons.swagger.ApiBaseSiteIdParam;
 import de.hybris.platform.webservicescommons.swagger.ApiFieldsParam;
 import io.swagger.annotations.Api;
@@ -38,15 +37,20 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -210,7 +214,7 @@ public class CustomerRegistrationController {
 
         validate(user, "user", alsayerSignUpDTOValidator);
         final RegisterData registerData = getDataMapper()
-                .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, mobile,civilId,uid,oneTimePassword,customerType");
+                .map(user, RegisterData.class, "login,eccCustId,password, name, arabicName, email,civilId,uid,oneTimePassword,customerType");
         boolean userExists = false;
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try {
@@ -264,5 +268,35 @@ public class CustomerRegistrationController {
         this.dataMapper = dataMapper;
     }
 
+    @Secured(
+            {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP"})
+    @RequestMapping(value = "/updateProfilePhoto", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = "", notes = "Update Profile Photo for logged in user")
+    @ApiBaseSiteIdAndUserIdParam
+    public ResponseWsDTO updateProfilePhoto(@RequestPart(name = "profilePhoto", required = false) final MultipartFile profilePhoto) {
+        final ResponseWsDTO response = new ResponseWsDTO();
+        try {
+            System.out.println("profilePhoto");
+            MediaFileDto media = null;
+            if (null != profilePhoto && profilePhoto.getSize() > 0)
+            {
+                 media = getFile(profilePhoto, profilePhoto.getInputStream());
+            }
+            customerFacade.updateProfilePhoto(media);
+        } catch (Exception ex) {
+            System.out.println("profilePhoto");
+        }
+        return response;
+    }
 
+    private MediaFileDto getFile(final MultipartFile file, final InputStream inputStream) {
+        final MediaFileDto mediaFile = new MediaFileDto();
+        mediaFile.setInputStream(inputStream);
+        mediaFile.setName(file.getOriginalFilename());
+        mediaFile.setSize(file.getSize());
+        mediaFile.setMime(file.getContentType());
+        return mediaFile;
+    }
 }

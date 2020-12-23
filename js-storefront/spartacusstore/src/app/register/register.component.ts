@@ -14,6 +14,8 @@ import {
   AnonymousConsent,
   AnonymousConsentsConfig,
   AnonymousConsentsService,
+  AuthRedirectService,
+  AuthService,
   ConsentTemplate,
   GlobalMessageEntities,
   GlobalMessageService,
@@ -28,7 +30,6 @@ import { CustomFormValidators, sortTitles } from '@spartacus/storefront';
 import { CommonService } from 'src/services/common/common.services';
 import { setFormField, isEmpty } from '../common/utility';
 
-
 declare var $: any;
 @Component({
   selector: 'app-register',
@@ -36,6 +37,7 @@ declare var $: any;
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
+  sub: Subscription;
   @ViewChild('registrationForm') registrationFormElement: NgForm;
   titles$: Observable<Title[]>;
   oneTimePassword:number;
@@ -58,8 +60,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       // lastName: ['', Validators.required],
       arabicName: [''],
       // arabicLastName: ['', Validators.required],
-      mobile: ['',Validators.required],
-      uid: ['', [Validators.required, CustomFormValidators.emailValidator]],
+      uid: ['',Validators.required],
+      email: ['', [CustomFormValidators.emailValidator]],
       password: [
         '',
         [Validators.required, CustomFormValidators.passwordValidator],
@@ -82,6 +84,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   customer: Promise<void>;
 
   constructor(
+    protected auth: AuthService,
+    protected authRedirectService: AuthRedirectService,
     protected userService: UserService,
     protected globalMessageService: GlobalMessageService,
     protected fb: FormBuilder,
@@ -161,13 +165,27 @@ export class RegisterComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if (this.registerForm.valid) {
       this.commonService.submitForm('registerCustomer',this.registerForm).then(status=>{
-        this.router.go('/login');
-      this.toastr.success('Activation email is sent to your email address.', 'Registration is success!');
+        const { uid, password } = this.registerForm.controls;
+    this.auth.authorize(
+      uid.value.toLowerCase(), // backend accepts lowercase emails only
+      password.value
+    );
+
+    if (!this.sub) {
+      this.sub = this.auth.getUserToken().subscribe((data) => {
+        if (data && data.access_token) {
+          this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+          this.authRedirectService.redirect();
+        }
       });
+    }
+      this.toastr.success('Thank you for registering');
+      });
+    
       $("#otpPopup").modal('hide');
     } else {
       this.registerForm.markAllAsTouched();
-    }
+    }    
   }
 
   registerUser(): void {
@@ -176,10 +194,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     // );
     this.registerService.register(
       this.collectDataFromRegisterForm(this.registerForm.value)
-    ).then(status=>{
-      this.router.go('/login');
-	  this.toastr.success('Activation email is sent to your email address.', 'Registration is success!');
-    });
+    );
   }
 
   titleSelected(title: Title): void {
@@ -313,9 +328,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   populateUserEccData(userEccData){
     if(!isEmpty(userEccData)){
-      this.registerForm.get("name").patchValue(userEccData.name);
-      this.registerForm.get("arabicName").patchValue(userEccData.arabicName);
-      this.registerForm.get("mobile").patchValue(userEccData.mobile);
+      setFormField(this.registerForm,"name",userEccData.name);
+      setFormField(this.registerForm,"arabicName",userEccData.arabicName);
+      setFormField(this.registerForm,"uid",userEccData.mobile);
       setFormField(this.registerForm,"email",userEccData.email);
       setFormField(this.registerForm,"customerType",userEccData.customerType);
     }else{
@@ -337,6 +352,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
     $('#userOTPModal').modal('hide');
     this.subscription.unsubscribe();
     this.userService.resetRegisterUserProcessState();
+  }
+
+  resendOTP(){
+    this.submitCivilId();
+    this.toastr.success("OTP resent.")
   }
   
 }
