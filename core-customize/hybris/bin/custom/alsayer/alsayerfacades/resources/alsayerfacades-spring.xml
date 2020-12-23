@@ -193,6 +193,7 @@
 		<property name="mediaService" ref="mediaService"/>
 		<property name="catalogVersionService" ref="catalogVersionService"/>
 		<property name="rsaRequestCodeGenerator" ref="rsaRequestCodeGenerator"/>
+		<property name="addressReverseConverter" ref="addressReverseConverter"/>
 	</bean>
 
 	<bean id="rsaRequestReverseConverter" parent="abstractPopulatingConverter">

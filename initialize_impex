@@ -472,7 +472,20 @@ INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];to
 ;addr18;Omar Ben Al Khattab St;;;Al Kuwayt;KW;;+81 3519 4163;Sharq - Parts
 ;addr19;Al Shaibi St.;;;Al Kuwayt;KW;;+81 3519 4163;Sulaibiya - Parts
 
+#####Country-Region(IN (isocode)-For Testing) #######
+INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]
+;IN;"India"
+;KW;"Kuwait"
 
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;KW;AH;AH;"Al Ahmadi"
+;KW;FA;FA;"Al Farwaniya"
+;KW;JA;JA;"Al Jahra"
+;KW;KU;KU;"Al Kuwayt"
+;KW;HA;HA;"Hawalli"
+;KW;MU;MU;"Mubarak Al-Kabeer"
+;IN;MH;MH;"Maharashtra"
+;IN;TN;TN;"Tamil Nadu"
 ### CORS ######
 
 INSERT_UPDATE CorsConfigurationProperty;key[unique=true];value;context[default=commercewebservices,unique=true]
