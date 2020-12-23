@@ -231,7 +231,9 @@
 	</bean>
 	<!--My Vehicles  start-->
 
-	<bean id="vehicleDataPopulator" class="com.alsayer.facades.populators.VehicleDataPopulator"></bean>
+	<bean id="vehicleDataPopulator" class="com.alsayer.facades.populators.VehicleDataPopulator">
+		<property name="warrantyConverter" ref="warrantyConverter" />
+	</bean>
 
 	<bean id="vehicleDataConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.alsayer.facades.data.VehicleData"/>
@@ -292,6 +294,46 @@
 		<property name="start" value="${keygen.rsaRequest.code.start}"/>
 		<property name="type" value="${keygen.rsaRequest.code.type}"/>
 		<property name="template" value="${keygen.rsaRequest.code.template}"/>
+	</bean>
+
+
+	<bean id="vehicleDataReversePopulator" class="com.alsayer.facades.populators.VehicleDataReversePopulator">
+		<property name="warrantyReverseConverter" ref="warrantyReverseConverter" />
+	</bean>
+
+	<bean id="vehicleDataReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.core.model.VehicleModel"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="vehicleDataReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="warrantyPopulator" class="com.alsayer.facades.populators.WarrantyPopulator">
+
+	</bean>
+
+	<bean id="warrantyConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.WarrantyData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="warrantyPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="warrantyReversePopulator" class="com.alsayer.facades.populators.WarrantyReversePopulator">
+
+	</bean>
+
+	<bean id="warrantyReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.core.model.WarrantyModel"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="warrantyReversePopulator" />
+			</list>
+		</property>
 	</bean>
 
 </beans>

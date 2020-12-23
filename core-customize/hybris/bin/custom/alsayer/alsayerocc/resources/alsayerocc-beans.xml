@@ -127,6 +127,7 @@
     <bean class="com.alsayer.occ.dto.WarrantyWsDTO">
         <property name="warrantyType" type="String"/>
         <property name="warrantyExpiryDate" type="java.util.Date"/>
+        <property name="description" type="java.lang.String" />
     </bean>
 
 	<bean class="com.alsayer.occ.dto.VehicleListWsDTO">
