@@ -68,32 +68,34 @@ public class GetCustomerDetailsAction extends AbstractSimpleDecisionAction<Store
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(vehicleInfoUrl), entity, String.class);
         LOG.debug(AlsayerCoreConstants.CUST_REG_PROCESS);
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
-            EccVehicleDetailsResponse responseBody = objectMapper.readValue(response.getBody(), EccVehicleDetailsResponse.class);
-            LOG.debug(AlsayerCoreConstants.VEHICLE_RESPONSE+ responseBody.toString());
-            List<E_Vehicle_Info> e_vehicle_infos = responseBody.getE_vehicle_infos();
-            List<VehicleModel> vehicleList = new LinkedList<>();
-            if (e_vehicle_infos.get(0) != null) {
-                for (E_Vehicle_Info vehicleRes : e_vehicle_infos) {
-                    VehicleModel vehicle = new VehicleModel();
-                    vehicle.setChassisNumber(vehicleRes.getVHVIN());
-                    vehicle.setStatus(vehicleRes.getStatus());
-                    vehicle.setPlateNumber(vehicleRes.getDBM_LICEXT());
-                    vehicle.setModline(vehicleRes.getMODLINE());
-                    vehicle.setModyear(vehicleRes.getMODYEAR());
-                    vehicleList.add(vehicle);
-                }
-                if (!vehicleList.isEmpty()) {
+            if (!("\"\"").equals(response.getBody())) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                EccVehicleDetailsResponse responseBody = objectMapper.readValue(response.getBody(), EccVehicleDetailsResponse.class);
+                LOG.debug(AlsayerCoreConstants.VEHICLE_RESPONSE + responseBody.toString());
+                List<E_Vehicle_Info> e_vehicle_infos = responseBody.getE_vehicle_infos();
+                List<VehicleModel> vehicleList = new LinkedList<>();
+                if (e_vehicle_infos.get(0) != null) {
+                    for (E_Vehicle_Info vehicleRes : e_vehicle_infos) {
+                        VehicleModel vehicle = new VehicleModel();
+                        vehicle.setChassisNumber(vehicleRes.getVHVIN());
+                        vehicle.setStatus(vehicleRes.getStatus());
+                        vehicle.setPlateNumber(vehicleRes.getDBM_LICEXT());
+                        vehicle.setModline(vehicleRes.getMODLINE());
+                        vehicle.setModyear(vehicleRes.getMODYEAR());
+                        vehicleList.add(vehicle);
+                    }
+                    if (!vehicleList.isEmpty()) {
 
-                    customer.setVehicles(vehicleList);
-                    modelService.save(customer);
-                    getVehicleWarranty(customer);
+                        customer.setVehicles(vehicleList);
+                        modelService.save(customer);
+                        getVehicleWarranty(customer);
+                    }
                 }
             }
         } catch (JsonProcessingException ex) {
-            ex.printStackTrace();
+            LOG.debug(ex.getMessage());
         }
 
         return Transition.OK;
@@ -131,13 +133,14 @@ public class GetCustomerDetailsAction extends AbstractSimpleDecisionAction<Store
                         warrantyModel.setWarrantyType(warranty.getDescription());
                         Date date = DateUtil.convertStringToDate(warranty.getWty_e_date());
                         warrantyModel.setWarrantyExpiryDate(date);
+                        warrantyModel.setDescription(warranty.getDescription());
                         warrantyModelList.add(warrantyModel);
                     }
                     vehicle.setWarranties(warrantyModelList);
                     getModelService().save(vehicle);
 
                 } catch (JsonProcessingException ex) {
-                    ex.printStackTrace();
+                    LOG.debug(ex.getMessage());
                 }
             }
         }
