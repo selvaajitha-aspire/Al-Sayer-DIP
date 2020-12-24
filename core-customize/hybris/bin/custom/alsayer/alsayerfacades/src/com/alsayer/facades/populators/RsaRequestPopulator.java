@@ -1,29 +1,23 @@
 package com.alsayer.facades.populators;
 
-import com.alsayer.core.constants.GeneratedAlsayerCoreConstants;
+import com.alsayer.core.model.DriverDetailsModel;
+import com.alsayer.core.model.RsaRequestModel;
+import com.alsayer.core.model.VehicleModel;
+import com.alsayer.facades.data.DriverDetailsData;
+import com.alsayer.facades.data.RsaRequestData;
+import com.alsayer.facades.data.VehicleData;
 import de.hybris.platform.cmsfacades.dto.MediaFileDto;
 import de.hybris.platform.cmsfacades.media.impl.DefaultMediaFacade;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
-
-import com.alsayer.core.model.RsaRequestModel;
-import com.alsayer.facades.data.RsaRequestData;
-import de.hybris.platform.servicelayer.i18n.I18NService;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collections;
-import java.util.UUID;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import com.alsayer.facades.data.VehicleData;
-import com.alsayer.core.model.VehicleModel;
-import com.alsayer.core.model.DriverDetailsModel;
-import com.alsayer.facades.data.DriverDetailsData;
+import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import org.apache.log4j.Logger;
 
-import javax.annotation.Resource;
+import java.io.InputStream;
+import java.util.Collections;
 
 public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequestData> {
     private final Logger LOG = Logger.getLogger(DefaultMediaFacade.class);
@@ -61,6 +55,7 @@ public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequest
                 serviceRequestData.setLatitude(serviceRequestModel.getLatitude());
             }
 
+            serviceRequestData.setIssue(serviceRequestModel.getIssue().getCode());
             if(null != serviceRequestModel.getLongitude()){
                 serviceRequestData.setLongitude(serviceRequestModel.getLongitude());
             }

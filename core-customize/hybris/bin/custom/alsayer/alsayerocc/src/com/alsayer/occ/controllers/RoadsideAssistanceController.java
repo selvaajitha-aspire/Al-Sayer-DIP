@@ -114,8 +114,7 @@ public class RoadsideAssistanceController {
             //RsaRequestWsDTO data = mapper.readValue(form, RsaRequestWsDTO.class);
             final List<MediaFileDto> mediaFileDtoList = new ArrayList<>();
 
-            if (null != attachments && attachments.getSize() > 0)
-            {
+            if (null != attachments && attachments.getSize() > 0) {
                 final MediaFileDto media = getFile(attachments, attachments.getInputStream());
                 mediaFileDtoList.add(media);
             }
@@ -142,14 +141,12 @@ public class RoadsideAssistanceController {
         return mediaFile;
     }
 
-    private RsaRequestData storeServiceRequest(RsaRequestWsDTO serviceWsDTO)
-    {
+    private RsaRequestData storeServiceRequest(RsaRequestWsDTO serviceWsDTO) {
         final RsaRequestData serviceRequestData = new RsaRequestData();
         BeanUtils.copyProperties(serviceWsDTO, serviceRequestData);
         final VehicleData vehicleData = new VehicleData();
         final List<MediaFileDto> list = new ArrayList<>();
-        for (final MediaFileDto mediaFileDto : serviceWsDTO.getAttachments())
-        {
+        for (final MediaFileDto mediaFileDto : serviceWsDTO.getAttachments()) {
             final MediaFileDto fileDto = new MediaFileDto();
             BeanUtils.copyProperties(mediaFileDto, fileDto);
             list.add(fileDto);
@@ -157,14 +154,14 @@ public class RoadsideAssistanceController {
         BeanUtils.copyProperties(serviceWsDTO.getVehicle(), vehicleData);
         serviceRequestData.setVehicle(vehicleData);
         serviceRequestData.setAttachments(list);
-        AddressData addressData=new AddressData();
-        CountryData countryData =new CountryData();
-        RegionData regionData=new RegionData();
-       BeanUtils.copyProperties(serviceWsDTO.getAddress(),addressData,"defaultAddress","shippingAddress","billingAddress","firstName","lastName","visibleInAddressBook" );
-       BeanUtils.copyProperties(serviceWsDTO.getAddress().getCountry(),countryData);
-       BeanUtils.copyProperties(serviceWsDTO.getAddress().getRegion(),regionData);
-       addressData.setRegion(regionData);
-       addressData.setCountry(countryData);
+        AddressData addressData = new AddressData();
+        CountryData countryData = new CountryData();
+        RegionData regionData = new RegionData();
+        BeanUtils.copyProperties(serviceWsDTO.getAddress(), addressData, "defaultAddress", "shippingAddress", "billingAddress", "firstName", "lastName", "visibleInAddressBook");
+        BeanUtils.copyProperties(serviceWsDTO.getAddress().getCountry(), countryData);
+        BeanUtils.copyProperties(serviceWsDTO.getAddress().getRegion(), regionData);
+        addressData.setRegion(regionData);
+        addressData.setCountry(countryData);
         serviceRequestData.setAddress(addressData);
         return serviceRequestData;
     }
