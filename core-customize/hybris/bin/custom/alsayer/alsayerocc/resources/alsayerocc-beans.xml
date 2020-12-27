@@ -107,6 +107,7 @@
 		<property name="driverDetails" type="com.alsayer.occ.dto.DriverDetailsWsDTO" />
 		<property name="type" type="java.lang.String" />
 		<property name="status" type="String" />
+        <property name="address" type="de.hybris.platform.commercewebservicescommons.dto.user.AddressWsDTO"/>
 	</bean>
 
 	<bean class="com.alsayer.occ.dto.DriverDetailsWsDTO">

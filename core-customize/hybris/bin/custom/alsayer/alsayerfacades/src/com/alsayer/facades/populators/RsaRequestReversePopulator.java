@@ -5,17 +5,18 @@ import com.alsayer.core.enums.ServiceStatus;
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.model.VehicleModel;
 import com.alsayer.core.model.WarrantyModel;
-import com.alsayer.core.utils.DateUtil;
 import com.alsayer.core.vehicles.services.MyVehiclesService;
 import com.alsayer.facades.data.RsaRequestData;
 import de.hybris.platform.catalog.CatalogVersionService;
-import de.hybris.platform.cmsfacades.data.MediaData;
 import de.hybris.platform.cmsfacades.dto.MediaFileDto;
 import de.hybris.platform.cmsfacades.media.impl.DefaultMediaFacade;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.media.MediaModel;
+import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -26,7 +27,6 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
@@ -47,6 +47,7 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
     public static final String ONLINE = "Online";
     public MediaService mediaService;
 
+    private Converter<AddressData, AddressModel> addressReverseConverter;
 
 
 
@@ -66,16 +67,24 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
             for(final WarrantyModel warrantyModel: vehicleModel.getWarranties()) {
                 if(warrantyModel.getWarrantyType().contains("14")&& warrantyModel.getWarrantyExpiryDate().after(currentDate)) {
 
-                    serviceRequestModel.setType("MUSAADA");
+
                     if (issueType.equalsIgnoreCase("FLAT_TYRE")) {
+                        serviceRequestModel.setType("MUSAADA");
                         serviceRequestModel.setIssue(IssueType.FLAT_TYRE);
 
                     } else if (issueType.equalsIgnoreCase("OUT_OF_FUEL")) {
+                        serviceRequestModel.setType("MUSAADA");
                         serviceRequestModel.setIssue((IssueType.OUT_OF_FUEL));
                     } else if (issueType.equalsIgnoreCase("DEAD_BATTERY")) {
+                        serviceRequestModel.setType("MUSAADA");
                         serviceRequestModel.setIssue((IssueType.DEAD_BATTERY));
-                    } else {
+                    } else if(issueType.equalsIgnoreCase("OTHERS_MUSAADA")){
+                        serviceRequestModel.setType("MUSAADA");
                         serviceRequestModel.setIssue((IssueType.OTHERS_MUSAADA));
+                    }
+                    else if(issueType.equalsIgnoreCase("RSA")){
+                        serviceRequestModel.setType("RSA");
+                        serviceRequestModel.setIssue((IssueType.RSA));
                     }
                     break;
                 }else {
@@ -100,7 +109,8 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
                 serviceRequestModel.setAttachments(Collections.singletonList(mediaModel));
             }
         }
-
+        serviceRequestModel.setAddress(getAddressReverseConverter().convert(serviceRequestData.getAddress()));
+        serviceRequestModel.getAddress().setOwner(serviceRequestModel);
     }
 
     private void createMediaFilePopulator(MediaFileDto media, MediaModel mediaModel) {
@@ -187,6 +197,14 @@ public class RsaRequestReversePopulator implements Populator<RsaRequestData, Rsa
 
     public void setRsaRequestCodeGenerator(PersistentKeyGenerator rsaRequestCodeGenerator) {
         this.rsaRequestCodeGenerator = rsaRequestCodeGenerator;
+    }
+
+    public Converter<AddressData, AddressModel> getAddressReverseConverter() {
+        return addressReverseConverter;
+    }
+
+    public void setAddressReverseConverter(Converter<AddressData, AddressModel> addressReverseConverter) {
+        this.addressReverseConverter = addressReverseConverter;
     }
 }
 

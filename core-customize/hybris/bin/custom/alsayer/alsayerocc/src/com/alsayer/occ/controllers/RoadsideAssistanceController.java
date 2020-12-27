@@ -16,6 +16,9 @@ import com.alsayer.occ.dto.ResponseWsDTO;
 import com.alsayer.occ.dto.RsaRequestWsDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.hybris.platform.cmsfacades.dto.MediaFileDto;
+import de.hybris.platform.commercefacades.user.data.AddressData;
+import de.hybris.platform.commercefacades.user.data.CountryData;
+import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import de.hybris.platform.webservicescommons.swagger.ApiBaseSiteIdAndUserIdParam;
 import io.swagger.annotations.Api;
@@ -154,6 +157,15 @@ public class RoadsideAssistanceController {
         BeanUtils.copyProperties(serviceWsDTO.getVehicle(), vehicleData);
         serviceRequestData.setVehicle(vehicleData);
         serviceRequestData.setAttachments(list);
+        AddressData addressData=new AddressData();
+        CountryData countryData =new CountryData();
+        RegionData regionData=new RegionData();
+       BeanUtils.copyProperties(serviceWsDTO.getAddress(),addressData,"defaultAddress","shippingAddress","billingAddress","firstName","lastName","visibleInAddressBook" );
+       BeanUtils.copyProperties(serviceWsDTO.getAddress().getCountry(),countryData);
+       BeanUtils.copyProperties(serviceWsDTO.getAddress().getRegion(),regionData);
+       addressData.setRegion(regionData);
+       addressData.setCountry(countryData);
+        serviceRequestData.setAddress(addressData);
         return serviceRequestData;
     }
 

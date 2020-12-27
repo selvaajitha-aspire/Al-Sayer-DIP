@@ -18,9 +18,9 @@ $lang=ar
 
 # Create Countries
 UPDATE Region;isocode[unique=true];name[lang=$lang]
-;KW-AH;"الأحمدي"
-;KW-FA;"الفروانية"
-;KW-HA;"الجهراء"
-;KW-KU;"الكويت"
-;KW-JA;"حولي"
-;KW-MU;"مبارك الكبير"
+;AH;"الأحمدي"
+;FA;"الفروانية"
+;HA;"الجهراء"
+;KU;"الكويت"
+;JA;"حولي"
+;MU;"مبارك الكبير"
