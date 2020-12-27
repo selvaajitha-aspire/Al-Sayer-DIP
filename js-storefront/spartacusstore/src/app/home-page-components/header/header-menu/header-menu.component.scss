@@ -120,6 +120,7 @@ $mobile-large: 640px;
  }
 
  .hamburger-menu {
+  display: block;
   position: fixed;
   top: 0;
   background: white;
@@ -176,6 +177,23 @@ $mobile-large: 640px;
   
 }
 
+.hamburger-menu{
+  display: none;
+}
+
+.header-style{
+  display: none;
+}
+
+.device-header-style{
+  display: block;
+  left: 50px;
+  position: absolute;
+}
+.device-icon{
+  // color: #DD231B;
+  font-size: 30px;
+}
   @media screen and (max-height: 450px) {
     .overlay a {font-size: 18px}
     .overlay .closebtn {
@@ -223,7 +241,12 @@ $mobile-large: 640px;
     font-size: 28px;
     color: #dd231b;
   }
+  .header-style{
+    display: block;
+  }
   
+  .device-header-style{
+    display: none;
   }
 
   .cropped1 {
@@ -232,3 +255,4 @@ $mobile-large: 640px;
     object-fit: cover;
     border: 2px solid #dd231b;
   }
+}

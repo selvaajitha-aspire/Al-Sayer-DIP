@@ -42,14 +42,14 @@ label{
 }
 /*Default Style - END*/
 header{
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
     // background-color: var(--fire-engine-red) !important;
 }
 header .SiteLogo {
-    display: none;
+    // display: none;
     position: absolute;
     right: 20px;
     padding: 0 !important;
@@ -79,7 +79,7 @@ cx-breadcrumb  {
 }
 .ServiceTileSection{
     display: block;
-    padding: 20% 5% 5% 2%;
+    padding: 5% 5% 5% 5%;
 }
 .accNavComponent{
     justify-content: left;
@@ -144,13 +144,25 @@ cx-navigation-ui h5{
   .StoreFinderPageTemplate {
       padding: 70px 0px;
   }
+  header{
+      height: 100px !important;
+      background-color: #DD231B !important;
+  }
+  header .SiteLogo{
+      width: 80px !important;
+      top: 0;
+  }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,
+    header .SiteLogo,
     .Section1,
     .Section4,
     .Section5{
         display: none;
+    }   
+    header{
+        position: fixed;
     }
     .LandingPage2Template, .AccountPageTemplate{
         position: relative !important;
@@ -169,7 +181,7 @@ cx-navigation-ui h5{
         
         background-image: url('./assets/background.jpg');
         border-radius: 0 0 6% 6%;
-        
+        padding: 20% 5% 5% 5%;
     }
     .ServiceTileSection app-service-tile{
         line-height: 1 !important;

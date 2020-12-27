@@ -5,10 +5,22 @@
 $desktop: 960px;
 $mobile-large: 640px;
 
+h5{
+    font-weight: 700;
+    font-size: 25px;
+    color: white;
+    text-transform: uppercase;
+}
 .brand-img{
     width: 120%;
     height: auto;
 
+}
+.brand-description{
+    font-weight: 400;
+    color: white;
+    font-size: 18px;
+    line-height: 34.12px;
 }
 
 .brand-img-container{
@@ -47,9 +59,20 @@ $mobile-large: 640px;
 .wrapper{
     width: 100vw;
 }
+.device-brand-view{
+    display: block;
+}
+
+.brand-btn{
+    background-color: white !important;
+    position: relative !important;
+}
+
+
 @media only screen and (max-width: $desktop){
     .brand-description-container-left,
-    .brand-description-container{
+    .brand-description-container,
+    .device-brand-view{
         display: none;
     }
     .brand-img{
@@ -94,5 +117,6 @@ $mobile-large: 640px;
       .mobile-carousel{
           display: block;
       }
+      
 }
 
