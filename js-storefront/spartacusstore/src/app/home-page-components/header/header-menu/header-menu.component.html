@@ -5,29 +5,31 @@
                 <!-- <img src='../../../../assets/icons/menuicon.png'/> -->
                 <i class="fa fa-bars menu-icon" aria-hidden="true"></i>
             </button>
-            <cx-site-context-selector context="language"></cx-site-context-selector>
+            <!-- <cx-site-context-selector context="language"></cx-site-context-selector> -->
         </div>
         
         
         <!-- <div class="header-title">{{title}}</div> -->
-        <div class='logo-wrapper'>
+        <!-- <div class='logo-wrapper'>
             <img src="../../../../assets/icons/alsayerlogo.png" width="55" height="55" [routerLink]='["/"]' >
             
-        </div>
+        </div> -->
+    </div>
+    <div class="device-header-style">
+        <!-- <i class="fa fa-bars menu-icon device-icon mt-4" aria-hidden="true"></i> -->
+        <div class="dropdown">
+            <button class="btn" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-bars menu-icon device-icon mt-4" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown-menu side-drop-down-menu" aria-labelledby="dropdownMenuButton">
+              <app-alsayer-navigation [node]="node$ | async"   [flyout]="false" (toggleMenu)="toggleMenu()"></app-alsayer-navigation>
+            </div>
+          </div>
+          <!-- <cx-site-context-selector context="language"></cx-site-context-selector> -->
     </div>
 </div>
 
-<div class="device-header-style">
-    <!-- <i class="fa fa-bars menu-icon device-icon mt-4" aria-hidden="true"></i> -->
-    <div class="dropdown">
-        <button class="btn" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-bars menu-icon device-icon mt-4" aria-hidden="true"></i>
-        </button>
-        <div class="dropdown-menu side-drop-down-menu" aria-labelledby="dropdownMenuButton">
-          <app-alsayer-navigation [node]="node$ | async"   [flyout]="false" (toggleMenu)="toggleMenu()"></app-alsayer-navigation>
-        </div>
-      </div>
-</div>
+
 
 <div class="overlay-hamburger" (click)='toggleMenu()' [ngClass]="(menuState == 'in')?'mble-menu-block':'mble-menu-none'"></div>
 <!-- [ngStyle]="{'display': menuState == 'in' ? 'block' : 'none' }"  -->

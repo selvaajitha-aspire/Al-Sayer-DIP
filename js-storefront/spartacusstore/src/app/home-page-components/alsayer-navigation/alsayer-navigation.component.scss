@@ -1,6 +1,9 @@
+$desktop: 960px;
+$mobile-large: 640px;
+
 .header-nav-link{
-    padding: 10px 0;
-    color: black;
+    padding: 10px 0 10px 20px;
+    color: white;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -8,4 +11,11 @@
     display: list-item;
     text-align: -webkit-match-parent;
     list-style-type: none;
+}
+
+@media only screen and (max-width: $desktop){
+    .header-nav-link{
+        padding: 10px 0;
+        color: inherit !important;
+    }
 }

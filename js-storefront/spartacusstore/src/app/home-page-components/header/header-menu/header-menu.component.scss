@@ -182,7 +182,7 @@ $mobile-large: 640px;
   display: none;
 }
 
-.header-style{
+.header-wrapper{
   display: none;
 }
 
@@ -190,6 +190,7 @@ $mobile-large: 640px;
   display: block;
   left: 50px;
   position: absolute;
+  top: 0;
 }
 .device-icon{
   color: #DD231B;
@@ -221,6 +222,12 @@ $mobile-large: 640px;
 .mble-menu-none{
   display: none;
 }
+
+.header-style{
+  height: 110px;
+  width: 100vw;
+}
+
   @media screen and (max-height: 450px) {
     .overlay a {font-size: 18px}
     .overlay .closebtn {
@@ -268,7 +275,7 @@ $mobile-large: 640px;
     font-size: 28px;
     color: #dd231b;
   }
-  .header-style{
+  .header-wrapper{
     display: block;
   }
   
@@ -288,6 +295,11 @@ $mobile-large: 640px;
   .mble-menu-none{
     display: none;
   }
+  .header-style{
+    height: auto;
+    width: auto;
+  }
+  
 }
 
 @media only screen and (min-width: $desktop){ 
