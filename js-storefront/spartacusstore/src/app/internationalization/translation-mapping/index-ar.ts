@@ -5,7 +5,7 @@ import { asm } from '../translations/ar/asm';
 import { cart } from '../translations/ar/cart';
 import { checkout } from '../translations/ar/checkout';
 import { common } from '../translations/ar/common';
-import { myAccount } from '../translations/ar/my-Account';
+import { myAccount } from '../translations/ar/my-account';
 import { payment } from '../translations/ar/payment';
 import { product } from '../translations/ar/product';
 import { pwa } from '../translations/ar/pwa';

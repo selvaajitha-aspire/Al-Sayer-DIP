@@ -2,23 +2,28 @@
 <!--
  Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 -->
-<process xmlns="http://www.hybris.de/xsd/processdefinition" start="getCustomerDetails" name="customerRegistrationEmailProcess"
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="createCustomerInECC" name="customerRegistrationEmailProcess"
 		processClass="de.hybris.platform.commerceservices.model.process.StoreFrontCustomerProcessModel" onError="error">
 
 
+	<action id="createCustomerInECC" bean="createCustomerInECC">
+		<transition name="OK" to="success"/>
+		<transition name="NOK" to="getCustomerDetails"/>
+	</action>
 
 	<action id="getCustomerDetails" bean="getCustomerDetails">
 		<transition name="OK" to="getServiceHistory"/>
 		<transition name="NOK" to="error"/>
 	</action>
 	<action id="getServiceHistory" bean="getServiceHistory">
-		<transition name="OK" to="createCustomerInECC"/>
+		<transition name="OK" to="getVehicleInsurances"/>
 		<transition name="NOK" to="error"/>
 	</action>
-	<action id="createCustomerInECC" bean="createCustomerInECC">
-		<transition name="OK" to="generateCustomerRegistrationEmail"/>
+	<action id="getVehicleInsurances" bean="getVehicleInsurances">
+		<transition name="OK" to="success"/>
 		<transition name="NOK" to="error"/>
 	</action>
+
 	<action id="generateCustomerRegistrationEmail" bean="generateCustomerRegistrationEmail">
 		<transition name="OK" to="sendEmail"/>
 		<transition name="NOK" to="error"/>
