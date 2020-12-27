@@ -42,7 +42,8 @@ label{
 }
 /*Default Style - END*/
 header{
-    position: sticky;
+    // position: sticky;
+    position: fixed;
     top: 0;
     z-index: 1000;
     width: 100%;
@@ -146,11 +147,24 @@ cx-navigation-ui h5{
   }
   header{
       height: 100px !important;
-      background-color: #DD231B !important;
+      background-color: transparent !important;
   }
   header .SiteLogo{
       width: 80px !important;
       top: 0;
+  }
+  .Section1{
+    margin-top: 0 !important;
+    max-width: 100vw !important;
+  }
+  .carousel-panel{
+    border-radius: 0 0 180px 0;
+  }
+  .LandingPage2Template .Section1 cx-banner cx-media img{
+    height: 893px !important;
+  }
+  .fa-circle:before{
+      content: "\f068" !important;
   }
 @media only screen and (max-width: $desktop){
     header .SearchBox,
