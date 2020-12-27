@@ -721,6 +721,12 @@
 
 	<bean id="createCustomerInECC" class="com.alsayer.core.actions.service.CreateCustomerInECC">
 		<property name="configurationService" ref="configurationService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<bean id="getVehicleInsurances" class="com.alsayer.core.actions.service.GetVehicleInsurancesAction">
+		<property name="configurationService" ref="configurationService"/>
+		<property name="modelService" ref="modelService"/>
 	</bean>
 
 </beans>

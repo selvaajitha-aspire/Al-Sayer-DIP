@@ -123,6 +123,15 @@
             </targetElement>
         </relation>
 
+        <relation code="VehicleInsuranceRelation" localized="false" autocreate="true">
+            <sourceElement type="Vehicle" qualifier="vehicle" cardinality="one" >
+                <modifiers read="true" write="true" optional="true" />
+            </sourceElement>
+            <targetElement type="Insurance" qualifier="insurances" cardinality="many" collectiontype="list">
+                <modifiers read="true" write="true"  optional="true" />
+            </targetElement>
+        </relation>
+
         <relation code="RsaRequest2Media" generate="true"
                   localized="false" autocreate="true">
             <sourceElement type="RsaRequest" qualifier="rsaRequest"
@@ -339,6 +348,39 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+
+            <itemtype code="Insurance" autocreate="true" generate="true" >
+                <deployment table="Insurance" typecode="12019"/>
+                <attributes>
+                    <attribute qualifier="uid" type="java.lang.String">
+                        <description>Insurance unique ID</description>
+                        <modifiers read="true" write="false" optional="false" initial="true" unique="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="dateOfExpiry" type="java.util.Date">
+                        <description>Expiry Date</description>
+                        <modifiers read="true" write="true" search="true" optional="false" initial="true" unique="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="coverageInfo" type="java.lang.String">
+                        <description>Coverage</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="policyNumber" type="java.lang.String">
+                        <description>Policy Number</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="dateOfIssue" type="java.util.Date">
+                        <description>Issue date</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
             <itemtype code="Customer" generate="false" autocreate="false">
                 <attributes>
                     <attribute qualifier="civilId" type="java.lang.String">

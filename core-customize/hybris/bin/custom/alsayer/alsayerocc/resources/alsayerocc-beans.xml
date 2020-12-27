@@ -148,6 +148,13 @@
         <property name="locationCode" type="String"/>
     </bean>
 
+    <bean class="com.alsayer.occ.dto.InsuranceWSDTO">
+        <property name="dateOfExpiry" type="java.util.Date"/>
+        <property name="coverageInfo" type="String"/>
+        <property name="policyNumber" type="String"/>
+        <property name="dateOfIssue" type="java.util.Date" />
+    </bean>
+
     <bean class="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO">
         <property name="profilePhotoUrl" type="String"/>
         <property name="profilePhoto" type="de.hybris.platform.commercefacades.product.data.ImageData"/>
