@@ -127,6 +127,7 @@ $mobile-large: 640px;
   color: #dd231b;
   height: 100%;
   z-index: 999;
+  overflow-y: scroll;
   // z-index: 99999;
   .hamburger-menu-wrapper {
     padding: 0px 50px;
@@ -286,5 +287,11 @@ $mobile-large: 640px;
   }
   .mble-menu-none{
     display: none;
+  }
+}
+
+@media only screen and (min-width: $desktop){ 
+  .hamburger-menu {
+    display: none !important;
   }
 }
