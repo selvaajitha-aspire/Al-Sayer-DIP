@@ -50,12 +50,12 @@ header{
     // background-color: var(--fire-engine-red) !important;
 }
 header .SiteLogo {
-    // display: none;
     position: absolute;
     right: 20px;
+    top: 0;
     padding: 0 !important;
     margin: 20px;
-    width: 105px !important;
+    width: 85px !important;
     z-index: 9999;
 }
 
@@ -63,7 +63,7 @@ header .SearchBox,
 header .SiteLogin .cx-login-greet,
 header .NavigationBar,
 header .MiniCart,
-header .SiteContext,
+// header .SiteContext,
 header .SiteLinks,
 .Section2A,
 .Section2B,
@@ -92,6 +92,7 @@ cx-breadcrumb  {
 header .SiteLogin{
     // margin-left: 85%;
     width: 100%;
+    padding: 0;
 }
 
 cx-login a{
@@ -149,10 +150,10 @@ cx-navigation-ui h5{
       height: 100px !important;
       background-color: transparent !important;
   }
-  header .SiteLogo{
-      width: 80px !important;
-      top: 0;
-  }
+//   header .SiteLogo{
+//       width: 80px !important;
+//       top: 0;
+//   }
   .Section1{
     margin-top: 0 !important;
     max-width: 100vw !important;
@@ -166,15 +167,48 @@ cx-navigation-ui h5{
   .fa-circle:before{
       content: "\f068" !important;
   }
+  header .SiteContext:after{
+      border-top: none !important;
+      
+  }
+  .SiteContext{
+      position: absolute;
+      top: 25px;
+      padding: 0 !important;
+  }
+  cx-site-context-selector select {
+    background-color: transparent;
+  }
+  cx-site-context-selector select{
+    font-size: 18px;
+}
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,
-    header .SiteLogo,
+    header .SiteLogin,
     .Section1,
     .Section4,
     .Section5{
         display: none;
     }   
+    header .SiteContext{
+        background-color: transparent;
+        position: fixed;
+        top: 5px;
+        left: 58px;
+    }
+    // cx-site-context-selector select{
+    //     font-size: 18px;
+    // }
+    cx-site-context-selector:not(:first-child){
+        border-left: none !important;
+    }
+    .navigation{
+        display: block !important;
+    }
+    .navigation cx-login{
+        display: none !important;
+    }
     header{
         position: fixed;
     }
@@ -220,27 +254,23 @@ cx-navigation-ui h5{
         line-height: 3;
     }
     header .SiteLogo {
-        display: none;
-        position: absolute;
-        // background-color: rgb(221, 35, 27) ;
-        border-radius: 80%;
-        top: 0px;
-        left: 37%;
-        border: 0;
-        margin: 0;
-        width: max-content !important;
+        display: block;
+        width: 55px !important;
+        height: 55px !important;
+        right: 0;
+        margin: 10px;
     }
     .SiteLogo cx-banner:first-child{
         display:none;
       }
-      .SiteLogo cx-banner:last-child{
-        display:block;
-        img{
-            margin: auto;
-            height: 80px;
-            width:90px;
-        }
-      }
+    //   .SiteLogo cx-banner:last-child{
+    //     display:block;
+    //     img{
+    //         margin: auto;
+    //         height: 80px;
+    //         width:90px;
+    //     }
+    //   }
       cx-navigation-ui nav {
         padding: 5px !important;
     }

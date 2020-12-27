@@ -1,4 +1,6 @@
 $red : #DD231B;
+$desktop: 960px;
+$mobile-large: 640px;
 form {
     .form-group-wrapper {
         position: relative; 
@@ -86,3 +88,16 @@ form {
 .logo-section{
     text-align: center;
 }
+
+// .lang-selector{
+//     display: none;
+// }
+
+// @media only screen and (max-width: $desktop){
+//     .lang-selector{
+//         display: block;
+//         position: fixed;
+//         left: 40px;
+//         top: 20px;
+//     }
+// }
