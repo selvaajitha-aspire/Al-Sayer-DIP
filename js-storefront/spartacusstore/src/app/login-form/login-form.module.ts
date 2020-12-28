@@ -10,7 +10,7 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import { LoginFormComponent } from './login-form.component';
-import { FormErrorsModule } from '@spartacus/storefront';
+import { FormErrorsModule, SiteContextSelectorModule } from '@spartacus/storefront';
 
 @NgModule({
   imports: [
@@ -21,6 +21,7 @@ import { FormErrorsModule } from '@spartacus/storefront';
     UrlModule,
     I18nModule,
     FormErrorsModule,
+    SiteContextSelectorModule
   ],
   providers: [
     provideDefaultConfig(<CmsConfig>{
