@@ -188,9 +188,9 @@ $mobile-large: 640px;
 
 .device-header-style{
   display: block;
-  left: 50px;
-  position: absolute;
-  top: 0;
+  // left: 50px;
+  // position: absolute;
+  // top: 0;
 }
 .device-icon{
   color: #DD231B;
@@ -276,7 +276,7 @@ $mobile-large: 640px;
     color: #dd231b;
   }
   .header-wrapper{
-    display: block;
+    display: flex;
   }
   
   .device-header-style{
@@ -300,6 +300,10 @@ $mobile-large: 640px;
     width: auto;
   }
   
+}
+.menu-wrapper{
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media only screen and (min-width: $desktop){ 

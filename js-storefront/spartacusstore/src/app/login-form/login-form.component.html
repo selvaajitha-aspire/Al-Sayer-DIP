@@ -1,50 +1,61 @@
-<!-- <div class="logo-section mt-5">
-  <img src="../../../../assets/icons/alsayerlogo.png" width="36" height="36" [routerLink]='["/"]' >
-</div> -->
-<!-- <div class="lang-selector">
-  <cx-site-context-selector context="language"></cx-site-context-selector>
-</div> -->
-<form class="pt-4" (ngSubmit)="submitForm()" [formGroup]="loginForm">
-    <div class="pb-5">
-        <div class="login-text">Login</div>
-        <div class="login-extra-text">Please enter your details to</div>
-        <div class="login-extra-text">login to the account</div>
-    </div>
-    <div class="form-group-wrapper left-icon mb-3">
-        <img src="../../assets/svg/mobile_icon.svg" alt="mobile no">
-        <input type="text" class="form-control" placeholder="Mobile Number" formControlName="userId" />
-        <cx-form-errors [control]="loginForm.get('userId')"></cx-form-errors>
-    </div>
-    <div class="form-group-wrapper left-and-right-icon mb-3">
-        <img class="left-img" src="../../assets/svg/password_icon.svg" alt="password">
-        <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password" />
-        <img class="right-img" (click)="showPassword = !showPassword" *ngIf="!showPassword" src="../../assets/icons/icn_view.png" alt="view password">
-        <img class="right-img" (click)="showPassword = !showPassword" *ngIf="showPassword" src="../../assets/icons/icn_hide.png" alt="Hide password">
-        
-        <cx-form-errors [control]="loginForm.get('password')"></cx-form-errors>
+<div class="container">
+  <div class="row login-header">
+    <div class="text-center mobile-header-left-align">
+      <div class="lang-selector">
+        <cx-site-context-selector context="language"></cx-site-context-selector>
       </div>
-    <p class="forget-password-text">
-      <a
-        [routerLink]="{ cxRoute: 'forgotPassword' } | cxUrl"
-        aria-controls="reset-password"
-        class="btn-link"
-        >{{ 'loginForm.forgotPassword' | cxTranslate }}</a
-      >
-    </p>
-  
-    <button type="submit" class="btn btn-block round-primary-btn mt-5" [disabled]="!loginForm.valid">
-      Login
-    </button>
-  </form>
-  
-  <div class="register">
-  
-    <ng-container>
-      <a class="a-red"
-        [routerLink]="{ cxRoute: 'register' } | cxUrl"
-        >NEW USER?</a
-      >
-    </ng-container>
-  
+    </div>
+    
+    <div class=" text-center mobile-header-right-align">
+      <img src="../../../../assets/icons/alsayerlogo.png" width="36" height="36" [routerLink]='["/"]' >
+    </div>
+    
+  </div>
+  <div class="row justify-content-center">
+    <form class="pt-4 device-login-view" (ngSubmit)="submitForm()" [formGroup]="loginForm">
+      <div class="pb-5">
+          <div class="login-text">Login</div>
+          <div class="login-extra-text">Please enter your details to</div>
+          <div class="login-extra-text">login to the account</div>
+      </div>
+      <div class="form-group-wrapper left-icon mb-3">
+          <img src="../../assets/svg/mobile_icon.svg" alt="mobile no">
+          <input type="text" class="form-control" placeholder="Mobile Number" formControlName="userId" />
+          <cx-form-errors [control]="loginForm.get('userId')"></cx-form-errors>
+      </div>
+      <div class="form-group-wrapper left-and-right-icon mb-3">
+          <img class="left-img" src="../../assets/svg/password_icon.svg" alt="password">
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password" />
+          <img class="right-img" (click)="showPassword = !showPassword" *ngIf="!showPassword" src="../../assets/icons/icn_view.png" alt="view password">
+          <img class="right-img" (click)="showPassword = !showPassword" *ngIf="showPassword" src="../../assets/icons/icn_hide.png" alt="Hide password">
+          
+          <cx-form-errors [control]="loginForm.get('password')"></cx-form-errors>
+        </div>
+      <p class="forget-password-text">
+        <a
+          [routerLink]="{ cxRoute: 'forgotPassword' } | cxUrl"
+          aria-controls="reset-password"
+          class="btn-link"
+          >{{ 'loginForm.forgotPassword' | cxTranslate }}</a
+        >
+      </p>
+    
+      <button type="submit" class="btn btn-block round-primary-btn mt-5" [disabled]="!loginForm.valid">
+        Login
+      </button>
+    </form>
+    
+    <div class="col-md-12 text-center">
+    
+      <ng-container>
+        <a class="a-red"
+          [routerLink]="{ cxRoute: 'register' } | cxUrl"
+          >NEW USER?</a
+        >
+      </ng-container>
+    
+    </div>
   </div>
   
+    
+</div>

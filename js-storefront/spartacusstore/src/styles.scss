@@ -42,29 +42,20 @@ label{
 }
 /*Default Style - END*/
 header{
-    // position: sticky;
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
     width: 100%;
-    // background-color: var(--fire-engine-red) !important;
-}
-header .SiteLogo {
-    position: absolute;
-    right: 20px;
-    top: 0;
-    padding: 0 !important;
-    margin: 20px;
-    width: 85px !important;
-    z-index: 9999;
 }
 
 header .SearchBox,
 header .SiteLogin .cx-login-greet,
 header .NavigationBar,
 header .MiniCart,
-// header .SiteContext,
+header .SiteContext,
+header .SiteLogo,
 header .SiteLinks,
+.SiteLogin,
 .Section2A,
 .Section2B,
 .Section2C,
@@ -90,7 +81,6 @@ cx-breadcrumb  {
 }
 
 header .SiteLogin{
-    // margin-left: 85%;
     width: 100%;
     padding: 0;
 }
@@ -129,7 +119,6 @@ cx-navigation-ui h5{
   header{
         border-radius: 0px !important;
         height: 50px !important;
-        // background-color: var(--white) !important;
   }
 
   .AccountPageTemplate cx-page-slot {
@@ -150,10 +139,7 @@ cx-navigation-ui h5{
       height: 100px !important;
       background-color: transparent !important;
   }
-//   header .SiteLogo{
-//       width: 80px !important;
-//       top: 0;
-//   }
+
   .Section1{
     margin-top: 0 !important;
     max-width: 100vw !important;
@@ -182,10 +168,25 @@ cx-navigation-ui h5{
   cx-site-context-selector select{
     font-size: 18px;
 }
+.LoginPageTemplate cx-page-slot, .CheckoutLoginPageTemplate cx-page-slot, .AccountPageTemplate cx-page-slot {
+    max-width: 100vw;
+}
+.LeftContentSlot{
+    width: 100vw;
+}
+.LoginPageTemplate cx-page-slot > *, .CheckoutLoginPageTemplate cx-page-slot > *, .AccountPageTemplate cx-page-slot > * {
+    max-width: 100vw;
+}
+.LeftContentSlot,
+.BodyContent{
+    padding-top: 25px !important;
+}
+cx-site-context-selector {
+    margin: 0 !important;
+}
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,
-    header .SiteLogin,
     .Section1,
     .Section4,
     .Section5{
@@ -197,9 +198,7 @@ cx-navigation-ui h5{
         top: 5px;
         left: 58px;
     }
-    // cx-site-context-selector select{
-    //     font-size: 18px;
-    // }
+
     cx-site-context-selector:not(:first-child){
         border-left: none !important;
     }
@@ -214,7 +213,6 @@ cx-navigation-ui h5{
     }
     .LandingPage2Template, .AccountPageTemplate{
         position: relative !important;
-       // top: 10px !important;
     }
     .LandingPage2Template cx-page-slot.Section1 img{
         height: 750px;
@@ -253,50 +251,15 @@ cx-navigation-ui h5{
         text-align: center;
         line-height: 3;
     }
-    header .SiteLogo {
-        display: block;
-        width: 55px !important;
-        height: 55px !important;
-        right: 0;
-        margin: 10px;
-    }
+    
     .SiteLogo cx-banner:first-child{
         display:none;
       }
-    //   .SiteLogo cx-banner:last-child{
-    //     display:block;
-    //     img{
-    //         margin: auto;
-    //         height: 80px;
-    //         width:90px;
-    //     }
-    //   }
+   
       cx-navigation-ui nav {
         padding: 5px !important;
     }
-    // .Section1 > cx-banner{
-    //     display: none;
-    // }
-
-
-    // .ServiceTileSection app-service-tile:nth-child(odd){
-    //     .ServiceTileBannerComponent{
-    //         border-right: 1px solid rgba(0, 0, 0, 0.2);
-    //     }
-        
-    // }
-    // .ServiceTileSection app-service-tile:nth-child(even){
-    //     .ServiceTileBannerComponent{
-    //         border-left: 1px solid rgba(0, 0, 0, 0.2)
-    //     }
-        
-    // }
-    // .ServiceTileSection app-service-tile:nth-last-of-type(-n+2){
-    //     .ServiceTileBannerComponent{
-    //         border-bottom: none;
-    //     }
-        
-    // }
+    
     .LoginPageTemplate {
         height: 100vh !important;
         margin-top: 0 !important;
@@ -318,7 +281,6 @@ cx-navigation-ui h5{
 
 .required-asterisk{
     color: #de2d25;
-    //font-weight: bold;
     margin-left: 1px;
     font-size: 1.5em;
 }
