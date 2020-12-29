@@ -1,7 +1,7 @@
 {
-  "name": "spartacusstore",
-  "short_name": "spartacusstore",
-  "theme_color": "#1976d2",
+  "name": "Alsayer",
+  "short_name": "Alsayer",
+  "theme_color": "#DD231B",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
