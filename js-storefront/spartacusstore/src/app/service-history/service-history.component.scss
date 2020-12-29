@@ -1,6 +1,18 @@
+:root {
+    --dark-gray : #b4b4b4;
+    --white: #ffffff;
+    --silver: #c2c2c2;
+    --fire-engine-red: #dd231b;
+    --malachite : #06D540;
+
+}
+
+$desktop: 960px;
+$mobile-large: 640px;
+
 .my-serviceHistorys-wrapper {
-    padding: 50px 10px 50px 0px;
-    overflow-y: scroll;
+    padding: 100px 10px 50px 0px;
+    // overflow-y: scroll;
     .serviceHistory-wrapper {
         display: flex;
         padding: 6px;
@@ -26,5 +38,13 @@
     }
     .vehicles-wrapper {
         margin-bottom: 30px;
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: $desktop){
+    .my-serviceHistorys-wrapper {
+        padding: 65px 10px 50px 0px;
     }
 }

@@ -184,6 +184,33 @@ cx-navigation-ui h5{
 cx-site-context-selector {
     margin: 0 !important;
 }
+cx-forgot-password {
+    max-width: 960px !important;
+}
+.AccountPageTemplate{
+    padding-bottom: 0px !important;
+}
+cx-update-profile-form {
+    padding-top: 80px;
+}
+html[dir="rtl"] {
+    .header-style{
+        .device-header-style{
+            .side-drop-down-menu{
+                transform: translate3d(-111px, 47px, 0px) !important;
+            }
+        }
+    }
+}
+html[dir="ltr"] {
+  .header-style{
+    .device-header-style{
+        .side-drop-down-menu{
+            transform: translate3d(0px, 47px, 0px) !important;
+            }
+        }
+    }
+}
 @media only screen and (max-width: $desktop){
     header .SearchBox,
     header .MiniCart,
@@ -271,6 +298,7 @@ cx-site-context-selector {
 
     cx-update-profile-form,cx-update-password-form {
         margin-top: 25px;
+        padding-top: 40px;
     }
 
     cx-site-context-selector select {
