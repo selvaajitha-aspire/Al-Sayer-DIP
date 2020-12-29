@@ -1,3 +1,4 @@
+//To hold Key value pairs
 export const user = {
   anonymousConsents: {
     preferences: 'Consent Preferences',
