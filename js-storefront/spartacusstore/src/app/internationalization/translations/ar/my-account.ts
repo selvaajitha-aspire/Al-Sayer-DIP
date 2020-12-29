@@ -124,6 +124,7 @@ export const myAccount = {
       },
       lastNameIsRequired: 'Last name is required.',
       profileUpdateSuccess: 'Personal details successfully updated',
+      updatePassword: 'Update password'
     },
     consentManagementForm: {
       clearAll: 'Clear all',
