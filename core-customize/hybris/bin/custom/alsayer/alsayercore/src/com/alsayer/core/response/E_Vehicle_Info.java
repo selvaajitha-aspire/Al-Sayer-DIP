@@ -27,6 +27,10 @@ public class E_Vehicle_Info {
     @JsonProperty("DBM_LICEXT")
     String DBM_LICEXT;
 
+    @JsonProperty("BRAND")
+    String BRAND;
+
+
     @Override
     public String toString() {
         return "E_Vehicle_Info{" +
@@ -37,6 +41,7 @@ public class E_Vehicle_Info {
                 ", MODYEAR='" + MODYEAR + '\'' +
                 ", civilid='" + civilid + '\'' +
                 ", DBM_LICEXT='" + DBM_LICEXT + '\'' +
+                ", BRAND='" + BRAND + '\'' +
                 '}';
     }
 
@@ -94,5 +99,13 @@ public class E_Vehicle_Info {
 
     public void setDBM_LICEXT(String DBM_LICEXT) {
         this.DBM_LICEXT = DBM_LICEXT;
+    }
+
+    public String getBRAND() {
+        return BRAND;
+    }
+
+    public void setBRAND(String BRAND) {
+        this.BRAND = BRAND;
     }
 }

@@ -6,6 +6,10 @@ import com.alsayer.core.enums.ReqType;
 import com.alsayer.core.enums.ServiceStatus;
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.model.RsaRequestProcessModel;
+import com.alsayer.core.response.E_orderSet;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import net.minidev.json.JSONArray;
@@ -30,8 +34,15 @@ public class CreateServiceRequestAction extends AbstractSimpleDecisionAction<Rsa
     private static final String MILEAGE="MILEAGE";
     private static final String WERKS="WERKS";
     private static final String REMARKS1="REMARKS1";
-    private static final String VBELN="VBELN";
     private static final String RETURN="RETURN";
+    private static final String LATITUDE="LATITUDE";
+    private static final String LONGITUDE="LONGITUDE";
+    private static final String ZIPCODE="ZIPCODE";
+    private static final String STREET="STREET";
+    private static final String GOVERNANCE="GOVERNANCE";
+    private static final String COUNTRY="COUNTRY";
+    private static final String PAID_SERVICE="PAID_SERVICE";
+
     public final String url = AlsayerCoreConstants.SCPT_RSA_POST_URL;
     protected static final String HEADER_AUTH_KEY = "Authorization";
     protected static final String HEDER_AUTH_VALUE = "Basic UzAwMjE4NDAzMzM6T2N0LjIwMTc=";
@@ -47,6 +58,7 @@ public class CreateServiceRequestAction extends AbstractSimpleDecisionAction<Rsa
     public Transition executeAction(RsaRequestProcessModel process) {
         final RsaRequestModel serviceRequest = process.getRsaRequest();
         final String issue=serviceRequest.getIssue().getCode();
+        final AddressModel address=serviceRequest.getAddress();
         final String chassisNumber=serviceRequest.getVehicle().getChassisNumber();
         if (serviceRequest != null)
         {
@@ -69,23 +81,36 @@ public class CreateServiceRequestAction extends AbstractSimpleDecisionAction<Rsa
                     jsonObject.put(MILEAGE,"");
                     jsonObject.put(WERKS,null);
                     jsonObject.put(REMARKS1,"");
-                    jsonObject.put(VBELN,null);
                     jsonObject.put(RETURN,null);
+                    jsonObject.put(LATITUDE,serviceRequest.getLatitude().toString());
+                    jsonObject.put(LONGITUDE,serviceRequest.getLongitude().toString());
+                    jsonObject.put(ZIPCODE,address.getPostalcode());
+                    jsonObject.put(STREET,address.getLine1()+" "+address.getLine2());
+                    jsonObject.put(GOVERNANCE,address.getRegion().getName());
+                    jsonObject.put(COUNTRY,address.getCountry().getIsocode());
+
+
                     JSONArray jsonArray = new JSONArray();
 
-                   if(process.getRsaRequest().getType().equalsIgnoreCase("RSA")){
+                   if(serviceRequest.getType().equalsIgnoreCase("RSA")){
                        jsonObject.put(REQTYPE, ReqType.T.getCode());
                        jsonObject.put(ISSUETYPE, EccIssueType.MR.getCode());
+                       jsonObject.put(PAID_SERVICE,"X");
                    }else {
                        jsonObject.put(REQTYPE, ReqType.M);
                        if(issue.equalsIgnoreCase("OUT_OF_FUEL"))
                             jsonObject.put(ISSUETYPE,EccIssueType.M1.getCode());
-                       if(issue.equalsIgnoreCase("DEAD_BATTERY"))
+
+                       else if(issue.equalsIgnoreCase("DEAD_BATTERY"))
                            jsonObject.put(ISSUETYPE,EccIssueType.M2.getCode());
-                       if(issue.equalsIgnoreCase("FLAT_TYRE"))
+
+                       else if(issue.equalsIgnoreCase("FLAT_TYRE"))
                            jsonObject.put(ISSUETYPE, EccIssueType.M3.getCode());
-                       if(issue.equalsIgnoreCase("OTHERS_MUSAADA"))
+
+                       else if(issue.equalsIgnoreCase("OTHERS_MUSAADA"))
                            jsonObject.put(ISSUETYPE,EccIssueType.M4.getCode());
+
+                       jsonObject.put(PAID_SERVICE,"-");
                    }
                     jsonArray.add(jsonObject);
                     JSONObject finalObj = new JSONObject();
@@ -93,6 +118,13 @@ public class CreateServiceRequestAction extends AbstractSimpleDecisionAction<Rsa
 
                     HttpEntity<Map<String, Object>> entity = new HttpEntity<>(finalObj, headers);
                     ResponseEntity<String> response = restTemplate.postForEntity(getConfigurationService().getConfiguration().getString(url), entity, String.class);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                    E_orderSet responseBody = objectMapper.readValue(response.getBody(), E_orderSet.class);
+                    if(!responseBody.getE_order().getVBELN().isEmpty()) {
+                        serviceRequest.setEccTicketId(responseBody.getE_order().getVBELN());
+                        getModelService().save(serviceRequest);
+                    }
                     return Transition.OK;
                 }
             }

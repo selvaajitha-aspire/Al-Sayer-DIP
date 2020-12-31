@@ -4,7 +4,6 @@ import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.core.model.InsuranceModel;
 import com.alsayer.core.model.VehicleModel;
 import com.alsayer.core.response.InsuranceList;
-import com.alsayer.core.response.InsuranceListSet;
 import com.alsayer.core.response.InsuranceListSetResponse;
 import com.alsayer.core.utils.DateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -66,7 +65,7 @@ public class GetVehicleInsurancesAction extends AbstractSimpleDecisionAction<Sto
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             try {
                 InsuranceListSetResponse responseBody = objectMapper.readValue(response.getBody(), InsuranceListSetResponse.class);
-                List<InsuranceList> insuranceList = responseBody.getInsuranceListSet().getInsuranceList();
+                List<InsuranceList> insuranceList = responseBody.getInsuranceList();
                 customerVehicles.forEach(y -> {
                     List<InsuranceModel> insuranceModelList = new LinkedList<>();
                     insuranceList.forEach(x -> {

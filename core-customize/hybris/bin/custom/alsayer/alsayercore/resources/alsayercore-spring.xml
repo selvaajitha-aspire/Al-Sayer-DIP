@@ -330,7 +330,8 @@
 
 	<bean id="getCustomerDetails" class="com.alsayer.core.actions.service.GetCustomerDetailsAction">
 		<property name="configurationService" ref="configurationService"/>
-
+		<property name="cxSegmentService" ref="cxSegmentService" />
+		<property name="cmsSiteService" ref="cmsSiteService"/>
 		<property name="modelService" ref="modelService"/>
 	</bean>
 	<bean id="getServiceHistory" class="com.alsayer.core.actions.service.GetServiceHistoryAction">
