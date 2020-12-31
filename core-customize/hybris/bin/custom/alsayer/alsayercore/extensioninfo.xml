@@ -12,10 +12,8 @@
                 		
         
         <requires-extension name="acceleratorcms"/>
-                		
-        
         <requires-extension name="solrserver"/>
-                		
+        <requires-extension name="personalizationservices"/>
         
         <coremodule generated="true" manager="com.alsayer.core.jalo.AlsayerCoreManager" packageroot="com.alsayer.core"/>
                 		
