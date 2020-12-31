@@ -585,6 +585,16 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 
+	<!-- Insurances-->
+	<bean id="insurancesService" class="com.alsayer.core.insurance.services.impl.DefaultInsurancesService">
+		<property name="userService" ref="userService"/>
+		<property name="insurancesDao" ref="insurancesDao"/>
+	</bean>
+
+	<bean id="insurancesDao" class="com.alsayer.core.insurance.daos.impl.DefaultInsurancesDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
 	<!--Service Request-->
 	<bean id="rsaRequestService" class="com.alsayer.core.servicerequest.service.impl.DefaultRsaRequestService">
 		<property name="rsaRequestDao" ref="rsaRequestDao"/>
@@ -708,7 +718,7 @@
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
 
-	<!--Service Request-->
+	<!--Service History-->
 	<bean id="serviceHistoryService" class="com.alsayer.core.servicehistory.service.impl.DefaultServiceHistoryService">
 		<property name="serviceHistoryDao" ref="serviceHistoryDao"/>
 		<property name="userService" ref="userService"/>
@@ -718,8 +728,8 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
-	<!--Service Request-->
 
+	<!--Prospect Customer-->
 	<bean id="createCustomerInECC" class="com.alsayer.core.actions.service.CreateCustomerInECC">
 		<property name="configurationService" ref="configurationService"/>
 		<property name="modelService" ref="modelService"/>

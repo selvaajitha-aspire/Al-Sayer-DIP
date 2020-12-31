@@ -336,4 +336,22 @@
 		</property>
 	</bean>
 
+	<!--Insurances-->
+	<bean id="insurancesFacade" class="com.alsayer.facades.insurance.impl.DefaultInsurancesFacade" >
+		<property name="insurancesService" ref="insurancesService"/>
+		<property name="insuranceDataConverter" ref="insuranceDataConverter"/>
+	</bean>
+
+	<bean id="insuranceDataPopulator" class="com.alsayer.facades.populators.InsuranceDataPopulator">
+
+	</bean>
+
+	<bean id="insuranceDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.InsuranceData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="insuranceDataPopulator" />
+			</list>
+		</property>
+	</bean>
 </beans>

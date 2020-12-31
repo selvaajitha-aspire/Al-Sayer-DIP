@@ -1,0 +1,55 @@
+<p>insurance works!</p>
+
+<div class="my-serviceHistorys-wrapper" [ngStyle]="{'height': innerHeight ? innerHeight : 'auto' }">
+    <div class="form-group col-md-6 p-0 vehicles-wrapper">
+        <label>
+            <span for="name" class="label-content d-block">Vehicles</span></label>
+        <fieldset formGroupName="vehicle">
+            <select #chassisNumber (change)="getChasisNumber(chassisNumber.value)" class="form-control form-control-sm d-block w-100 box-to-line"
+                *ngIf="vehicleList | async as vehicles$">
+                <option selected value="" disabled>Select Vehicle</option>
+                <option *ngFor="let vehicle of vehicles$ " [value]="vehicle.chassisNumber">{{vehicle.modline}}
+                    ,{{vehicle.plateNumber}}</option>
+            </select>
+        </fieldset>
+
+    </div>
+
+    <div class="container p-0" *ngIf="insurances | async as insurances$">
+        <div *ngFor="let insurance of insurances$; let i=index" class="box insurances-wrapper col-12 p-0">
+            <div class="d-flex justify-content-between col-11" *ngIf="!insuranceToggle[i]">
+                <span class="insurances-collapse-text">{{insurance.coverageInfo}}</span>
+                <span class="text-right insurances-collapse-text">{{insurance.dateOfExpiry | date: 'mediumDate'}}
+                </span>
+            </div>
+            <div class="col-11" *ngIf="insuranceToggle[i]">
+                <div class="d-flex justify-content-between">
+                    <span class='insurance-open-text-header'>Insurance</span>
+                    <span class="text-right insurance-open-text">{{insurance.coverageInfo}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='insurance-open-text-header'>Expiry Date</span>
+                    <span class="text-right insurance-open-text">{{insurance.dateOfExpiry | date: 'mediumDate'}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='insurance-open-text-header'>Date of Issue</span>
+                    <span class="text-right insurance-open-text">{{insurance.dateOfIssue | date: 'mediumDate'}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class='insurance-open-text-header'>Policy No.</span>
+                    <span class="text-right insurance-open-text">{{insurance.policyNumber}}</span>
+                </div>
+            </div>
+            <div class="col-1 p-0">
+                <span *ngIf="!insuranceToggle[i]" (click)="insuranceToggle[i] = !insuranceToggle[i]">
+                    <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
+                </span>
+                <span *ngIf="insuranceToggle[i]" (click)="insuranceToggle[i] = !insuranceToggle[i]">
+                    <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+</div>
