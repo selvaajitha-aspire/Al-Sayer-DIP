@@ -28,28 +28,28 @@
             </div>
             <div class="col-11" *ngIf="vehicleToggle[i]">
                 <div class="d-flex justify-content-between">
-                    <span class='vehicle-open-text-header'>Model</span>
+                    <span class='vehicle-open-text-header'>{{ 'vehicles.model' | cxTranslate }}</span>
                     <span class="text-right vehicle-open-text">{{vehicle.modline}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span class='vehicle-open-text-header'>Year</span>
+                    <span class='vehicle-open-text-header'>{{ 'vehicles.year' | cxTranslate }}</span>
                     <span class="text-right vehicle-open-text">{{vehicle.modyear}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span class='vehicle-open-text-header'>Plate Number</span>
+                    <span class='vehicle-open-text-header'>{{ 'vehicles.plateNumber' | cxTranslate }}</span>
                     <span class="text-right vehicle-open-text">{{vehicle.plateNumber}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span class='vehicle-open-text-header'>Chasis Number</span>
+                    <span class='vehicle-open-text-header'>{{ 'vehicles.chasisNumber' | cxTranslate }}</span>
                     <span class="text-right vehicle-open-text">{{vehicle.chassisNumber}}</span>
                 </div>
                 <div *ngFor="let warranty of vehicle.warranties" class="warranty-wrapper">
                     <div class="d-flex justify-content-between">
-                        <span class='vehicle-open-text-header'>Warranty Type</span>
+                        <span class='vehicle-open-text-header'>{{ 'vehicles.warrantyType' | cxTranslate }}</span>
                         <span class="text-right vehicle-open-text">{{warranty.warrantyType}}</span>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <span class='vehicle-open-text-header'>Warranty Expiry Date</span>
+                        <span class='vehicle-open-text-header'>{{ 'vehicles.warrantyExpiryDate' | cxTranslate }}</span>
                         <span class="text-right vehicle-open-text">{{warranty.warrantyExpiryDate | date: 'mediumDate'}}</span>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
     </div>
     <ng-template #no_data>
         <div class="text-center">
-            No data available
+            {{ 'vehicles.noDataAvailable' | cxTranslate }}
         </div>
     </ng-template>
 </div>

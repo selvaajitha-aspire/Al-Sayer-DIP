@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register.component';
-import { provideDefaultConfig, CmsConfig, NotAuthGuard, ConfigModule, AuthModule, provideConfigFromMetaTags } from '@spartacus/core';
+import { provideDefaultConfig, CmsConfig, NotAuthGuard, ConfigModule, AuthModule, provideConfigFromMetaTags, I18nModule } from '@spartacus/core';
 import { RouterModule } from '@angular/router';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { FormErrorsModule, SiteContextSelectorModule } from '@spartacus/storefront';
@@ -24,6 +24,7 @@ import { NgOtpInputModule } from  'ng-otp-input';
    RecaptchaModule,
    NgOtpInputModule,
    SiteContextSelectorModule,
+   I18nModule,
    ConfigModule.withConfig(registerOccConfig),
   ],
   providers: [

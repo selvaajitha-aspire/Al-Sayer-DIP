@@ -73,6 +73,18 @@ interface TranslationChunksConfig {
       'loginForm',
       'register',
       'checkoutLogin',
+    ],
+    roadsideAssistance:[
+      'roadsideAssistance'
+    ],
+    vehicles:[
+      'vehicles'
+    ],
+    tickets:[
+      'tickets'
+    ],
+    serviceHistory:[
+      'serviceHistory'
     ]
 
   }

@@ -45,6 +45,10 @@ export const user = {
     },
     wrongEmailFormat: 'This is not a valid email format.',
     guestCheckout: 'Guest Checkout',
+    enterDetails : 'Please enter your details to',
+    loginToAccount : 'login to the account',
+    login : 'Login',
+    newUser : 'NEW USER?'
   },
   register: {
     confirmPassword: {
@@ -86,6 +90,22 @@ export const user = {
     bothPasswordMustMatch: 'Both password must match',
     titleRequired: 'Title is required.',
     postRegisterMessage: 'Please log in with provided credentials.',
+    civilId : 'Civil ID',
+    signUp : 'Signup',
+    enterDetails : 'Please enter your details to',
+    loginAccount: 'login to the account',
+    haveAnAccount: 'Have an account?',
+    login: 'Login',
+    confirmOTP: 'Confirm OTP',
+    submitOTP: 'Submit OTP',
+    continue: 'Continue',
+    otp: 'OTP',
+    receivedOTP: 'You should have received an OTP',
+    enterNumber: 'Please enter the 6 digit number.',
+    invalidOTP: 'Invalid OTP',
+    confirm: 'Confirm',
+    didntReceiveOTP: 'Didn\'t receive an OTP?',
+    resend: 'Resend'
   },
   checkoutLogin: {
     emailAddress: {
