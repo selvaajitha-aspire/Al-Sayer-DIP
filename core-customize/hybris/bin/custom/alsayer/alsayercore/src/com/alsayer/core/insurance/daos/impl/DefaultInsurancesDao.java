@@ -2,7 +2,6 @@ package com.alsayer.core.insurance.daos.impl;
 
 import com.alsayer.core.insurance.daos.InsurancesDao;
 import com.alsayer.core.model.InsuranceModel;
-import com.alsayer.core.model.VehicleModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -24,17 +23,15 @@ public class DefaultInsurancesDao extends AbstractItemDao implements InsurancesD
     private String getInsuranceByChassisAndCustomerQuery(){
         StringBuilder builder = new StringBuilder();
         builder.append(" SELECT {A.pk} FROM {" + InsuranceModel._TYPECODE + " as A ")
-                .append(" JOIN "+ VehicleModel._TYPECODE +" as B on {B.pk} = {A."+ InsuranceModel.VEHICLE+"} } ")
+                .append(" JOIN "+ CustomerModel._TYPECODE +" as B on {B.pk} = {A."+ InsuranceModel.USER+"} } ")
                 .append(" WHERE ")
-                .append(" {B." + VehicleModel.CHASSISNUMBER + "} = ?chassisNo")
-                .append(" AND {B.").append(VehicleModel.CUSTOMER).append("} = ?customer");
+                .append(" {B.").append(CustomerModel.PK).append("} = ?customer");
         return builder.toString();
     }
 
     @Override
-    public List<InsuranceModel> getInsurances(String chassisNo, CustomerModel customer) {
+    public List<InsuranceModel> getInsurancesByCustomer(CustomerModel customer) {
         Map<String,Object> params = new HashMap<>();
-        params.put("chassisNo",chassisNo);
         params.put("customer",customer);
         return getInsuranceList(getInsuranceByChassisAndCustomerQuery()
                 ,params);

@@ -18,8 +18,8 @@ public class DefaultInsurancesFacade implements InsurancesFacade {
     private Converter<InsuranceModel, InsuranceData> insuranceDataConverter;
 
     @Override
-    public List<InsuranceData> getInsuranceByVehicleChassis(String chassisNumber){
-        List<InsuranceModel> vehicles  = getInsurancesService().getInsurancesByChassisNo(chassisNumber);
+    public List<InsuranceData> getInsurance(){
+        List<InsuranceModel> vehicles  = getInsurancesService().getInsurances();
         return Converters.convertAll(vehicles, getInsuranceDataConverter());
 
     }

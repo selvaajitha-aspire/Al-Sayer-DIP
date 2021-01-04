@@ -17,9 +17,8 @@ export class InsuranceService {
 
   constructor(public http:HttpClient, public url:OccEndpointsService) { }
 
-  getInsuranceList(chassisNumber): Observable<any> {
-    const api = this.url.getUrl('getInsurances') + chassisNumber;
-    return this.http.get<any>(api, this.httpOptions).pipe(map(res => res));
+  getInsuranceList(): Observable<any> {
+    return this.http.get<any>(this.url.getUrl('getInsurances'), this.httpOptions).pipe(map(res => res));
   }
 
 }

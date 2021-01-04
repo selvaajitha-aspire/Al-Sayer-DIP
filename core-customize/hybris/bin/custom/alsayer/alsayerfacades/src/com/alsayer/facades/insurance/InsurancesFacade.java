@@ -5,6 +5,6 @@ import com.alsayer.facades.data.InsuranceData;
 import java.util.List;
 
 public interface InsurancesFacade {
-    public List<InsuranceData> getInsuranceByVehicleChassis(String chassisNum);
+    public List<InsuranceData> getInsurance();
 }
 

@@ -9,24 +9,19 @@ import { RoadsideAssistanceService } from 'src/services/roadside-assistance/road
 })
 export class InsuranceComponent implements OnInit {
   insurances;
-  vehicleList;
   insuranceToggle = {};
   innerHeight: any = 'auto';
-  selectedChassisNumber = '';
+  
 
-  constructor( protected service:InsuranceService,
-    private assistanceService: RoadsideAssistanceService ) { }
+  constructor( protected service:InsuranceService ) { }
 
   ngOnInit(): void {
     this.innerHeight = window && window.innerHeight;
     this.innerHeight = this.innerHeight ? this.innerHeight-120 + 'px': 'auto';
-    this.vehicleList=this.assistanceService.getVehicles() || [];
+    this.insurances=this.service.getInsuranceList() || [];
   }
 
-  getChasisNumber(chassisNumber) {
-    this.selectedChassisNumber = chassisNumber;
-    this.insurances=this.service.getInsuranceList(chassisNumber) || [];
-  }
+ 
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {

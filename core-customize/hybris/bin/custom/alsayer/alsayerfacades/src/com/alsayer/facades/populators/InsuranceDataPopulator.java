@@ -14,6 +14,8 @@ public class InsuranceDataPopulator  implements Populator<InsuranceModel, Insura
             insuranceData.setDateOfIssue(insuranceModel.getDateOfIssue());
             insuranceData.setCoverageInfo(insuranceModel.getCoverageInfo());
             insuranceData.setPolicyNumber(insuranceModel.getPolicyNumber());
+            insuranceData.setChassisNumber(insuranceModel.getChassisNumber());
+            insuranceData.setPlateNumber(insuranceModel.getPlateNumber());
         }
     }
 }

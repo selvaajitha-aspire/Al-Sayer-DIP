@@ -13,7 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.LinkedList;
@@ -43,14 +46,13 @@ public class InsuranceController {
 
     @Secured(
             {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP"})
-    @RequestMapping(value = "/getInsurances/{chassisNo}", method = RequestMethod.GET,
+    @RequestMapping(value = "/getInsurances", method = RequestMethod.GET,
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
-    @ApiOperation(value = "Get Insurances of Vehicle by chassis number", notes = "Only registered users can get insurance details")
+    @ApiOperation(value = "Get Insurances of Vehicle", notes = "Only registered users can get insurance details")
     public List<InsuranceWSDTO> getDriverDetails(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
-                                               @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields,
-                                               @ApiParam(value = "Vehicle chassis number") @PathVariable("chassisNo") String chassisNo) {
-        List<InsuranceData> insuranceDataList = insurancesFacade.getInsuranceByVehicleChassis(chassisNo);
+                                               @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields) {
+        List<InsuranceData> insuranceDataList = insurancesFacade.getInsurance();
         if (CollectionUtils.isNotEmpty(insuranceDataList)) {
             return dataMapper.mapAsList(insuranceDataList, InsuranceWSDTO.class, fields);
         }

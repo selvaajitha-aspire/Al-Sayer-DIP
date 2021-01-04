@@ -15,9 +15,9 @@ public class DefaultInsurancesService implements InsurancesService {
     private UserService userService;
 
     @Override
-    public List<InsuranceModel> getInsurancesByChassisNo(String chassisNumber){
+    public List<InsuranceModel> getInsurances(){
        final CustomerModel customer= (CustomerModel) getUserService().getCurrentUser();
-        return getInsurancesDao().getInsurances(chassisNumber,customer);
+        return getInsurancesDao().getInsurancesByCustomer(customer);
     }
 
     public InsurancesDao getInsurancesDao() {

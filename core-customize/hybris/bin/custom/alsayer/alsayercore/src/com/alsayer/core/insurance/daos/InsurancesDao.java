@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface InsurancesDao {
 
-    public List<InsuranceModel> getInsurances(final String chassis,final CustomerModel customer);
+    public List<InsuranceModel> getInsurancesByCustomer(final CustomerModel customer);
 }
 
