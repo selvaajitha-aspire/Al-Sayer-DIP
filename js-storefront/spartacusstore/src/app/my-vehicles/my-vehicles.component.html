@@ -18,7 +18,7 @@
     </div>
 </div> -->
 
-<div class="my-vehicles-wrapper" [ngStyle]="{'height': innerHeight ? innerHeight : 'auto' }" >
+<div class="my-vehicles-wrapper" [ngStyle]="{'min-height': innerHeight ? innerHeight : 'auto' }" >
     <div class="container p-0" *ngIf="vehicleList | async as vehicles$;else no_data">
         <div *ngFor="let vehicle of vehicles$; let i=index" class="box vehicle-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!vehicleToggle[i]">

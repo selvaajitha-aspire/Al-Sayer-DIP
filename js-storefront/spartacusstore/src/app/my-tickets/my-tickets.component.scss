@@ -62,6 +62,10 @@ thead{
     color: #06D540;
 }
 
+.my-tickets-wrapper{
+    padding: 100px 10px 50px 0px;
+}
+
 @media only screen and (max-width: $desktop){
     .tileBannerComponent{
         width: 50%;
@@ -73,9 +77,8 @@ thead{
     .location-btn{
         font-size: 14px !important;
     }
+    .my-tickets-wrapper{
+        padding: 65px 10px 50px 0px;
+    }
 }
 
-.my-tickets-wrapper{
-    padding: 50px 10px 50px 0px;
-    overflow-y: scroll;
-}

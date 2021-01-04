@@ -80,7 +80,7 @@
 </div> -->
 
 
-<div class="my-tickets-wrapper" [ngStyle]="{'height': innerHeight ? innerHeight : 'auto' }">
+<div class="my-tickets-wrapper" [ngStyle]="{'min-height': innerHeight ? innerHeight : 'auto' }">
     <div class="container p-0" *ngIf="ticketsList | async as ticket$;else no_data" >
         <div *ngFor="let ticket of ticket$; let i=index" class="box ticket-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!ticketToggle[i]">
