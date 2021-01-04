@@ -52,7 +52,7 @@ INSERT_UPDATE ServiceTileBannerComponent;$contentCV[unique=true];uid[unique=true
 ;;MyServiceHistoryComponent;My Service History Component;MyServiceHistoryComponent;/my-account/my-services
 ;;CarReplacementComponent;Car Replacement Component;CarReplacementComponent;/my-services/car-replacement
 ;;AccesoriesComponent;Car Accesories Component;AccesoriesComponent;/my-services/accessories
-;;InsuranceComponent;Car Insurance Component;InsuranceComponent;/my-services/insurance
+;;InsuranceComponent;Car Insurance Component;InsuranceComponent;/insurances
 ;;TyresComponent;Car Tyres Component;TyresComponent;/my-services/tyres
 ;;ServiceAppointmentComponent;Car Service Appointment Component;ServiceAppointmentComponent;/my-services/service-appointment
 
@@ -121,6 +121,7 @@ UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$
 # CMS Navigation Node
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 ;;MyAccountNavNode;""
+
 
 
 ##### Brand Banner Images Component
@@ -204,6 +205,27 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 ;;ServiceHistoryPage;Service History
+
+### My Purchases Page ####
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;MyPurchasesPage;My Purchases Page;AccountPageTemplate;/my-account/my-purchases
+
+INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType;&componentRef
+;;MyPurchasesComponent;My Purchases Component;MyPurchasesComponent;MyPurchasesComponent
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-MyPurchasesPage;Side Content Slot for Services;true;;;;
+;;BodyContent-MyPurchasesPage;Body Content Slot for Services;true;MyPurchasesComponent;;;
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='MyPurchasesPage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-Purchases-Slot;SideContent;;SideContent-MyPurchasesPage;;;
+;;BodyContent-Purchases-Slot;BodyContent;;BodyContent-MyPurchasesPage;;;
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;MyPurchasesPage;My Purchases
 
 ### Vehicles Page ####
 

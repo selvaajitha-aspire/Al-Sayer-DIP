@@ -43,13 +43,11 @@ public class GetVehicleInsurancesAction extends AbstractSimpleDecisionAction<Sto
     @Override
     public Transition executeAction(StoreFrontCustomerProcessModel storeFrontCustomerProcessModel) throws RetryLaterException, Exception {
         CustomerModel customer = storeFrontCustomerProcessModel.getCustomer();
-        List<VehicleModel> customerVehicles = customer.getVehicles();
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         RestTemplate restTemplate = new RestTemplate(requestFactory);
         HttpHeaders headers = new HttpHeaders();
         headers.add(HEADER_AUTH_KEY, HEDER_AUTH_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
-
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(CIVILID, customer.getCivilId());
         JSONArray jsonArray = new JSONArray();
@@ -65,27 +63,23 @@ public class GetVehicleInsurancesAction extends AbstractSimpleDecisionAction<Sto
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             try {
                 InsuranceListSetResponse responseBody = objectMapper.readValue(response.getBody(), InsuranceListSetResponse.class);
-                List<InsuranceList> insuranceList = responseBody.getInsuranceList();
-                customerVehicles.forEach(y -> {
-                    List<InsuranceModel> insuranceModelList = new LinkedList<>();
-                    insuranceList.forEach(x -> {
-
-                        if (y.getChassisNumber().equalsIgnoreCase(x.getChassisNumber())) {
-                            InsuranceModel insuranceModel = new InsuranceModel();
-                            insuranceModel.setUid(UUID.randomUUID().toString());
-                            Date expiryDate = DateUtil.convertStringToDate(x.getDateOfExpiry());
-                            insuranceModel.setDateOfExpiry(expiryDate);
-                            Date issueDate = DateUtil.convertStringToDate(x.getDateOfIssue());
-                            insuranceModel.setDateOfIssue(issueDate);
-                            insuranceModel.setCoverageInfo(x.getCoverageInfo());
-                            insuranceModel.setPolicyNumber(x.getPolicyNumber());
-                            insuranceModelList.add(insuranceModel);
-                        }
+                final List<InsuranceModel> insuranceModelList = new LinkedList<>();
+                responseBody.getInsuranceList().forEach(x -> {
+                        InsuranceModel insuranceModel = new InsuranceModel();
+                        insuranceModel.setUid(UUID.randomUUID().toString());
+                        Date expiryDate = DateUtil.convertStringToDate(x.getDateOfExpiry());
+                        insuranceModel.setDateOfExpiry(expiryDate);
+                        Date issueDate = DateUtil.convertStringToDate(x.getDateOfIssue());
+                        insuranceModel.setDateOfIssue(issueDate);
+                        insuranceModel.setCoverageInfo(x.getCoverageInfo());
+                        insuranceModel.setPolicyNumber(x.getPolicyNumber());
+                        insuranceModel.setChassisNumber(x.getChassisNumber().isEmpty()?"":x.getChassisNumber());
+                        insuranceModel.setPlateNumber(x.getPlateNumber().isEmpty()?"":x.getPlateNumber());
+                        insuranceModelList.add(insuranceModel);
                     });
-                    y.setInsurances(insuranceModelList);
-                    getModelService().save(y);
+                    customer.setInsurances(insuranceModelList);
+                    getModelService().save(customer);
                     LOG.debug(AlsayerCoreConstants.INSURANCE_ACTION_MSG);
-                });
             } catch (JsonProcessingException ex) {
                 LOG.error(ex + AlsayerCoreConstants.INSURANCE_ERR_MSG);
             }

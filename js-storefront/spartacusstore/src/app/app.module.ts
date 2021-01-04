@@ -26,6 +26,7 @@ import { customTranslationResources } from './internationalization/custom-transl
 import { customTranslationConfig } from './internationalization/translation-config/custom-translation-config';
 
 import { MarkAsteriskDirectiveModule } from './directives/mark-asterisk.directive';
+import { InsuranceModule } from './insurance/insurance.module';
 
 
 
@@ -122,7 +123,8 @@ else {
     MyTicketsModule,
     UpdateProfileModule,
     ServiceHistoryModule,
-    MarkAsteriskDirectiveModule
+    MarkAsteriskDirectiveModule,
+    InsuranceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
