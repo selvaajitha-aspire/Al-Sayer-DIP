@@ -1,45 +1,72 @@
-<p>insurance works!</p>
+<div class="container my-insurance-wrapper" [ngStyle]="{'min-height': innerHeight ? innerHeight : 'auto' }">
+    <div class="row">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#insuranceAccordian"
+                            aria-expanded="false" aria-controls="insuranceAccordian">
+                            Insurances
+                        </a>
+                    </h4>
 
-<div class="my-insurance-wrapper" [ngStyle]="{'height': innerHeight ? innerHeight : 'auto' }">
-    <div class="container p-0" *ngIf="insurances | async as insurances$">
-        <div *ngFor="let insurance of insurances$; let i=index" class="box insurances-wrapper col-12 p-0">
-            <div class="d-flex justify-content-between col-11" *ngIf="!insuranceToggle[i]">
-                <span class="insurances-collapse-text">{{insurance.coverageInfo}}</span>
-                <span class="text-right insurances-collapse-text">{{insurance.dateOfExpiry | date: 'mediumDate'}}
-                </span>
+                </div>
+                <div id="insuranceAccordian" class="panel-collapse collapse" role="tabpanel"
+                    aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <div>
+                            <div class="container p-0" *ngIf="insurances | async as insurances$">
+                                <div *ngFor="let insurance of insurances$; let i=index"
+                                    class="box insurances-wrapper col-12 p-0">
+                                    <div class="d-flex justify-content-between col-11" *ngIf="!insuranceToggle[i]">
+                                        <span class="insurances-collapse-text">{{insurance.coverageInfo}}</span>
+                                        <span
+                                            class="text-right insurances-collapse-text">{{insurance.dateOfExpiry | date: 'mediumDate'}}
+                                        </span>
+                                    </div>
+                                    <div class="col-11" *ngIf="insuranceToggle[i]">
+                                        <div class="d-flex justify-content-between">
+                                            <span class='insurance-open-text-header'>Insurance</span>
+                                            <span
+                                                class="text-right insurance-open-text">{{insurance.coverageInfo}}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class='insurance-open-text-header'>Expiry Date</span>
+                                            <span
+                                                class="text-right insurance-open-text">{{insurance.dateOfExpiry | date: 'mediumDate'}}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class='insurance-open-text-header'>Date of Issue</span>
+                                            <span
+                                                class="text-right insurance-open-text">{{insurance.dateOfIssue | date: 'mediumDate'}}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class='insurance-open-text-header'>Policy No.</span>
+                                            <span
+                                                class="text-right insurance-open-text">{{insurance.policyNumber}}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class='insurance-open-text-header'>Plate No.</span>
+                                            <span
+                                                class="text-right insurance-open-text">{{insurance.plateNumber}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 p-0">
+                                        <span *ngIf="!insuranceToggle[i]" class="cursor-pointer"
+                                            (click)="insuranceToggle[i] = !insuranceToggle[i]">
+                                            <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
+                                        </span>
+                                        <span *ngIf="insuranceToggle[i]" class="cursor-pointer"
+                                            (click)="insuranceToggle[i] = !insuranceToggle[i]">
+                                            <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-11" *ngIf="insuranceToggle[i]">
-                <div class="d-flex justify-content-between">
-                    <span class='insurance-open-text-header'>Insurance</span>
-                    <span class="text-right insurance-open-text">{{insurance.coverageInfo}}</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span class='insurance-open-text-header'>Expiry Date</span>
-                    <span class="text-right insurance-open-text">{{insurance.dateOfExpiry | date: 'mediumDate'}}</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span class='insurance-open-text-header'>Date of Issue</span>
-                    <span class="text-right insurance-open-text">{{insurance.dateOfIssue | date: 'mediumDate'}}</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span class='insurance-open-text-header'>Policy No.</span>
-                    <span class="text-right insurance-open-text">{{insurance.policyNumber}}</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span class='insurance-open-text-header'>Plate No.</span>
-                    <span class="text-right insurance-open-text">{{insurance.plateNumber}}</span>
-                </div>
-            </div>
-            <div class="col-1 p-0">
-                <span *ngIf="!insuranceToggle[i]" (click)="insuranceToggle[i] = !insuranceToggle[i]">
-                    <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
-                </span>
-                <span *ngIf="insuranceToggle[i]" (click)="insuranceToggle[i] = !insuranceToggle[i]">
-                    <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
-                </span>
-            </div>
-
-
         </div>
     </div>
 </div>
