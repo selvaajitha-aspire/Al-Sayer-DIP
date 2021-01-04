@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyTicketsComponent } from './my-tickets.component';
-import { CmsConfig, ConfigModule } from '@spartacus/core';
+import { CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
 import { ticketsOccConfig } from '../config/tickets-config';
 
 
@@ -11,6 +11,7 @@ import { ticketsOccConfig } from '../config/tickets-config';
   declarations: [MyTicketsComponent],
   imports: [
     CommonModule,
+    I18nModule,
     ConfigModule.withConfig(ticketsOccConfig),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {

@@ -1,195 +1,161 @@
 <section class="page-section container">
   <div class="row justify-content-center">
+    <div class="row w-100 login-header">
+      <div class="text-center mobile-header-left-align">
+        <div class="lang-selector">
+          <cx-site-context-selector context="language"></cx-site-context-selector>
+        </div>
+      </div>
+      <div class="text-center mobile-header-right-align">
+        <img src="../../../../assets/icons/alsayerlogo.png" width="36" height="36" [routerLink]='["/"]'>
+      </div>
+
+    </div>
     <div class="col-md-6 p-0">
       <div class="section">
-          <div class="text-center mb-2">
-            <img src="../../../../assets/icons/alsayerlogo.png" width="36" height="36" [routerLink]='["/"]' >
+
+        <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm">
+
+          <input type="hidden" class="form-control" formControlName="customerType" />
+          <div class="pb-5 pt-3">
+            <div class="signup-text">{{ 'register.signUp' | cxTranslate }}</div>
+            <div class="signup-extra-text">{{ 'register.enterDetails' | cxTranslate }}</div>
+            <div class="signup-extra-text">{{ 'register.loginAccount' | cxTranslate }}</div>
           </div>
-          <form (ngSubmit)="submitForm()" [formGroup]="registerForm" #registrationForm="ngForm" >
-            <!-- <input
-              class=""
-              type="hidden" autocomplete="off"
-              name="userCivilId"
-             [(ngModel)]="userCivilId"
-            /> -->
-            <input type="hidden" class="form-control" formControlName="customerType" />
-            <div class="pb-5 pt-3">
-              <div class="signup-text">Signup</div>
-              <div class="signup-extra-text">Please enter your details to</div>
-              <div class="signup-extra-text">login to the account</div>
-            </div>
           <div class="form-group-wrapper left-icon">
             <img src="../../assets/svg/user_icon.svg" alt="Name">
             <input type="text" class="form-control" placeholder="Name" formControlName="name" />
-            <cx-form-errors [control]="registerForm.get('name')" ></cx-form-errors>
+            <cx-form-errors [control]="registerForm.get('name')"></cx-form-errors>
           </div>
-
-          <!-- <div class="form-group-wrapper left-icon">
-            <img src="../../assets/icons/icn_myaccount.png" alt="last name">
-            <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" />
-            <cx-form-errors [control]="registerForm.get('lastName')" ></cx-form-errors>
-          </div> -->
-
           <div class="form-group-wrapper left-icon">
             <img src="../../assets/svg/user_icon.svg" alt="Arabic Name">
             <input type="text" class="form-control" placeholder="Arabic Name" formControlName="arabicName" />
-            <cx-form-errors [control]="registerForm.get('arabicName')" ></cx-form-errors>
+            <cx-form-errors [control]="registerForm.get('arabicName')"></cx-form-errors>
           </div>
 
-          <!-- <div class="form-group-wrapper left-icon">
-            <img src="../../assets/icons/icn_myaccount.png" alt="arabic last name">
-            <input type="text" class="form-control" placeholder="Last Name (arabic)" formControlName="arabicLastName" />
-            <cx-form-errors [control]="registerForm.get('arabicLastName')" ></cx-form-errors>
-          </div> -->
-           
           <div class="form-group-wrapper left-icon">
             <img src="../../assets/svg/mobile_icon.svg" alt="mobile no">
             <input type="text" class="form-control" placeholder="Mobile Number" formControlName="uid" />
-            <cx-form-errors [control]="registerForm.get('uid')" ></cx-form-errors>
+            <cx-form-errors [control]="registerForm.get('uid')"></cx-form-errors>
           </div>
 
           <div class="form-group-wrapper left-icon">
             <img src="../../assets/svg/email_icon.svg" alt="email">
             <input type="text" class="form-control" placeholder="Email id" formControlName="email" />
-            <cx-form-errors [control]="registerForm.get('email')" ></cx-form-errors>
+            <cx-form-errors [control]="registerForm.get('email')"></cx-form-errors>
           </div>
 
           <div class="form-group-wrapper left-icon">
             <img src="../../assets/svg/password_icon.svg" alt="Password">
             <input type="password" class="form-control" placeholder="Password" formControlName="password" />
-            <cx-form-errors [control]="registerForm.get('password')" ></cx-form-errors>
+            <cx-form-errors [control]="registerForm.get('password')"></cx-form-errors>
           </div>
 
           <div class="form-group-wrapper left-and-right-icon">
             <img class="left-img" src="../../assets/svg/password_icon.svg" alt="confirm password">
-            <input [type]="showConfPassword ? 'text' : 'password'" class="form-control" placeholder="Confirm Password" formControlName="passwordconf" />
-            <!-- <span (click)="alert('hi') && confpassword.type= (confpassword.type=='password' )?'text':'password'"> -->
-              <img class="right-img" (click)="toggleShowConfPassword()" *ngIf="!showConfPassword" src="../../assets/icons/icn_view.png" alt="view password">
-              <img class="right-img" (click)="toggleShowConfPassword()" *ngIf="showConfPassword" src="../../assets/icons/icn_hide.png" alt="Hide password">
-            <!-- </spa/=n> -->
-            
-            <cx-form-errors [control]="registerForm.get('passwordconf')" ></cx-form-errors>
+            <input [type]="showConfPassword ? 'text' : 'password'" class="form-control" placeholder="Confirm Password"
+              formControlName="passwordconf" />
+            <img class="right-img" (click)="toggleShowConfPassword()" *ngIf="!showConfPassword"
+              src="../../assets/icons/icn_view.png" alt="view password">
+            <img class="right-img" (click)="toggleShowConfPassword()" *ngIf="showConfPassword"
+              src="../../assets/icons/icn_hide.png" alt="Hide password">
+
+            <cx-form-errors [control]="registerForm.get('passwordconf')"></cx-form-errors>
           </div>
-           
+
           <button type="submit" [disabled]="!registerForm.valid" class="btn btn-block round-primary-btn mt-20 mb-20">
-           Signup
+            {{ 'register.signUp' | cxTranslate }}
           </button>
-          
+
         </form>
         <div class="have-an-account-wrapper">
-          Have an account? 
-          <a class="login-link a-red" [routerLink]="['/login']" routerLinkActive="router-link-active" >
-            Login
+          {{ 'register.haveAnAccount' | cxTranslate }}
+          <a class="login-link a-red" [routerLink]="['/login']" routerLinkActive="router-link-active">
+            {{ 'register.login' | cxTranslate }}
           </a>
         </div>
       </div>
     </div>
   </div>
-  </section>
+</section>
 
 
 <div class="modal fade" id="otpPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="modal-body">
-          
-          <div class="form-group">
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+
+        <div class="form-group">
           <label>
-            <span class="label-content">Confirm OTP</span>
-            <input
-              class="form-control"
-              type="text"
-              name="oneTimePassword"
-             [(ngModel)]="oneTimePassword"
-            />
+            <span class="label-content">{{ 'register.confirmOTP' | cxTranslate }}</span>
+            <input class="form-control" type="text" name="oneTimePassword" [(ngModel)]="oneTimePassword" />
           </label>
         </div>
         <button (click)="submitOtp()" class="btn btn-block btn-primary">
-         Submit OTP
-         </button>
-        </div>
+          {{ 'register.submitOTP' | cxTranslate }}
+        </button>
       </div>
     </div>
+  </div>
 </div>
 
-<!-- <p>Form value: {{ registerForm.value | json }}</p>
-  <p>Form valid: {{ registerForm.valid }}</p> -->
-
-
-  <div class="modal fade" id="civilIdPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <!-- <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
-        <div class="modal-body">
-          <p class="civil-id-header">Civil ID</p>
-          <div class="form-group">
+<div class="modal fade" id="civilIdPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p class="civil-id-header">{{ 'register.civilId' | cxTranslate }}</p>
+        <div class="form-group">
           <label>
-            <span class="label-content">Civil ID</span>
-            <input
-              class=""
-              type="text" autocomplete="off"
-              name="userCivilId"
-             [(ngModel)]="userCivilId"
-            />
+            <span class="label-content">{{ 'register.civilId' | cxTranslate }}</span>
+            <input class="" type="text" autocomplete="off" name="userCivilId" [(ngModel)]="userCivilId" />
           </label>
         </div>
         <div class="civil-id-btn-wrapper">
           <button (click)="submitCivilId()" class="btn btn-primary civil-id-btn">
-            Continue
-           </button>
-        </div>
+            {{ 'register.continue' | cxTranslate }}
+          </button>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 
 
 <div class="modal fade" id="userOTPModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <!-- <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button> -->
-    <div class="modal-body">
-      <p class="otp-header">OTP</p>
-      <div>
-        <p class="otp-extra-text">You should have received an OTP</p>
-        <p class="otp-extra-text">Please enter the 6 digit number.</p>
-      </div>
-      <div class="invalid-otp" *ngIf="invalidOTPFlag">Invalid OTP</div>
-      <div class="form-group">
-      <label>
-        <span class="label-content">OTP</span>
-        <!-- <input
-          class=""
-          type="text" autocomplete="off"
-          name="userCivilId"
-         [(ngModel)]="userCivilId"
-        /> -->
-        <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6}"></ng-otp-input>
-      </label>
-    </div>
-    <div class="otp-btn-wrapper">
-      <button (click)="submitUserOTP()" class="btn btn-primary otp-btn">
-        Confirm
-       </button>
-       
-       <div>Didn't receive an OTP?</div>
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p class="otp-header">{{ 'register.otp' | cxTranslate }}</p>
+        <div>
+          <p class="otp-extra-text">{{ 'register.receivedOTP' | cxTranslate }}</p>
+          <p class="otp-extra-text">{{ 'register.enterNumber' | cxTranslate }}</p>
+        </div>
+        <div class="invalid-otp" *ngIf="invalidOTPFlag">{{ 'register.invalidOTP' | cxTranslate }}</div>
+        <div class="form-group">
+          <label>
+            <span class="label-content">OTP</span>
+            <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:6}"></ng-otp-input>
+          </label>
+        </div>
+        <div class="otp-btn-wrapper">
+          <button (click)="submitUserOTP()" class="btn btn-primary otp-btn">
+            {{ 'register.confirm' | cxTranslate }}
+          </button>
 
-       <a (click)="resendOTP()" >
-        Resend
-       </a>
-    </div>
+          <div>{{ 'register.didntReceiveOTP' | cxTranslate }}</div>
+
+          <a (click)="resendOTP()">
+            {{ 'register.resend' | cxTranslate }}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 </div>

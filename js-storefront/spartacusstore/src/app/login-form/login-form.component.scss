@@ -8,7 +8,6 @@ form {
         img {
             position: absolute;
             padding: 12px 12px; 
-            // pointer-events: none;
         }
     }
     .left-icon {
@@ -88,16 +87,29 @@ form {
 .logo-section{
     text-align: center;
 }
+.login-header{
+    position: relative;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+}
+.device-login-view{
+    width: 50%;
+}
 
-// .lang-selector{
-//     display: none;
-// }
+@media only screen and (max-width: $desktop){
+    .device-login-view{
+        width: 100%;
+    }
+    .mobile-header-right-align,
+    .mobile-header-left-align{
+        display: flex;
+    }
 
-// @media only screen and (max-width: $desktop){
-//     .lang-selector{
-//         display: block;
-//         position: fixed;
-//         left: 40px;
-//         top: 20px;
-//     }
-// }
+    .mobile-header-left-align{
+        justify-content: flex-start;
+    }
+    .mobile-header-right-align{
+        justify-content: flex-end;
+    }
+}

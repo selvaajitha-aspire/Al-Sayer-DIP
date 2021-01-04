@@ -80,7 +80,7 @@
 </div> -->
 
 
-<div class="my-tickets-wrapper" [ngStyle]="{'height': innerHeight ? innerHeight : 'auto' }">
+<div class="my-tickets-wrapper" [ngStyle]="{'min-height': innerHeight ? innerHeight : 'auto' }">
     <div class="container p-0" *ngIf="ticketsList | async as ticket$;else no_data" >
         <div *ngFor="let ticket of ticket$; let i=index" class="box ticket-wrapper col-12 p-0">
             <div class="d-flex justify-content-between col-11" *ngIf="!ticketToggle[i]">
@@ -90,28 +90,28 @@
             </div>
             <div class="col-11" *ngIf="ticketToggle[i]">
                 <div class="d-flex justify-content-between">
-                    <span class='ticket-open-text-header'>ID</span>
+                    <span class='ticket-open-text-header'>{{ 'tickets.id' | cxTranslate }}</span>
                     <span class="text-right ticket-open-text">{{ticket.uid}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span class='ticket-open-text-header'>Notes</span>
+                    <span class='ticket-open-text-header'>{{ 'tickets.notes' | cxTranslate }}</span>
                     <span class="text-right ticket-open-text">{{ticket.notes}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span class='ticket-open-text-header'>Issue</span>
+                    <span class='ticket-open-text-header'>{{ 'tickets.issue' | cxTranslate }}</span>
                     <span class="text-right ticket-open-text">{{ticket.issue}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span class='ticket-open-text-header'>Status</span>
+                    <span class='ticket-open-text-header'>{{ 'tickets.status' | cxTranslate }}</span>
                     <span class="text-right ticket-open-text status-text">{{ticket.status}}</span>
                 </div>
                 <div class="d-flex justify-content-between" *ngIf="ticket.status === 'IN_PROGRESS'">
-                    <span class='ticket-open-text-header'>Driver Details</span>
+                    <span class='ticket-open-text-header'>{{ 'tickets.driverDetails' | cxTranslate }}</span>
                     <span class="text-right ticket-open-text">
                         <button type="button"
                             class="btn btn-default form-control form-control-sm round-primary-btn location-btn"
                             data-toggle="modal" (click)="getDriverLocation(ticket)">
-                            Get driver location</button>
+                            {{ 'tickets.getDriverLocation' | cxTranslate }}</button>
                     </span>
                 </div>
             </div>
@@ -129,7 +129,7 @@
     </div>
     <ng-template #no_data>
         <div class="text-center">
-            No data available
+            {{ 'tickets.noDataAvailable' | cxTranslate }}
         </div>
     </ng-template>
     <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

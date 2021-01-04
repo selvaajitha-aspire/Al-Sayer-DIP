@@ -1,6 +1,5 @@
 package com.alsayer.core.roadsideassistance.services.impl;
 
-import com.alsayer.core.model.DriverDetailsModel;
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.roadsideassistance.daos.RoadSideAssistanceDao;
 import com.alsayer.core.roadsideassistance.services.RoadSideAssistanceService;
@@ -12,11 +11,6 @@ public class DefaultRoadSideAssistanceService implements RoadSideAssistanceServi
     @Override
     public void saveServiceRequest(RsaRequestModel serviceRequestModel){
          getRoadSideAssistanceDao().saveServiceRequestinDB(serviceRequestModel);
-    }
-
-    @Override
-    public DriverDetailsModel getDriverDetails(){
-       return getRoadSideAssistanceDao().getDriverDeatailsFromServiceRequest();
     }
 
     public RoadSideAssistanceDao getRoadSideAssistanceDao() {

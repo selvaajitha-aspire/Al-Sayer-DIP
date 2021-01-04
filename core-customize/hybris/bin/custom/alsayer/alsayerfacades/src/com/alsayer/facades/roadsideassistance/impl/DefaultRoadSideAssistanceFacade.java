@@ -18,10 +18,6 @@ public class DefaultRoadSideAssistanceFacade implements RoadSideAssistanceFacade
 
     private Converter<DriverDetailsModel, DriverDetailsData> driverDetailsConverter;
 
-    @Override
-    public DriverDetailsData getDriverDetails(){
-        return getDriverDetailsConverter().convert(getRoadSideAssistanceService().getDriverDetails());
-    }
 
     @Override
     public void  storeServiceRequest(RsaRequestData data){

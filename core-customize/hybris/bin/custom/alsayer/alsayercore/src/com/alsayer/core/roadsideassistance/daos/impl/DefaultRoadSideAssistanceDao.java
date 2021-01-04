@@ -1,16 +1,13 @@
 package com.alsayer.core.roadsideassistance.daos.impl;
 
 import com.alsayer.core.event.rsa.RsaRequestStartEvent;
-import com.alsayer.core.model.DriverDetailsModel;
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.model.RsaRequestProcessModel;
 import com.alsayer.core.roadsideassistance.daos.RoadSideAssistanceDao;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
 import de.hybris.platform.servicelayer.model.ModelService;
-import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
-import de.hybris.platform.servicelayer.search.SearchResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +18,6 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
     private ModelService modelService;
 
     private EventService eventService;
-
-    private String lastServiceRequestUid;
 
     private FlexibleSearchService flexibleSearchService;
 
@@ -36,9 +31,8 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
 
     @Override
     public boolean saveServiceRequestinDB(final RsaRequestModel serviceRequest) {
-        Boolean saved=true;
+        boolean saved=true;
         try {
-            lastServiceRequestUid=serviceRequest.getUid();
            getModelService().save(serviceRequest);
             final RsaRequestProcessModel process= new RsaRequestProcessModel();
             process.setRsaRequest(serviceRequest);
@@ -54,18 +48,6 @@ public class DefaultRoadSideAssistanceDao extends AbstractItemDao implements Roa
         return saved;
     }
 
-
-    /**
-     * @return the Driver Details
-     * @throws NullPointerException if no Service Request with the specified UID is found
-     */
-    @Override
-    public DriverDetailsModel getDriverDeatailsFromServiceRequest(){
-        final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
-        query.addQueryParameter("uid", lastServiceRequestUid);
-        final SearchResult<RsaRequestModel> result = getFlexibleSearchService().search(query);
-        return result.getResult()!=null?result.getResult().get(0).getDriverDetails():null;
-    }
 
     @Override
     public FlexibleSearchService getFlexibleSearchService() {
