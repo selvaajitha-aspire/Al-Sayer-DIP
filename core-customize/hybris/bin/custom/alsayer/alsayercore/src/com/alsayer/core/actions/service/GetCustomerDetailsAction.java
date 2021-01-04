@@ -85,7 +85,7 @@ public class GetCustomerDetailsAction extends AbstractSimpleDecisionAction<Store
                 LOG.debug(AlsayerCoreConstants.VEHICLE_RESPONSE + responseBody.toString());
                 List<VehicleModel> vehicleList=getVehicleList(responseBody.getE_vehicle_infos());
                     if (!vehicleList.isEmpty()) {
-                        CxUserToSegmentModel cxUserToSegmentModel=new CxUserToSegmentModel();
+                        /* CxUserToSegmentModel cxUserToSegmentModel=new CxUserToSegmentModel();
                         for (VehicleModel vehicleModel : vehicleList){
 
                             if (vehicleModel.getBrand().equalsIgnoreCase("LX")) {
@@ -100,7 +100,7 @@ public class GetCustomerDetailsAction extends AbstractSimpleDecisionAction<Store
                              userToSegmentModelList = new LinkedList<>((Collection<? extends CxUserToSegmentModel>) Arrays.asList(customer.getUserToSegments()));
                         }
                         userToSegmentModelList.add(cxUserToSegmentModel);
-                        customer.setUserToSegments(userToSegmentModelList);
+                        customer.setUserToSegments(userToSegmentModelList); */
                         customer.setVehicles(vehicleList);
                         modelService.save(customer);
                         getVehicleWarranty(customer);

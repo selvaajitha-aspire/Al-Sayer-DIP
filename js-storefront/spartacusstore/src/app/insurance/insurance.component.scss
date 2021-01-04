@@ -1,0 +1,87 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+:root {
+    --dark-gray : #b4b4b4;
+    --white: #ffffff;
+    --silver: #c2c2c2;
+    --fire-engine-red: #dd231b;
+}
+
+$desktop: 960px;
+$mobile-large: 640px;
+
+.my-insurance-wrapper {
+    padding: 100px 10px 70px 0px;
+    .insurances-wrapper {
+        display: flex;
+        padding: 6px;
+        background: white;
+        border: 1px solid grey;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px white;
+        margin: 10px 0;
+       .insurances-collapse-text, .insurance-open-text , .insurance-open-text-header{
+        font-size: 14px;
+        font-weight: 600;
+        padding: 5px 0;
+       }
+       .insurance-open-text-header {
+        opacity: 0.7;
+       }
+       .warranty-wrapper {
+            border: 1px solid grey;
+            padding: 5px;
+            border-radius: 15px;
+            margin-bottom: 5px;
+       }
+    }
+    .panel-group {
+        .panel {
+            margin-bottom: 0;
+            border-radius: 4px;
+            border-color: #dddddd;
+            background-color: #ffffff;
+            border: 1px solid transparent;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        }
+        .panel-heading{
+            background-color: white;
+            border-bottom: 0;
+            padding: 10px 15px;
+            border-bottom: 1px solid transparent;
+            border-top-right-radius: 3px;
+            border-top-left-radius: 3px;
+            a {
+                color: black !important;
+            }
+        }
+    }
+}
+
+.panel-group{
+    width: 100% !important;
+}
+.panel-title > a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content:"\f068";
+    padding-right: 5px;
+}
+.panel-title > a.collapsed:before {
+    float: right !important;
+    content:"\f067";
+}
+.panel-title > a:hover, 
+.panel-title > a:active, 
+.panel-title > a:focus  {
+    text-decoration:none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: $desktop){
+    .my-insurance-wrapper {
+        padding: 70px 10px 50px 0px;
+    }
+}
