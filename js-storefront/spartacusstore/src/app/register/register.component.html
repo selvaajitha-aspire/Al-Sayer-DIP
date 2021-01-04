@@ -18,9 +18,9 @@
 
           <input type="hidden" class="form-control" formControlName="customerType" />
           <div class="pb-5 pt-3">
-            <div class="signup-text">Signup</div>
-            <div class="signup-extra-text">Please enter your details to</div>
-            <div class="signup-extra-text">login to the account</div>
+            <div class="signup-text">{{ 'register.signUp' | cxTranslate }}</div>
+            <div class="signup-extra-text">{{ 'register.enterDetails' | cxTranslate }}</div>
+            <div class="signup-extra-text">{{ 'register.loginAccount' | cxTranslate }}</div>
           </div>
           <div class="form-group-wrapper left-icon">
             <img src="../../assets/svg/user_icon.svg" alt="Name">
@@ -64,14 +64,14 @@
           </div>
 
           <button type="submit" [disabled]="!registerForm.valid" class="btn btn-block round-primary-btn mt-20 mb-20">
-            Signup
+            {{ 'register.signUp' | cxTranslate }}
           </button>
 
         </form>
         <div class="have-an-account-wrapper">
-          Have an account?
+          {{ 'register.haveAnAccount' | cxTranslate }}
           <a class="login-link a-red" [routerLink]="['/login']" routerLinkActive="router-link-active">
-            Login
+            {{ 'register.login' | cxTranslate }}
           </a>
         </div>
       </div>
@@ -91,12 +91,12 @@
 
         <div class="form-group">
           <label>
-            <span class="label-content">Confirm OTP</span>
+            <span class="label-content">{{ 'register.confirmOTP' | cxTranslate }}</span>
             <input class="form-control" type="text" name="oneTimePassword" [(ngModel)]="oneTimePassword" />
           </label>
         </div>
         <button (click)="submitOtp()" class="btn btn-block btn-primary">
-          Submit OTP
+          {{ 'register.submitOTP' | cxTranslate }}
         </button>
       </div>
     </div>
@@ -108,16 +108,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <p class="civil-id-header">Civil ID</p>
+        <p class="civil-id-header">{{ 'register.civilId' | cxTranslate }}</p>
         <div class="form-group">
           <label>
-            <span class="label-content">Civil ID</span>
+            <span class="label-content">{{ 'register.civilId' | cxTranslate }}</span>
             <input class="" type="text" autocomplete="off" name="userCivilId" [(ngModel)]="userCivilId" />
           </label>
         </div>
         <div class="civil-id-btn-wrapper">
           <button (click)="submitCivilId()" class="btn btn-primary civil-id-btn">
-            Continue
+            {{ 'register.continue' | cxTranslate }}
           </button>
         </div>
       </div>
@@ -132,12 +132,12 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <p class="otp-header">OTP</p>
+        <p class="otp-header">{{ 'register.otp' | cxTranslate }}</p>
         <div>
-          <p class="otp-extra-text">You should have received an OTP</p>
-          <p class="otp-extra-text">Please enter the 6 digit number.</p>
+          <p class="otp-extra-text">{{ 'register.receivedOTP' | cxTranslate }}</p>
+          <p class="otp-extra-text">{{ 'register.enterNumber' | cxTranslate }}</p>
         </div>
-        <div class="invalid-otp" *ngIf="invalidOTPFlag">Invalid OTP</div>
+        <div class="invalid-otp" *ngIf="invalidOTPFlag">{{ 'register.invalidOTP' | cxTranslate }}</div>
         <div class="form-group">
           <label>
             <span class="label-content">OTP</span>
@@ -146,13 +146,13 @@
         </div>
         <div class="otp-btn-wrapper">
           <button (click)="submitUserOTP()" class="btn btn-primary otp-btn">
-            Confirm
+            {{ 'register.confirm' | cxTranslate }}
           </button>
 
-          <div>Didn't receive an OTP?</div>
+          <div>{{ 'register.didntReceiveOTP' | cxTranslate }}</div>
 
           <a (click)="resendOTP()">
-            Resend
+            {{ 'register.resend' | cxTranslate }}
           </a>
         </div>
       </div>

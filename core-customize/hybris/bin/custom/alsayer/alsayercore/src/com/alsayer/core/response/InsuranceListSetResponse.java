@@ -2,23 +2,25 @@ package com.alsayer.core.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class InsuranceListSetResponse {
 
-    @JsonProperty("InsuranceListSet")
-     InsuranceListSet InsuranceListSet;
+    @JsonProperty("InsuranceList")
+    List<InsuranceList> InsuranceList;
 
     @Override
     public String toString() {
-        return "InsuranceListSetResponse{" +
-                "InsuranceListSet=" + InsuranceListSet +
+        return "InsuranceListSet{" +
+                "InsuranceList=" + InsuranceList +
                 '}';
     }
 
-    public InsuranceListSet getInsuranceListSet() {
-        return InsuranceListSet;
+    public List<InsuranceList> getInsuranceList() {
+        return InsuranceList;
     }
 
-    public void setInsuranceListSet(InsuranceListSet insuranceListSet) {
-        InsuranceListSet = insuranceListSet;
+    public void setInsuranceList(List<InsuranceList> insuranceList) {
+        InsuranceList = insuranceList;
     }
 }

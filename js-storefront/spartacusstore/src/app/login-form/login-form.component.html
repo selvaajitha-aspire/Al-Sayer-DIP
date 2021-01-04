@@ -15,8 +15,8 @@
     <form class="pt-4 device-login-view" (ngSubmit)="submitForm()" [formGroup]="loginForm">
       <div class="pb-5">
           <div class="login-text">Login</div>
-          <div class="login-extra-text">Please enter your details to</div>
-          <div class="login-extra-text">login to the account</div>
+          <div class="login-extra-text">{{ 'loginForm.enterDetails' | cxTranslate }}</div>
+          <div class="login-extra-text">{{ 'loginForm.loginToAccount' | cxTranslate }}</div>
       </div>
       <div class="form-group-wrapper left-icon mb-3">
           <img src="../../assets/svg/mobile_icon.svg" alt="mobile no">
@@ -41,7 +41,7 @@
       </p>
     
       <button type="submit" class="btn btn-block round-primary-btn mt-5" [disabled]="!loginForm.valid">
-        Login
+        {{ 'loginForm.login' | cxTranslate }}
       </button>
     </form>
     
@@ -50,7 +50,7 @@
       <ng-container>
         <a class="a-red"
           [routerLink]="{ cxRoute: 'register' } | cxUrl"
-          >NEW USER?</a
+          >{{ 'loginForm.newUser' | cxTranslate }}</a
         >
       </ng-container>
     

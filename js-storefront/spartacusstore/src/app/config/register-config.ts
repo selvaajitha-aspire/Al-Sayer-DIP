@@ -8,6 +8,7 @@ export const registerOccConfig = {
                 validateOTP: 'register/validateOTP',
                 getComponents: 'cms/components',
                 getServiceHistory: 'service-history/getMyServiceHistoryByChassisNo/',
+                getInsurances: 'insurance/getInsurances',
                 updateProfilePhoto: 'register/updateProfilePhoto'
             },
             
@@ -15,4 +16,3 @@ export const registerOccConfig = {
     },
 };
 
-//export const siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU";

@@ -123,8 +123,8 @@
             </targetElement>
         </relation>
 
-        <relation code="VehicleInsuranceRelation" localized="false" autocreate="true">
-            <sourceElement type="Vehicle" qualifier="vehicle" cardinality="one" >
+        <relation code="CustomerInsuranceRelation" localized="false" autocreate="true">
+            <sourceElement type="Customer" qualifier="user" cardinality="one" >
                 <modifiers read="true" write="true" optional="true" />
             </sourceElement>
             <targetElement type="Insurance" qualifier="insurances" cardinality="many" collectiontype="list">
@@ -346,6 +346,11 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="brand" type="java.lang.String">
+                        <description>Brand of vehicle</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 
@@ -356,6 +361,16 @@
                     <attribute qualifier="uid" type="java.lang.String">
                         <description>Insurance unique ID</description>
                         <modifiers read="true" write="false" optional="false" initial="true" unique="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="chassisNumber" type="java.lang.String">
+                        <description>Chassis No of vehicle</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="plateNumber" type="java.lang.String">
+                        <description>Registration No of vehicle</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="dateOfExpiry" type="java.util.Date">
@@ -518,7 +533,11 @@
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
-
+                    <attribute qualifier="eccTicketId" type="java.lang.String">
+                        <description>Ecc Ticket Id</description>
+                        <modifiers read="true" write="true" optional="true" />
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 
