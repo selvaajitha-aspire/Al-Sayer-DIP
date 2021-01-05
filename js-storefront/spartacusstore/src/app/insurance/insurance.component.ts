@@ -1,6 +1,6 @@
+
 import { Component, OnInit, HostListener } from '@angular/core';
 import { InsuranceService } from 'src/services/insurance.service';
-import { RoadsideAssistanceService } from 'src/services/roadside-assistance/roadside-assistance.service';
 
 @Component({
   selector: 'app-insurance',
@@ -22,9 +22,10 @@ export class InsuranceComponent implements OnInit {
   }
 
  
+ 
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize() {
     this.innerHeight = window && window.innerHeight;
     this.innerHeight = this.innerHeight ? this.innerHeight-120 + 'px': 'auto';
   }

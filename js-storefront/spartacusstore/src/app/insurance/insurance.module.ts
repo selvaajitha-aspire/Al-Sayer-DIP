@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InsuranceComponent } from './insurance.component';
-import { ConfigModule, CmsConfig } from '@spartacus/core';
+import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
 
 
 
@@ -9,6 +9,7 @@ import { ConfigModule, CmsConfig } from '@spartacus/core';
   declarations: [InsuranceComponent],
   imports: [
     CommonModule,
+    I18nModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         MyPurchasesComponent: {
