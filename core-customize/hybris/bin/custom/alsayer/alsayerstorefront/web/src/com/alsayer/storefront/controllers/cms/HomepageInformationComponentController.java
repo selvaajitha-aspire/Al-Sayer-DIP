@@ -19,10 +19,10 @@ public class HomepageInformationComponentController extends AbstractCMSComponent
     @Override
     protected void fillModel(HttpServletRequest request, Model model, HomepageInformationComponentModel component) {
         model.addAttribute("infoHeader",component.getHeader());
-        model.addAttribute("detail",component.getDetail());
         model.addAttribute("infoType",component.getInfoType());
         model.addAttribute("link",component.getLink());
         model.addAttribute("media",component.getMedia());
+        model.addAttribute("content",component.getContent());
     }
 
     @Override
