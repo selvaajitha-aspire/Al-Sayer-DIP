@@ -69,6 +69,7 @@
             <value code="NEWS"/>
             <value code="OVERSEAS"/>
             <value code="CONTACT_US"/>
+            <value code="FAQ"/>
         </enumtype>
 
         <enumtype code="ServiceJob" autocreate="true" generate="true" dynamic="true">
@@ -541,7 +542,7 @@
                 </attributes>
             </itemtype>
 
-            <itemtype code="HomepageInformationComponent" extends="SimpleCMSComponent"
+            <itemtype code="HomepageInformationComponent" extends="CMSParagraphComponent"
                       autocreate="true" generate="true"
                       jaloclass="com.alsayer.core.jalo.HomepageInformationComponent">
                 <description>ALSAYER Homepage Information Component With header, detail, media and url
@@ -557,11 +558,6 @@
                         <modifiers read="true" write="true" />
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="detail" type="localized:java.lang.String">
-                        <description>Information in detail.</description>
-                        <modifiers read="true" write="true" />
-                        <persistence type="property"/>
-                    </attribute>
                     <attribute qualifier="infoType" type="InformationType">
                         <description>Information type, to apply different conditions.</description>
                         <modifiers read="true" write="true" />
@@ -572,7 +568,6 @@
                         <modifiers read="true" write="true" />
                         <persistence type="property"/>
                     </attribute>
-
                 </attributes>
             </itemtype>
 
@@ -671,6 +666,7 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
         </typegroup>
 
 

@@ -26,6 +26,7 @@ import { customTranslationResources } from './internationalization/custom-transl
 import { customTranslationConfig } from './internationalization/translation-config/custom-translation-config';
 
 import { MarkAsteriskDirectiveModule } from './directives/mark-asterisk.directive';
+import { InfoComponentModule } from './InfoComponent/info-component.module';
 import { InsuranceModule } from './insurance/insurance.module';
 
 
@@ -60,6 +61,7 @@ else {
     PageSlotModule,
     NavigationModule,
     HamburgerMenuModule,
+    InfoComponentModule,
     BrowserAnimationsModule,
     RouterModule,
     IconModule,
@@ -103,6 +105,12 @@ else {
             'Section3',
             'Section4',
             'Section5',
+          ],
+        },
+        ContentPage1Template: {
+          slots: [
+            'Section1',
+            'Section2A',
           ],
         }
       }

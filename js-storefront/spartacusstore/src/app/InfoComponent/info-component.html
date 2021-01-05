@@ -1,0 +1,7 @@
+<ng-container *ngIf="component.data$ | async as data">
+        <div class="InformationComponent">
+             <b><span  class="d-block tile-headline font-weight-bold tile-link mt-2">{{data.header}}</span></b>
+             <span  class="d-block tile-headline font-weight-bold tile-link mt-2">{{data.content}}</span>
+                <br/>
+            </div>
+</ng-container>
