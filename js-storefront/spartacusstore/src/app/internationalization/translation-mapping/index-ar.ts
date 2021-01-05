@@ -15,6 +15,7 @@ import { roadsideAssistance } from '../translations/ar/roadsideAssistance';
 import { vehicles } from '../translations/ar/vehicles';
 import { tickets } from '../translations/ar/tickets';
 import { serviceHistory } from '../translations/ar/serviceHistory';
+import { insurance } from '../translations/ar/insurance';
 
 export const ar = {
   address,
@@ -31,5 +32,6 @@ export const ar = {
   roadsideAssistance,
   vehicles,
   tickets,
-  serviceHistory
+  serviceHistory,
+  insurance
 };

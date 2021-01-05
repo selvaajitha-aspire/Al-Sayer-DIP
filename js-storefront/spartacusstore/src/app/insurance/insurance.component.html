@@ -6,7 +6,7 @@
                     <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#insuranceAccordian"
                             aria-expanded="false" aria-controls="insuranceAccordian">
-                            Insurances
+                            {{ 'insurance.heading' | cxTranslate }}
                         </a>
                     </h4>
 
@@ -26,27 +26,27 @@
                                     </div>
                                     <div class="col-11" *ngIf="insuranceToggle[i]">
                                         <div class="d-flex justify-content-between">
-                                            <span class='insurance-open-text-header'>Insurance</span>
+                                            <span class='insurance-open-text-header'>{{ 'insurance.insuranceInfo' | cxTranslate }}</span>
                                             <span
                                                 class="text-right insurance-open-text">{{insurance.coverageInfo}}</span>
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <span class='insurance-open-text-header'>Expiry Date</span>
+                                            <span class='insurance-open-text-header'>{{ 'insurance.expiryDate' | cxTranslate }}</span>
                                             <span
                                                 class="text-right insurance-open-text">{{insurance.dateOfExpiry | date: 'mediumDate'}}</span>
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <span class='insurance-open-text-header'>Date of Issue</span>
+                                            <span class='insurance-open-text-header'>{{ 'insurance.issueDate' | cxTranslate }}</span>
                                             <span
                                                 class="text-right insurance-open-text">{{insurance.dateOfIssue | date: 'mediumDate'}}</span>
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <span class='insurance-open-text-header'>Policy No.</span>
+                                            <span class='insurance-open-text-header'>{{ 'insurance.policyNumber' | cxTranslate }}</span>
                                             <span
                                                 class="text-right insurance-open-text">{{insurance.policyNumber}}</span>
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <span class='insurance-open-text-header'>Plate No.</span>
+                                            <span class='insurance-open-text-header'>{{ 'insurance.plateNumber' | cxTranslate }}</span>
                                             <span
                                                 class="text-right insurance-open-text">{{insurance.plateNumber}}</span>
                                         </div>

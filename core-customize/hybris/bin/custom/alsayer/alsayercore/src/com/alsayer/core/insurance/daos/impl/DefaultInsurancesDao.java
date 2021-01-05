@@ -25,7 +25,8 @@ public class DefaultInsurancesDao extends AbstractItemDao implements InsurancesD
         builder.append(" SELECT {A.pk} FROM {" + InsuranceModel._TYPECODE + " as A ")
                 .append(" JOIN "+ CustomerModel._TYPECODE +" as B on {B.pk} = {A."+ InsuranceModel.USER+"} } ")
                 .append(" WHERE ")
-                .append(" {B.").append(CustomerModel.PK).append("} = ?customer");
+                .append(" {B.").append(CustomerModel.PK).append("} = ?customer")
+                .append(" order by {A."+InsuranceModel.DATEOFEXPIRY +"}");
         return builder.toString();
     }
 

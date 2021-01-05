@@ -1,3 +1,4 @@
+
 // It is used to map group in a page
 
 interface TranslationChunksConfig {
@@ -85,6 +86,9 @@ interface TranslationChunksConfig {
     ],
     serviceHistory:[
       'serviceHistory'
+    ],
+    insurance:[
+      'insurance'
     ]
 
   }
