@@ -9,6 +9,11 @@ import { product } from '../translations/en/product';
 import { pwa } from '../translations/en/pwa';
 import { storeFinder } from '../translations/en/store-finder';
 import { user } from '../translations/en/user';
+import { roadsideAssistance } from '../translations/en/roadsideAssistance';
+import { vehicles } from '../translations/en/vehicles';
+import { tickets } from '../translations/en/tickets';
+import { serviceHistory } from '../translations/en/serviceHistory';
+import { insurance } from '../translations/en/insurance'
 
 export const en = {
   address,
@@ -22,4 +27,9 @@ export const en = {
   pwa,
   storeFinder,
   user,
+  roadsideAssistance,
+  vehicles,
+  tickets,
+  serviceHistory,
+  insurance
 };

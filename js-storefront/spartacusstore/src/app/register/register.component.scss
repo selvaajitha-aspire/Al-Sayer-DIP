@@ -1,8 +1,9 @@
 $red : #DD231B;
+$desktop: 960px;
+$mobile-large: 640px;
 #civilIdPopup {
     top: calc(100% - 500px);
     .modal-dialog {
-        // top: calc(100% - 392px) !important;
         .modal-content {
             border-radius: 25px 25px 25px 25px;
             .modal-body {
@@ -45,7 +46,6 @@ $red : #DD231B;
 #userOTPModal {
     top: calc(100% - 500px);
     .modal-dialog {
-        // top: calc(100% - 392px) !important;
         .modal-content {
             border-radius: 25px 25px 25px 25px;
             .modal-body {
@@ -53,7 +53,6 @@ $red : #DD231B;
                     text-align: center;
                     font-size: 18px;
                     font-weight: 600;
-                    // margin-bottom: 75px;
                 }
                 .otp-extra-text {
                     font-size: 12px;
@@ -125,7 +124,6 @@ form {
         img {
             position: absolute;
             padding: 12px 12px;
-            // pointer-events: none;
         }
     }
     .left-icon {
@@ -196,5 +194,27 @@ form {
         &::before {
             background: none !important;
         }
+    }
+}
+
+.login-header{
+    position: relative;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: $desktop){
+    
+    .mobile-header-right-align,
+    .mobile-header-left-align{
+        display: flex;
+    }
+
+    .mobile-header-left-align{
+        justify-content: flex-start;
+    }
+    .mobile-header-right-align{
+        justify-content: flex-end;
     }
 }

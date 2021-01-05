@@ -6,12 +6,10 @@
 
 package com.alsayer.occ.controllers;
 
-import com.alsayer.facades.data.DriverDetailsData;
 import com.alsayer.facades.data.RsaRequestData;
 import com.alsayer.facades.data.VehicleData;
 import com.alsayer.facades.roadsideassistance.RoadSideAssistanceFacade;
 import com.alsayer.occ.constants.AlsayeroccConstants;
-import com.alsayer.occ.dto.DriverDetailsWsDTO;
 import com.alsayer.occ.dto.ResponseWsDTO;
 import com.alsayer.occ.dto.RsaRequestWsDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,12 +21,10 @@ import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import de.hybris.platform.webservicescommons.swagger.ApiBaseSiteIdAndUserIdParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -164,23 +160,6 @@ public class RoadsideAssistanceController {
         addressData.setCountry(countryData);
         serviceRequestData.setAddress(addressData);
         return serviceRequestData;
-    }
-
-    @Secured(
-            {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERGROUP"})
-    @RequestMapping(value = "/getDriver", method = RequestMethod.GET,
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @ResponseBody
-    @ApiOperation(value = "Get Vehicles of Customer", notes = "Only registered users can get driver details")
-    public DriverDetailsWsDTO getDriverDetails(@ApiParam(value = "Response configuration. This is the list of fields that should be returned in the response body.", allowableValues = "BASIC, DEFAULT, FULL")
-                                               @RequestParam(defaultValue = BASIC_FIELD_SET) final String fields) {
-        DriverDetailsData driverDetails = roadsideAssistanceFacade.getDriverDetails();
-        if (driverDetails != null) {
-            DriverDetailsWsDTO driverWsDTO = dataMapper.map(driverDetails, DriverDetailsWsDTO.class, fields);
-
-            return driverWsDTO;
-        }
-        return new DriverDetailsWsDTO();
     }
 
 }

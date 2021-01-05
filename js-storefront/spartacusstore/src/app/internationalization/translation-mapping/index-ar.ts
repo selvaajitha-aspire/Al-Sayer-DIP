@@ -11,6 +11,11 @@ import { product } from '../translations/ar/product';
 import { pwa } from '../translations/ar/pwa';
 import { storeFinder } from '../translations/ar/store-finder';
 import { user } from '../translations/ar/user';
+import { roadsideAssistance } from '../translations/ar/roadsideAssistance';
+import { vehicles } from '../translations/ar/vehicles';
+import { tickets } from '../translations/ar/tickets';
+import { serviceHistory } from '../translations/ar/serviceHistory';
+import { insurance } from '../translations/ar/insurance';
 
 export const ar = {
   address,
@@ -24,4 +29,9 @@ export const ar = {
   pwa,
   storeFinder,
   user,
+  roadsideAssistance,
+  vehicles,
+  tickets,
+  serviceHistory,
+  insurance
 };

@@ -37,6 +37,7 @@ declare var $: any;
 })
 export class HeaderMenuComponent implements OnInit, AfterViewInit {
   @ViewChild('stickyMenu') menuElement: ElementRef;
+  @ViewChild('dropDownMenu') dropDownMenu: ElementRef;
   menuPosition = 50;
   @HostListener('window:scroll', ['$event'])
     handleScroll(){
@@ -115,6 +116,7 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
  
   toggleMenu() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
+    this.dropDownMenu && this.dropDownMenu.nativeElement.classList.remove('show');
   }
   hideHeader(url) {
     let headerFlag = true;

@@ -153,6 +153,8 @@
         <property name="coverageInfo" type="String"/>
         <property name="policyNumber" type="String"/>
         <property name="dateOfIssue" type="java.util.Date" />
+        <property name="chassisNumber" type="String"/>
+        <property name="plateNumber" type="String"/>
     </bean>
 
     <bean class="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO">
