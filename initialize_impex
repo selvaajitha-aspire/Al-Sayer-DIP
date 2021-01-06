@@ -393,7 +393,7 @@ INSERT_UPDATE ServiceHistory;uid[unique=true];mileage;serviceType;serviceDesc;in
 ;100002;30000.0;Test;Test Description;2000.0;3120
 ;100003;30000.0;Test;Test Description;2000.0;3120
 
-INSERT_UPDATE RsaRequest;uid[unique=true];vehicle(chassisNumber);status(code);type;issue(code);latitude;longitude;notes[lang=en]
+INSERT_UPDATE RsaRequest;uid[unique=true];vehicle(chassisNumber);status(code);type(code);issue(code);latitude;longitude;notes[lang=en]
 ;f53d20ac-3ff4-4456-b32a-9d25788e57cf;KW1000001;STARTED;MUSAADA;DEAD_BATTERY;73.9838868;18.5767007;"Two tyres got burst"
 
 

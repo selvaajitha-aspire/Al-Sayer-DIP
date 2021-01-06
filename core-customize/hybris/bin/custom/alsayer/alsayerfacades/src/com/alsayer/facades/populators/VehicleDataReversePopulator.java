@@ -20,7 +20,8 @@ public class VehicleDataReversePopulator implements Populator<VehicleData, Vehic
         vehicleModel.setStatus(vehicleData.getStatus());
         vehicleModel.setModline(vehicleData.getModline());
         vehicleModel.setModyear(vehicleData.getModyear());
-        vehicleModel.setPlateNumber(vehicleModel.getPlateNumber());
+        vehicleModel.setPlateNumber(vehicleData.getPlateNumber());
+        vehicleModel.setBrand(vehicleData.getBrand());
 
         if(CollectionUtils.isNotEmpty(vehicleData.getWarranties())){
             vehicleModel.setWarranties(warrantyReverseConverter.convertAll(vehicleData.getWarranties()));

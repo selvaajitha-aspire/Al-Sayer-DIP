@@ -197,8 +197,9 @@ getSelectedVehicle(chassisNumber) {
           vehicle.warranties.map(warranty => {
             const warrantyTypeFlag = warranty.warrantyType && warranty.warrantyType.includes('14');
             const warrantyDate = warranty.warrantyExpiryDate;
+            const brandFlag=vehicle.brand==='LX';
             const warrantyDateFlag = new Date() < new Date(warrantyDate) ? true : false;
-            if(warrantyTypeFlag && warrantyDateFlag) {
+            if(warrantyTypeFlag && warrantyDateFlag || brandFlag) {
               this.warrantyFlag = true;
             }
           })
