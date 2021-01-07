@@ -27,6 +27,7 @@ public class VehicleDataPopulator implements Populator<VehicleModel, VehicleData
             if(CollectionUtils.isNotEmpty(source.getWarranties())){
                 target.setWarranties(warrantyConverter.convertAll(source.getWarranties()));
             }
+            target.setBrand(source.getBrand());
         }
     }
 

@@ -3,6 +3,7 @@ package com.alsayer.core.actions.service;
 import com.alsayer.core.constants.AlsayerCoreConstants;
 import com.alsayer.core.enums.EccIssueType;
 import com.alsayer.core.enums.ReqType;
+import com.alsayer.core.enums.RequestType;
 import com.alsayer.core.enums.ServiceStatus;
 import com.alsayer.core.model.RsaRequestModel;
 import com.alsayer.core.model.RsaRequestProcessModel;
@@ -92,10 +93,10 @@ public class CreateServiceRequestAction extends AbstractSimpleDecisionAction<Rsa
 
                     JSONArray jsonArray = new JSONArray();
 
-                   if(serviceRequest.getType().equalsIgnoreCase("RSA")){
+                   if(serviceRequest.getType().equals(RequestType.RSA)){
                        jsonObject.put(REQTYPE, ReqType.T.getCode());
                        jsonObject.put(ISSUETYPE, EccIssueType.MR.getCode());
-                       jsonObject.put(PAID_SERVICE,"X");
+
                    }else {
                        jsonObject.put(REQTYPE, ReqType.M);
                        if(issue.equalsIgnoreCase("OUT_OF_FUEL"))
@@ -110,6 +111,11 @@ public class CreateServiceRequestAction extends AbstractSimpleDecisionAction<Rsa
                        else if(issue.equalsIgnoreCase("OTHERS_MUSAADA"))
                            jsonObject.put(ISSUETYPE,EccIssueType.M4.getCode());
 
+
+                   }
+                   if(serviceRequest.getPaidService().equals(Boolean.TRUE)){
+                       jsonObject.put(PAID_SERVICE,"X");
+                   }else {
                        jsonObject.put(PAID_SERVICE,"-");
                    }
                     jsonArray.add(jsonObject);
