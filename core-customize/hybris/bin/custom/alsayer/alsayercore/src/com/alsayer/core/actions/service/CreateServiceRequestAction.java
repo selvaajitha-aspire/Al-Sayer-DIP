@@ -98,7 +98,7 @@ public class CreateServiceRequestAction extends AbstractSimpleDecisionAction<Rsa
                        jsonObject.put(ISSUETYPE, EccIssueType.MR.getCode());
 
                    }else {
-                       jsonObject.put(REQTYPE, ReqType.M);
+                       jsonObject.put(REQTYPE, ReqType.M.getCode());
                        if(issue.equalsIgnoreCase("OUT_OF_FUEL"))
                             jsonObject.put(ISSUETYPE,EccIssueType.M1.getCode());
 
