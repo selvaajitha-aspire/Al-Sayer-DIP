@@ -97,9 +97,25 @@
                     <span class='ticket-open-text-header'>{{ 'tickets.notes' | cxTranslate }}</span>
                     <span class="text-right ticket-open-text">{{ticket.notes}}</span>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between" *ngIf="ticket.issue === 'OUT_OF_FUEL'">
                     <span class='ticket-open-text-header'>{{ 'tickets.issue' | cxTranslate }}</span>
-                    <span class="text-right ticket-open-text">{{ticket.issue}}</span>
+                    <span class="text-right ticket-open-text" >{{'tickets.OUT_OF_FUEL' |cxTranslate }}</span>
+                </div>
+                <div class="d-flex justify-content-between" *ngIf="ticket.issue === 'FLAT_TYRE'">
+                    <span class='ticket-open-text-header'>{{ 'tickets.issue' | cxTranslate }}</span>
+                    <span class="text-right ticket-open-text" >{{'tickets.FLAT_TYRE' |cxTranslate }}</span>
+                </div>
+                <div class="d-flex justify-content-between" *ngIf="ticket.issue === 'DEAD_BATTERY'">
+                    <span class='ticket-open-text-header'>{{ 'tickets.issue' | cxTranslate }}</span>
+                    <span class="text-right ticket-open-text" >{{'tickets.DEAD_BATTERY' |cxTranslate }}</span>
+                </div>
+                <div class="d-flex justify-content-between" *ngIf="ticket.issue === 'OTHERS_MUSAADA'">
+                    <span class='ticket-open-text-header'>{{ 'tickets.issue' | cxTranslate }}</span>
+                    <span class="text-right ticket-open-text" >{{'tickets.OTHERS_MUSAADA' |cxTranslate }}</span>
+                </div>
+                <div class="d-flex justify-content-between" *ngIf="ticket.issue === 'RSA'">
+                    <span class='ticket-open-text-header'>{{ 'tickets.issue' | cxTranslate }}</span>
+                    <span class="text-right ticket-open-text" >{{'tickets.RSA' |cxTranslate }}</span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <span class='ticket-open-text-header'>{{ 'tickets.status' | cxTranslate }}</span>
