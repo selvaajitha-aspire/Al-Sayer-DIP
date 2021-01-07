@@ -1,7 +1,43 @@
 <ng-container *ngIf="component.data$ | async as data">
-        <div class="InformationComponent">
-             <b><span  class="d-block tile-headline font-weight-bold tile-link mt-2">{{data.header}}</span></b>
-             <span  class="d-block tile-headline font-weight-bold tile-link mt-2">{{data.content}}</span>
-                <br/>
+    <div class="InformationComponent" *ngIf="data.infoType === 'ABOUT_US'">
+        <div class="aboutUs-heading">
+            ABOUT ALSAYER
+        </div>
+        <div class="aboutUs-wrapper row">
+            <div class="col-md-6 col-sm-12" [ngClass]="(data.media && data.media.url) ? 'col-md-6':'col-md-12'">
+                <div class="aboutUs-sub-heading">
+                    <span>{{data.header}}</span>
+                </div>
+                <div class="aboutUs-content">
+                    <span>{{data.content}}</span>
+                </div>
             </div>
+            <div class="col-md-6 col-sm-12" *ngIf="data.media && data.media.url" >
+                <img [src]="getUrl(data.media.url)"  alt="aboutus" width="100%">
+            </div>
+        </div>
+    </div>
+    <div class="InformationComponent" *ngIf="data.infoType === 'FAQ'">
+        <div class="faq-heading" *ngIf="data.uid === 'FAQ_ONE'">
+            FAQ
+        </div>
+        <div class="faq-wrapper">
+            <div class="faq-question" (click)="expandFlag = !expandFlag" [class.expanded-question]="expandFlag">
+                <div>
+                    <span>{{data.header}}</span>
+                </div>
+                <div>
+                    <span *ngIf="expandFlag">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </span>
+                    <span *ngIf="!expandFlag">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="faq-answer" *ngIf="expandFlag">
+                <span >{{data.content}}</span>
+            </div>
+        </div>
+    </div>
 </ng-container>
