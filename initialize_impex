@@ -564,4 +564,25 @@ UPDATE HomepageInformationComponent;$contentCV[unique=true];uid[unique=true];hea
 ;;FAQ_ELEVEN;"قبل حجز اي موعد ماذا يجب علينا ان نتأكد منه؟";"يجب أن نتأكد من أننا اخترنا الكراج الصحيح حتى لا نضطر الى اعادة كل الشغل من البداية. •يجب ان نتأكد انه لا يوجد اي مواعيد مفتوحة وصالحة (اي ان مدتها لم تنتهي بعد) وفي هذه الحالة نقوم فقط بإعادة الجدولة للموعد الصالح."
 
 
+## Service type  page for Checkout(/checkout/service-type)
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;CheckoutServiceType;Checkout Service Type Page;MultiStepCheckoutSummaryPageTemplate;/checkout/service-type
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;cmsComponents(uid, $contentCV)
+;;BodyContentSlot-checkoutServiceType;Checkout Service Type Slot;CheckoutProgressComponent,CheckoutProgressMobileTopComponent,CheckoutServiceTypeComponent,CheckoutProgressMobileBottomComponent
+;;SideContentSlot-checkoutServiceType;Order Summary Slot;CheckoutOrderSummaryComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+;;BodyContent-checkoutServiceType;BodyContent;CheckoutServiceType;BodyContentSlot-checkoutServiceType
+;;SideContent-checkoutServiceType;SideContent;CheckoutServiceType;SideContentSlot-checkoutServiceType
+
+INSERT_UPDATE CMSFlexComponent;$contentCV[unique=true];uid[unique=true];name;flexType
+;;CheckoutProgressComponent;Checkout Progress Component;CheckoutProgress
+;;CheckoutProgressMobileTopComponent;Checkout Progress Mobile Top Component;CheckoutProgressMobileTop
+;;CheckoutServiceTypeComponent;Checkout Service Type Component;CheckoutServiceTypeComponent
+;;CheckoutProgressMobileBottomComponent;Checkout Progress Mobile Bottom Component;CheckoutProgressMobileBottom
+
+
+
+
 

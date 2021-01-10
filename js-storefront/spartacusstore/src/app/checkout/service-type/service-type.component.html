@@ -1,0 +1,26 @@
+
+<app-use-my-location></app-use-my-location>
+
+<div class="cx-checkout-btns row">
+    <div class="col-md-12 col-lg-6">
+      <button
+        class="cx-btn btn btn-block btn-action"
+        (click)="goPrevious()"
+      >
+        {{ 'checkout.backToCart' | cxTranslate }}
+      </button>
+    </div>
+    <div class="col-md-12 col-lg-6">
+      <button
+        class="cx-btn btn btn-block btn-primary"
+        
+        (click)="goNext()"
+      >
+        {{ 'common.continue' | cxTranslate }}
+      </button>
+    </div>
+  </div>
+
+
+
+
