@@ -44,6 +44,7 @@ export const checkout = {
       backToCart: 'Back to cart',
     },
     checkoutProgress: {
+      serviceType:'Service Type',
       shippingAddress: 'Shipping Address',
       deliveryMode: 'Delivery mode',
       paymentDetails: 'Payment details',
