@@ -7,7 +7,7 @@ import { UseMyLocationComponent } from 'src/app/use-my-location/use-my-location.
 
 
 @NgModule({
-  declarations: [ServiceTypeComponent,UseMyLocationComponent],
+  declarations: [ServiceTypeComponent],
   imports: [
     CommonModule,
     I18nModule,
@@ -19,7 +19,7 @@ import { UseMyLocationComponent } from 'src/app/use-my-location/use-my-location.
       },
     }),
   ],
-  exports : [ServiceTypeComponent,UseMyLocationComponent],
-   entryComponents : [UseMyLocationComponent],
+  // exports : [ServiceTypeComponent,UseMyLocationComponent],
+  //  entryComponents : [UseMyLocationComponent],
 })
 export class ServiceTypeModule { }

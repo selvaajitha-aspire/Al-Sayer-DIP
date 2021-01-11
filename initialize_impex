@@ -139,7 +139,7 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 # create navigation component for my account
 
 UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$contentCV)
-;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,StoreLocatorNavNode,SignOutNavNode
+;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,StoreLocatorNavNode,AboutUsNavNode,FAQNavNode,SignOutNavNode
 
 #en
 # CMS Navigation Node

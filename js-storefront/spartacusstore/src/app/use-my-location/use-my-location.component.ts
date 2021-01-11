@@ -1,5 +1,5 @@
 import { UseMyLocationService } from './use-my-location.service';
-import { Component, OnInit, ViewChild, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 
 declare var $: any;
 
@@ -17,6 +17,7 @@ export class UseMyLocationComponent implements OnInit {
   latLng=new google.maps.LatLng(this.lat,this.lng);
   currentLatLng;
   addressU='';
+  addressComponent:google.maps.GeocoderAddressComponent[];
   marker1:google.maps.Marker;
   marker2:google.maps.Marker;
   
@@ -43,6 +44,10 @@ export class UseMyLocationComponent implements OnInit {
      icon : this.originIcon
    });
   }
+  @Output()
+    setAddress = new EventEmitter<object>();
+
+    
 
   getCurrentLocation(){
    
@@ -81,8 +86,9 @@ export class UseMyLocationComponent implements OnInit {
        if (status == google.maps.GeocoderStatus.OK) {
            if (results[0]) {
              this.addressU=results[0].formatted_address;
-           
-            //console.log(results[0].formatted_address)
+             this.addressComponent=results[0].address_components;
+             this.setAddress.emit({address:this.addressU,addressComponent:this.addressComponent});
+            
             this.cd.detectChanges();
            } else {
              console.log(('Location not found'));
