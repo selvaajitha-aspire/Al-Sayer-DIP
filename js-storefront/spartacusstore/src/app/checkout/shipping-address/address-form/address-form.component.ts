@@ -276,15 +276,23 @@ export class AddressFormComponent implements OnInit, OnDestroy {
            
             arrAddress.map((address_component)=> {
              
-              if (address_component.types[0] == "establishment"){  
+                if (address_component.types[0] == "establishment"){  
                 setFormField(this.addressForm,"line1",address_component.long_name);
                 console.log("building"+address_component.long_name)
-            }
+                }
+                if (address_component.types[0] == "route"){  
+                  setFormField(this.addressForm,"line1",address_component.long_name);
+                  console.log("building"+address_component.long_name)
+                }
                 if (address_component.types[0] == "political"){
                   setFormField(this.addressForm,"line2",address_component.long_name);
                 }
             
                 if (address_component.types[0] == "administrative_area_level_2"){
+                  setFormField(this.addressForm,"town",address_component.long_name);
+                  console.log("city"+address_component.long_name)
+                }
+                if (address_component.types[0] == "locality"){
                   setFormField(this.addressForm,"town",address_component.long_name);
                   console.log("city"+address_component.long_name)
                 }
