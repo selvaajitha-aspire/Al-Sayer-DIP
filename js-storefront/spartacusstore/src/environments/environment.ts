@@ -9,6 +9,8 @@ export const environment = {
   prefix: '/occ/v2/' 
 };
 
+export const subscriptionPublicKey = "BB1Mex4SWQ_ifDM9edDpq90UyvjZheWnwUM15qLcoOOb8HiLI-PuYCR42AQpNJlB76HKe_IQP9E6jzrkZEGzGag"
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

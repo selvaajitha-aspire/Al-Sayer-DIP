@@ -62,11 +62,15 @@
 
             <cx-form-errors [control]="registerForm.get('passwordconf')"></cx-form-errors>
           </div>
+          <div class="form-group-wrapper left-icon">
+            <input type="checkbox" name="isSubscribed" formControlName="isSubscribed" value="true" 
+            (change)="onChangedReceiveNotification($event)"/> Receive Notification
 
+            <input type="hidden" name="subscriptionJSON" formControlName="subscriptionJSON" [(ngModel)]="subscriptionJSON" />
+        </div>
           <button type="submit" [disabled]="!registerForm.valid" class="btn btn-block round-primary-btn mt-20 mb-20">
             {{ 'register.signUp' | cxTranslate }}
           </button>
-
         </form>
         <div class="have-an-account-wrapper">
           {{ 'register.haveAnAccount' | cxTranslate }}

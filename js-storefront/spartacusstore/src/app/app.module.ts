@@ -9,7 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule, SiteContextSelectorModule } from '@spartacus/storefront';
+import { B2cStorefrontModule, DirectionMode, DirectionConfig, LayoutConfig, PageSlotModule, NavigationModule, HamburgerMenuModule, IconModule, GenericLinkModule, SiteContextSelectorModule, CheckoutStepType } from '@spartacus/storefront';
 import { OccConfig, ConfigModule, I18nModule, StoreFinderConfig } from '@spartacus/core';
 import { environment } from './../environments/environment';
 import { RoadsideAssistanceModule } from './roadside-assistance/roadside-assistance.module';
@@ -28,6 +28,8 @@ import { customTranslationConfig } from './internationalization/translation-conf
 import { MarkAsteriskDirectiveModule } from './directives/mark-asterisk.directive';
 import { InfoComponentModule } from './InfoComponent/info-component.module';
 import { InsuranceModule } from './insurance/insurance.module';
+import { ServiceTypeModule } from './checkout/service-type/service-type.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -84,7 +86,48 @@ else {
       },
       features: {
         level: '2.1'
-      }
+      },
+      routing: {
+        routes: {
+          // Create a route for your new checkout step
+          checkoutServiceType: { paths: ['/checkout/service-type'] },
+        },
+      },
+      checkout: {
+        steps: [
+           // Add the new step here, before the shipping address step
+           {
+            id: 'serviceType',
+            name: 'checkoutProgress.serviceType', // Provide translation for this key
+            routeName: 'checkoutServiceType',
+            type: [],
+          },
+          {
+            id: 'shippingAddress',
+            name: 'checkoutProgress.shippingAddress',
+            routeName: 'checkoutShippingAddress',
+            type: [CheckoutStepType.SHIPPING_ADDRESS],
+          },
+          {
+            id: 'deliveryMode',
+            name: 'checkoutProgress.deliveryMode',
+            routeName: 'checkoutDeliveryMode',
+            type: [CheckoutStepType.DELIVERY_MODE],
+          },
+          {
+            id: 'paymentDetails',
+            name: 'checkoutProgress.paymentDetails',
+            routeName: 'checkoutPaymentDetails',
+            type: [CheckoutStepType.PAYMENT_DETAILS],
+          },
+          {
+            id: 'reviewOrder',
+            name: 'checkoutProgress.reviewOrder',
+            routeName: 'checkoutReviewOrder',
+            type: [CheckoutStepType.REVIEW_ORDER],
+          },
+        ],
+      },
     }),
     ConfigModule.withConfig({
       direction: {
@@ -132,7 +175,9 @@ else {
     UpdateProfileModule,
     ServiceHistoryModule,
     MarkAsteriskDirectiveModule,
-    InsuranceModule
+    InsuranceModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {​​​​​ enabled: environment.production }​​​​​),
+    ServiceTypeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
