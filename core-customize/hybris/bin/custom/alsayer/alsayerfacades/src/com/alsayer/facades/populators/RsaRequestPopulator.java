@@ -88,7 +88,7 @@ public class RsaRequestPopulator implements Populator<RsaRequestModel,RsaRequest
                 serviceRequestData.setStatus(serviceRequestModel.getStatus().getCode());
             }
             if(null != serviceRequestModel.getType()){
-                serviceRequestData.setType(serviceRequestModel.getType());
+                serviceRequestData.setType(serviceRequestModel.getType().getCode());
             }
 
         }

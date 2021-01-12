@@ -1,0 +1,33 @@
+<div class="col-md-6 col-sm-12 current-location-wrapper">
+    <label> <span class="label-content d-block" style="float: left;padding-top: 8px;" >Location</span></label>
+     <button required type="button" class="btn btn-default form-control form-control-sm round-default-btn location-btn" data-toggle="modal" (click)="getCurrentLocation()">
+        <!-- <i class="fa fa-map-marker text-danger mr-4" title="Current Location" aria-hidden="true"></i> -->
+        Get My Current Location
+        <img src="../../assets/svg/location_icon.svg" alt="location">
+      </button>
+  </div>
+
+  <div class="modal fade" id="locationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close mb-0 text-right pr-2 pt-2" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <label class="location-input-wrapper">
+        <span class="label-content">Location</span>
+         <div class="form-group col-md-12 col-sm-12 p-0">
+          <input
+          class="form-control form-control-sm d-inline box-to-line"
+          type="text"
+          name="addressU"
+          [value]="addressU"
+          placeholder="Area / City" disabled
+        /></div>
+      </label>
+      <div class="modal-body">
+        <div #map style="width:100%;height:80vh" id="map"></div>
+      </div>
+    </div>
+  </div>
+  </div>

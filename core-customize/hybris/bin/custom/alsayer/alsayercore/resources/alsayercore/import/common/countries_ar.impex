@@ -7,7 +7,7 @@
 #
 
 # Language
-$lang=de
+$lang=ar
 
 # Create Countries
 UPDATE Country;isocode[unique=true];name[lang=$lang]

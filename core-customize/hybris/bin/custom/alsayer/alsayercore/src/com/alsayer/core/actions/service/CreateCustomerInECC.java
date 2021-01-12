@@ -77,9 +77,7 @@ public class CreateCustomerInECC extends AbstractSimpleDecisionAction<StoreFront
                 return Transition.OK;
 
             } catch (final Exception e) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug(e);
-                }
+                LOG.error(e);
                 return Transition.NOK;
             }
 

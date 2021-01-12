@@ -32,7 +32,6 @@ import { ServiceTypeModule } from './checkout/service-type/service-type.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 
-
 const occConfig: OccConfig = { backend: { occ: {} } };
 
 // only provide the `occ.baseUrl` key if it is explicitly configured, otherwise the value of
@@ -176,7 +175,7 @@ else {
     ServiceHistoryModule,
     MarkAsteriskDirectiveModule,
     InsuranceModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {​​​​​ enabled: environment.production }​​​​​),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     ServiceTypeModule
   ],
   providers: [],
