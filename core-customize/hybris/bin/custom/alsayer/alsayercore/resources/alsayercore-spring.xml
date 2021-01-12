@@ -768,4 +768,7 @@
 	</bean>
 	<!--Notification Payload-->
 
+	<bean id="dailyNotificationJob" class="com.alsayer.core.job.DailyNotificationJobPerformable"
+		  parent="abstractJobPerformable"/>
+
 </beans>
