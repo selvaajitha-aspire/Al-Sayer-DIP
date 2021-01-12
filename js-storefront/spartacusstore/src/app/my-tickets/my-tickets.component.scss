@@ -66,6 +66,10 @@ thead{
     padding: 100px 10px 50px 0px;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 @media only screen and (max-width: $desktop){
     .tileBannerComponent{
         width: 50%;
