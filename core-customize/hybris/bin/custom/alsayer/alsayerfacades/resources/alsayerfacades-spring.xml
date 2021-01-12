@@ -381,8 +381,33 @@
 		</property>
 	</bean>
 
-	<bean id="notificationFacade" class="com.alsayer.facades.notification.DefaultNotificationFacade" >
+	<bean id="notificationFacade" class="com.alsayer.facades.notification.impl.DefaultNotificationFacade" >
 
 	</bean>
 
+	<bean id="notificationPayloadReversePopulator" class="com.alsayer.facades.populators.NotifiationPayloadReversePopulator">
+
+	</bean>
+
+	<bean id="notificationPayloadReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.core.model.NotificationPayloadModel"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="notificationPayloadReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="notificationPayloadPopulator" class="com.alsayer.facades.populators.NotificationPayloadPopulator">
+
+	</bean>
+
+	<bean id="notificationPayloadConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.NotificationPayloadData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="notificationPayloadPopulator" />
+			</list>
+		</property>
+	</bean>
 </beans>

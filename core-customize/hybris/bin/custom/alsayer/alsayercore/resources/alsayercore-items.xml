@@ -559,7 +559,8 @@
                     </attribute>
                     <attribute qualifier="paidService" type="java.lang.Boolean">
                         <description>Paid Service Flag</description>
-                        <modifiers read="true" write="true" optional="true" />
+                        <defaultvalue>false</defaultvalue>
+                        <modifiers read="true" write="true" optional="false" />
                         <persistence type="property"/>
                     </attribute>
 
@@ -705,6 +706,28 @@
                         <description>Subscription object as a JSON String</description>
                     </attribute>
                 </attributes>
+            </itemtype>
+
+            <itemtype code="NotificationPayload" autocreate="true" generate="true" jaloclass="com.alsayer.core.jalo.NotificationPayload">
+                <deployment table="notificationPayload" typecode="14001" />
+                <attributes>
+                    <attribute qualifier="template" type="java.lang.String">
+                        <persistence type="property" >
+                            <columntype>
+                                <value>varchar(3000)</value>
+                            </columntype>
+                        </persistence>
+                        <modifiers optional="true" initial="false"/>
+                        <description>Notification Template JSON</description>
+                    </attribute>
+                    <attribute qualifier="templateCode" type="java.lang.String">
+                        <persistence type="property" >
+                        </persistence>
+                        <modifiers optional="true" initial="false"/>
+                        <description>Notification icon</description>
+                    </attribute>
+                </attributes>
+
             </itemtype>
 
         </typegroup>

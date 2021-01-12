@@ -96,4 +96,9 @@
 		<property name="subscriptionJSON" type="java.lang.String"/>
 		<property name="user" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
 	</bean>
+
+	<bean class="com.alsayer.facades.data.NotificationPayloadData">
+		<property name="template" type="String" />
+		<property name="templateCode" type="String" />
+	</bean>
 </beans>

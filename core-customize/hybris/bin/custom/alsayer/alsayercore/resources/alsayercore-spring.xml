@@ -740,7 +740,7 @@
 		<property name="modelService" ref="modelService"/>
 	</bean>
 
-	<!--Service Request-->
+	<!--Subscription-->
 	<bean id="subscriptionService" class="com.alsayer.core.subscription.service.impl.DefaultSubscriptionService">
 		<property name="subscriptionDao" ref="subscriptionDao"/>
 		<property name="subscriptionConverter" ref="subscriptionConverter" />
@@ -753,6 +753,19 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
-	<!--Service Request-->
+	<!--Subscription-->
+
+	<!--Notification Payload-->
+	<bean id="notificationPayloadService" class="com.alsayer.core.payload.service.impl.DefaultNotificationPayloadService">
+		<property name="notificationPayloadDao" ref="notificationPayloadDao"/>
+		<property name="notificationPayloadConverter" ref="notificationPayloadConverter" />
+		<property name="notificationPayloadReverseConverter" ref="notificationPayloadReverseConverter" />
+	</bean>
+
+	<bean id="notificationPayloadDao" class="com.alsayer.core.payload.dao.impl.DefaultNotificationPayloadDao">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<!--Notification Payload-->
 
 </beans>
