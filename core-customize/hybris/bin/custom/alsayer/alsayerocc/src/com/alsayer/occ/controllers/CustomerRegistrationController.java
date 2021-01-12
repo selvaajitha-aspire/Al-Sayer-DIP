@@ -1,7 +1,10 @@
 
 package com.alsayer.occ.controllers;
 
+import com.alsayer.core.subscription.service.SubscriptionService;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
+import com.alsayer.facades.data.SubscriptionData;
+import com.alsayer.facades.notification.NotificationFacade;
 import com.alsayer.occ.constants.AlsayeroccConstants;
 import com.alsayer.occ.dto.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,6 +30,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.Authorization;
+import nl.martijndwars.webpush.Notification;
+import nl.martijndwars.webpush.PushService;
+import nl.martijndwars.webpush.Subscription;
+import org.jose4j.lang.JoseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -48,10 +55,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 
 @Controller
@@ -88,6 +97,12 @@ public class CustomerRegistrationController {
 
     @Resource
     private DataMapper dataMapper;
+
+    @Resource
+    private NotificationFacade notificationFacade;
+
+    @Resource
+    private SubscriptionService subscriptionService;
 
     private static final String BASIC_FIELD_SET = "BASIC";
 
@@ -128,6 +143,18 @@ public class CustomerRegistrationController {
             return null;
         }
     }
+
+    @RequestMapping(value = "/testNotification", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    private void sendNotification(){
+        try {
+            String payload = "{\"notification\":{\"data\":{\"url\":\"http://www.youtube.com/funofheuristic\"},\"title\":\"Hello\",\"vibrate\":[100,50,100]}}";
+            List<SubscriptionData> subscriptionList = subscriptionService.getAllSubscriptions();
+            notificationFacade.pushNotificationWithSubscriptionData(subscriptionList,payload);
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
+        }
+    }
+
 
     @RequestMapping(value = "/getCustomerDetails/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -219,6 +246,9 @@ public class CustomerRegistrationController {
         CustomerRegistrationResultDTO customerRegistrationResultDTO = new CustomerRegistrationResultDTO();
         try {
             customerFacade.register(registerData);
+            SubscriptionData subData = new SubscriptionData();
+            subData.setSubscriptionJSON(user.getSubscriptionJSON());
+            subscriptionService.save(subData);
         } catch (final DuplicateUidException ex) {
             userExists = true;
             LOG.debug("Duplicated UID", ex);

@@ -1,6 +1,5 @@
 package com.alsayer.core.servicehistory.service.impl;
 
-import com.alsayer.core.jalo.ServiceHistory;
 import com.alsayer.core.model.ServiceHistoryModel;
 import com.alsayer.core.servicehistory.dao.ServiceHistoryDao;
 import com.alsayer.core.servicehistory.service.ServiceHistoryService;

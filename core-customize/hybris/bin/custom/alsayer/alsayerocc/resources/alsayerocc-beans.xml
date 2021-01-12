@@ -73,6 +73,7 @@
         <property name="password" type="String"/>
         <property name="oneTimePassword" type="String"/>
         <property name="customerType" type="String"/>
+        <property name="subscriptionJSON" type="String" />
     </bean>
 
 
@@ -122,6 +123,7 @@
         <property name="modyear" type="String"/>
 		<property name="plateNumber" type="String"/>
         <property name="warranties" type="java.util.List&lt;com.alsayer.occ.dto.WarrantyWsDTO&gt;"/>
+        <property name="brand" type="String"/>
 	</bean>
 
     <bean class="com.alsayer.occ.dto.WarrantyWsDTO">

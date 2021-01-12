@@ -35,6 +35,7 @@
 		<property name="modyear" type="String"/>
 		<property name="plateNumber" type="String"/>
 		<property name="warranties" type="java.util.List&lt;com.alsayer.facades.data.WarrantyData&gt;"/>
+		<property name="brand" type="String"/>
 	</bean>
 
 	<bean class="com.alsayer.facades.data.WarrantyData">
@@ -89,5 +90,10 @@
 		<property name="dateOfIssue" type="java.util.Date" />
 		<property name="chassisNumber" type="String"/>
 		<property name="plateNumber" type="String"/>
+	</bean>
+
+	<bean class="com.alsayer.facades.data.SubscriptionData">
+		<property name="subscriptionJSON" type="java.lang.String"/>
+		<property name="user" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
 	</bean>
 </beans>

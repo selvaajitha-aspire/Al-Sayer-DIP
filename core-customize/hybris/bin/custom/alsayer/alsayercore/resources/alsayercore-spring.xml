@@ -740,4 +740,19 @@
 		<property name="modelService" ref="modelService"/>
 	</bean>
 
+	<!--Service Request-->
+	<bean id="subscriptionService" class="com.alsayer.core.subscription.service.impl.DefaultSubscriptionService">
+		<property name="subscriptionDao" ref="subscriptionDao"/>
+		<property name="subscriptionConverter" ref="subscriptionConverter" />
+		<property name="subscriptionReverseConverter" ref="subscriptionReverseConverter" />
+		<property name="userService" ref="userService"/>
+
+	</bean>
+
+	<bean id="subscriptionDao" class="com.alsayer.core.subscription.dao.impl.DefaultSubscriptionDao">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<!--Service Request-->
+
 </beans>

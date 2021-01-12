@@ -48,9 +48,14 @@
             <value code="OTHERS_MUSAADA"/>
             <value code="RSA"/>
         </enumtype>
+        <enumtype code="RequestType" autocreate="true" generate="true" dynamic="true">
+            <description>request type</description>
+            <value code="MUSAADA"/>
+            <value code="RSA"/>
+        </enumtype>
 
         <enumtype code="ReqType" autocreate="true" generate="true" dynamic="true">
-            <description>Status of service request to the target system</description>
+            <description>ECC Request type</description>
             <value code="M"/>
             <value code="T"/>
         </enumtype>
@@ -157,7 +162,14 @@
                 <modifiers initial="true" optional="true" />
             </targetElement>
         </relation>
-
+        <relation code="CustomerSubscription" localized="false" autocreate="true">
+            <sourceElement type="Customer" qualifier="user" cardinality="one" >
+                <modifiers read="true" write="true" optional="true" />
+            </sourceElement>
+            <targetElement type="Subscription" qualifier="subscription" cardinality="many" collectiontype="set">
+                <modifiers read="true" write="true"  optional="true" />
+            </targetElement>
+        </relation>
     </relations>
 
 
@@ -424,6 +436,12 @@
                         <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="isSubscribed" type="java.lang.Boolean">
+                        <description>Consent for subscription to Notifications</description>
+                        <defaultvalue>false</defaultvalue>
+                        <modifiers read="true" write="true" />
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 
@@ -499,7 +517,7 @@
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="type" type="java.lang.String">
+                    <attribute qualifier="type" type="RequestType">
                         <description>Request Type(RSA/Musaada)</description>
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
@@ -539,6 +557,12 @@
                         <modifiers read="true" write="true" optional="true" />
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="paidService" type="java.lang.Boolean">
+                        <description>Paid Service Flag</description>
+                        <modifiers read="true" write="true" optional="true" />
+                        <persistence type="property"/>
+                    </attribute>
+
                 </attributes>
             </itemtype>
 
@@ -663,6 +687,22 @@
                         <persistence type="property" />
                         <modifiers optional="true" initial="false"/>
                         <description>image of the Component</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="Subscription" autocreate="true" generate="true" jaloclass="com.alsayer.core.jalo.Subsription">
+                <deployment table="subscription" typecode="14000" />
+                <attributes>
+                    <attribute qualifier="subscriptionJSON" type="java.lang.String">
+                        <persistence type="property" >
+                            <columntype >
+                                <value>varchar(500)</value>
+                            </columntype>
+                        </persistence>
+                            
+                        <modifiers optional="true" initial="false"/>
+                        <description>Subscription object as a JSON String</description>
                     </attribute>
                 </attributes>
             </itemtype>
