@@ -21,13 +21,13 @@
 <div class="my-vehicles-wrapper" [ngStyle]="{'min-height': innerHeight ? innerHeight : 'auto' }" >
     <div class="container p-0" *ngIf="vehicleList | async as vehicles$;else no_data">
         <div *ngFor="let vehicle of vehicles$; let i=index" class="box vehicle-wrapper col-12 p-0">
-            <div class="d-flex justify-content-between col-11" *ngIf="!vehicleToggle[i]">
+            <div class="d-flex justify-content-between col-11 cursor-pointer" *ngIf="!vehicleToggle[i]" (click)="vehicleToggle[i] = !vehicleToggle[i]">
                 <span class="vehicle-collapse-text">{{vehicle.modline}}</span>
                 <span class="text-right vehicle-collapse-text">{{vehicle.plateNumber}}
                 </span>
             </div>
             <div class="col-11" *ngIf="vehicleToggle[i]">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between cursor-pointer" (click)="vehicleToggle[i] = !vehicleToggle[i]">
                     <span class='vehicle-open-text-header'>{{ 'vehicles.model' | cxTranslate }}</span>
                     <span class="text-right vehicle-open-text">{{vehicle.modline}}</span>
                 </div>
@@ -54,11 +54,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-1 p-0">
-                <span *ngIf="!vehicleToggle[i]" (click)="vehicleToggle[i] = !vehicleToggle[i]">
+            <div class="col-1 p-0 cursor-pointer" (click)="vehicleToggle[i] = !vehicleToggle[i]">
+                <span *ngIf="!vehicleToggle[i]" >
                     <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
                 </span>
-                <span *ngIf="vehicleToggle[i]" (click)="vehicleToggle[i] = !vehicleToggle[i]">
+                <span *ngIf="vehicleToggle[i]">
                     <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
                 </span>
             </div>

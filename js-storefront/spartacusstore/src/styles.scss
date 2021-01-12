@@ -87,6 +87,15 @@ header .SiteLogin{
 
 cx-login a{
     color: var(--white);
+    
+}
+
+.header {
+    .SiteLogin{
+        cx-login > a {
+                display: none;
+        }
+    }
 }
 
 cx-navigation-ui h5{

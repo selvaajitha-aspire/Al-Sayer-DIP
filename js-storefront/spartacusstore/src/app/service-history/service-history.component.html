@@ -15,13 +15,13 @@
 
     <div class="container p-0" *ngIf="serviceHistoryList | async as serviceHistorys$">
         <div *ngFor="let serviceHistory of serviceHistorys$; let i=index" class="box serviceHistory-wrapper col-12 p-0">
-            <div class="d-flex justify-content-between col-11" *ngIf="!serviceHistoryToggle[i]">
+            <div class="d-flex justify-content-between col-11 cursor-pointer" *ngIf="!serviceHistoryToggle[i]" (click)="serviceHistoryToggle[i] = !serviceHistoryToggle[i]">
                 <span class="serviceHistory-collapse-text">{{serviceHistory.serviceType}}</span>
                 <span class="text-right serviceHistory-collapse-text">{{serviceHistory.serviceDate | date: 'mediumDate'}}
                 </span>
             </div>
             <div class="col-11" *ngIf="serviceHistoryToggle[i]">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between cursor-pointer" (click)="serviceHistoryToggle[i] = !serviceHistoryToggle[i]">
                     <span class='serviceHistory-open-text-header'>{{ 'serviceHistory.serviceType' | cxTranslate }}</span>
                     <span class="text-right serviceHistory-open-text">{{serviceHistory.serviceType}}</span>
                 </div>
@@ -50,11 +50,11 @@
                     <span class="text-right serviceHistory-open-text">{{serviceHistory.locationCode}}</span>
                 </div> -->
             </div>
-            <div class="col-1 p-0">
-                <span *ngIf="!serviceHistoryToggle[i]" (click)="serviceHistoryToggle[i] = !serviceHistoryToggle[i]">
+            <div class="col-1 p-0 cursor-pointer" (click)="serviceHistoryToggle[i] = !serviceHistoryToggle[i]">
+                <span *ngIf="!serviceHistoryToggle[i]" >
                     <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
                 </span>
-                <span *ngIf="serviceHistoryToggle[i]" (click)="serviceHistoryToggle[i] = !serviceHistoryToggle[i]">
+                <span *ngIf="serviceHistoryToggle[i]">
                     <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
                 </span>
             </div>

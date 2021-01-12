@@ -83,13 +83,13 @@
 <div class="my-tickets-wrapper" [ngStyle]="{'min-height': innerHeight ? innerHeight : 'auto' }">
     <div class="container p-0" *ngIf="ticketsList | async as ticket$;else no_data" >
         <div *ngFor="let ticket of ticket$; let i=index" class="box ticket-wrapper col-12 p-0">
-            <div class="d-flex justify-content-between col-11" *ngIf="!ticketToggle[i]">
+            <div class="d-flex justify-content-between col-11 cursor-pointer" *ngIf="!ticketToggle[i]" (click)="ticketToggle[i] = !ticketToggle[i]">
                 <span class="ticket-collapse-text">{{ticket.notes}}</span>
                 <span class="text-right ticket-collapse-text status-text">{{ticket.status}}
                 </span>
             </div>
             <div class="col-11" *ngIf="ticketToggle[i]">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between cursor-pointer" (click)="ticketToggle[i] = !ticketToggle[i]">
                     <span class='ticket-open-text-header'>{{ 'tickets.id' | cxTranslate }}</span>
                     <span class="text-right ticket-open-text">{{ticket.uid}}</span>
                 </div>
@@ -131,11 +131,11 @@
                     </span>
                 </div>
             </div>
-            <div class="col-1 p-0">
-                <span *ngIf="!ticketToggle[i]" (click)="ticketToggle[i] = !ticketToggle[i]">
+            <div class="col-1 p-0 cursor-pointer" (click)="ticketToggle[i] = !ticketToggle[i]">
+                <span *ngIf="!ticketToggle[i]" >
                     <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
                 </span>
-                <span *ngIf="ticketToggle[i]" (click)="ticketToggle[i] = !ticketToggle[i]">
+                <span *ngIf="ticketToggle[i]">
                     <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
                 </span>
             </div>

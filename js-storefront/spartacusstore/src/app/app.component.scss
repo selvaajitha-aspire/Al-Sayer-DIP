@@ -1,0 +1,19 @@
+:root {
+    --fire-engine-red: #dd231b;
+    --white: #ffffff;
+    --alizarin : #de2d25;
+}
+$desktop: 960px;
+$mobile-large: 640px;
+.signin-menu{
+    position: fixed;
+    top: 0;
+    z-index: 101;
+    width: 100%;
+}
+
+@media only screen and (max-width: $desktop){
+    .signin-menu{
+        display: none;
+    }
+}
