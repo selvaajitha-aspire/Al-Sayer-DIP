@@ -2,7 +2,20 @@
 <!--
  Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
-                                                                                                                                                                                                                                                                            	
+                                                                                                                                                                                                                                                                                                                                	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -70,7 +83,20 @@
     
     
     <extension abstractclassprefix="Generated" classprefix="AlsayerStorefront" name="alsayerstorefront" usemaven="false">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        		
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                		
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -853,6 +879,175 @@
         
         
         
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -906,7 +1101,20 @@
         
         
         <requires-extension name="acceleratorstorefrontcommons"/>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        		
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                		
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -974,7 +1182,20 @@
         
         
         <requires-extension name="alsayerfacades"/>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        		
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                		
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1042,7 +1263,7 @@
         
         
         <webmodule jspcompile="false" webroot="/alsayerstorefront"/>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        		
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                		
         
         		
         
@@ -1111,8 +1332,34 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <meta key="extgen-template-extension" value="true"/>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        	
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1180,7 +1427,20 @@
     
     
     </extension>
-                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
