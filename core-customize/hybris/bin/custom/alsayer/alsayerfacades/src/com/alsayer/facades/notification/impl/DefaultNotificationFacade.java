@@ -1,7 +1,7 @@
-package com.alsayer.facades.notification;
+package com.alsayer.facades.notification.impl;
 
 import com.alsayer.facades.data.SubscriptionData;
-import com.alsayer.occ.dto.RsaRequestWsDTO;
+import com.alsayer.facades.notification.NotificationFacade;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.martijndwars.webpush.Notification;
 import nl.martijndwars.webpush.PushService;
@@ -15,7 +15,7 @@ import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class DefaultNotificationFacade implements NotificationFacade{
+public class DefaultNotificationFacade implements NotificationFacade {
 
     final static Logger LOG = LoggerFactory.getLogger(DefaultNotificationFacade.class);
     
@@ -56,7 +56,7 @@ public class DefaultNotificationFacade implements NotificationFacade{
     public void pushNotification(SubscriptionData subscription, String payload){
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Subscription sub = mapper.readValue(subscription.getSubscriptionJSON(), Subscription.class);
+            Subscription sub = mapper.readValue(subscription.getSubscriptionJSON(),Subscription.class);
             pushNotification(sub,payload);
         } catch (Exception e) {
             LOG.error(e.getMessage());

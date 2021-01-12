@@ -1,8 +1,10 @@
 
 package com.alsayer.occ.controllers;
 
+import com.alsayer.core.payload.service.NotificationPayloadService;
 import com.alsayer.core.subscription.service.SubscriptionService;
 import com.alsayer.facades.customer.AlsayerCustomerFacade;
+import com.alsayer.facades.data.NotificationPayloadData;
 import com.alsayer.facades.data.SubscriptionData;
 import com.alsayer.facades.notification.NotificationFacade;
 import com.alsayer.occ.constants.AlsayeroccConstants;
@@ -104,6 +106,9 @@ public class CustomerRegistrationController {
     @Resource
     private SubscriptionService subscriptionService;
 
+    @Resource
+    private NotificationPayloadService notificationPayloadService;
+
     private static final String BASIC_FIELD_SET = "BASIC";
 
 
@@ -144,15 +149,18 @@ public class CustomerRegistrationController {
         }
     }
 
-    @RequestMapping(value = "/testNotification", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private void sendNotification(){
+    @RequestMapping(value = "/testNotification/{templateCode}", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseBody
+    public String sendNotification(@PathVariable("templateCode") String templateCode){
         try {
-            String payload = "{\"notification\":{\"data\":{\"url\":\"http://www.youtube.com/funofheuristic\"},\"title\":\"Hello\",\"vibrate\":[100,50,100]}}";
-            List<SubscriptionData> subscriptionList = subscriptionService.getAllSubscriptions();
-            notificationFacade.pushNotificationWithSubscriptionData(subscriptionList,payload);
+            //String payload = "{\"notification\":{\"data\":{\"url\":\"http://www.youtube.com/funofheuristic\"},\"title\":\"Hello\",\"vibrate\":[100,50,100]}}";
+            NotificationPayloadData payloadTemplate = notificationPayloadService.getPayloadTemplateByCode(templateCode);
+            List<SubscriptionData> subscriptionList = this.subscriptionService.getAllSubscriptions();
+            notificationFacade.pushNotificationWithSubscriptionData(subscriptionList,payloadTemplate.getTemplate());
         } catch (Exception e) {
             LOG.error(e.getMessage());
         }
+        return "Test Notification sent";
     }
 
 
