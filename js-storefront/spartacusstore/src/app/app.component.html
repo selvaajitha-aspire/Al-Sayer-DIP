@@ -1,3 +1,7 @@
+<!-- <app-header-menu *ngIf="isLoggedIn"></app-header-menu> -->
+<div class="signin-menu">
+  <app-signin-menu *ngIf="!isLoggedIn"></app-signin-menu>
+</div>
 
 <cx-storefront></cx-storefront>
 <!-- <ng-container>

@@ -49,7 +49,7 @@
     [ngClass]="(menuState == 'in')?'mble-menu-block':'mble-menu-none'"></div>
 <div [@slideInOut]="menuState" class="hamburger-menu">
     <div class='hamburger-menu-wrapper'>
-        <div class="profile-wrapper">
+        <div class="profile-wrapper" *ngIf="isLoggedIn">
             <img [src]="profilePhotoUrl" class="cropped1">
             <form class="form-wrapper" novalidate>
                 <div class="form-group col-md-6 mb-4">

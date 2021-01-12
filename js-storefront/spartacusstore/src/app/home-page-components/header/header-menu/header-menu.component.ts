@@ -104,10 +104,10 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
     this.router.events.subscribe((event: Event) => {
       if(event instanceof NavigationEnd){
         // this.title = '';
-        this.hideHeader(event.url);
+        // this.hideHeader(event.url);
       }
     });
-    this.hideHeader(this.router.url);
+    // this.hideHeader(this.router.url);
     this.user$.subscribe(resp=>{
       this.profilePhotoUrl = this.getUrl(resp.profilePhotoUrl);
     });
