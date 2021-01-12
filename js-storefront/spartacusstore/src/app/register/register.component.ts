@@ -378,7 +378,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     await this.swPush.requestSubscription({
       serverPublicKey: subscriptionPublicKey
     }).then(sub => {
-        this.subscriptionJSON = JSON.stringify(sub);
+        let json = JSON.stringify(sub);
+        let obj = JSON.parse(json);
+        delete obj["expirationTime"]
+        this.subscriptionJSON = JSON.stringify(obj);
     }).catch(err => {
         console.error("Could not subscribe to notifications", err);
     });
