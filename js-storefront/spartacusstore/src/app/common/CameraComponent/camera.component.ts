@@ -9,7 +9,7 @@ declare var $: any;
     styleUrls: ['./camera.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
-  export class CameraComponent {
+  export class CameraComponent implements OnInit {
 
     constructor(private renderer : Renderer2){
         
@@ -29,21 +29,25 @@ declare var $: any;
     @ViewChild('video', { static: true }) videoElement: ElementRef;
     @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
-    constraints : any;
     videoWidth = 0;
     videoHeight = 0;
     currentImage = '';
 
+    constraints = {
+      video: {
+          facingMode: "environment",
+          width: { ideal:  window.innerWidth },
+          height: { ideal: window.innerHeight }
+      }
+    };
+
+    ngOnInit(){
+      
+    }
 
     openCamera(event){
         event.preventDefault();
-        this.constraints = {
-          video: {
-              facingMode: isEmpty(this.cameraFacing)?"environment":this.cameraFacing,
-              width: { ideal:  window.innerWidth },
-              height: { ideal: window.innerHeight }
-          }
-        };
+        
         this.videoElement.nativeElement.style.display='block';
         this.canvas.nativeElement.style.display='none';
          this.retakeFlag = false;
