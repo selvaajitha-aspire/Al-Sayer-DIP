@@ -70,11 +70,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 ;;icn_storelocator.png;icn_storelocator.png;$siteResource/images/banners/alsayer/homepage/links/icn_storelocator.png;image/png;;"Locate Us"
 ;;icn_aboutus.png;icn_aboutus.png;$siteResource/images/banners/alsayer/homepage/links/icn_aboutus.png;image/png;;"About Us"
 ;;icn_contactus.png;icn_contactus.png;$siteResource/images/banners/alsayer/homepage/links/icn_contactus.png;image/png;;"FAQ"
-<<<<<<< HEAD
-
-=======
 ;;icn_signin.png;icn_signin.png;$siteResource/images/banners/alsayer/homepage/links/icn_signin.png;image/png;;"Sing In"
->>>>>>> develop
 
 # create cms link components for my account pages------------------------------------
 
@@ -161,11 +157,7 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 # create navigation component for my account
 
 UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$contentCV)
-<<<<<<< HEAD
-;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,StoreLocatorNavNode,AboutUsNavNode,FAQNavNode,SignOutNavNode
-=======
 ;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,StoreLocatorNavNode,AboutUsNavNode,FAQNavNode,SignOutNavNode,SignInNavNode
->>>>>>> develop
 
 #en
 # CMS Navigation Node
