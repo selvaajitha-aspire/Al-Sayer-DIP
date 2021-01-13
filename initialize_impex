@@ -70,7 +70,11 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 ;;icn_storelocator.png;icn_storelocator.png;$siteResource/images/banners/alsayer/homepage/links/icn_storelocator.png;image/png;;"Locate Us"
 ;;icn_aboutus.png;icn_aboutus.png;$siteResource/images/banners/alsayer/homepage/links/icn_aboutus.png;image/png;;"About Us"
 ;;icn_contactus.png;icn_contactus.png;$siteResource/images/banners/alsayer/homepage/links/icn_contactus.png;image/png;;"FAQ"
+<<<<<<< HEAD
 
+=======
+;;icn_signin.png;icn_signin.png;$siteResource/images/banners/alsayer/homepage/links/icn_signin.png;image/png;;"Sing In"
+>>>>>>> develop
 
 # create cms link components for my account pages------------------------------------
 
@@ -84,6 +88,7 @@ INSERT_UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;AboutUsSideLink;AboutUsSideLink;/aboutUs;icn_aboutus.png;AboutUsSideLink;;
 ;;FAQSideLink;FAQSideLink;/faq;icn_contactus.png;FAQSideLink;;
 ;;SignOutSideLink;SignOutSideLink;/logout;icn_signout.png;SignOutSideLink;
+;;SignInSideLink;SignInSideLink;/login;icn_signin.png;SignInSideLink;
 
 # create navigation root node for my account & child nodes for the root node
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
@@ -98,6 +103,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;AboutUsNavNode;;About Us;MyAccountNavNode;;AboutUsNavNode
 ;FAQNavNode;;FAQ;MyAccountNavNode;;FAQNavNode
 ;SignOutNavNode;;Sign Out;MyAccountNavNode;;SignOutNavNode
+;SignInNavNode;;Sign In;MyAccountNavNode;;SignInNavNode
 
 # create cms navigation entry for nvaigation child nodes
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
@@ -110,6 +116,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;AboutUsNavNodeEntry;;AboutUsNavNodeEntry;AboutUsNavNode;AboutUsSideLink;
 ;FAQNavNodeEntry;;FAQNavNodeEntry;FAQNavNode;FAQSideLink;
 ;SignOutNavNodeEntry;;SignOutNavNodeEntry;SignOutNavNode;SignOutSideLink;
+;SignInNavNodeEntry;;SignInNavNodeEntry;SignInNavNode;SignInSideLink;
 
 UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
 ;;MyProfileSideLink;"My Profile"
@@ -121,6 +128,21 @@ UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[l
 ;;AboutUsSideLink;"About Us"
 ;;FAQSideLink;"FAQ"
 ;;SignOutSideLink;"Sign Out"
+;;SignInSideLink;"Sign In"
+
+##Putting Restriction 
+
+REMOVE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(&componentRef)
+;;Logged in User;anonymousUserRestriction;loggedInUser;MyAccount
+
+INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];&userRestriction;name;uid[unique=true];users(uid)
+;;anonymousUserRestriction;Anonymous User Restriction;anonymousUserRestriction;anonymous
+
+
+INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(&linkRef)
+;;Logged in User;anonymousUserRestriction;loggedInUser;MyProfileSideLink,MyVehiclesSideLink,MyPurchasesSideLink,MyTicketsSideLink,MyServicesSideLink,SignOutSideLink
+
+
 
 ##Putting Restriction 
 
@@ -139,7 +161,11 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 # create navigation component for my account
 
 UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];children(uid,$contentCV)
+<<<<<<< HEAD
 ;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,StoreLocatorNavNode,AboutUsNavNode,FAQNavNode,SignOutNavNode
+=======
+;MyAccountNavNode;;MyProfileNavNode,MyVehiclesNavNode,MyPurchasesNavNode,MyTicketsNavNode,MyServicesNavNode,StoreLocatorNavNode,AboutUsNavNode,FAQNavNode,SignOutNavNode,SignInNavNode
+>>>>>>> develop
 
 #en
 # CMS Navigation Node

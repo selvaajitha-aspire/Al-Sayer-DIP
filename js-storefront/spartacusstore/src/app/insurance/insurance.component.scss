@@ -46,12 +46,16 @@ $mobile-large: 640px;
         .panel-heading{
             background-color: white;
             border-bottom: 0;
-            padding: 10px 15px;
+            padding: 5px 15px;
             border-bottom: 1px solid transparent;
             border-top-right-radius: 3px;
             border-top-left-radius: 3px;
+            h4{
+                margin: 0;
+            }
             a {
                 color: black !important;
+                display: block;
             }
         }
     }

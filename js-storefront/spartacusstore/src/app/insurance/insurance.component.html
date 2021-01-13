@@ -18,14 +18,14 @@
                             <div class="container p-0" *ngIf="insurances | async as insurances$">
                                 <div *ngFor="let insurance of insurances$; let i=index"
                                     class="box insurances-wrapper col-12 p-0">
-                                    <div class="d-flex justify-content-between col-11" *ngIf="!insuranceToggle[i]">
+                                    <div class="d-flex justify-content-between col-11 cursor-pointer" *ngIf="!insuranceToggle[i]" (click)="insuranceToggle[i] = !insuranceToggle[i]">
                                         <span class="insurances-collapse-text">{{insurance.coverageInfo}}</span>
                                         <span
                                             class="text-right insurances-collapse-text">{{insurance.dateOfExpiry | date: 'mediumDate'}}
                                         </span>
                                     </div>
                                     <div class="col-11" *ngIf="insuranceToggle[i]">
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex justify-content-between cursor-pointer" (click)="insuranceToggle[i] = !insuranceToggle[i]">
                                             <span class='insurance-open-text-header'>{{ 'insurance.insuranceInfo' | cxTranslate }}</span>
                                             <span
                                                 class="text-right insurance-open-text">{{insurance.coverageInfo}}</span>
@@ -51,13 +51,11 @@
                                                 class="text-right insurance-open-text">{{insurance.plateNumber}}</span>
                                         </div>
                                     </div>
-                                    <div class="col-1 p-0">
-                                        <span *ngIf="!insuranceToggle[i]" class="cursor-pointer"
-                                            (click)="insuranceToggle[i] = !insuranceToggle[i]">
+                                    <div class="col-1 p-0 cursor-pointer" (click)="insuranceToggle[i] = !insuranceToggle[i]">
+                                        <span *ngIf="!insuranceToggle[i]">
                                             <img src="../../assets/icons/icn_rightarrow.png" alt="icn_rightarrow">
                                         </span>
-                                        <span *ngIf="insuranceToggle[i]" class="cursor-pointer"
-                                            (click)="insuranceToggle[i] = !insuranceToggle[i]">
+                                        <span *ngIf="insuranceToggle[i]">
                                             <img src="../../assets/icons/icn_dropdown.png" alt="icn_dropdown">
                                         </span>
                                     </div>
