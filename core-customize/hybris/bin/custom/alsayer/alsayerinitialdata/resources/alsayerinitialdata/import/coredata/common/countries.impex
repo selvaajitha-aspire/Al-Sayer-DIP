@@ -11,9 +11,9 @@ INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]
 # ISO 3166-2:KW
 #
 INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
-;KW;KW-AH;AH;"Al Ahmadi"
-;KW;KW-FA;FA;"Farwaniya"
-;KW;KW-JA;JA;"Al Jahra"
-;KW;KW-KU;KU;"Al Kuwayt"
-;KW;KW-HA;HA;"Hawalli"
-;KW;KW-MU;MU;"Mubarak Al-Kabeer"
+;KW;AH;AH;"Al Ahmadi"
+;KW;FA;FA;"Farwaniya"
+;KW;JA;JA;"Al Jahra"
+;KW;KU;KU;"Al Kuwayt"
+;KW;HA;HA;"Hawalli"
+;KW;MU;MU;"Mubarak Al-Kabeer"
