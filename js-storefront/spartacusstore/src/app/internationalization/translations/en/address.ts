@@ -16,7 +16,7 @@ export const address = {
         label: 'City',
         placeholder: 'City',
       },
-      state: 'State',
+      state: 'Governance',
       zipCode: {
         label: 'Zip code',
         placeholder: 'Postal Code/Zip',

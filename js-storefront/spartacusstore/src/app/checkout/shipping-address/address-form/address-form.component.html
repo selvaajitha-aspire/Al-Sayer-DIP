@@ -18,6 +18,8 @@
                 bindValue="isocode"
                 placeholder="{{ 'addressForm.selectOne' | cxTranslate }}"
                 (change)="countrySelected($event)"
+                [(ngModel)]="selectedAttributes"
+                
               >
               </ng-select>
               <cx-form-errors
@@ -161,7 +163,6 @@
                   [items]="regions"
                   bindLabel="{{ regions[0].name ? 'name' : 'isocode' }}"
                   bindValue="{{ regions[0].name ? 'isocode' : 'region' }}"
-                  placeholder="{{ 'addressForm.selectOne' | cxTranslate }}"
                 >
                 </ng-select>
                 <cx-form-errors

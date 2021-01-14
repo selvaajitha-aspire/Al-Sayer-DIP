@@ -34,6 +34,7 @@ import { setFormField } from 'src/app/common/utility';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddressFormComponent implements OnInit, OnDestroy {
+  selectedAttributes='';
   countries$: Observable<Country[]>;
   titles$: Observable<Title[]>;
   regions$: Observable<Region[]>;
@@ -99,6 +100,7 @@ export class AddressFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Fetching countries
+    
     this.countries$ = this.userAddressService.getDeliveryCountries().pipe(
       tap((countries: Country[]) => {
         if (Object.keys(countries).length === 0) {
@@ -106,6 +108,13 @@ export class AddressFormComponent implements OnInit, OnDestroy {
         }
       })
     );
+     this.countries$.subscribe(countries=>{
+       countries.map(country=>{
+         this.selectedAttributes=country.isocode;
+         this.selectedCountry$.next(country.isocode);
+         return 
+       })
+     })
 
     // Fetching titles
     this.titles$ = this.userService.getTitles().pipe(
