@@ -126,19 +126,6 @@ UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[l
 ;;SignOutSideLink;"Sign Out"
 ;;SignInSideLink;"Sign In"
 
-##Putting Restriction 
-
-REMOVE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(&componentRef)
-;;Logged in User;anonymousUserRestriction;loggedInUser;MyAccount
-
-INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];&userRestriction;name;uid[unique=true];users(uid)
-;;anonymousUserRestriction;Anonymous User Restriction;anonymousUserRestriction;anonymous
-
-
-INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(&linkRef)
-;;Logged in User;anonymousUserRestriction;loggedInUser;MyProfileSideLink,MyVehiclesSideLink,MyPurchasesSideLink,MyTicketsSideLink,MyServicesSideLink,SignOutSideLink
-
-
 
 ##Putting Restriction 
 
