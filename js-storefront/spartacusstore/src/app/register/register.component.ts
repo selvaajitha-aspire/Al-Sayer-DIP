@@ -387,4 +387,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
   }
 
+  unsubscribeUser() {
+    this.swPush.unsubscribe().then((resp) => {
+      console.log(JSON.stringify(resp))
+    })
+    .catch(function(error) {
+      console.log('Error unsubscribing', error);
+    });
+  }
+
 }

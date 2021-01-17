@@ -1,3 +1,4 @@
+import { ShippingAddressModule } from './checkout/shipping-address/shipping-address.module';
 import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
@@ -176,7 +177,8 @@ else {
     MarkAsteriskDirectiveModule,
     InsuranceModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-    ServiceTypeModule
+    ServiceTypeModule,
+    ShippingAddressModule
   ],
   providers: [],
   bootstrap: [AppComponent]
