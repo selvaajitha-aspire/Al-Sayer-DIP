@@ -31,6 +31,7 @@ import { InfoComponentModule } from './InfoComponent/info-component.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { ServiceTypeModule } from './checkout/service-type/service-type.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { refreshTokenConfigFactory } from './RefreshTokenConfig';
 
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -71,6 +72,7 @@ else {
     I18nModule,
     SiteContextSelectorModule,
     ToastrModule.forRoot(),
+    ConfigModule.withConfigFactory(refreshTokenConfigFactory),
     B2cStorefrontModule.withConfig({
       backend: occConfig.backend,
       context: {
