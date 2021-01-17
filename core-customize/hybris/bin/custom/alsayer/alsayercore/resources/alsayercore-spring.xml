@@ -749,7 +749,6 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 	
-	
 	<!--Subscription-->
 	<bean id="subscriptionService" class="com.alsayer.core.subscription.service.impl.DefaultSubscriptionService">
 		<property name="subscriptionDao" ref="subscriptionDao"/>
@@ -780,5 +779,4 @@
 
 	<bean id="dailyNotificationJob" class="com.alsayer.core.job.DailyNotificationJobPerformable"
 		  parent="abstractJobPerformable"/>
-
 </beans>
