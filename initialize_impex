@@ -126,6 +126,7 @@ UPDATE SideMenuLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[l
 ;;SignOutSideLink;"Sign Out"
 ;;SignInSideLink;"Sign In"
 
+
 ##Putting Restriction 
 
 REMOVE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(&componentRef)
@@ -467,33 +468,33 @@ INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(cod
 ;$standard-gr-hours;SATURDAY ; 07:30; 17:00
 
 
-INSERT_UPDATE PointOfService;name[unique=true];displayName;type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];$storeImage;openingSchedule(code);basestore(uid)[default=$storeUid];serviceJobTimingMap(key(code),value(code))[map-delimiter= | ]
-;Al Ahmadi - Service Center;Al Ahmadi - Service Center;STORE;addr1;29.083715;48.089963;;;$standardHours;;BODY_PAINT_SHOP->$alahmadi-bs-hours | GENERAL_REPAIRS->$standard-gr-hours
+INSERT_UPDATE PointOfService;name[unique=true];displayName;type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];$storeImage;openingSchedule(code);basestore(uid)[default=$storeUid];serviceJobTimingMap(key(code),value(code))[map-delimiter= | ];isServiceCenter;locationCode
+;Al Ahmadi - Service Center;Al Ahmadi - Service Center;STORE;addr1;29.083715;48.089963;;;$standardHours;;BODY_PAINT_SHOP->$alahmadi-bs-hours | GENERAL_REPAIRS->$standard-gr-hours;;3143
 ;Ahmadi - Parts;Ahmadi - Parts;STORE;addr01;29.084021;48.0896128;;;$standardHours;;
 ;Al Ahmadi - Certified Car Showroom;Al Ahmadi - Certified Car Showroom;STORE;addr02;29.0847465;48.085132;;;$standardHours;;
 ;Al Ahmadi - New Cars Showroom;Al Ahmadi - New Cars Showroom;STORE;addr03;29.085954;48.084753;;;$standardHours;;
-;Al Jahra - Service Center;Al Jahra - Service Center;STORE;addr2;29.312925;47.658575;;;$standardHours;;
+;Al Jahra - Service Center;Al Jahra - Service Center;STORE;addr2;29.312925;47.658575;;;$standardHours;;;;3121
 ;Al Jahra - New Cars Showroom;Al Jahra - New Cars Showroom;STORE;addr201;29.312854;47.657908;;;$standardHours;;
 ;Al Rai - New Cars Showroom;Al Rai - New Cars Showroom;STORE;addr301;29.313211;47.931519;;;$standardHours;;
 ;Al Rai - Parts;Al Rai - Parts;STORE;addr302;29.3131813;47.9302493;;;$standardHours;;
-;Al Rai -1 - Service Center;Al Rai -1 - Service Center;STORE;addr3;29.313138;47.930976;;;$standard-gr-hours;;
-;Al Rai -2 - Service Center;Al Rai -2 - Service Center;STORE;addr4;29.311747;47.930939;;;$standardHours;;GENERAL_REPAIRS->$standard-gr-hours
+;Al Rai -1 - Service Center;Al Rai -1 - Service Center;STORE;addr3;29.313138;47.930976;;;$standard-gr-hours;;;;3101
+;Al Rai -2 - Service Center;Al Rai -2 - Service Center;STORE;addr4;29.311747;47.930939;;;$standardHours;;GENERAL_REPAIRS->$standard-gr-hours;;3108
 ;Al Tilal Mall - New Cars Showroom;Al Tilal Mall - New Cars Showroom;STORE;addr5;29.338965;47.941390;;;$standardHours;;
 ;Ardiya - Parts;Ardiya - Parts;STORE;addr6;29.2931649;47.9106574;;;$standardHours;;
 ;Aswaq al Qurain  (Autozone) - New Cars Showroom;Aswaq al Qurain  (Autozone) - New Cars Showroom;STORE;addr7;29.194322;48.052885;;;$standardHours;;
 ;Aswaq al Qurain (Autozone) - Certified Car Showroom;Aswaq al Qurain (Autozone) - Certified Car Showroom;STORE;addr8;29.194322;48.052885;;;$standardHours;;
 ;Canada Dry - Parts;Canada Dry - Parts;STORE;addr9;29.325548;47.938621;;;$standardHours;;
-;Fahaheel  - Service Center;Fahaheel  - Service Center;STORE;addr10;29.073427;48.116312;;;$standardHours;;
+;Fahaheel  - Service Center;Fahaheel  - Service Center;STORE;addr10;29.073427;48.116312;;;$standardHours;;;;3135
 ;Fahaheel - Parts;Fahaheel - Parts;STORE;addr11;29.0734103;48.1167771;;;$standardHours;;
 ;Farwaniya - Parts;Farwaniya - Parts;STORE;addr12;29.2762323;47.9505536;;;$standardHours;;
 ;Ghazali - Central Body & Paint Shop;Ghazali - Central Body & Paint Shop;STORE;addr13;29.309346;47.944994;;;$standardHours;;
-;Ghazali - Service Center;Ghazali - Service Center;STORE;addr14;29.306831;47.943382;;;$standardHours;;
+;Ghazali - Service Center;Ghazali - Service Center;STORE;addr14;29.306831;47.943382;;;$standardHours;;;;3120
 ;Industrial Ardiya - New Car Delivery Center;Industrial Ardiya - New Car Delivery Center;STORE;addr15;29.295926;47.920492;;;$standardHours;;
 ;Industrial Ardiya - Tender & Fleet;Industrial Ardiya - Tender & Fleet;STORE;addr16;29.295591;47.920562;;;$standardHours;;
 ;Jahra - Parts;Jahra - Parts;STORE;addr17;29.3128027;47.6585301;;;$standardHours;;
 ;Sharq - Parts;Sharq - Parts;STORE;addr18;29.3745354;47.9904691;;;$standardHours;;
 ;Sulaibiya - Parts;Sulaibiya - Parts;STORE;addr19;29.271874;47.843256;;;$standardHours;;
-
+;Maharashtra - Service Center;Maharashtra - Service Center;STORE;addr20;18.5767007;73.9838868;;;$standardHours;;BODY_PAINT_SHOP->$alahmadi-bs-hours | GENERAL_REPAIRS->$standard-gr-hours;true;3160
 
 INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
 ;addr1;Al Ahmadi;;;Al Ahmadi Industrial;KW;;+81 1988 3600;Al Ahmadi - Service Center
@@ -521,6 +522,7 @@ INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];to
 ;addr17;Al Jahra;;;Al Jahra;KW;;+81 3519 4163;Jahra - Parts
 ;addr18;Omar Ben Al Khattab St;;;Al Kuwayt;KW;;+81 3519 4163;Sharq - Parts
 ;addr19;Al Shaibi St.;;;Al Kuwayt;KW;;+81 3519 4163;Sulaibiya - Parts
+;addr20;Lohegaon Road;;412207;Pune;IN;;+81 3519 4163;Maharashtra - Service Center
 
 #####Country-Region(IN (isocode)-For Testing) #######
 INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]

@@ -740,4 +740,14 @@
 		<property name="modelService" ref="modelService"/>
 	</bean>
 
+	<!--POS Service -->
+	<bean id="posService" class="com.alsayer.core.storelocator.service.impl.DefaultPosService">
+		<property name="posDao" ref="posDao"/>
+	</bean>
+
+	<bean id="posDao" class="com.alsayer.core.storelocator.dao.impl.DefaultPosDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+
 </beans>

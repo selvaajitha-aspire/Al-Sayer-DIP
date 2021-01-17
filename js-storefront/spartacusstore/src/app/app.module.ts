@@ -1,3 +1,4 @@
+import { ShippingAddressModule } from './checkout/shipping-address/shipping-address.module';
 import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { MyVehiclesModule } from './my-vehicles/my-vehicles.module';
 import { RegisterModule } from './register/register.module';
@@ -175,7 +176,8 @@ else {
     ServiceHistoryModule,
     MarkAsteriskDirectiveModule,
     InsuranceModule,
-    ServiceTypeModule
+    ServiceTypeModule,
+    ShippingAddressModule
   ],
   providers: [],
   bootstrap: [AppComponent]
