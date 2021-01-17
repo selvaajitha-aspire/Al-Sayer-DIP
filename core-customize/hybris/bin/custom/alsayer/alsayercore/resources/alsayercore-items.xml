@@ -162,7 +162,14 @@
                 <modifiers initial="true" optional="true" />
             </targetElement>
         </relation>
-
+        <relation code="CustomerSubscription" localized="false" autocreate="true">
+            <sourceElement type="Customer" qualifier="user" cardinality="one" >
+                <modifiers read="true" write="true" optional="true" />
+            </sourceElement>
+            <targetElement type="Subscription" qualifier="subscription" cardinality="many" collectiontype="set">
+                <modifiers read="true" write="true"  optional="true" />
+            </targetElement>
+        </relation>
     </relations>
 
 
@@ -429,6 +436,12 @@
                         <modifiers read="true" write="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="isSubscribed" type="java.lang.Boolean">
+                        <description>Consent for subscription to Notifications</description>
+                        <defaultvalue>false</defaultvalue>
+                        <modifiers read="true" write="true" />
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 
@@ -557,7 +570,8 @@
                     </attribute>
                     <attribute qualifier="paidService" type="java.lang.Boolean">
                         <description>Paid Service Flag</description>
-                        <modifiers read="true" write="true" optional="true" />
+                        <defaultvalue>false</defaultvalue>
+                        <modifiers read="true" write="true" optional="false" />
                         <persistence type="property"/>
                     </attribute>
                     <attribute qualifier="locationCode" type="java.lang.String">
@@ -691,6 +705,44 @@
                         <description>image of the Component</description>
                     </attribute>
                 </attributes>
+            </itemtype>
+
+            <itemtype code="Subscription" autocreate="true" generate="true" jaloclass="com.alsayer.core.jalo.Subsription">
+                <deployment table="subscription" typecode="14000" />
+                <attributes>
+                    <attribute qualifier="subscriptionJSON" type="java.lang.String">
+                        <persistence type="property" >
+                            <columntype >
+                                <value>varchar(500)</value>
+                            </columntype>
+                        </persistence>
+                            
+                        <modifiers optional="true" initial="false"/>
+                        <description>Subscription object as a JSON String</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="NotificationPayload" autocreate="true" generate="true" jaloclass="com.alsayer.core.jalo.NotificationPayload">
+                <deployment table="notificationPayload" typecode="14001" />
+                <attributes>
+                    <attribute qualifier="template" type="java.lang.String">
+                        <persistence type="property" >
+                            <columntype>
+                                <value>varchar(3000)</value>
+                            </columntype>
+                        </persistence>
+                        <modifiers optional="true" initial="false"/>
+                        <description>Notification Template JSON</description>
+                    </attribute>
+                    <attribute qualifier="templateCode" type="java.lang.String">
+                        <persistence type="property" >
+                        </persistence>
+                        <modifiers optional="true" initial="false"/>
+                        <description>Notification icon</description>
+                    </attribute>
+                </attributes>
+
             </itemtype>
 
         </typegroup>

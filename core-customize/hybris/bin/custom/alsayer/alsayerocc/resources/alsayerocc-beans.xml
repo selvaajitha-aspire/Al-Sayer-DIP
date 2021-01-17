@@ -73,6 +73,7 @@
         <property name="password" type="String"/>
         <property name="oneTimePassword" type="String"/>
         <property name="customerType" type="String"/>
+        <property name="subscriptionJSON" type="String" />
     </bean>
 
 

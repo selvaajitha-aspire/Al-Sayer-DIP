@@ -24,11 +24,13 @@ import {
   Title,
   UserService,
 } from '@spartacus/core';
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { combineLatest, Observable, Subscription, from } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CustomFormValidators, sortTitles } from '@spartacus/storefront';
 import { CommonService } from 'src/services/common/common.services';
 import { setFormField, isEmpty } from '../common/utility';
+import { SwPush } from '@angular/service-worker';
+import { subscriptionPublicKey } from 'src/environments/environment.prod';
 
 declare var $: any;
 @Component({
@@ -46,6 +48,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   userECCData = '';
   showConfPassword : boolean = false;
   invalidOTPFlag : boolean = false;
+  subscriptionJSON = '';
 
   anonymousConsent$: Observable<{
     consent: AnonymousConsent;
@@ -72,7 +75,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
       //   disabled: this.isConsentRequired(),
       // }),
       // termsandconditions: [false, Validators.requiredTrue],
-      customerType : ['']
+      customerType : [''],
+      isSubscribed : [''],
+      subscriptionJSON : ['']
     },
     {
       validators: CustomFormValidators.passwordsMustMatch(
@@ -96,7 +101,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     protected registerService: RegisterService,
     private toastr: ToastrService,
     public commonService: CommonService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private swPush: SwPush
   ) {}
 
   ngOnInit() {
@@ -356,7 +362,38 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   resendOTP(){
     this.submitCivilId();
-    this.toastr.success("OTP resent.")
+    this.toastr.success("OTP resent.");
   }
   
+  onChangedReceiveNotification(e){
+    if(e.target.checked){
+      this.requestSubscription();
+    }else{
+      this.subscriptionJSON = '';
+    }
+    
+  }
+
+  async requestSubscription(){
+    await this.swPush.requestSubscription({
+      serverPublicKey: subscriptionPublicKey
+    }).then(sub => {
+        let json = JSON.stringify(sub);
+        let obj = JSON.parse(json);
+        delete obj["expirationTime"]
+        this.subscriptionJSON = JSON.stringify(obj);
+    }).catch(err => {
+        console.error("Could not subscribe to notifications", err);
+    });
+  }
+
+  unsubscribeUser() {
+    this.swPush.unsubscribe().then((resp) => {
+      console.log(JSON.stringify(resp))
+    })
+    .catch(function(error) {
+      console.log('Error unsubscribing', error);
+    });
+  }
+
 }

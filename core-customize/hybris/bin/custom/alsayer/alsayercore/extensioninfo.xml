@@ -4,7 +4,7 @@
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
         	
     
-    <extension abstractclassprefix="Generated" classprefix="AlsayerCore" managername="AlsayerCoreManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="alsayercore">
+    <extension usemaven="true" abstractclassprefix="Generated" classprefix="AlsayerCore" managername="AlsayerCoreManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="alsayercore">
                 		
         
         <!-- you should add all required extensions to this list, except platform 

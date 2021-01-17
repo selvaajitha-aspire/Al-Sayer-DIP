@@ -30,7 +30,7 @@ import { MarkAsteriskDirectiveModule } from './directives/mark-asterisk.directiv
 import { InfoComponentModule } from './InfoComponent/info-component.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { ServiceTypeModule } from './checkout/service-type/service-type.module';
-
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 const occConfig: OccConfig = { backend: { occ: {} } };
@@ -176,6 +176,7 @@ else {
     ServiceHistoryModule,
     MarkAsteriskDirectiveModule,
     InsuranceModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     ServiceTypeModule,
     ShippingAddressModule
   ],

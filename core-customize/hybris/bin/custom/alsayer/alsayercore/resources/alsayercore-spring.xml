@@ -748,6 +748,35 @@
 	<bean id="posDao" class="com.alsayer.core.storelocator.dao.impl.DefaultPosDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
+	
+	<!--Subscription-->
+	<bean id="subscriptionService" class="com.alsayer.core.subscription.service.impl.DefaultSubscriptionService">
+		<property name="subscriptionDao" ref="subscriptionDao"/>
+		<property name="subscriptionConverter" ref="subscriptionConverter" />
+		<property name="subscriptionReverseConverter" ref="subscriptionReverseConverter" />
+		<property name="userService" ref="userService"/>
 
+	</bean>
 
+	<bean id="subscriptionDao" class="com.alsayer.core.subscription.dao.impl.DefaultSubscriptionDao">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<!--Subscription-->
+
+	<!--Notification Payload-->
+	<bean id="notificationPayloadService" class="com.alsayer.core.payload.service.impl.DefaultNotificationPayloadService">
+		<property name="notificationPayloadDao" ref="notificationPayloadDao"/>
+		<property name="notificationPayloadConverter" ref="notificationPayloadConverter" />
+		<property name="notificationPayloadReverseConverter" ref="notificationPayloadReverseConverter" />
+	</bean>
+
+	<bean id="notificationPayloadDao" class="com.alsayer.core.payload.dao.impl.DefaultNotificationPayloadDao">
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<!--Notification Payload-->
+
+	<bean id="dailyNotificationJob" class="com.alsayer.core.job.DailyNotificationJobPerformable"
+		  parent="abstractJobPerformable"/>
 </beans>

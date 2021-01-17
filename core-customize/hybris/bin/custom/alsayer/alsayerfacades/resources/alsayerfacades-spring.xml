@@ -354,4 +354,60 @@
 			</list>
 		</property>
 	</bean>
+
+	<bean id="subscriptionPopulator" class="com.alsayer.facades.populators.SunscriptionPopulator">
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+
+	<bean id="subscriptionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.SubscriptionData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="subscriptionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="subscriptionReversePopulator" class="com.alsayer.facades.populators.SubscriptionReversePopulator">
+		<property name="customerReverseConverter" ref="customerReverseConverter"/>
+	</bean>
+
+	<bean id="subscriptionReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.core.model.SubscriptionModel"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="subscriptionReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="notificationFacade" class="com.alsayer.facades.notification.impl.DefaultNotificationFacade" >
+
+	</bean>
+
+	<bean id="notificationPayloadReversePopulator" class="com.alsayer.facades.populators.NotifiationPayloadReversePopulator">
+
+	</bean>
+
+	<bean id="notificationPayloadReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.core.model.NotificationPayloadModel"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="notificationPayloadReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="notificationPayloadPopulator" class="com.alsayer.facades.populators.NotificationPayloadPopulator">
+
+	</bean>
+
+	<bean id="notificationPayloadConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.alsayer.facades.data.NotificationPayloadData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="notificationPayloadPopulator" />
+			</list>
+		</property>
+	</bean>
 </beans>

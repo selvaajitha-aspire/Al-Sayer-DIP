@@ -9,8 +9,9 @@ import { FormErrorsModule } from '@spartacus/storefront';
 
 import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuard } from '@spartacus/storefront';
-import { CameraComponent } from '../common/CameraComponent/camera.component';
+//import { CameraComponent } from '../common/CameraComponent/camera.component';
 import { MarkAsteriskDirectiveModule } from '../directives/mark-asterisk.directive';
+ import { CameraModule } from '../common/CameraComponent/camera.module';
 const staticRoutes: Routes = [{
   path: 'my-services', children: [
     {
@@ -24,7 +25,7 @@ const staticRoutes: Routes = [{
 
 
 @NgModule({
-  declarations: [RoadsideAssistanceComponent,CameraComponent],
+  declarations: [RoadsideAssistanceComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,6 +33,7 @@ const staticRoutes: Routes = [{
     ReactiveFormsModule,
     MarkAsteriskDirectiveModule,
     I18nModule,
+    CameraModule,
     ConfigModule.withConfig(rsaOccConfig),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
@@ -42,7 +44,7 @@ const staticRoutes: Routes = [{
     }),
     RouterModule.forChild(staticRoutes)
   ],
-  exports : [CameraComponent],
-  entryComponents : [CameraComponent],
+  exports : [],
+  entryComponents : [],
 })
 export class RoadsideAssistanceModule { }
